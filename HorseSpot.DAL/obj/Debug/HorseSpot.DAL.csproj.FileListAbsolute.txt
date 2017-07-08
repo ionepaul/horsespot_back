@@ -1,0 +1,226 @@
+C:\Users\Petre\Documents\Visual Studio 2015\Projects\HorseSpot\HorseSpot.DAL\bin\Debug\HorseSpot.DAL.dll.config
+C:\Users\Petre\Documents\Visual Studio 2015\Projects\HorseSpot\HorseSpot.DAL\bin\Debug\HorseSpot.DAL.dll
+C:\Users\Petre\Documents\Visual Studio 2015\Projects\HorseSpot\HorseSpot.DAL\bin\Debug\HorseSpot.DAL.pdb
+C:\Users\Petre\Documents\Visual Studio 2015\Projects\HorseSpot\HorseSpot.DAL\bin\Debug\EntityFramework.dll
+C:\Users\Petre\Documents\Visual Studio 2015\Projects\HorseSpot\HorseSpot.DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Petre\Documents\Visual Studio 2015\Projects\HorseSpot\HorseSpot.DAL\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+C:\Users\Petre\Documents\Visual Studio 2015\Projects\HorseSpot\HorseSpot.DAL\bin\Debug\Microsoft.Practices.Unity.Configuration.dll
+C:\Users\Petre\Documents\Visual Studio 2015\Projects\HorseSpot\HorseSpot.DAL\bin\Debug\Microsoft.Practices.Unity.dll
+C:\Users\Petre\Documents\Visual Studio 2015\Projects\HorseSpot\HorseSpot.DAL\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.dll
+C:\Users\Petre\Documents\Visual Studio 2015\Projects\HorseSpot\HorseSpot.DAL\bin\Debug\MongoDB.Bson.dll
+C:\Users\Petre\Documents\Visual Studio 2015\Projects\HorseSpot\HorseSpot.DAL\bin\Debug\MongoDB.Driver.Core.dll
+C:\Users\Petre\Documents\Visual Studio 2015\Projects\HorseSpot\HorseSpot.DAL\bin\Debug\MongoDB.Driver.dll
+C:\Users\Petre\Documents\Visual Studio 2015\Projects\HorseSpot\HorseSpot.DAL\bin\Debug\MongoDB.Driver.GridFS.dll
+C:\Users\Petre\Documents\Visual Studio 2015\Projects\HorseSpot\HorseSpot.DAL\bin\Debug\EntityFramework.xml
+C:\Users\Petre\Documents\Visual Studio 2015\Projects\HorseSpot\HorseSpot.DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Petre\Documents\Visual Studio 2015\Projects\HorseSpot\HorseSpot.DAL\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+C:\Users\Petre\Documents\Visual Studio 2015\Projects\HorseSpot\HorseSpot.DAL\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+C:\Users\Petre\Documents\Visual Studio 2015\Projects\HorseSpot\HorseSpot.DAL\bin\Debug\Microsoft.Practices.Unity.xml
+C:\Users\Petre\Documents\Visual Studio 2015\Projects\HorseSpot\HorseSpot.DAL\bin\Debug\Microsoft.Practices.Unity.Configuration.xml
+C:\Users\Petre\Documents\Visual Studio 2015\Projects\HorseSpot\HorseSpot.DAL\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.xml
+C:\Users\Petre\Documents\Visual Studio 2015\Projects\HorseSpot\HorseSpot.DAL\bin\Debug\MongoDB.Bson.xml
+C:\Users\Petre\Documents\Visual Studio 2015\Projects\HorseSpot\HorseSpot.DAL\bin\Debug\MongoDB.Driver.xml
+C:\Users\Petre\Documents\Visual Studio 2015\Projects\HorseSpot\HorseSpot.DAL\bin\Debug\MongoDB.Driver.GridFS.xml
+C:\Users\Petre\Documents\Visual Studio 2015\Projects\HorseSpot\HorseSpot.DAL\obj\Debug\HorseSpot.DAL.dll
+C:\Users\Petre\Documents\Visual Studio 2015\Projects\HorseSpot\HorseSpot.DAL\obj\Debug\HorseSpot.DAL.pdb
+C:\Users\Petre\Documents\Visual Studio 2015\Projects\HorseSpot\HorseSpot.DAL\bin\Debug\LinqKit.dll
+C:\Users\Petre\Documents\Visual Studio 2015\Projects\HorseSpot\HorseSpot.DAL\bin\Debug\LinqKit.pdb
+C:\Users\Petre\Documents\Visual Studio 2015\Projects\HorseSpot\HorseSpot.DAL\bin\Debug\LinqKit.xml
+C:\Users\Petre\Documents\Visual Studio 2015\Projects\HorseSpot\HorseSpot.DAL\obj\Debug\HorseSpot.DAL.csprojResolveAssemblyReference.cache
+D:\HORSE_SPOT\HorseSpot\HorseSpot.DAL\bin\Debug\HorseSpot.DAL.dll.config
+D:\HORSE_SPOT\HorseSpot\HorseSpot.DAL\bin\Debug\HorseSpot.DAL.dll
+D:\HORSE_SPOT\HorseSpot\HorseSpot.DAL\bin\Debug\HorseSpot.DAL.pdb
+D:\HORSE_SPOT\HorseSpot\HorseSpot.DAL\bin\Debug\EntityFramework.dll
+D:\HORSE_SPOT\HorseSpot\HorseSpot.DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\HORSE_SPOT\HorseSpot\HorseSpot.DAL\bin\Debug\LinqKit.dll
+D:\HORSE_SPOT\HorseSpot\HorseSpot.DAL\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+D:\HORSE_SPOT\HorseSpot\HorseSpot.DAL\bin\Debug\Microsoft.Practices.Unity.Configuration.dll
+D:\HORSE_SPOT\HorseSpot\HorseSpot.DAL\bin\Debug\Microsoft.Practices.Unity.dll
+D:\HORSE_SPOT\HorseSpot\HorseSpot.DAL\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.dll
+D:\HORSE_SPOT\HorseSpot\HorseSpot.DAL\bin\Debug\MongoDB.Bson.dll
+D:\HORSE_SPOT\HorseSpot\HorseSpot.DAL\bin\Debug\MongoDB.Driver.Core.dll
+D:\HORSE_SPOT\HorseSpot\HorseSpot.DAL\bin\Debug\MongoDB.Driver.dll
+D:\HORSE_SPOT\HorseSpot\HorseSpot.DAL\bin\Debug\MongoDB.Driver.GridFS.dll
+D:\HORSE_SPOT\HorseSpot\HorseSpot.DAL\bin\Debug\EntityFramework.xml
+D:\HORSE_SPOT\HorseSpot\HorseSpot.DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\HORSE_SPOT\HorseSpot\HorseSpot.DAL\bin\Debug\LinqKit.pdb
+D:\HORSE_SPOT\HorseSpot\HorseSpot.DAL\bin\Debug\LinqKit.xml
+D:\HORSE_SPOT\HorseSpot\HorseSpot.DAL\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+D:\HORSE_SPOT\HorseSpot\HorseSpot.DAL\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+D:\HORSE_SPOT\HorseSpot\HorseSpot.DAL\bin\Debug\Microsoft.Practices.Unity.xml
+D:\HORSE_SPOT\HorseSpot\HorseSpot.DAL\bin\Debug\Microsoft.Practices.Unity.Configuration.xml
+D:\HORSE_SPOT\HorseSpot\HorseSpot.DAL\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.xml
+D:\HORSE_SPOT\HorseSpot\HorseSpot.DAL\bin\Debug\MongoDB.Bson.xml
+D:\HORSE_SPOT\HorseSpot\HorseSpot.DAL\bin\Debug\MongoDB.Driver.xml
+D:\HORSE_SPOT\HorseSpot\HorseSpot.DAL\bin\Debug\MongoDB.Driver.GridFS.xml
+D:\HORSE_SPOT\HorseSpot\HorseSpot.DAL\obj\Debug\HorseSpot.DAL.csprojResolveAssemblyReference.cache
+D:\HORSE_SPOT\HorseSpot\HorseSpot.DAL\obj\Debug\HorseSpot.DAL.dll
+D:\HORSE_SPOT\HorseSpot\HorseSpot.DAL\obj\Debug\HorseSpot.DAL.pdb
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\HorseSpot.DAL.dll.config
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\HorseSpot.DAL.dll
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\HorseSpot.DAL.pdb
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\EntityFramework.dll
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\LinqKit.dll
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\Microsoft.Practices.Unity.Configuration.dll
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\Microsoft.Practices.Unity.dll
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.dll
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\MongoDB.Bson.dll
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\MongoDB.Driver.Core.dll
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\MongoDB.Driver.dll
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\MongoDB.Driver.GridFS.dll
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\EntityFramework.xml
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\LinqKit.pdb
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\LinqKit.xml
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\Microsoft.Practices.Unity.xml
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\Microsoft.Practices.Unity.Configuration.xml
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.xml
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\MongoDB.Bson.xml
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\MongoDB.Driver.xml
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\MongoDB.Driver.GridFS.xml
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\obj\Debug\HorseSpot.DAL.csprojResolveAssemblyReference.cache
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\obj\Debug\HorseSpot.DAL.dll
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\obj\Debug\HorseSpot.DAL.pdb
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\Microsoft.AspNet.Identity.Owin.dll
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\Microsoft.Owin.dll
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\Microsoft.Owin.Security.Cookies.dll
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\Microsoft.Owin.Security.dll
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\Microsoft.Owin.Security.OAuth.dll
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\Newtonsoft.Json.dll
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\Owin.dll
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\Microsoft.AspNet.Identity.Owin.xml
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\Microsoft.Owin.xml
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\Microsoft.Owin.Security.xml
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\Microsoft.Owin.Security.Cookies.xml
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\Microsoft.Owin.Security.OAuth.xml
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\Newtonsoft.Json.xml
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\HorseSpot.Infrastructure.dll
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\HorseSpot.Models.dll
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\RazorEngine.dll
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\System.Web.Razor.dll
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\HorseSpot.Infrastructure.pdb
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\HorseSpot.Models.pdb
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\bin\Debug\ro\HorseSpot.Infrastructure.resources.dll
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\HorseSpot.DAL.dll.config
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\HorseSpot.DAL.dll
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\HorseSpot.DAL.pdb
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\EntityFramework.dll
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\HorseSpot.Infrastructure.dll
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\LinqKit.dll
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\Microsoft.AspNet.Identity.Owin.dll
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\Microsoft.Owin.dll
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\Microsoft.Owin.Security.Cookies.dll
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\Microsoft.Owin.Security.dll
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\Microsoft.Owin.Security.OAuth.dll
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\Microsoft.Practices.Unity.Configuration.dll
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\Microsoft.Practices.Unity.dll
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.dll
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\MongoDB.Bson.dll
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\MongoDB.Driver.Core.dll
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\MongoDB.Driver.dll
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\MongoDB.Driver.GridFS.dll
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\Newtonsoft.Json.dll
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\Owin.dll
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\HorseSpot.Models.dll
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\RazorEngine.dll
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\System.Web.Razor.dll
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\HorseSpot.Infrastructure.pdb
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\EntityFramework.xml
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\LinqKit.pdb
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\LinqKit.xml
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\Microsoft.AspNet.Identity.Owin.xml
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\Microsoft.Owin.xml
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\Microsoft.Owin.Security.xml
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\Microsoft.Owin.Security.Cookies.xml
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\Microsoft.Owin.Security.OAuth.xml
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\Microsoft.Practices.Unity.xml
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\Microsoft.Practices.Unity.Configuration.xml
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.xml
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\MongoDB.Bson.xml
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\MongoDB.Driver.xml
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\MongoDB.Driver.GridFS.xml
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\Newtonsoft.Json.xml
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\HorseSpot.Models.pdb
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\bin\Debug\ro\HorseSpot.Infrastructure.resources.dll
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\obj\Debug\HorseSpot.DAL.csprojResolveAssemblyReference.cache
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\obj\Debug\HorseSpot.DAL.Migrations.InitialCreate.resources
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\obj\Debug\HorseSpot.DAL.Migrations.appOffset.resources
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\obj\Debug\HorseSpot.DAL.Migrations.appDatetime.resources
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\obj\Debug\HorseSpot.DAL.Migrations.appointmentsUpdate.resources
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\obj\Debug\HorseSpot.DAL.csproj.GenerateResource.Cache
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\obj\Debug\HorseSpot.DAL.dll
+D:\Projects\HorseSpot\HorseSpot_Services_10_03\HorseSpot.DAL\obj\Debug\HorseSpot.DAL.pdb
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\obj\Debug\HorseSpot.DAL.Migrations.InitialCreate.resources
+D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.DAL\obj\Debug\HorseSpot.DAL.csproj.GenerateResource.Cache
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\HorseSpot.DAL.dll.config
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\HorseSpot.DAL.dll
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\HorseSpot.DAL.pdb
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\EntityFramework.dll
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\HorseSpot.Infrastructure.dll
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\LinqKit.dll
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\Microsoft.AspNet.Identity.Owin.dll
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\Microsoft.Owin.dll
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\Microsoft.Owin.Security.Cookies.dll
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\Microsoft.Owin.Security.dll
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\Microsoft.Owin.Security.OAuth.dll
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\Microsoft.Practices.Unity.Configuration.dll
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\Microsoft.Practices.Unity.dll
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.dll
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\MongoDB.Bson.dll
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\MongoDB.Driver.Core.dll
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\MongoDB.Driver.dll
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\MongoDB.Driver.GridFS.dll
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\Newtonsoft.Json.dll
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\Owin.dll
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\HorseSpot.Models.dll
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\RazorEngine.dll
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\System.Web.Razor.dll
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\HorseSpot.Infrastructure.pdb
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\EntityFramework.xml
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\LinqKit.pdb
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\LinqKit.xml
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\Microsoft.AspNet.Identity.Owin.xml
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\Microsoft.Owin.xml
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\Microsoft.Owin.Security.xml
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\Microsoft.Owin.Security.Cookies.xml
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\Microsoft.Owin.Security.OAuth.xml
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\Microsoft.Practices.ServiceLocation.xml
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\Microsoft.Practices.Unity.xml
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\Microsoft.Practices.Unity.Configuration.xml
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.xml
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\MongoDB.Bson.xml
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\MongoDB.Driver.xml
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\MongoDB.Driver.GridFS.xml
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\Newtonsoft.Json.xml
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\HorseSpot.Models.pdb
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\bin\Debug\ro\HorseSpot.Infrastructure.resources.dll
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\obj\Debug\HorseSpot.DAL.csprojResolveAssemblyReference.cache
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\obj\Debug\HorseSpot.DAL.Migrations.InitialCreate.resources
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\obj\Debug\HorseSpot.DAL.csproj.GenerateResource.Cache
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\obj\Debug\HorseSpot.DAL.dll
+D:\HORSE_SPOT\HorseSpot_Services_LOCAL\HorseSpot.DAL\obj\Debug\HorseSpot.DAL.pdb
