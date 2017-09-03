@@ -128,21 +128,16 @@
     <Compile Include="Dao\AbstractDao.cs" />
     <Compile Include="Dao\AppointmentDao.cs" />
     <Compile Include="Dao\ClientDao.cs" />
-    <Compile Include="Dao\CountryDao.cs" />
     <Compile Include="Dao\UserDao.cs" />
-    <Compile Include="Dao\GenderDao.cs" />
-    <Compile Include="Dao\HorseAbilityDao.cs" />
     <Compile Include="Dao\HorseAdDao.cs" />
-    <Compile Include="Dao\MongoAbstractDao.cs" />
-    <Compile Include="Dao\PriceRangeDao.cs" />
     <Compile Include="Dao\RecommendedRiderDao.cs" />
     <Compile Include="Dao\RefreshTokenDao.cs" />
     <Compile Include="Dao\UtilAdDao.cs" />
     <Compile Include="Entities\Appointment.cs" />
     <Compile Include="Entities\Client.cs" />
     <Compile Include="Entities\Country.cs" />
-    <Compile Include="Entities\Gender.cs" />
     <Compile Include="Entities\HorseAbility.cs" />
+    <Compile Include="Entities\Image.cs" />
     <Compile Include="Entities\Subscriber.cs" />
     <Compile Include="Entities\PriceRange.cs" />
     <Compile Include="Entities\RecommendedRider.cs" />
@@ -167,15 +162,13 @@
       <DependentUpon>201705231655293_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Address.cs" />
-    <Compile Include="Models\AdvertismentBaseClass.cs" />
+    <Compile Include="Entities\Address.cs" />
     <Compile Include="Models\GetHorseAdListResults.cs" />
-    <Compile Include="Models\HorseAd.cs" />
+    <Compile Include="Entities\HorseAd.cs" />
     <Compile Include="Models\SearchModelDao.cs" />
-    <Compile Include="Models\Pedigree.cs" />
+    <Compile Include="Entities\Pedigree.cs" />
     <Compile Include="Models\SearchHorseDao.cs" />
-    <Compile Include="Models\UserModel.cs" />
-    <Compile Include="MongoDataContext.cs" />
+    <Compile Include="Entities\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
