@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<parameters>
-  <parameter name="HorseSpotDataContext-Web.config Connection String" description="HorseSpotDataContext Connection String used in web.config by the application to access the database." defaultValue="Data Source=188.213.132.101;Initial Catalog=horsespotdatabase;Integrated Security=False;User Id=paul;Password=kern725pot626;MultipleActiveResultSets=True" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="D:\\HORSE_SPOT\\HorseSpot_Services\\HorseSpot\.Api\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='HorseSpotDataContext']/@connectionString" />
-  </parameter>
-</parameters>

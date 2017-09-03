@@ -1,9 +1,0 @@
-D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.Models\bin\Release\HorseSpot.Models.dll
-D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.Models\bin\Release\HorseSpot.Models.pdb
-D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.Models\bin\Release\Newtonsoft.Json.dll
-D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.Models\bin\Release\System.ComponentModel.DataAnnotations.dll
-D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.Models\bin\Release\Newtonsoft.Json.xml
-D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.Models\bin\Release\System.ComponentModel.DataAnnotations.xml
-D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.Models\obj\Release\HorseSpot.Models.csprojResolveAssemblyReference.cache
-D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.Models\obj\Release\HorseSpot.Models.dll
-D:\HORSE_SPOT\HorseSpot_Services\HorseSpot.Models\obj\Release\HorseSpot.Models.pdb
