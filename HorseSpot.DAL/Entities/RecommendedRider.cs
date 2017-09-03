@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using HorseSpot.DAL.Models;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace HorseSpot.DAL.Entities
 {
@@ -9,5 +11,7 @@ namespace HorseSpot.DAL.Entities
         [Required]
         [MaxLength(50)]
         public string Rider { get; set; }
+
+        public ICollection<HorseAd> HorseAds { get; set; }
     }
 }

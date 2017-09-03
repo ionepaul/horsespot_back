@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using System;
+using System.Collections.Generic;
 
 namespace HorseSpot.DAL.Models
 {
@@ -9,5 +10,7 @@ namespace HorseSpot.DAL.Models
         public string LastName { get; set; }
         public Nullable<bool> NewsletterSubscription { get; set; }
         public string ImagePath { get; set; }
+
+        public ICollection<HorseAd> FavoriteHorseAds { get; set; }
     }
 }

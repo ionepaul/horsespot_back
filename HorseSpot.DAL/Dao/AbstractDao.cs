@@ -2,10 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Core.Objects;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HorseSpot.DAL.Dao
 {
@@ -21,10 +18,6 @@ namespace HorseSpot.DAL.Dao
 
         #region Constructor
 
-        /// <summary>
-        /// AbstractDao Constructor
-        /// </summary>
-        /// <param name="dataContext">HorseSpotDatabase Context</param>
         public AbstractDao(HorseSpotDataContext dataContext)
         {
             _ctx = dataContext;

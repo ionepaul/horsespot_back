@@ -7,15 +7,11 @@ using System.Linq;
 
 namespace HorseSpot.DAL.Dao
 {
-    public class HorseAdDao : MongoAbstractDao<HorseAd>, IHorseAdDao
+    public class HorseAdDao : AbstractDao<HorseAd>, IHorseAdDao
     {
         #region Constructor
 
-        /// <summary>
-        /// HorseAdDao Constructor
-        /// </summary>
-        /// <param name="dataContext">HorseSpot MongoDB Data Context</param>
-        public HorseAdDao(MongoDataContext dataContext)
+        public HorseAdDao(HorseSpotDataContext dataContext)
             : base(dataContext)
         {
         }
@@ -34,14 +30,12 @@ namespace HorseSpot.DAL.Dao
         {
             var skipNumber = GetNumberToSkip(pageNumber);
 
-            var filter = Builders<HorseAd>.Filter.Where(e => e.FavoriteFor.Contains(userId));
-            var sortOptions = Builders<HorseAd>.Sort.Descending(e => e.DatePosted);
-
-            var totalNumber = _context.HorseAds.Find(filter).ToList().Count;
+            var totalNumber = _ctx.Users.Where(e=> e.Id == userId).Select(u => u.FavoriteHorseAds).FirstOrDefault().ToList().Count;
 
             var results = new GetHorseAdListResults();
             results.TotalCount = totalNumber;
-            results.HorseAdList = _context.HorseAds.Find(filter).Sort(sortOptions).Skip(skipNumber).ToList().Take(ApplicationConstants.AdsPerPage);
+            results.HorseAdList = _ctx.Users.Where(u=> u.Id ==userId).Select(x => x.FavoriteHorseAds).FirstOrDefault()
+                                      .OrderByDescending(e => e.DatePosted).Skip(skipNumber).ToList().Take(ApplicationConstants.AdsPerPage);
 
             return results;
         }
@@ -56,14 +50,11 @@ namespace HorseSpot.DAL.Dao
         {
             var skipNumber = GetNumberToSkip(pageNumber);
 
-            var filter = Builders<HorseAd>.Filter.Where(e => e.UserId == id);
-            var sortOptions = Builders<HorseAd>.Sort.Descending(e => e.DatePosted);
-
-            var totalNumber = _context.HorseAds.Find(filter).ToList().Count;
+            var totalNumber = _ctx.HorseAds.Where(e => e.UserId == id).ToList().Count;
 
             var results = new GetHorseAdListResults();
             results.TotalCount = totalNumber;
-            results.HorseAdList = _context.HorseAds.Find(filter).Sort(sortOptions).Skip(skipNumber).ToList().Take(ApplicationConstants.AdsPerPage);
+            results.HorseAdList = _ctx.HorseAds.Where(e => e.UserId == id).OrderByDescending(e=> e.Description).Skip(skipNumber).ToList().Take(ApplicationConstants.AdsPerPage);
 
             return results;
         }
@@ -77,14 +68,11 @@ namespace HorseSpot.DAL.Dao
         {
             var skipNumber = GetNumberToSkip(pageNumber);
 
-            var filter = Builders<HorseAd>.Filter.Where(e => !e.IsValidated);
-            var sortOptions = Builders<HorseAd>.Sort.Ascending(e => e.DatePosted);
-
-            var totalNumber = _context.HorseAds.Find(filter).ToList().Count;
+            var totalNumber = _ctx.HorseAds.Where(e => !e.IsValidated).ToList().Count;
 
             var results = new GetHorseAdListResults();
             results.TotalCount = totalNumber;
-            results.HorseAdList = _context.HorseAds.Find(filter).Sort(sortOptions).Skip(skipNumber).ToList().Take(ApplicationConstants.AdsPerPage);
+            results.HorseAdList = _ctx.HorseAds.Where(e => !e.IsValidated).OrderByDescending(e => e.DatePosted).Skip(skipNumber).ToList().Take(ApplicationConstants.AdsPerPage);
 
             return results;
         }
@@ -105,18 +93,18 @@ namespace HorseSpot.DAL.Dao
             var orderPredicate = searchQuery.GetOrderPredicate();
             var isAscendingSortOrder = searchQuery.IsAscendingSortOrder();
 
-            var totalNumber = _context.HorseAds.AsQueryable().AsExpandable().Where(searchPredicate).ToList().Count;
+            var totalNumber = _ctx.HorseAds.AsQueryable().AsExpandable().Where(searchPredicate).ToList().Count;
 
             results.TotalCount = totalNumber;
 
             if (isAscendingSortOrder)
             {
-                results.HorseAdList = _context.HorseAds.AsQueryable().AsExpandable().Where(searchPredicate)
+                results.HorseAdList = _ctx.HorseAds.AsQueryable().AsExpandable().Where(searchPredicate)
                                       .OrderBy(orderPredicate).Skip(skipNumber).Take(ApplicationConstants.AdsPerPage).ToList();
             }
             else
             {
-                results.HorseAdList = _context.HorseAds.AsQueryable().AsExpandable().Where(searchPredicate)
+                results.HorseAdList = _ctx.HorseAds.AsQueryable().AsExpandable().Where(searchPredicate)
                                       .OrderByDescending(orderPredicate).Skip(skipNumber).Take(ApplicationConstants.AdsPerPage).ToList();
             }
 

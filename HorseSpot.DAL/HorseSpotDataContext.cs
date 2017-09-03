@@ -5,9 +5,6 @@ using System.Data.Entity;
 
 namespace HorseSpot.DAL
 {
-    /// <summary>
-    /// Horse Spot Relational Database Context
-    /// </summary>
     public class HorseSpotDataContext : IdentityDbContext<UserModel>
     {
         public HorseSpotDataContext() : base("HorseSpotDataContext") { }
@@ -15,8 +12,6 @@ namespace HorseSpot.DAL
         public DbSet<Client> Clients { get; set; }
 
         public DbSet<RefreshToken> RefreshTokens { get; set; }
-
-        public DbSet<Gender> Genders { get; set; }
 
         public DbSet<HorseAbility> HorseAbilities { get; set; }
 
@@ -29,5 +24,13 @@ namespace HorseSpot.DAL
         public DbSet<Appointment> Appointments { get; set; }
 
         public DbSet<Subscriber> Subscribers { get; set; }
+
+        public DbSet<Address> Addresses { get; set; }
+
+        public DbSet<Image> Images { get; set; }
+
+        public DbSet<Pedigree> Pedigrees { get; set; }
+
+        public DbSet<HorseAd> HorseAds { get; set; }
     }
 }

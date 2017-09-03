@@ -17,9 +17,6 @@ namespace HorseSpot.DAL.Dao
 
         private UserManager<UserModel> _userManager;
 
-        /// <summary>
-        /// UserDao Constructor
-        /// </summary>
         public UserDao()
         {
             _ctx = new HorseSpotDataContext();

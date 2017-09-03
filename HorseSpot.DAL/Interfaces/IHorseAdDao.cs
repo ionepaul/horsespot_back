@@ -1,8 +1,7 @@
 ﻿using HorseSpot.DAL.Models;
-
 namespace HorseSpot.DAL.Interfaces
 {
-    public interface IHorseAdDao : IMongoDao<HorseAd>
+    public interface IHorseAdDao : IDao<HorseAd>
     {
         GetHorseAdListResults GetFavoritesFor(string userId, int pageNumber);
 

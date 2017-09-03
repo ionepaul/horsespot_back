@@ -11,10 +11,6 @@ namespace HorseSpot.DAL.Dao
     {
         #region Constructor
 
-        /// <summary>
-        /// AppointmentDao Constructor
-        /// </summary>
-        /// <param name="dataContext">HorseSpot Relational Database COntext</param>
         public AppointmentDao(HorseSpotDataContext dataContext)
             : base(dataContext)
         {

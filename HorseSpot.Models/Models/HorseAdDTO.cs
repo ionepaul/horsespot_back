@@ -18,7 +18,7 @@ namespace HorseSpot.Models.Models
         public string HorseName { get; set; }
 
         [Required]
-        public GenderDTO Gender { get; set; }
+        public string Gender { get; set; }
 
         [Required]
         public int Age { get; set; }
@@ -52,7 +52,6 @@ namespace HorseSpot.Models.Models
         public IEnumerable<RecommendedRiderDTO> RecomendedRiders { get; set; }
         
         public IEnumerable<string> FavoritesFor { get; set; }
-
 
         public decimal Price { get; set; }
 

@@ -7,10 +7,6 @@ namespace HorseSpot.DAL.Dao
     {
         #region Constructor
 
-        /// <summary>
-        /// ClientDao Constructor
-        /// </summary>
-        /// <param name="dataContext">HorseSpot Relational Database Context</param>
         public ClientDao(HorseSpotDataContext dataContext)
             : base(dataContext)
         {

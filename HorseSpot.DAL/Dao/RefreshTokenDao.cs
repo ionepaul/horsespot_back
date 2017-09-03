@@ -9,10 +9,7 @@ namespace HorseSpot.DAL.Dao
     public class RefreshTokenDao : AbstractDao<RefreshToken>, IRefreshTokenDao
     {
         #region Constructor
-        /// <summary>
-        /// RefreshTokenDao Constructor
-        /// </summary>
-        /// <param name="dataContext">HorseSpot Relational Database Context</param>
+
         public RefreshTokenDao(HorseSpotDataContext dataContext)
             : base(dataContext)
         {
