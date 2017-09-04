@@ -12,7 +12,7 @@ namespace HorseSpot.DAL.Models
     {
         #region Local Variables
 
-        private int _genderId;
+        private string _gender;
         private int _minAge;
         private int _maxAge;
         private int _minHeight;
@@ -35,7 +35,7 @@ namespace HorseSpot.DAL.Models
 
         public SearchHorseDao(SearchModelDao searchModel)
         {
-            _genderId = searchModel.GenderId;
+            _gender = searchModel.Gender;
             _minAge = searchModel.MinAge == null ? 0 : searchModel.MinAge.Value;
             _maxAge = searchModel.MaxAge == null ? 0 : searchModel.MaxAge.Value;
             _minHeight = searchModel.MinHeight == null ? 0 : searchModel.MinHeight.Value;
@@ -69,9 +69,9 @@ namespace HorseSpot.DAL.Models
         {
             var genderSearch = PredicateBuilder.True<HorseAd>();
 
-            if (_genderId != 0)
+            if (!string.IsNullOrEmpty(_gender))
             {
-                genderSearch = genderSearch.And(ad => ad.Gender.Id == _genderId);
+                genderSearch = genderSearch.And(ad => ad.Gender.Equals(_gender));
             }
 
             return genderSearch.Expand();

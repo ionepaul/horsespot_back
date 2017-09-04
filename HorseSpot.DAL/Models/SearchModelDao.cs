@@ -5,7 +5,7 @@ namespace HorseSpot.DAL.Models
     public class SearchModelDao
     {
         public int PageNumber { get; set; }
-        public int GenderId { get; set; }
+        public string Gender { get; set; }
         public int? MinAge { get; set; }
         public int? MaxAge { get; set; }
         public int? MinHeight { get; set; }
