@@ -8,8 +8,6 @@ using HorseSpot.Infrastructure.MailService;
 using HorseSpot.Infrastructure.Resources;
 using HorseSpot.Infrastructure.Validators;
 using HorseSpot.Models.Models;
-using MongoDB.Bson;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,7 +20,6 @@ namespace HorseSpot.BLL.Bus
 
         private IHorseAdDao _iHorseAdDao;
         private IUserDao _iUserDao;
-        private IGenderDao _iGenderDao;
         private IPriceRangeDao _iPriceRangeDao;
         private IHorseAbilityDao _iHorseAbilityDao;
         private IRecommendedRiderDao _iRecommendedRiderDao;
@@ -44,13 +41,12 @@ namespace HorseSpot.BLL.Bus
         /// <param name="iRecommendedRiderDao">RecommendedRiderDao Interface</param>
         /// <param name="iAppointmentDao">AppointmentDao Interface</param>
         /// <param name="iMailerService">MailerService Interface</param>
-        public HorseAdBus(IHorseAdDao iHorseAdDao, IUserDao iAuthDao, IGenderDao iGenderDao,
+        public HorseAdBus(IHorseAdDao iHorseAdDao, IUserDao iAuthDao,
             IPriceRangeDao iPriceRangeDao, IHorseAbilityDao iHorseAbilityDao, IRecommendedRiderDao iRecommendedRiderDao, 
             IAppointmentDao iAppointmentDao, IMailerService iMailerService)
         {
             _iHorseAdDao = iHorseAdDao;
             _iUserDao = iAuthDao;
-            _iGenderDao = iGenderDao;
             _iPriceRangeDao = iPriceRangeDao;
             _iHorseAbilityDao = iHorseAbilityDao;
             _iRecommendedRiderDao = iRecommendedRiderDao;
@@ -97,7 +93,7 @@ namespace HorseSpot.BLL.Bus
         /// <param name="id">Horse Advertisment Id</param>
         /// <param name="horseAdDTO">Horse Advertisment Model</param>
         /// <param name="userId">The id of user who tries to update the post</param>
-        public void Update(string id, HorseAdDTO horseAdDTO, string userId)
+        public void Update(int id, HorseAdDTO horseAdDTO, string userId)
         {
             var validatedHorseAd = ValidateAndSetHorseAd(horseAdDTO);
 
@@ -131,7 +127,7 @@ namespace HorseSpot.BLL.Bus
         /// <param name="id">Horse advertisment id</param>
         /// <param name="userId">The id of the user who tries to delete the post</param>
         /// <returns>Task or exception</returns>
-        public async Task Delete(string id, string userId)
+        public async Task Delete(int id, string userId)
         {
             var horseAd = _iHorseAdDao.GetById(id);
 
@@ -177,9 +173,9 @@ namespace HorseSpot.BLL.Bus
         /// </summary>
         /// <param name="id">Horse Advertisment id</param>
         /// <returns>Task</returns>
-        public async Task Validate(string id)
+        public async Task Validate(int id)
         {
-            _iHorseAdDao.Validate(new ObjectId(id));
+            _iHorseAdDao.Validate(id);
 
             var horseAd = _iHorseAdDao.GetById(id);
             var user = _iUserDao.FindUserById(horseAd.UserId);
@@ -205,7 +201,7 @@ namespace HorseSpot.BLL.Bus
         /// </summary>
         /// <param name="id">Horse advertisment id</param>
         /// <param name="userId">User id</param>
-        public void AddToFavorite(string id, string userId)
+        public void AddToFavorite(int id, string userId)
         {
             var horseAd = _iHorseAdDao.GetById(id);
 
@@ -214,18 +210,20 @@ namespace HorseSpot.BLL.Bus
                 throw new ResourceNotFoundException(Resources.InvalidAdIdentifier);
             }
 
-            var favoritesList = horseAd.FavoriteFor;
+            var user = _iUserDao.FindUserById(userId);
 
-            if (!favoritesList.Contains(userId))
+            var favoritesList = user.FavoriteHorseAds;
+
+            if (favoritesList.Select(x => x.Id == id).Count() > 0) 
             {
-                favoritesList.Add(userId);
+                favoritesList.Add(horseAd);
             }
             else
             {
-                favoritesList.Remove(userId);
+                favoritesList.Remove(horseAd);
             }
 
-            _iHorseAdDao.UpdateFavoritesList(new ObjectId(id), favoritesList);
+            _iHorseAdDao.UpdateFavoritesList(id, favoritesList);
         }
 
         /// <summary>
@@ -233,7 +231,7 @@ namespace HorseSpot.BLL.Bus
         /// </summary>
         /// <param name="id">Horse Advertisment id</param>
         /// <returns></returns>
-        public async Task IncreaseViews(string id)
+        public async Task IncreaseViews(int id)
         {
             var horseAd = _iHorseAdDao.GetById(id);
 
@@ -244,7 +242,7 @@ namespace HorseSpot.BLL.Bus
 
             var views = horseAd.Views + 1;
 
-            await _iHorseAdDao.IncreaseViews(new ObjectId(id), views);
+            await _iHorseAdDao.IncreaseViews(id, views);
         }
 
         /// <summary>
@@ -252,7 +250,7 @@ namespace HorseSpot.BLL.Bus
         /// </summary>
         /// <param name="id">Horse advertisment id</param>
         /// <returns>Horse advertisment model</returns>
-        public HorseAdDTO GetById(string id)
+        public HorseAdDTO GetById(int id)
         {
             var horseAd = _iHorseAdDao.GetById(id);
 
@@ -353,7 +351,7 @@ namespace HorseSpot.BLL.Bus
         /// <param name="adId">Horse Advertisment Id</param>
         /// <param name="userId">User Id</param>
         /// <returns>True/False</returns>
-        public bool CheckPostOwner(string adId, string userId)
+        public bool CheckPostOwner(int adId, string userId)
         {
             var horseAd = _iHorseAdDao.GetById(adId);
 
@@ -398,15 +396,6 @@ namespace HorseSpot.BLL.Bus
             }
 
             horseAdDTO.PriceRange.PriceRangeValue = priceRange.PriceRangeValue;
-
-            var gender = _iGenderDao.GetById(horseAdDTO.Gender.Id);
-
-            if (gender == null)
-            {
-                throw new ValidationException(Resources.InvalidHorseGenderIdentifier);
-            }
-
-            horseAdDTO.Gender.Gender = gender.GenderValue;
 
             if (!horseAdDTO.Abilities.Any())
             {
