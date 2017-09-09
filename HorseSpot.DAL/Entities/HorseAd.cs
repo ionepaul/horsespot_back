@@ -36,16 +36,13 @@ namespace HorseSpot.DAL.Models
         public bool HaveXRays { get; set; }
         public bool HaveCompetionalExperience { get; set; }
         public string UserId { get; set; }
-        public int PriceRangeId { get; set; }
-        public int AddressId { get; set; }
-        public int PedigreeId { get; set; }
+        public bool IsDeleted { get; set; }
+        public bool IsSold { get; set; }
 
-        [ForeignKey("AddressId")]
         public virtual Address Address { get; set; }
-        [ForeignKey("PedigreeId")]
         public virtual Pedigree Pedigree { get; set; }
-        [ForeignKey("PriceRangeId")]
         public virtual PriceRange PriceRange { get; set; }
+
         [ForeignKey("UserId")]
         public virtual UserModel User { get; set; }
 

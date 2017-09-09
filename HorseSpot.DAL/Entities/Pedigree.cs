@@ -5,9 +5,9 @@ namespace HorseSpot.DAL.Models
 {
     public class Pedigree
     {
-        [Key]
+        [Key, ForeignKey("PedigreeId")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int PedigreeId { get; set; }
 
         #region FatherLine
 

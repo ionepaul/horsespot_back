@@ -5,9 +5,9 @@ namespace HorseSpot.DAL.Models
 {
     public class Address
     {
-        [Key]
+        [Key,ForeignKey("AddressId")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int AddressId { get; set; }
         public string Country { get; set; }
         public string City { get; set; }
         public string Street { get; set; }

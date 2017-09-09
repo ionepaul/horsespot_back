@@ -30,17 +30,6 @@ namespace HorseSpot.BLL.Bus
 
         #region Constructor
 
-        /// <summary>
-        /// HorseBus Constructor
-        /// </summary>
-        /// <param name="iHorseAdDao">HorseAdDao Interface</param>
-        /// <param name="iAuthDao">AuthDao Interface</param>
-        /// <param name="iGenderDao">GenderDao Interface</param>
-        /// <param name="iPriceRangeDao">PriceRangeDao Interface</param>
-        /// <param name="iHorseAbilityDao">HorseAbilityDao Interface</param>
-        /// <param name="iRecommendedRiderDao">RecommendedRiderDao Interface</param>
-        /// <param name="iAppointmentDao">AppointmentDao Interface</param>
-        /// <param name="iMailerService">MailerService Interface</param>
         public HorseAdBus(IHorseAdDao iHorseAdDao, IUserDao iAuthDao,
             IPriceRangeDao iPriceRangeDao, IHorseAbilityDao iHorseAbilityDao, IRecommendedRiderDao iRecommendedRiderDao, 
             IAppointmentDao iAppointmentDao, IMailerService iMailerService)
@@ -68,10 +57,9 @@ namespace HorseSpot.BLL.Bus
         {
             var validatedHorseAd = ValidateAndSetHorseAd(horseAdDTO);
 
-            HorseAd horseAd = HorseAdConverter.FromHorseAdDTOToHorseAd(new ObjectId(), validatedHorseAd);
-            horseAd.UserId = userId;
+            HorseAd horseAd = HorseAdConverter.FromHorseAdDTOToHorseAd(validatedHorseAd, userId);
 
-            _iHorseAdDao.Insert(horseAd);
+            _iHorseAdDao.Add(horseAd);
 
             EmailModel emailModel = new EmailModel()
             {
@@ -397,21 +385,23 @@ namespace HorseSpot.BLL.Bus
 
             horseAdDTO.PriceRange.PriceRangeValue = priceRange.PriceRangeValue;
 
-            if (!horseAdDTO.Abilities.Any())
+            if (horseAdDTO.Abilities.Any())
+            {
+                foreach (var ability in horseAdDTO.Abilities)
+                {
+                    var dbAbility = _iHorseAbilityDao.GetById(ability.Id);
+
+                    if (dbAbility == null)
+                    {
+                        throw new ValidationException(Resources.InvalidAbilityIdentifier);
+                    }
+
+                    ability.Ability = dbAbility.Ability;
+                }
+            }
+            else
             {
                 throw new ValidationException(Resources.MustSelectAtLeastOneAbility);
-            }
-
-            foreach (var ability in horseAdDTO.Abilities)
-            {
-                var dbAbility = _iHorseAbilityDao.GetById(ability.Id);
-
-                if (dbAbility == null)
-                {
-                    throw new ValidationException(Resources.InvalidAbilityIdentifier);
-                }
-
-                ability.Ability = dbAbility.Ability;
             }
 
             if (horseAdDTO.RecomendedRiders.Any())
@@ -427,6 +417,9 @@ namespace HorseSpot.BLL.Bus
 
                     rider.Rider = dbRider.Rider;
                 }
+            } else
+            {
+                throw new ValidationException(Resources.MustSelectAtLeastOneRecommendedRider);
             }
 
             return horseAdDTO;

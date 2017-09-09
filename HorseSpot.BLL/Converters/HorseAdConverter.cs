@@ -20,13 +20,12 @@ namespace HorseSpot.BLL.Converters
         /// <param name="adId">Horse Advertisment Id</param>
         /// <param name="horseAdDTO">Horse ad Advertisment DTO</param>
         /// <returns>Horse ad Database Model</returns>
-        public static HorseAd FromHorseAdDTOToHorseAd(ObjectId adId, HorseAdDTO horseAdDTO)
+        public static HorseAd FromHorseAdDTOToHorseAd(HorseAdDTO horseAdDTO, string userId)
         {
             var horseAd = new HorseAd
             {
-                Id = adId,
                 HorseName = horseAdDTO.HorseName,
-                Abilities = horseAdDTO.Abilities.Select(HorseAbilityConverter.FromHorseAbilityDTOToHorseAbility),
+                Abilities = horseAdDTO.Abilities.Select(HorseAbilityConverter.FromHorseAbilityDTOToHorseAbility).ToList(),
                 Address = FromAddressDTOToAddress(horseAdDTO.Address),
                 Pedigree = FromPedigreeDTOToPedigree(horseAdDTO.Pedigree),
                 Price = horseAdDTO.Price,
@@ -34,18 +33,18 @@ namespace HorseSpot.BLL.Converters
                 Breed = horseAdDTO.Breed,
                 Age = horseAdDTO.Age,
                 Description = horseAdDTO.Description,
-                Gender = GenderConverter.FromGenderDTOToGender(horseAdDTO.Gender),
+                Gender = horseAdDTO.Gender,
                 HaveCompetionalExperience = horseAdDTO.HaveCompetionalExperience,
                 HaveXRays = horseAdDTO.HaveXRays,
-                RecomendedRiders = horseAdDTO != null ? horseAdDTO.RecomendedRiders.Select(RecommendedRiderConverter.FromRiderDTOToRider) : null,
+                RecomendedRiders = horseAdDTO != null ? horseAdDTO.RecomendedRiders.Select(RecommendedRiderConverter.FromRiderDTOToRider).ToList() : null,
                 IsSponsorized = horseAdDTO.IsSponsorized,
                 VideoLink = horseAdDTO.VideoLink,
                 DatePosted = DateTime.UtcNow,
                 Title = SetAdTitle(horseAdDTO),
-                FavoriteFor = new List<string>(),
                 Height = horseAdDTO.HeightInCm,
-                ImageIds = new List<string>(),
-                IsValidated = false
+                //ImageIds = new List<string>(),
+                IsValidated = false,
+                UserId = userId
             };
 
             return horseAd;
