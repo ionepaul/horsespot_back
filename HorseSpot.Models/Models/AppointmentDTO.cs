@@ -12,7 +12,7 @@ namespace HorseSpot.Models.Models
         public DateTime AppointmentDateTime { get; set; }
 
         [Required]
-        public string AdvertismentId { get; set; }
+        public int AdvertismentId { get; set; }
 
         [Required]
         public string AdvertismentOwnerId { get; set; }
@@ -57,11 +57,5 @@ namespace HorseSpot.Models.Models
         public string UserWhoSeenId { get; set; }
 
         public bool AllSeen { get; set; }
-
-        //[Required]
-        //public bool IsPendingResponse { get; set; }
-
-        //[Required]
-        //public bool IsPendingResponseFromInitiator { get; set; }
     }
 }

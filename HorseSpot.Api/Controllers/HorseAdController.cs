@@ -42,7 +42,7 @@ namespace HorseSpot.Api.Controllers
         [HttpPut]
         [Authorize]
         [Route("api/horses/update/{id}")]
-        public void Put([FromUri] string id, [FromBody] HorseAdDTO horseAdDTO)
+        public void Put([FromUri] int id, [FromBody] HorseAdDTO horseAdDTO)
         {
             _iHorseAdBus.Update(id, horseAdDTO, UserIdExtractor.GetUserIdFromRequest(Request));
         }
@@ -54,10 +54,10 @@ namespace HorseSpot.Api.Controllers
         /// <returns>Task</returns>
         [Authorize]
         [HttpDelete]
-        [Route("api/horses/delete/{id}")]
-        public async Task Delete([FromUri] string id)
+        [Route("api/horses/delete/{id}/{isSold}")]
+        public async Task Delete([FromUri] int id, bool isSold)
         {
-            await _iHorseAdBus.Delete(id, UserIdExtractor.GetUserIdFromRequest(Request));
+            await _iHorseAdBus.Delete(id, UserIdExtractor.GetUserIdFromRequest(Request), isSold);
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace HorseSpot.Api.Controllers
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [Route("api/horses/validate/{id}")]
-        public async Task Validate([FromUri] string id)
+        public async Task Validate([FromUri] int id)
         {
             await _iHorseAdBus.Validate(id);
         }
@@ -80,7 +80,7 @@ namespace HorseSpot.Api.Controllers
         [HttpPost]
         [Authorize]
         [Route("api/horses/favorite/{id}")]
-        public void AddToFavorite([FromUri] string id)
+        public void AddToFavorite([FromUri] int id)
         {
             _iHorseAdBus.AddToFavorite(id, UserIdExtractor.GetUserIdFromRequest(Request));
         }
@@ -92,7 +92,7 @@ namespace HorseSpot.Api.Controllers
         /// <returns>Task</returns>
         [HttpPost]
         [Route("api/horses/views/{id}")]
-        public async Task IncreaseViews([FromUri] string id)
+        public async Task IncreaseViews([FromUri] int id)
         {
             await _iHorseAdBus.IncreaseViews(id);
         }
@@ -104,7 +104,7 @@ namespace HorseSpot.Api.Controllers
         /// <returns>Horse Advertisment Model</returns>
         [HttpGet]
         [Route("api/horses/get/{id}")]
-        public HorseAdDTO Get([FromUri] string id)
+        public HorseAdDTO Get([FromUri] int id)
         {
             return _iHorseAdBus.GetById(id);
         }
@@ -130,7 +130,7 @@ namespace HorseSpot.Api.Controllers
         [HttpGet]
         [Authorize]
         [Route("api/horses/ispostowner/{adId}")]
-        public bool CheckPostOwner([FromUri] string adId)
+        public bool CheckPostOwner([FromUri] int adId)
         {
             return _iHorseAdBus.CheckPostOwner(adId, UserIdExtractor.GetUserIdFromRequest(Request));
         }

@@ -3,7 +3,9 @@ using HorseSpot.DAL.Models;
 using HorseSpot.Infrastructure.Constants;
 using LinqKit;
 using MongoDB.Driver;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace HorseSpot.DAL.Dao
 {
@@ -111,10 +113,16 @@ namespace HorseSpot.DAL.Dao
             return results;
         }
 
+        public async Task UpdateAsync(HorseAd horseAd)
+        {
+            _ctx.Entry(horseAd).State = EntityState.Modified;
+            await _ctx.SaveChangesAsync();
+        }
+
         #endregion
 
         #region PrivateMethods
-        
+
         /// <summary>
         /// Gets the number of pages to skip
         /// </summary>

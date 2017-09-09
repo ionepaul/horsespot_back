@@ -54,7 +54,7 @@ namespace HorseSpot.DAL.Dao
         public async Task<UserModel> UpdateUser(UserModel userModel)
         {
             var result = await _userManager.UpdateAsync(userModel);
-
+            
             var user = _userManager.FindById(userModel.Id);
             
             return user;

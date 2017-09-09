@@ -92,7 +92,7 @@ namespace HorseSpot.DAL.Dao
         /// </summary>
         /// <param name="horseAdId">Advertisment Id</param>
         /// <returns>List of appointments</returns>
-        public IEnumerable<Appointment> GetAppointmentsByHorseAdvertismentId(string horseAdId)
+        public IEnumerable<Appointment> GetAppointmentsByHorseAdvertismentId(int horseAdId)
         {
             var appointments = from app in _ctx.Appointments where app.AdvertismentId == horseAdId select app;
 

@@ -15,7 +15,7 @@ namespace HorseSpot.DAL.Entities
         [Required]
         public DateTime AppointmentDateTime { get; set; }
         [Required]
-        public string AdvertismentId { get; set; }
+        public int AdvertismentId { get; set; }
         [Required]
         public string AdvertismentOwnerId { get; set; }
         [Required]
@@ -30,10 +30,14 @@ namespace HorseSpot.DAL.Entities
         public bool SeenByOwner { get; set; }
         [Required]
         public bool SeenByInitiator { get; set; }
+        [Required]
+        public bool IsCanceled { get; set; }
 
         [ForeignKey("AdvertismentOwnerId")]
         public virtual UserModel AdOwner { get; set; }
         [ForeignKey("InitiatorId")]
         public virtual UserModel Initiator { get; set; }
+        [ForeignKey("AdvertismentId")]
+        public virtual HorseAd HorseAd { get; set; }
     }
 }

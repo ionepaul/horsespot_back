@@ -35,16 +35,6 @@ namespace HorseSpot.DAL.Migrations
                 context.HorseAbilities.AddRange(BuildHorseAbilitiesList());
             }
 
-            if (context.Genders.Count() > 0)
-            {
-                return;
-            }
-            else
-            {
-                context.Genders.AddRange(BuildGendersList());
-            }
-
-
             if (context.RecommendedRiders.Count() > 0)
             {
                 return;
@@ -468,27 +458,6 @@ namespace HorseSpot.DAL.Migrations
             };
 
             return HorseAbilitiesList;
-        }
-
-        private static List<Gender> BuildGendersList()
-        {
-            List<Gender> GendersList = new List<Gender>
-            {
-                new Gender
-                {
-                    GenderValue = "Gelding"
-                },
-                new Gender
-                {
-                    GenderValue = "Mare"
-                },
-                new Gender
-                {
-                    GenderValue = "Stallion"
-                }
-            };
-
-            return GendersList;
         }
 
         private static List<Client> BuildClientsList()

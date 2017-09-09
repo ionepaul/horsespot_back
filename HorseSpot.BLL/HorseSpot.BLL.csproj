@@ -94,7 +94,6 @@
     <Compile Include="Bus\AppointmentBus.cs" />
     <Compile Include="Bus\AuthorizationBus.cs" />
     <Compile Include="Bus\CountryBus.cs" />
-    <Compile Include="Bus\GenderBus.cs" />
     <Compile Include="Bus\HorseAbilityBus.cs" />
     <Compile Include="Bus\HorseAdBus.cs" />
     <Compile Include="Bus\PriceRangeBus.cs" />
@@ -104,7 +103,6 @@
     <Compile Include="Converters\AppointmentConverter.cs" />
     <Compile Include="Converters\AuthorizationConverter.cs" />
     <Compile Include="Converters\EmailSendingConverter.cs" />
-    <Compile Include="Converters\GenderConverter.cs" />
     <Compile Include="Converters\HorseAbilityConverter.cs" />
     <Compile Include="Converters\HorseAdConverter.cs" />
     <Compile Include="Converters\PriceRangeConverter.cs" />
@@ -113,7 +111,6 @@
     <Compile Include="Interfaces\IAppointmentBus.cs" />
     <Compile Include="Interfaces\IAuthorizationBus.cs" />
     <Compile Include="Interfaces\ICountryBus.cs" />
-    <Compile Include="Interfaces\IGenderBus.cs" />
     <Compile Include="Interfaces\IHorseAbilityBus.cs" />
     <Compile Include="Interfaces\IHorseAdBus.cs" />
     <Compile Include="Interfaces\IPriceRangeBus.cs" />

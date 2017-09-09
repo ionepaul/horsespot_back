@@ -128,6 +128,9 @@
     <Compile Include="Dao\AbstractDao.cs" />
     <Compile Include="Dao\AppointmentDao.cs" />
     <Compile Include="Dao\ClientDao.cs" />
+    <Compile Include="Dao\CountryDao.cs" />
+    <Compile Include="Dao\HorseAbilityDao.cs" />
+    <Compile Include="Dao\PriceRangeDao.cs" />
     <Compile Include="Dao\UserDao.cs" />
     <Compile Include="Dao\HorseAdDao.cs" />
     <Compile Include="Dao\RecommendedRiderDao.cs" />
@@ -148,10 +151,8 @@
     <Compile Include="Interfaces\ICountryDao.cs" />
     <Compile Include="Interfaces\IUserDao.cs" />
     <Compile Include="Interfaces\IDao.cs" />
-    <Compile Include="Interfaces\IGenderDao.cs" />
     <Compile Include="Interfaces\IHorseAbilityDao.cs" />
     <Compile Include="Interfaces\IHorseAdDao.cs" />
-    <Compile Include="Interfaces\IMongoDao.cs" />
     <Compile Include="Interfaces\IPriceRangeDao.cs" />
     <Compile Include="Interfaces\IRecommendedRiderDao.cs" />
     <Compile Include="Interfaces\ISearchHelper.cs" />
@@ -160,6 +161,10 @@
     <Compile Include="Migrations\201705231655293_InitialCreate.cs" />
     <Compile Include="Migrations\201705231655293_InitialCreate.Designer.cs">
       <DependentUpon>201705231655293_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709091744421_HorseAds.cs" />
+    <Compile Include="Migrations\201709091744421_HorseAds.Designer.cs">
+      <DependentUpon>201709091744421_HorseAds.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Entities\Address.cs" />
@@ -198,6 +203,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201705231655293_InitialCreate.resx">
       <DependentUpon>201705231655293_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709091744421_HorseAds.resx">
+      <DependentUpon>201709091744421_HorseAds.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

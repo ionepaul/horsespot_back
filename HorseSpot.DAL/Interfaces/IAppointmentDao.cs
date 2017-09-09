@@ -15,6 +15,6 @@ namespace HorseSpot.DAL.Interfaces
 
         void UpdateAppointment(Appointment appointment);
 
-        IEnumerable<Appointment> GetAppointmentsByHorseAdvertismentId(string horseAdId);
+        IEnumerable<Appointment> GetAppointmentsByHorseAdvertismentId(int horseAdId);
     }
 }

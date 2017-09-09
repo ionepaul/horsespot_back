@@ -358,6 +358,15 @@ namespace HorseSpot.Infrastructure.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must select at least one recommended rider..
+        /// </summary>
+        public static string MustSelectAtLeastOneRecommendedRider {
+            get {
+                return ResourceManager.GetString("MustSelectAtLeastOneRecommendedRider", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please update at least one image..
         /// </summary>
         public static string PleaseUpdateAtLeastOneImage {

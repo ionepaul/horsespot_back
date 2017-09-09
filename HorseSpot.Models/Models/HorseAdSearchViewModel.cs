@@ -5,7 +5,7 @@ namespace HorseSpot.Models.Models
     public class HorseAdSearchViewModel
     {
         public int PageNumber { get; set; }
-        public int GenderId { get; set; }
+        public string Gender { get; set; }
         public BetweenAge AgeModel { get; set; }
         public BetweenHeight HeightModel { get; set; }
         public string Breed { get; set; }
@@ -22,7 +22,6 @@ namespace HorseSpot.Models.Models
         public HorseAdSearchViewModel()
         {
             PageNumber = 1;
-            GenderId = 0;
             AgeModel = new BetweenAge();
             HeightModel = new BetweenHeight();
             ToHaveXRays = false;

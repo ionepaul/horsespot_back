@@ -52,13 +52,11 @@ namespace HorseSpot.Api
             container.RegisterType<IHorseAdDao, HorseAdDao>();
             container.RegisterType<IAuthorizationBus, AuthorizationBus>();
             container.RegisterType<IMailerService, MailerService>();
-            container.RegisterType<IGenderDao, GenderDao>();
             container.RegisterType<IPriceRangeDao, PriceRangeDao>();
             container.RegisterType<IHorseAbilityDao, HorseAbilityDao>();
-            container.RegisterType<IGenderBus, GenderBus>();
             container.RegisterType<IPriceRangeBus, PriceRangeBus>();
             container.RegisterType<IHorseAbilityBus, HorseAbilityBus>();
-            container.RegisterType<IUtilAdDao, UtilAdDao>();
+            //container.RegisterType<IUtilAdDao, UtilAdDao>();
             container.RegisterType<IUtilBus, UtilBus>();
             container.RegisterType<IRecommendedRiderDao, RecommendedRiderDao>();
             container.RegisterType<IRecommendedRiderBus, RecommendedRiderBus>();

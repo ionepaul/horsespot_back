@@ -81,7 +81,7 @@ namespace HorseSpot.BLL.Bus
         /// <param name="id">Horse Advertisment Id</param>
         /// <param name="horseAdDTO">Horse Advertisment Model</param>
         /// <param name="userId">The id of user who tries to update the post</param>
-        public void Update(int id, HorseAdDTO horseAdDTO, string userId)
+        public async Task Update(int id, HorseAdDTO horseAdDTO, string userId)
         {
             var validatedHorseAd = ValidateAndSetHorseAd(horseAdDTO);
 
@@ -97,16 +97,9 @@ namespace HorseSpot.BLL.Bus
                 throw new ForbiddenException(Resources.ActionRequiresAdditionalRights);
             }
             
-            var updatedHorseAd = HorseAdConverter.FromHorseAdDTOToHorseAd(horseAd.Id, validatedHorseAd);
+            var updatedHorseAd = HorseAdConverter.FromHorseAdDTOToHorseAd(validatedHorseAd, horseAd.UserId);
 
-            updatedHorseAd.UserId = horseAd.UserId;
-            updatedHorseAd.FavoriteFor = horseAd.FavoriteFor;
-            updatedHorseAd.DatePosted = horseAd.DatePosted;
-            updatedHorseAd.IsValidated = horseAd.IsValidated;
-            updatedHorseAd.ImageIds = horseAd.ImageIds;
-            updatedHorseAd.Views = horseAd.Views;
-
-            _iHorseAdDao.Update(updatedHorseAd);
+            await _iHorseAdDao.UpdateAsync(updatedHorseAd);
         }
 
         /// <summary>
@@ -115,7 +108,7 @@ namespace HorseSpot.BLL.Bus
         /// <param name="id">Horse advertisment id</param>
         /// <param name="userId">The id of the user who tries to delete the post</param>
         /// <returns>Task or exception</returns>
-        public async Task Delete(int id, string userId)
+        public async Task Delete(int id, string userId, bool isSold)
         {
             var horseAd = _iHorseAdDao.GetById(id);
 
@@ -129,7 +122,7 @@ namespace HorseSpot.BLL.Bus
                 throw new ForbiddenException(Resources.ActionRequiresAdditionalRights);
             }
 
-            var associatedAppointments = _iAppointmentDao.GetAppointmentsByHorseAdvertismentId(horseAd.Id.ToString());
+            var associatedAppointments = _iAppointmentDao.GetAppointmentsByHorseAdvertismentId(horseAd.Id);
 
             if (associatedAppointments.Count() != 0)
             {
@@ -148,12 +141,16 @@ namespace HorseSpot.BLL.Bus
                         HorseAdTitle = horseAd.Title
                     };
 
-                    _iAppointmentDao.Delete(appointment);
+                    appointment.IsCanceled = true;
+                    _iAppointmentDao.UpdateAppointment(appointment);
                     await _iMailerService.SendMail(emailModel);
                 }
             }
-                     
-            _iHorseAdDao.Delete(horseAd);
+
+            horseAd.IsDeleted = true;
+            horseAd.IsSold = isSold;
+
+            await _iHorseAdDao.UpdateAsync(horseAd);
         }
 
         /// <summary>
@@ -163,10 +160,11 @@ namespace HorseSpot.BLL.Bus
         /// <returns>Task</returns>
         public async Task Validate(int id)
         {
-            _iHorseAdDao.Validate(id);
-
             var horseAd = _iHorseAdDao.GetById(id);
             var user = _iUserDao.FindUserById(horseAd.UserId);
+
+            horseAd.IsValidated = true;
+            await _iHorseAdDao.UpdateAsync(horseAd);
 
             EmailModel emailModel = new EmailModel()
             {
@@ -174,7 +172,7 @@ namespace HorseSpot.BLL.Bus
                 Receiver = user.Email,
                 ReceiverFirstName = user.FirstName,
                 ReceiverLastName = user.LastName,
-                HorseAdLink = ConfigurationManager.AppSettings["HorseAdLink"] + horseAd.Id.ToString() + "/" + horseAd.Abilities.First().Ability.ToLowerInvariant() + "/" + horseAd.Age + "y" + "-" + horseAd.HorseName + "-" + horseAd.Gender.GenderValue.ToLowerInvariant(),
+                HorseAdLink = ConfigurationManager.AppSettings["HorseAdLink"] + horseAd.Id + "/" + horseAd.Abilities.First().Ability.ToLowerInvariant() + "/" + horseAd.Age + "y" + "-" + horseAd.HorseName + "-" + horseAd.Gender.ToLowerInvariant(),
                 EmailSubject = EmailSubjects.ValidationSucceded,
                 EmailTemplatePath = EmailTemplatesPath.ValidationSuccededTemplate
             };
@@ -189,7 +187,7 @@ namespace HorseSpot.BLL.Bus
         /// </summary>
         /// <param name="id">Horse advertisment id</param>
         /// <param name="userId">User id</param>
-        public void AddToFavorite(int id, string userId)
+        public async Task AddToFavorite(int id, string userId)
         {
             var horseAd = _iHorseAdDao.GetById(id);
 
@@ -211,7 +209,7 @@ namespace HorseSpot.BLL.Bus
                 favoritesList.Remove(horseAd);
             }
 
-            _iHorseAdDao.UpdateFavoritesList(id, favoritesList);
+            var updatedUser = await _iUserDao.UpdateUser(user);
         }
 
         /// <summary>
@@ -228,9 +226,9 @@ namespace HorseSpot.BLL.Bus
                 throw new ResourceNotFoundException(Resources.InvalidAdIdentifier);
             }
 
-            var views = horseAd.Views + 1;
+            horseAd.Views += 1;
 
-            await _iHorseAdDao.IncreaseViews(id, views);
+            await _iHorseAdDao.UpdateAsync(horseAd);
         }
 
         /// <summary>
@@ -244,6 +242,7 @@ namespace HorseSpot.BLL.Bus
 
             if (horseAd == null)
             {
+
                 throw new ResourceNotFoundException(Resources.InvalidAdIdentifier);
             }
 

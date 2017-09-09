@@ -270,7 +270,6 @@
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\HorseAbilityController.cs" />
     <Compile Include="Controllers\HorseAdController.cs" />
-    <Compile Include="Controllers\HorseGenderController.cs" />
     <Compile Include="Controllers\PriceRangeController.cs" />
     <Compile Include="Controllers\RecommendedRiderController.cs" />
     <Compile Include="Controllers\UtilsController.cs" />

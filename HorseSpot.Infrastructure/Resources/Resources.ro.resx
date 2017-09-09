@@ -216,6 +216,9 @@
   <data name="MustSelectAtLeastOneAbility" xml:space="preserve">
     <value>Trebuie sa selectezi cel putin o abilitate.</value>
   </data>
+  <data name="MustSelectAtLeastOneRecommendedRider" xml:space="preserve">
+    <value>Trebuie sa selectezi cel putin un calaret recomandat.</value>
+  </data>
   <data name="PleaseUpdateAtLeastOneImage" xml:space="preserve">
     <value>Te rugam sa incarci cel putin o imagine.</value>
   </data>

@@ -83,29 +83,13 @@ namespace HorseSpot.BLL.Converters
                 Father_Father_Mother = pedigreeDTO.Father_Father_Mother,
                 Father_Mother_Father = pedigreeDTO.Father_Mother_Father,
                 Father_Mother_Mother = pedigreeDTO.Father_Mother_Mother,
-                Father_Father_Father_Father = pedigreeDTO.Father_Father_Father_Father,
-                Father_Father_Father_Mother = pedigreeDTO.Father_Father_Father_Mother,
-                Father_Father_Mother_Father = pedigreeDTO.Father_Father_Mother_Father,
-                Father_Father_Mother_Mother = pedigreeDTO.Father_Father_Mother_Mother,
-                Father_Mother_Father_Father = pedigreeDTO.Father_Mother_Father_Father,
-                Father_Mother_Father_Mother = pedigreeDTO.Father_Mother_Father_Mother,
-                Father_Mother_Mother_Father = pedigreeDTO.Father_Mother_Mother_Father,
-                Father_Mother_Mother_Mother = pedigreeDTO.Father_Mother_Mother_Mother,
                 Mother = pedigreeDTO.Mother,
                 Mother_Father = pedigreeDTO.Mother_Father,
                 Mother_Mother = pedigreeDTO.Mother_Mother,
                 Mother_Father_Father = pedigreeDTO.Mother_Father_Father,
                 Mother_Father_Mother = pedigreeDTO.Mother_Father_Mother,
                 Mother_Mother_Father = pedigreeDTO.Mother_Mother_Father,
-                Mother_Mother_Mother = pedigreeDTO.Mother_Mother_Mother,
-                Mother_Father_Father_Father = pedigreeDTO.Mother_Father_Father_Father,
-                Mother_Father_Father_Mother = pedigreeDTO.Mother_Father_Father_Mother,
-                Mother_Father_Mother_Father = pedigreeDTO.Mother_Father_Mother_Father,
-                Mother_Father_Mother_Mother = pedigreeDTO.Mother_Father_Mother_Mother,
-                Mother_Mother_Father_Father = pedigreeDTO.Mother_Mother_Father_Father,
-                Mother_Mother_Father_Mother = pedigreeDTO.Mother_Mother_Father_Mother,
-                Mother_Mother_Mother_Father = pedigreeDTO.Mother_Mother_Mother_Father,
-                Mother_Mother_Mother_Mother = pedigreeDTO.Mother_Mother_Mother_Mother
+                Mother_Mother_Mother = pedigreeDTO.Mother_Mother_Mother
             };
 
             return pedigree;
@@ -153,10 +137,10 @@ namespace HorseSpot.BLL.Converters
                 Breed = horseAd.Breed,
                 Age = horseAd.Age,
                 Description = horseAd.Description,
-                Gender = GenderConverter.FromGenderToGenderDTO(horseAd.Gender),
+                Gender = horseAd.Gender,
                 HaveCompetionalExperience = horseAd.HaveCompetionalExperience,
                 HaveXRays = horseAd.HaveXRays,
-                ImageIds = horseAd.ImageIds,
+                //ImageIds = horseAd.ImageIds,
                 RecomendedRiders = horseAd.RecomendedRiders.Select(RecommendedRiderConverter.FromRiderToRiderDTO),
                 IsSponsorized = horseAd.IsSponsorized,
                 VideoLink = horseAd.VideoLink,
@@ -165,8 +149,7 @@ namespace HorseSpot.BLL.Converters
                 IsValidated = horseAd.IsValidated,
                 HeightInCm = horseAd.Height,
                 CountFavoritesFor = horseAd.FavoriteFor.Count,
-                Views = horseAd.Views,
-                FavoritesFor = horseAd.FavoriteFor
+                Views = horseAd.Views
             };
 
             return horseAdDTO;
@@ -193,29 +176,13 @@ namespace HorseSpot.BLL.Converters
                 Father_Father_Mother = pedigree.Father_Father_Mother,
                 Father_Mother_Father = pedigree.Father_Mother_Father,
                 Father_Mother_Mother = pedigree.Father_Mother_Mother,
-                Father_Father_Father_Father = pedigree.Father_Father_Father_Father,
-                Father_Father_Father_Mother = pedigree.Father_Father_Father_Mother,
-                Father_Father_Mother_Father = pedigree.Father_Father_Mother_Father,
-                Father_Father_Mother_Mother = pedigree.Father_Father_Mother_Mother,
-                Father_Mother_Father_Father = pedigree.Father_Mother_Father_Father,
-                Father_Mother_Father_Mother = pedigree.Father_Mother_Father_Mother,
-                Father_Mother_Mother_Father = pedigree.Father_Mother_Mother_Father,
-                Father_Mother_Mother_Mother = pedigree.Father_Mother_Mother_Mother,
                 Mother = pedigree.Mother,
                 Mother_Father = pedigree.Mother_Father,
                 Mother_Mother = pedigree.Mother_Mother,
                 Mother_Father_Father = pedigree.Mother_Father_Father,
                 Mother_Father_Mother = pedigree.Mother_Father_Mother,
                 Mother_Mother_Father = pedigree.Mother_Mother_Father,
-                Mother_Mother_Mother = pedigree.Mother_Mother_Mother,
-                Mother_Father_Father_Father = pedigree.Mother_Father_Father_Father,
-                Mother_Father_Father_Mother = pedigree.Mother_Father_Father_Mother,
-                Mother_Father_Mother_Father = pedigree.Mother_Father_Mother_Father,
-                Mother_Father_Mother_Mother = pedigree.Mother_Father_Mother_Mother,
-                Mother_Mother_Father_Father = pedigree.Mother_Mother_Father_Father,
-                Mother_Mother_Father_Mother = pedigree.Mother_Mother_Father_Mother,
-                Mother_Mother_Mother_Father = pedigree.Mother_Mother_Mother_Father,
-                Mother_Mother_Mother_Mother = pedigree.Mother_Mother_Mother_Mother
+                Mother_Mother_Mother = pedigree.Mother_Mother_Mother
             };
         }
 
@@ -237,7 +204,7 @@ namespace HorseSpot.BLL.Converters
                 MinHeight = searchModel.HeightModel.MinHeight,
                 SuitableFor = searchModel.SuitableFor,
                 Breed = searchModel.Breed,
-                GenderId = searchModel.GenderId,
+                Gender = searchModel.Gender,
                 PriceRangeId = searchModel.PriceRangeId,
                 ToHaveCompetionalExperience = searchModel.ToHaveCompetionalExperience,
                 ToHaveVideo = searchModel.ToHaveVideo,
@@ -281,7 +248,7 @@ namespace HorseSpot.BLL.Converters
             {
                 Id = horseAd.Id.ToString(),
                 Title = horseAd.Title,
-                ImageId = horseAd.ImageIds.FirstOrDefault(),
+                //ImageId = horseAd.ImageIds.FirstOrDefault(),
                 Age = horseAd.Age,
                 Breed = horseAd.Breed,
                 HorseName = horseAd.HorseName,
@@ -292,7 +259,7 @@ namespace HorseSpot.BLL.Converters
                 CountFavoritesFor = horseAd.FavoriteFor.Count,
                 Views = horseAd.Views,
                 Country = horseAd.Address.Country,
-                Gender = horseAd.Gender.GenderValue,
+                Gender = horseAd.Gender,
                 DatePosted = horseAd.DatePosted
             };
         }

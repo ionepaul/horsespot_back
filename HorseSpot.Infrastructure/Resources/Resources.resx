@@ -216,6 +216,9 @@
   <data name="MustSelectAtLeastOneAbility" xml:space="preserve">
     <value>You must select at least one ability.</value>
   </data>
+  <data name="MustSelectAtLeastOneRecommendedRider" xml:space="preserve">
+    <value>You must select at least one recommended rider.</value>
+  </data>
   <data name="PleaseUpdateAtLeastOneImage" xml:space="preserve">
     <value>Please update at least one image.</value>
   </data>
