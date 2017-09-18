@@ -10,5 +10,6 @@ namespace HorseSpot.DAL.Interfaces
         GetHorseAdListResults GetAllForAdmin(int pageNumber);
         GetHorseAdListResults SearchAfter(SearchHorseDao searchQuery, int pageNumber);
         Task UpdateAsync(HorseAd horseAd);
+        void AddHorse(HorseAd horseAd);
     }
 }

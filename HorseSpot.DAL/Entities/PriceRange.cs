@@ -7,12 +7,10 @@ namespace HorseSpot.DAL.Entities
 {
     public class PriceRange
     {
-        [Key, ForeignKey("HorseAds")]
+        [Key]
         public int Id { get; set; }
         [Required]
         [MaxLength(100)]
         public string PriceRangeValue { get; set; }
-
-        public virtual ICollection<HorseAd> HorseAds { get; set; }
     }
 }

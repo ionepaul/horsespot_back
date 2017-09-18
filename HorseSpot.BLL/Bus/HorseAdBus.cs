@@ -8,6 +8,7 @@ using HorseSpot.Infrastructure.MailService;
 using HorseSpot.Infrastructure.Resources;
 using HorseSpot.Infrastructure.Validators;
 using HorseSpot.Models.Models;
+using System;
 using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
@@ -55,11 +56,18 @@ namespace HorseSpot.BLL.Bus
         /// <returns>Horse Advertisment Id or exception</returns>
         public async Task<string> Add(HorseAdDTO horseAdDTO, string userId)
         {
-            var validatedHorseAd = ValidateAndSetHorseAd(horseAdDTO);
+            var validatedHorseAd = ValidateHorseAd(horseAdDTO);
 
             HorseAd horseAd = HorseAdConverter.FromHorseAdDTOToHorseAd(validatedHorseAd, userId);
 
-            _iHorseAdDao.Add(horseAd);
+            try
+            {
+                _iHorseAdDao.AddHorse(horseAd);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
 
             EmailModel emailModel = new EmailModel()
             {
@@ -83,7 +91,7 @@ namespace HorseSpot.BLL.Bus
         /// <param name="userId">The id of user who tries to update the post</param>
         public async Task Update(int id, HorseAdDTO horseAdDTO, string userId)
         {
-            var validatedHorseAd = ValidateAndSetHorseAd(horseAdDTO);
+            var validatedHorseAd = ValidateHorseAd(horseAdDTO);
 
             var horseAd = _iHorseAdDao.GetById(id);
 
@@ -364,7 +372,7 @@ namespace HorseSpot.BLL.Bus
         /// </summary>
         /// <param name="horseAdDTO">Horse Advertisment Model</param>
         /// <returns>Horse Advertisment Model</returns>
-        private HorseAdDTO ValidateAndSetHorseAd(HorseAdDTO horseAdDTO)
+        private HorseAdDTO ValidateHorseAd(HorseAdDTO horseAdDTO)
         {
             if (horseAdDTO == null)
             {
@@ -373,50 +381,20 @@ namespace HorseSpot.BLL.Bus
 
             ValidationHelper.ValidateModelAttributes<HorseAdDTO>(horseAdDTO);
             ValidationHelper.ValidateModelAttributes<AddressDTO>(horseAdDTO.Address);
-            ValidationHelper.ValidateModelAttributes<PriceRangeDTO>(horseAdDTO.PriceRange);
 
-            var priceRange = _iPriceRangeDao.GetById(horseAdDTO.PriceRange.Id);
+            var priceRange = _iPriceRangeDao.GetById(horseAdDTO.PriceRangeId);
 
             if (priceRange == null)
             {
                 throw new ValidationException(Resources.InvalidPriceRangeIdentifier);
             }
 
-            horseAdDTO.PriceRange.PriceRangeValue = priceRange.PriceRangeValue;
-
-            if (horseAdDTO.Abilities.Any())
-            {
-                foreach (var ability in horseAdDTO.Abilities)
-                {
-                    var dbAbility = _iHorseAbilityDao.GetById(ability.Id);
-
-                    if (dbAbility == null)
-                    {
-                        throw new ValidationException(Resources.InvalidAbilityIdentifier);
-                    }
-
-                    ability.Ability = dbAbility.Ability;
-                }
-            }
-            else
+            if (!horseAdDTO.AbilityIds.Any())
             {
                 throw new ValidationException(Resources.MustSelectAtLeastOneAbility);
             }
 
-            if (horseAdDTO.RecomendedRiders.Any())
-            {
-                foreach(var rider in horseAdDTO.RecomendedRiders)
-                {
-                    var dbRider = _iRecommendedRiderDao.GetById(rider.Id);
-
-                    if (dbRider == null)
-                    {
-                        throw new ValidationException(Resources.InvalidRecommendedRiderIdentifier);
-                    }
-
-                    rider.Rider = dbRider.Rider;
-                }
-            } else
+            if (!horseAdDTO.RecomendedRidersIds.Any())
             {
                 throw new ValidationException(Resources.MustSelectAtLeastOneRecommendedRider);
             }

@@ -26,11 +26,11 @@ namespace HorseSpot.Api.Controllers
         /// <param name="horseAdDTO">horse advertisment model</param>
         /// <returns>Task</returns>
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         [Route("api/horses/post")]
         public async Task<string> Post([FromBody] HorseAdDTO horseAdDTO)
         {
-            var horseAdId = await _iHorseAdBus.Add(horseAdDTO, UserIdExtractor.GetUserIdFromRequest(Request));
+            var horseAdId = await _iHorseAdBus.Add(horseAdDTO, "dbefe2da-76ff-4f5c-a2f9-7c09570ecaee"); //UserIdExtractor.GetUserIdFromRequest(Request));
             return horseAdId;
         }
 

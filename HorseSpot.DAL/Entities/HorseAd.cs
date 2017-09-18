@@ -38,17 +38,27 @@ namespace HorseSpot.DAL.Models
         public string UserId { get; set; }
         public bool IsDeleted { get; set; }
         public bool IsSold { get; set; }
+        public int AddressId { get; set; }
+        public int PedigreeId { get; set; }
+        public int PriceRangeId { get; set; }
 
+        [ForeignKey("AddressId")]
         public virtual Address Address { get; set; }
+        [ForeignKey("PedigreeId")]
         public virtual Pedigree Pedigree { get; set; }
+        [ForeignKey("PriceRangeId")]
         public virtual PriceRange PriceRange { get; set; }
-
         [ForeignKey("UserId")]
         public virtual UserModel User { get; set; }
 
         public ICollection<Image> Images { get; set; }
         public ICollection<UserModel> FavoriteFor { get; set; }
         public ICollection<HorseAbility> Abilities { get; set; }
-        public ICollection<RecommendedRider> RecomendedRiders { get; set; }        
+        public ICollection<RecommendedRider> RecomendedRiders { get; set; }
+
+        [NotMapped]
+        public IEnumerable<int> RecommendedRiderIds { get; set; }
+        [NotMapped]
+        public IEnumerable<int> HorseAbilitesIds { get; set; }
     }
 }

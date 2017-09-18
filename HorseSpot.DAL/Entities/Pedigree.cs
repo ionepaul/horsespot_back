@@ -5,7 +5,7 @@ namespace HorseSpot.DAL.Models
 {
     public class Pedigree
     {
-        [Key, ForeignKey("HorseAd")]
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PedigreeId { get; set; }
 
@@ -58,7 +58,5 @@ namespace HorseSpot.DAL.Models
         #endregion
 
         #endregion
-
-        public virtual HorseAd HorseAd { get; set; }
     }
 }

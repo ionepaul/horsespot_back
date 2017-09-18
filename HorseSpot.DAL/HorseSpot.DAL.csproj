@@ -166,6 +166,10 @@
     <Compile Include="Migrations\201709091744421_HorseAds.Designer.cs">
       <DependentUpon>201709091744421_HorseAds.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709091926372_HorseAds_v2.cs" />
+    <Compile Include="Migrations\201709091926372_HorseAds_v2.Designer.cs">
+      <DependentUpon>201709091926372_HorseAds_v2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Entities\Address.cs" />
     <Compile Include="Models\GetHorseAdListResults.cs" />
@@ -206,6 +210,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709091744421_HorseAds.resx">
       <DependentUpon>201709091744421_HorseAds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709091926372_HorseAds_v2.resx">
+      <DependentUpon>201709091926372_HorseAds_v2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

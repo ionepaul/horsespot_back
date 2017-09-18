@@ -33,7 +33,7 @@ namespace HorseSpot.Models.Models
         public string Description { get; set; }
 
         [Required]
-        public IEnumerable<HorseAbilityDTO> Abilities { get; set; }
+        public IEnumerable<int> AbilityIds { get; set; }
 
         public string VideoLink { get; set; }
 
@@ -49,14 +49,14 @@ namespace HorseSpot.Models.Models
         public bool HaveCompetionalExperience { get; set; }
 
         [Required]
-        public IEnumerable<RecommendedRiderDTO> RecomendedRiders { get; set; }
-        
+        public IEnumerable<int> RecomendedRidersIds { get; set; }
+
         public IEnumerable<string> FavoritesFor { get; set; }
 
         public decimal Price { get; set; }
 
         [Required]
-        public PriceRangeDTO PriceRange { get; set; }
+        public int PriceRangeId { get; set; }
 
         public IList<string> ImageIds { get; set; }
 
@@ -73,5 +73,11 @@ namespace HorseSpot.Models.Models
 
         [XmlIgnore]
         public DateTime DatePosted { get; set; }
+
+        public PriceRangeDTO PriceRange { get; set; }
+
+        public IEnumerable<RecommendedRiderDTO> RecomendedRiders { get; set; }
+
+        public IEnumerable<HorseAbilityDTO> Abilities { get; set; } 
     }
 }

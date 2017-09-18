@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using HorseSpot.DAL.Models;
 using HorseSpot.Models.Models;
 using MongoDB.Bson;
+using HorseSpot.DAL.Entities;
 
 namespace HorseSpot.BLL.Converters
 {
@@ -25,18 +26,18 @@ namespace HorseSpot.BLL.Converters
             var horseAd = new HorseAd
             {
                 HorseName = horseAdDTO.HorseName,
-                Abilities = horseAdDTO.Abilities.Select(HorseAbilityConverter.FromHorseAbilityDTOToHorseAbility).ToList(),
+                HorseAbilitesIds = horseAdDTO.AbilityIds,
                 Address = FromAddressDTOToAddress(horseAdDTO.Address),
                 Pedigree = FromPedigreeDTOToPedigree(horseAdDTO.Pedigree),
                 Price = horseAdDTO.Price,
-                PriceRange = PriceRangeConverter.FromPriceRangeDTOToPriceRange(horseAdDTO.PriceRange),
+                PriceRangeId = horseAdDTO.PriceRangeId,
                 Breed = horseAdDTO.Breed,
                 Age = horseAdDTO.Age,
                 Description = horseAdDTO.Description,
                 Gender = horseAdDTO.Gender,
                 HaveCompetionalExperience = horseAdDTO.HaveCompetionalExperience,
                 HaveXRays = horseAdDTO.HaveXRays,
-                RecomendedRiders = horseAdDTO != null ? horseAdDTO.RecomendedRiders.Select(RecommendedRiderConverter.FromRiderDTOToRider).ToList() : null,
+                RecommendedRiderIds = horseAdDTO.RecomendedRidersIds,
                 IsSponsorized = horseAdDTO.IsSponsorized,
                 VideoLink = horseAdDTO.VideoLink,
                 DatePosted = DateTime.UtcNow,

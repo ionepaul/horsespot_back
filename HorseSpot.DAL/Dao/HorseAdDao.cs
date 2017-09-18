@@ -1,8 +1,12 @@
-﻿using HorseSpot.DAL.Interfaces;
+﻿using HorseSpot.DAL.Entities;
+using HorseSpot.DAL.Interfaces;
 using HorseSpot.DAL.Models;
 using HorseSpot.Infrastructure.Constants;
+using HorseSpot.Infrastructure.Resources;
 using LinqKit;
 using MongoDB.Driver;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
@@ -117,6 +121,39 @@ namespace HorseSpot.DAL.Dao
         {
             _ctx.Entry(horseAd).State = EntityState.Modified;
             await _ctx.SaveChangesAsync();
+        }
+
+        public void AddHorse(HorseAd horseAd)
+        {
+            horseAd.RecomendedRiders = new List<RecommendedRider>();
+            horseAd.Abilities = new List<HorseAbility>();
+
+            horseAd.HorseAbilitesIds.ForEach(id =>
+            {
+                var horseAbility = _ctx.HorseAbilities.FirstOrDefault(a => a.Id == id);
+
+                if (horseAbility == null)
+                {
+                    throw new Exception(Resources.InvalidAbilityIdentifier);
+                }
+
+                horseAd.Abilities.Add(horseAbility);
+            });
+
+            horseAd.RecommendedRiderIds.ForEach(id =>
+            {
+                var recommendedRider = _ctx.RecommendedRiders.FirstOrDefault(r => r.Id == id);
+
+                if (recommendedRider == null)
+                {
+                    throw new Exception(Resources.InvalidRecommendedRiderIdentifier);
+                }
+
+                horseAd.RecomendedRiders.Add(recommendedRider);
+            });
+
+            _ctx.HorseAds.Add(horseAd);
+            _ctx.SaveChanges();
         }
 
         #endregion
