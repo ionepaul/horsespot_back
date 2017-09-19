@@ -11,34 +11,20 @@ namespace HorseSpot.Api.Controllers
     {
         private IHorseAdBus _iHorseAdBus;
 
-        /// <summary>
-        /// HorseAd Controller Constructor
-        /// </summary>
-        /// <param name="iHorseAdBus">HorseAd Bussines Logic Interface</param>
         public HorseAdController(IHorseAdBus iHorseAdBus)
         {
             _iHorseAdBus = iHorseAdBus;
         }
 
-        /// <summary>
-        /// API Interface to add a new horse advertisment
-        /// </summary>
-        /// <param name="horseAdDTO">horse advertisment model</param>
-        /// <returns>Task</returns>
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         [Route("api/horses/post")]
         public async Task<string> Post([FromBody] HorseAdDTO horseAdDTO)
         {
-            var horseAdId = await _iHorseAdBus.Add(horseAdDTO, "dbefe2da-76ff-4f5c-a2f9-7c09570ecaee"); //UserIdExtractor.GetUserIdFromRequest(Request));
+            var horseAdId = await _iHorseAdBus.Add(horseAdDTO, UserIdExtractor.GetUserIdFromRequest(Request));
             return horseAdId;
         }
 
-        /// <summary>
-        /// API Interface to edit a horse advertisment
-        /// </summary>
-        /// <param name="id">Horse Advertisment Id</param>
-        /// <param name="horseAdDTO">Horse Advertisment Model</param>
         [HttpPut]
         [Authorize]
         [Route("api/horses/update/{id}")]
@@ -47,11 +33,6 @@ namespace HorseSpot.Api.Controllers
             _iHorseAdBus.Update(id, horseAdDTO, UserIdExtractor.GetUserIdFromRequest(Request));
         }
 
-        /// <summary>
-        /// API Interface to delete a horse advertisment
-        /// </summary>
-        /// <param name="id">Horse Advertisment Id</param>
-        /// <returns>Task</returns>
         [Authorize]
         [HttpDelete]
         [Route("api/horses/delete/{id}/{isSold}")]
@@ -60,11 +41,6 @@ namespace HorseSpot.Api.Controllers
             await _iHorseAdBus.Delete(id, UserIdExtractor.GetUserIdFromRequest(Request), isSold);
         }
 
-        /// <summary>
-        /// API Interface to validate a horse advertisment
-        /// </summary>
-        /// <param name="id">Horse Advertisment Id</param>
-        /// <returns>Task</returns>
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [Route("api/horses/validate/{id}")]
@@ -155,6 +131,14 @@ namespace HorseSpot.Api.Controllers
             }
 
             return _iHorseAdBus.SearchHorses(horseFilter);
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("api/horses/images/save/{adId}/{imageName}")]
+        public async Task SaveNewImage([FromUri] int adId, [FromUri] string imageName)
+        {
+            await _iHorseAdBus.SaveNewImage(adId, imageName, UserIdExtractor.GetUserIdFromRequest(Request));
         }
     }
 }

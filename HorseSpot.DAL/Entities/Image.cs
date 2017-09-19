@@ -1,5 +1,4 @@
 ﻿using HorseSpot.DAL.Models;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,8 +9,11 @@ namespace HorseSpot.DAL.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ImageId { get; set; }
-        public string Path { get; set; }
+        public string Name { get; set; }
+        public bool IsProfilePic { get; set; }
+        public int HorseAdId { get; set; }
 
-        public ICollection<HorseAd> HorseAds { get; set; }
+        [ForeignKey("HorseAdId")]
+        public virtual HorseAd HorseAd { get; set; }
     }
 }

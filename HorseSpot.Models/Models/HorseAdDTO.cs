@@ -58,7 +58,8 @@ namespace HorseSpot.Models.Models
         [Required]
         public int PriceRangeId { get; set; }
 
-        public IList<string> ImageIds { get; set; }
+        [Required]
+        public IEnumerable<ImageDTO> Images { get; set; }
 
         public bool IsSponsorized { get; set; }
 

@@ -23,7 +23,7 @@ namespace HorseSpot.BLL.Bus
     {
         #region Local Variables
 
-        private IUtilAdDao _iUtilAdDao;
+        private IImageDao _iImageDao;
         private IUserDao _iUserDao;
         private IHorseAdDao _iHorseAdDao;
         private IMailerService _iMailerService;
@@ -31,16 +31,10 @@ namespace HorseSpot.BLL.Bus
         #endregion
 
         #region Constructor
-        /// <summary>
-        /// UtilBus Constructor
-        /// </summary>
-        /// <param name="iUtilAdDao">Util Dao Interface</param>
-        /// <param name="iHorseAdDao">HorseAd Dao Interface</param>
-        /// <param name="iUserDao">UserDao Interface</param>
-        /// <param name="iMailerService">MailerService Interface</param>
-        public UtilBus(IUtilAdDao iUtilAdDao, IHorseAdDao iHorseAdDao, IUserDao iUserDao, IMailerService iMailerService)
+
+        public UtilBus(IImageDao iImageDao, IHorseAdDao iHorseAdDao, IUserDao iUserDao, IMailerService iMailerService)
         {
-            _iUtilAdDao = iUtilAdDao;
+            _iImageDao = iImageDao;
             _iHorseAdDao = iHorseAdDao;
             _iUserDao = iUserDao;
             _iMailerService = iMailerService;
@@ -49,256 +43,138 @@ namespace HorseSpot.BLL.Bus
         #endregion
 
         #region Public Methods
-        /// <summary>
-        /// Gets an image by id
-        /// </summary>
-        /// <param name="id">Image Id</param>
-        /// <returns>Stream and Content Type or Exception if not found</returns>
-        //public Tuple<GridFSDownloadStream, string> GetImageById(string id)
-        //{
-        //    Tuple<GridFSDownloadStream, string> result = _iUtilAdDao.GetImages(id);
 
-        //    if (result == null)
-        //    {
-        //        throw new ResourceNotFoundException(Resources.InvalidPictureIdentifier);
-        //    }
+        public string DeleteImage(int imageId, string userId)
+        {
+            var image = _iImageDao.GetById(imageId);
+            
+            if (image == null)
+            {
+                throw new ResourceNotFoundException(Resources.ImageNotFoundInAdImagesList);
+            }
 
-        //    return result;
-        //}
+            if (image.HorseAd.UserId != userId)
+            {
+                throw new ForbiddenException(Resources.ActionRequiresAdditionalRights);
+            }
 
-        ///// <summary>
-        ///// Save images
-        ///// </summary>
-        ///// <param name="adId">Advertisment id</param>
-        ///// <param name="files">Posted Files</param>
-        ///// <param name="userId">User Id</param>
-        //public void SaveImages(string adId, List<HttpPostedFile> files, string userId)
-        //{
-        //    if (files.Count > ApplicationConstants.MaximumFileToUpload)
-        //    {
-        //        throw new ValidationException(Resources.CannotUploadMoreThan5);
-        //    }
+            var imageName = image.Name;
+            _iImageDao.Delete(image);
 
-        //    var horseAd = _iHorseAdDao.GetById(adId);
+            return imageName;
+        }
 
-        //    if (horseAd.UserId != userId)
-        //    {
-        //        throw new ForbiddenException(Resources.ActionRequiresAdditionalRights);
-        //    }
+        public void SetHorseAdProfilePicture(int imageId, string userId)
+        {
+            var image = _iImageDao.GetById(imageId);
 
-        //    var advertismentsImages = horseAd.ImageIds;
-        //    var totalImages = advertismentsImages.Count + files.Count;
+            if (image == null)
+            {
+                throw new ResourceNotFoundException(Resources.ImageNotFoundInAdImagesList);
+            }
 
-        //    if (totalImages > ApplicationConstants.MaximumFileToUpload)
-        //    {
-        //        throw new ValidationException(Resources.CannotHaveMoreThan5PerAd);
-        //    }
+            if (image.HorseAd.UserId != userId)
+            {
+                throw new ForbiddenException(Resources.ActionRequiresAdditionalRights);
+            }
 
-        //    foreach (var file in files)
-        //    {
-        //        var extension = Path.GetExtension(file.FileName).Replace(".", "");
-        //        if (!Enum.IsDefined(typeof(SupportedImageExtensionEnum), extension.ToUpper()))
-        //        {
-        //            throw new ValidationException(Resources.InvalidPictureFormat);
-        //        }
-        //    }
+            image.HorseAd.Images.Where(img => img.IsProfilePic).FirstOrDefault().IsProfilePic = false;
+            image.IsProfilePic = true;
 
-        //    foreach (var file in files)
-        //    {
-        //        var imageId = _iUtilAdDao.UploadOneImage(file);
-        //        advertismentsImages.Add(imageId);
-        //    }
+            _iImageDao.Update(image);
+        }
 
-        //    _iHorseAdDao.SetImages(adId, advertismentsImages.ToList());
-        //}
+        public async Task SetUserProfilePicture(string path, string id)
+        {
+            var user = _iUserDao.FindUserById(id);
 
-        ///// <summary>
-        ///// Deletes an image by id
-        ///// </summary>
-        ///// <param name="adId">Advertisment Id</param>
-        ///// <param name="imageId">Image Id</param>
-        ///// <param name="userId">User Id</param>
-        //public void DeleteImage(string adId, string imageId, string userId)
-        //{
-        //    var ad = _iHorseAdDao.GetById(adId);
+            if (user == null)
+            {
+                throw new ValidationException(Resources.InvalidUserIdentifier);
+            }
 
-        //    if (ad.UserId != userId)
-        //    {
-        //        throw new ForbiddenException(Resources.ActionRequiresAdditionalRights);
-        //    }
+            if (user.ImagePath == ApplicationConstants.DefaultProfilePhoto)
+            {
+                CheckFormat(path);
+                user.ImagePath = path;
+            }
+            else
+            {
+                CheckFormat(path);
 
-        //    if (!ad.ImageIds.Contains(imageId))
-        //    {
-        //        throw new ResourceNotFoundException(Resources.ImageNotFoundInAdImagesList);
-        //    }
+                var currentImagePath = user.ImagePath;
+                if (File.Exists(currentImagePath))
+                {
+                    File.Delete(currentImagePath);
+                }
 
-        //    ad.ImageIds.Remove(imageId);
-        //    var newImageIdsList = ad.ImageIds.ToList();
+                user.ImagePath = path;
+            }
 
-        //    _iUtilAdDao.DeleteImage(imageId);
+            await _iUserDao.UpdateUser(user);
+        }
 
-        //    _iHorseAdDao.SetImages(adId, newImageIdsList);
-        //}
+        public async Task EmailSendingBetweenUsers(EmailModelDTO emailModelDTO)
+        {
+            if (emailModelDTO == null)
+            {
+                throw new ValidationException(Resources.InvalidSendEmailRequest);
+            }
 
-        ///// <summary>
-        ///// Sets the profile picture for an advertisment
-        ///// </summary>
-        ///// <param name="adId">Advertisment Id</param>
-        ///// <param name="imageId">Image Id</param>
-        ///// <param name="userId">User Id</param>
-        //public void SetHorseAdProfilePicture(string adId, string imageId, string userId)
-        //{
-        //    var ad = _iHorseAdDao.GetById(adId);
+            ValidationHelper.ValidateModelAttributes<EmailModelDTO>(emailModelDTO);
 
-        //    if (ad.UserId != userId)
-        //    {
-        //        throw new ForbiddenException(Resources.ActionRequiresAdditionalRights);
-        //    }
+            Regex emailRegex = new Regex(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
 
-        //    if (!ad.ImageIds.Contains(imageId))
-        //    {
-        //        throw new ResourceNotFoundException(Resources.ImageNotFoundInAdImagesList);
-        //    }
+            if (!emailRegex.IsMatch(emailModelDTO.Sender))
+            {
+                throw new ValidationException(Resources.InvalidEmailFormat);
+            }
 
-        //    var imageIndex = ad.ImageIds.ToList().FindIndex(imgId => imgId == imageId);
-        //    var aux = ad.ImageIds[imageIndex];
-        //    ad.ImageIds[imageIndex] = ad.ImageIds[0];
-        //    ad.ImageIds[0] = aux;
+            if (emailModelDTO.Message.Length == 0)
+            {
+                throw new ValidationException(Resources.InvalidMessageFormat);
+            }
 
-        //    var newImageIdsList = ad.ImageIds.ToList();
-        //    _iHorseAdDao.SetImages(adId, newImageIdsList);
-        //}
+            EmailModel emailModel = EmailSendingConverter.FromEmailModelDTOTOEmailModel(emailModelDTO);
 
-        ///// <summary>
-        ///// Set the user profile picture
-        ///// </summary>
-        ///// <param name="path">Image path</param>
-        ///// <param name="id">User Id</param>
-        ///// <returns>Task</returns>
-        //public async Task SetUserProfilePicture(string path, string id)
-        //{
-        //    var user = _iUserDao.FindUserById(id);
+            await _iMailerService.SendMail(emailModel);
+        }
 
-        //    if (user == null)
-        //    {
-        //        throw new ValidationException(Resources.InvalidUserIdentifier);
-        //    }
+        public async Task ReceiveEmailFromContactPage(ContactPageEmailModel contactPageEmailModel)
+        {
+            if (contactPageEmailModel == null)
+            {
+                throw new ValidationException(Resources.InvalidSendEmailRequest);
+            }
 
-        //    if (user.ImagePath == ApplicationConstants.DefaultProfilePhoto)
-        //    {
-        //        CheckFormat(path);
-        //        user.ImagePath = path;
-        //    }
-        //    else
-        //    {
-        //        CheckFormat(path);
+            ValidationHelper.ValidateModelAttributes<ContactPageEmailModel>(contactPageEmailModel);
 
-        //        var currentImagePath = user.ImagePath;
-        //        if (File.Exists(currentImagePath))
-        //        {
-        //            File.Delete(currentImagePath);
-        //        }
+            Regex emailRegex = new Regex(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
 
-        //        user.ImagePath = path;
-        //    }
+            if (!emailRegex.IsMatch(contactPageEmailModel.Sender))
+            {
+                throw new ValidationException(Resources.InvalidEmailFormat);
+            }
 
-        //    await _iUserDao.UpdateUser(user);
-        //}
+            if (contactPageEmailModel.Message.Length == 0)
+            {
+                throw new ValidationException(Resources.InvalidMessageFormat);
+            }
 
-        ///// <summary>
-        ///// Gets the user profile picutre path
-        ///// </summary>
-        ///// <param name="userId">User Id</param>
-        ///// <returns>The Path</returns>
-        //public string GetUserPicturePath(string userId)
-        //{
-        //    var user = _iUserDao.FindUserById(userId);
+            EmailModel emailModel = EmailSendingConverter.FromContactPageEmailModelTOEmailModel(contactPageEmailModel);
 
-        //    if (user == null)
-        //    {
-        //        throw new ValidationException(Resources.InvalidUserIdentifier);
-        //    }
+            await _iMailerService.SendMail(emailModel);
+        }
 
-        //    return user.ImagePath;
-        //}
+        public void CheckFormat(string path)
+        {
+            var extension = Path.GetExtension(path).Replace(".", "");
 
-        ///// <summary>
-        ///// Sends email to an user with the message from another user
-        ///// </summary>
-        ///// <param name="emailModelDTO">Email Model </param>
-        ///// <returns>Task</returns>
-        //public async Task EmailSendingBetweenUsers(EmailModelDTO emailModelDTO)
-        //{
-        //    if (emailModelDTO == null)
-        //    {
-        //        throw new ValidationException(Resources.InvalidSendEmailRequest);
-        //    }
-
-        //    ValidationHelper.ValidateModelAttributes<EmailModelDTO>(emailModelDTO);
-
-        //    Regex emailRegex = new Regex(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
-
-        //    if (!emailRegex.IsMatch(emailModelDTO.Sender))
-        //    {
-        //        throw new ValidationException(Resources.InvalidEmailFormat);
-        //    }
-
-        //    if (emailModelDTO.Message.Length == 0) {
-        //        throw new ValidationException(Resources.InvalidMessageFormat);
-        //    }
-
-        //    EmailModel emailModel = EmailSendingConverter.FromEmailModelDTOTOEmailModel(emailModelDTO);
-
-        //    await _iMailerService.SendMail(emailModel);
-        //}
-
-        ///// <summary>
-        ///// Send email to HorseSpot with the message from contact page
-        ///// </summary>
-        ///// <param name="contactPageEmailModel">ContactPageEmail Model</param>
-        ///// <returns>Task</returns>
-        //public async Task ReceiveEmailFromContactPage(ContactPageEmailModel contactPageEmailModel)
-        //{
-        //    if (contactPageEmailModel == null)
-        //    {
-        //        throw new ValidationException(Resources.InvalidSendEmailRequest);
-        //    }
-
-        //    ValidationHelper.ValidateModelAttributes<ContactPageEmailModel>(contactPageEmailModel);
-
-        //    Regex emailRegex = new Regex(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
-
-        //    if (!emailRegex.IsMatch(contactPageEmailModel.Sender))
-        //    {
-        //        throw new ValidationException(Resources.InvalidEmailFormat);
-        //    }
-
-        //    if (contactPageEmailModel.Message.Length == 0)
-        //    {
-        //        throw new ValidationException(Resources.InvalidMessageFormat);
-        //    }
-
-        //    EmailModel emailModel = EmailSendingConverter.FromContactPageEmailModelTOEmailModel(contactPageEmailModel);
-
-        //    await _iMailerService.SendMail(emailModel);
-        //}
-
-        //#endregion
-
-        //#region Private Methods
-
-        ///// <summary>
-        ///// Check Image format
-        ///// </summary>
-        ///// <param name="path">Image path</param>
-        //private void CheckFormat(string path)
-        //{
-        //    var extension = Path.GetExtension(path).Replace(".", "");
-        //    if (!Enum.IsDefined(typeof(SupportedImageExtensionEnum), extension.ToUpper()))
-        //    {
-        //        throw new ValidationException(Resources.InvalidPictureFormat);
-        //    }
-        //}
+            if (!Enum.IsDefined(typeof(SupportedImageExtensionEnum), extension.ToUpper()))
+            {
+                throw new ValidationException(Resources.InvalidPictureFormat);
+            }
+        }
 
         #endregion
     }

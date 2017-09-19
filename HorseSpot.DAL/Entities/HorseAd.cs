@@ -51,10 +51,10 @@ namespace HorseSpot.DAL.Models
         [ForeignKey("UserId")]
         public virtual UserModel User { get; set; }
 
-        public ICollection<Image> Images { get; set; }
-        public ICollection<UserModel> FavoriteFor { get; set; }
-        public ICollection<HorseAbility> Abilities { get; set; }
-        public ICollection<RecommendedRider> RecomendedRiders { get; set; }
+        public virtual ICollection<Image> Images { get; set; }
+        public virtual ICollection<UserModel> FavoriteFor { get; set; }
+        public virtual ICollection<HorseAbility> Abilities { get; set; }
+        public virtual ICollection<RecommendedRider> RecomendedRiders { get; set; }
 
         [NotMapped]
         public IEnumerable<int> RecommendedRiderIds { get; set; }

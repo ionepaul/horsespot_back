@@ -43,7 +43,7 @@ namespace HorseSpot.BLL.Converters
                 DatePosted = DateTime.UtcNow,
                 Title = SetAdTitle(horseAdDTO),
                 Height = horseAdDTO.HeightInCm,
-                //ImageIds = new List<string>(),
+                Images = horseAdDTO.Images.Select(FromImageDTOToImage).ToList(),
                 IsValidated = false,
                 UserId = userId
             };
@@ -141,7 +141,7 @@ namespace HorseSpot.BLL.Converters
                 Gender = horseAd.Gender,
                 HaveCompetionalExperience = horseAd.HaveCompetionalExperience,
                 HaveXRays = horseAd.HaveXRays,
-                //ImageIds = horseAd.ImageIds,
+                Images = horseAd.Images.Select(FromImageToImageDTO),
                 RecomendedRiders = horseAd.RecomendedRiders.Select(RecommendedRiderConverter.FromRiderToRiderDTO),
                 IsSponsorized = horseAd.IsSponsorized,
                 VideoLink = horseAd.VideoLink,
@@ -149,7 +149,7 @@ namespace HorseSpot.BLL.Converters
                 Title = horseAd.Title,
                 IsValidated = horseAd.IsValidated,
                 HeightInCm = horseAd.Height,
-                CountFavoritesFor = horseAd.FavoriteFor.Count,
+                CountFavoritesFor = horseAd.FavoriteFor?.Count ?? 0,
                 Views = horseAd.Views
             };
 
@@ -245,11 +245,13 @@ namespace HorseSpot.BLL.Converters
         /// <returns>Horse advertisment list model</returns>
         public static HorseAdListModel FromHorseAdToHorseAdListModel(HorseAd horseAd)
         {
+            var profilePic = horseAd.Images.Where(img => img.IsProfilePic).Select(img => img.Name).FirstOrDefault();
+
             return new HorseAdListModel
             {
                 Id = horseAd.Id.ToString(),
                 Title = horseAd.Title,
-                //ImageId = horseAd.ImageIds.FirstOrDefault(),
+                ImageId = profilePic ?? horseAd.Images.Select(img=> img.Name).FirstOrDefault(),
                 Age = horseAd.Age,
                 Breed = horseAd.Breed,
                 HorseName = horseAd.HorseName,
@@ -262,6 +264,35 @@ namespace HorseSpot.BLL.Converters
                 Country = horseAd.Address.Country,
                 Gender = horseAd.Gender,
                 DatePosted = horseAd.DatePosted
+            };
+        }
+
+        public static Image FromImageDTOToImage(ImageDTO imageDTOObj)
+        {
+            if (imageDTOObj == null)
+            {
+                return null;
+            }
+
+            return new Image
+            {
+                Name = imageDTOObj.ImageName,
+                IsProfilePic = imageDTOObj.IsProfilePic
+            };
+        }
+
+        public static ImageDTO FromImageToImageDTO(Image imageObj)
+        {
+            if (imageObj == null)
+            {
+                return null;
+            }
+
+            return new ImageDTO
+            {
+                ImageName = imageObj.Name,
+                IsProfilePic = imageObj.IsProfilePic,
+                ImageId = imageObj.ImageId
             };
         }
     }

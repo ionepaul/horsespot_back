@@ -12,10 +12,6 @@ namespace HorseSpot.Api
 {
     public static class Bootstrapper
     {
-        /// <summary>
-        /// Initialize the Unity Container
-        /// </summary>
-        /// <returns></returns>
         public static IUnityContainer Initialise()
         {
             var container = BuildUnityContainer();
@@ -27,10 +23,6 @@ namespace HorseSpot.Api
             return container;
         }
 
-        /// <summary>
-        /// Builds the Unity Container
-        /// </summary>
-        /// <returns></returns>
         private static IUnityContainer BuildUnityContainer()
         {
             var container = new UnityContainer();
@@ -40,10 +32,6 @@ namespace HorseSpot.Api
             return container;
         }
 
-        /// <summary>
-        /// Register types within the unity container
-        /// </summary>
-        /// <param name="container">Unity container</param>
         public static void RegisterTypes(UnityContainer container)
         {
             container.RegisterType<IUserBus, UserBus>();
@@ -56,7 +44,6 @@ namespace HorseSpot.Api
             container.RegisterType<IHorseAbilityDao, HorseAbilityDao>();
             container.RegisterType<IPriceRangeBus, PriceRangeBus>();
             container.RegisterType<IHorseAbilityBus, HorseAbilityBus>();
-            //container.RegisterType<IUtilAdDao, UtilAdDao>();
             container.RegisterType<IUtilBus, UtilBus>();
             container.RegisterType<IRecommendedRiderDao, RecommendedRiderDao>();
             container.RegisterType<IRecommendedRiderBus, RecommendedRiderBus>();
@@ -66,6 +53,7 @@ namespace HorseSpot.Api
             container.RegisterType<ICountryDao, CountryDao>();
             container.RegisterType<IRefreshTokenDao, RefreshTokenDao>();
             container.RegisterType<IClientDao, ClientDao>();
+            container.RegisterType<IImageDao, ImageDao>();
 
             container.RegisterInstance(typeof(HttpConfiguration), GlobalConfiguration.Configuration);
         }

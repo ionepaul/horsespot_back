@@ -1,186 +1,124 @@
-﻿using HorseSpot.Api.Utils;
-using HorseSpot.BLL.Interfaces;
-using MongoDB.Driver.GridFS;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Configuration;
 using System.IO;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using HorseSpot.Infrastructure.Resources;
 using System.Web;
 using System.Web.Http;
-using HorseSpot.Models.Models;
+using HorseSpot.BLL.Interfaces;
+using System;
 using System.Threading.Tasks;
+using HorseSpot.Models.Models;
+using HorseSpot.Api.Utils;
 
 namespace HorseSpot.Api.Controllers
 {
     public class UtilsController : ApiController
     {
-        //private IUtilBus _iUtilBus;
+        private IUtilBus _iUtilBus;
 
-        ///// <summary>
-        ///// Utils Controller Constructor 
-        ///// </summary>
-        ///// <param name="iUtilBus">UtilBus Bussines Logic Interface</param>
-        //public UtilsController(IUtilBus iUtilBus)
-        //{
-        //    _iUtilBus = iUtilBus;
-        //}
+        public UtilsController(IUtilBus iUtilBus)
+        {
+            _iUtilBus = iUtilBus;
+        }
 
-        ///// <summary>
-        ///// API Interface to upload images related to a horse advertisment
-        ///// </summary>
-        ///// <param name="adId">Advertisment Id</param>
-        ///// <returns>Response message</returns>
-        //[HttpPost]
-        //[Authorize]
-        //[Route("api/images/upload/{adId}")]
-        //public HttpResponseMessage UploadImages([FromUri] string adId)
-        //{
-        //    var imagesToSave = new List<HttpPostedFile>();
-        //    var uploadFiles = HttpContext.Current.Request.Files;
+        [HttpPost]
+        [Authorize]
+        [Route("api/horses/images/delete/{imageId}")]
+        public void Delete([FromUri] int imageId)
+        {
+            var imageName = _iUtilBus.DeleteImage(imageId, UserIdExtractor.GetUserIdFromRequest(Request));
 
-        //    if (uploadFiles.Count > 0)
-        //    {
-        //        foreach (string file in uploadFiles)
-        //        {
-        //            var postedFile = uploadFiles[file];
-        //            imagesToSave.Add(postedFile);
-        //        }
+            var horseAdvImageDir = ConfigurationManager.AppSettings["HorseAdsImgDirectory"];
+            var serverPath = HttpContext.Current.Server.MapPath(horseAdvImageDir);
 
-        //        _iUtilBus.SaveImages(adId, imagesToSave, UserIdExtractor.GetUserIdFromRequest(Request));
+            if (Directory.Exists(Path.GetDirectoryName(serverPath)))
+            {
+                var path = Path.Combine(serverPath, imageName);
+                File.Delete(path);
+            }
+        }
 
-        //        return Request.CreateResponse(HttpStatusCode.OK);
-        //    }
-        //    else
-        //    {
-        //        return Request.CreateResponse(HttpStatusCode.BadRequest, Resources.PleaseUpdateAtLeastOneImage);
-        //    }
-        //}
+        [HttpPost]
+        [Authorize]
+        [Route("api/horses/images/profilepic/{imageId}")]
+        public void SetAsAdProfilePicture([FromUri] int imageId)
+        {
+            _iUtilBus.SetHorseAdProfilePicture(imageId, UserIdExtractor.GetUserIdFromRequest(Request));
+        }
 
-        ///// <summary>
-        ///// API Interaface to get an image by id
-        ///// </summary>
-        ///// <param name="id">Image Id</param>
-        ///// <returns>Response message</returns>
-        //[HttpGet]
-        //[Route("api/images/get/{id}")]
-        //public HttpResponseMessage GetImageById([FromUri] string id)
-        //{
-        //    Tuple<GridFSDownloadStream, string> stream = _iUtilBus.GetImageById(id);
+        [HttpPost]
+        [Route("api/user/profilephoto/upload/{id}")]
+        public HttpResponseMessage UploadProfilePhoto([FromUri] string id)
+        {
+            var uploadFiles = HttpContext.Current.Request.Files;
 
-        //    HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
+            if (uploadFiles.Count > 0)
+            {
+                var profileImage = uploadFiles[0];
+                var profilePicturesDir = ConfigurationManager.AppSettings["ProfilePicturesDirectory"];
+                var serverPath = HttpContext.Current.Server.MapPath(profilePicturesDir);
+                var path = Path.Combine(serverPath, profileImage.FileName);
 
-        //    result.Content = new StreamContent(stream.Item1);
+                CreateDirectoryIfNotExist(serverPath);
+                profileImage.SaveAs(path);
 
-        //    result.Content.Headers.ContentType = new MediaTypeHeaderValue(stream.Item2);
+                _iUtilBus.SetUserProfilePicture(path, id);
 
-        //    return result;
-        //}
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
 
-        ///// <summary>
-        ///// API Interface to delete image by id 
-        ///// </summary>
-        ///// <param name="adId">Advertisment Id</param>
-        ///// <param name="imageId">Image Id</param>
-        //[HttpDelete]
-        //[Authorize]
-        //[Route("api/images/delete/{adId}/{imageId}")]
-        //public void Delete([FromUri] string adId, [FromUri] string imageId)
-        //{
-        //   // _iUtilBus.DeleteImage(adId, imageId, UserIdExtractor.GetUserIdFromRequest(Request));
-        //}
+            return Request.CreateResponse(HttpStatusCode.BadRequest, Resources.PleaseUpdateAtLeastOneImage);
+        }
 
-        ///// <summary>
-        ///// API Interface to set an horse advertisment profile picture
-        ///// </summary>
-        ///// <param name="adId">Advertisment Id</param>
-        ///// <param name="imageId">Image Id</param>
-        //[HttpPut]
-        //[Authorize]
-        //[Route("api/horsead/profilepic/{adId}/{imageId}")]
-        //public void SetAsAdProfilePicture([FromUri] string adId, [FromUri] string imageId)
-        //{
-        //    _iUtilBus.SetHorseAdProfilePicture(adId, imageId, UserIdExtractor.GetUserIdFromRequest(Request));
-        //}
+        [HttpPost]
+        [Authorize]
+        [Route("api/horses/images/upload")]
+        public HttpResponseMessage UploadHorseAdImage()
+        {
+            var uploadFiles = HttpContext.Current.Request.Files;
 
-        ///// <summary>
-        ///// API Interface to upload user profile picture
-        ///// </summary>
-        ///// <param name="id">User Id</param>
-        ///// <returns>Response Message</returns>
-        //[HttpPost]
-        //[Route("api/user/profilephoto/upload/{id}")]
-        //public HttpResponseMessage UploadProfilePhoto([FromUri] string id)
-        //{
-        //    var files = HttpContext.Current.Request.Files;
+            if (uploadFiles.Count > 0)
+            {
+                var image = uploadFiles[0];
+                _iUtilBus.CheckFormat(image.FileName);
 
-        //    if (files.Count > 0)
-        //    {
-        //        var postedFile = files[0];
-        //        var serverpath = HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["ProfilePicturesDirectory"]);
-        //        var path = Path.Combine(serverpath, postedFile.FileName);
-        //        postedFile.SaveAs(path);
+                var horseAdvImageDir = ConfigurationManager.AppSettings["HorseAdsImgDirectory"];
+                var serverPath = HttpContext.Current.Server.MapPath(horseAdvImageDir);
+                var imageName = Guid.NewGuid() + image.FileName;
+                var path = Path.Combine(serverPath, imageName);
 
-        //        _iUtilBus.SetUserProfilePicture(path, id);
+                CreateDirectoryIfNotExist(serverPath);
+                image.SaveAs(path);
 
-        //        return Request.CreateResponse(HttpStatusCode.OK);
-        //    }
-        //    else
-        //    {
-        //        return Request.CreateResponse(HttpStatusCode.BadRequest, Resources.PleaseUpdateAtLeastOneImage);
-        //    }
-        //}
+                return Request.CreateResponse(HttpStatusCode.OK, imageName);
+            }
 
-        ///// <summary>
-        ///// API Interface to get user profile picture
-        ///// </summary>
-        ///// <param name="userId">User Id</param>
-        ///// <returns>Response Message</returns>
-        //[HttpGet]
-        //[Route("api/user/profilephoto/get/{userId}")]
-        //public HttpResponseMessage GetProfilePicture([FromUri] string userId)
-        //{
-        //    string path = _iUtilBus.GetUserPicturePath(userId);
+            return Request.CreateResponse(HttpStatusCode.BadRequest, Resources.PleaseUpdateAtLeastOneImage);
+        }
 
-        //    string fileName = Path.GetFileName(path);
-        //    string contentType = MimeMapping.GetMimeMapping(fileName);
+        [HttpPost]
+        [Route("api/sendemail")]
+        public async Task SendMail([FromBody] EmailModelDTO emailModelDTO)
+        {
+            await _iUtilBus.EmailSendingBetweenUsers(emailModelDTO);
+        }
 
-        //    var fileStream = new FileStream(path, FileMode.Open);
+        [HttpPost]
+        [Route("api/contactformemail")]
+        public async Task ReceiveEmailFromContact([FromBody] ContactPageEmailModel contactPageEmailModel)
+        {
+            await _iUtilBus.ReceiveEmailFromContactPage(contactPageEmailModel);
+        }
 
-        //    HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
-
-        //    result.Content = new StreamContent(fileStream);
-
-        //    result.Content.Headers.ContentType = new MediaTypeHeaderValue(contentType);
-
-        //    return result;
-        //}
-
-        ///// <summary>
-        ///// API Interface to send email to an user
-        ///// </summary>
-        ///// <param name="emailModelDTO">EmailModel DTO</param>
-        ///// <returns>Task</returns>
-        //[HttpPost]
-        //[Route("api/sendemail")]
-        //public async Task SendMail([FromBody] EmailModelDTO emailModelDTO)
-        //{
-        //    await _iUtilBus.EmailSendingBetweenUsers(emailModelDTO);
-        //}
-
-        ///// <summary>
-        ///// API Interface to send email to horsespot from contact page
-        ///// </summary>
-        ///// <param name="contactPageEmailModel">Conact Page Email Model</param>
-        ///// <returns>Task</returns>
-        //[HttpPost]
-        //[Route("api/contactformemail")]
-        //public async Task ReceiveEmailFromContact([FromBody] ContactPageEmailModel contactPageEmailModel)
-        //{
-        //    await _iUtilBus.ReceiveEmailFromContactPage(contactPageEmailModel);
-        //}
+        #region Private Methods
+        private void CreateDirectoryIfNotExist(string serverPath)
+        {
+            if (!Directory.Exists(serverPath))
+            {
+                Directory.CreateDirectory(serverPath);
+            }
+        }
+        #endregion
     }
 }

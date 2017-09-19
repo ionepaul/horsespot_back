@@ -130,12 +130,12 @@
     <Compile Include="Dao\ClientDao.cs" />
     <Compile Include="Dao\CountryDao.cs" />
     <Compile Include="Dao\HorseAbilityDao.cs" />
+    <Compile Include="Dao\ImageDao.cs" />
     <Compile Include="Dao\PriceRangeDao.cs" />
     <Compile Include="Dao\UserDao.cs" />
     <Compile Include="Dao\HorseAdDao.cs" />
     <Compile Include="Dao\RecommendedRiderDao.cs" />
     <Compile Include="Dao\RefreshTokenDao.cs" />
-    <Compile Include="Dao\UtilAdDao.cs" />
     <Compile Include="Entities\Appointment.cs" />
     <Compile Include="Entities\Client.cs" />
     <Compile Include="Entities\Country.cs" />
@@ -149,6 +149,7 @@
     <Compile Include="Interfaces\IAppointmentDao.cs" />
     <Compile Include="Interfaces\IClientDao.cs" />
     <Compile Include="Interfaces\ICountryDao.cs" />
+    <Compile Include="Interfaces\IImageDao.cs" />
     <Compile Include="Interfaces\IUserDao.cs" />
     <Compile Include="Interfaces\IDao.cs" />
     <Compile Include="Interfaces\IHorseAbilityDao.cs" />
@@ -157,7 +158,6 @@
     <Compile Include="Interfaces\IRecommendedRiderDao.cs" />
     <Compile Include="Interfaces\ISearchHelper.cs" />
     <Compile Include="Interfaces\IRefreshTokenDao.cs" />
-    <Compile Include="Interfaces\IUtilAdDao.cs" />
     <Compile Include="Migrations\201705231655293_InitialCreate.cs" />
     <Compile Include="Migrations\201705231655293_InitialCreate.Designer.cs">
       <DependentUpon>201705231655293_InitialCreate.cs</DependentUpon>
@@ -169,6 +169,10 @@
     <Compile Include="Migrations\201709091926372_HorseAds_v2.cs" />
     <Compile Include="Migrations\201709091926372_HorseAds_v2.Designer.cs">
       <DependentUpon>201709091926372_HorseAds_v2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709191730142_ImagesUpdate.cs" />
+    <Compile Include="Migrations\201709191730142_ImagesUpdate.Designer.cs">
+      <DependentUpon>201709191730142_ImagesUpdate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Entities\Address.cs" />
@@ -213,6 +217,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709091926372_HorseAds_v2.resx">
       <DependentUpon>201709091926372_HorseAds_v2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709191730142_ImagesUpdate.resx">
+      <DependentUpon>201709191730142_ImagesUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

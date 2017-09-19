@@ -1,5 +1,6 @@
 ﻿using HorseSpot.BLL.Converters;
 using HorseSpot.BLL.Interfaces;
+using HorseSpot.DAL.Entities;
 using HorseSpot.DAL.Interfaces;
 using HorseSpot.DAL.Models;
 using HorseSpot.Infrastructure.Constants;
@@ -250,7 +251,6 @@ namespace HorseSpot.BLL.Bus
 
             if (horseAd == null)
             {
-
                 throw new ResourceNotFoundException(Resources.InvalidAdIdentifier);
             }
 
@@ -361,6 +361,26 @@ namespace HorseSpot.BLL.Bus
             }
 
             return false;
+        }
+
+        public async Task SaveNewImage(int adId, string imageName, string userId)
+        {
+            var horseAd = _iHorseAdDao.GetById(adId);
+
+            if (horseAd == null)
+            {
+                throw new ResourceNotFoundException(Resources.InvalidAdIdentifier);
+            }
+
+            if (horseAd.UserId != userId)
+            {
+                throw new ForbiddenException(Resources.ActionRequiresAdditionalRights);
+            }
+
+            var image = new Image { Name = imageName, IsProfilePic = false };
+            horseAd.Images.Add(image);
+
+            await _iHorseAdDao.UpdateAsync(horseAd);
         }
 
         #endregion
