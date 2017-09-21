@@ -198,27 +198,27 @@ namespace HorseSpot.BLL.Bus
         /// <param name="userId">User id</param>
         public async Task AddToFavorite(int id, string userId)
         {
-            var horseAd = _iHorseAdDao.GetById(id);
+            //var horseAd = _iHorseAdDao.GetById(id);
 
-            if (horseAd == null)
-            {
-                throw new ResourceNotFoundException(Resources.InvalidAdIdentifier);
-            }
+            //if (horseAd == null)
+            //{
+            //    throw new ResourceNotFoundException(Resources.InvalidAdIdentifier);
+            //}
 
-            var user = _iUserDao.FindUserById(userId);
+            //var user = _iUserDao.FindUserById(userId);
 
-            var favoritesList = user.FavoriteHorseAds;
+            //var favoritesList = user.FavoriteHorseAds;
 
-            if (favoritesList.Select(x => x.Id == id).Count() > 0) 
-            {
-                favoritesList.Add(horseAd);
-            }
-            else
-            {
-                favoritesList.Remove(horseAd);
-            }
+            //if (favoritesList.Select(x => x.Id == id).Count() > 0) 
+            //{
+            //    favoritesList.Add(horseAd);
+            //}
+            //else
+            //{
+            //    favoritesList.Remove(horseAd);
+            //}
 
-            var updatedUser = await _iUserDao.UpdateUser(user);
+            //var updatedUser = await _iUserDao.UpdateUser(user);
         }
 
         /// <summary>
@@ -286,23 +286,6 @@ namespace HorseSpot.BLL.Bus
             var results = new GetHorseAdListResultsDTO();
             results.TotalCount = usersFavorites.TotalCount;
             results.HorseAdList = usersFavorites.HorseAdList.Select(HorseAdConverter.FromHorseAdToHorseAdListModel);
-
-            return results;
-        }
-
-        /// <summary>
-        /// Gets the list of user's posted advertisments by page number
-        /// </summary>
-        /// <param name="pageNumber">Page Number</param>
-        /// <param name="userId">User Id</param>
-        /// <returns>Model containing total number of posts owned and list of posts</returns>
-        public GetHorseAdListResultsDTO GetAllForUser(int pageNumber, string userId)
-        {
-            var usersHorseAds = _iHorseAdDao.GetPostedAdsFor(userId, pageNumber);
-
-            var results = new GetHorseAdListResultsDTO();
-            results.TotalCount = usersHorseAds.TotalCount;
-            results.HorseAdList = usersHorseAds.HorseAdList.Select(HorseAdConverter.FromHorseAdToHorseAdListModel);
 
             return results;
         }

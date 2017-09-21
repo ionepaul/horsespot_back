@@ -13,7 +13,6 @@ namespace HorseSpot.BLL.Interfaces
         Task AddToFavorite(int id, string userId);
         HorseAdDTO GetById(int id);
         GetHorseAdListResultsDTO GetUserFavorites(int pageNumber, string userId);
-        GetHorseAdListResultsDTO GetAllForUser(int pageNumber, string userId);
         GetHorseAdListResultsDTO GetAllForAdmin(int pageNumber);
         GetHorseAdListResultsDTO SearchHorses(HorseAdSearchViewModel searchModel);
         bool CheckPostOwner(int adId, string userId);

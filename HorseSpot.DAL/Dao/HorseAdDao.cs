@@ -47,25 +47,6 @@ namespace HorseSpot.DAL.Dao
         }
 
         /// <summary>
-        /// Gets the advertisments that were posted by the user by page number
-        /// </summary>
-        /// <param name="id">User Id</param>
-        /// <param name="pageNumber">Page Number</param>
-        /// <returns>Model containing total number of ads posted and list of ads</returns>
-        public GetHorseAdListResults GetPostedAdsFor(string id, int pageNumber)
-        {
-            var skipNumber = GetNumberToSkip(pageNumber);
-
-            var totalNumber = _ctx.HorseAds.Where(e => e.UserId == id).ToList().Count;
-
-            var results = new GetHorseAdListResults();
-            results.TotalCount = totalNumber;
-            results.HorseAdList = _ctx.HorseAds.Where(e => e.UserId == id).OrderByDescending(e=> e.Description).Skip(skipNumber).ToList().Take(ApplicationConstants.AdsPerPage);
-
-            return results;
-        }
-
-        /// <summary>
         /// Gets all unvalidated advertisments by page number
         /// </summary>
         /// <param name="pageNumber">Page Number</param>
@@ -160,11 +141,6 @@ namespace HorseSpot.DAL.Dao
 
         #region PrivateMethods
 
-        /// <summary>
-        /// Gets the number of pages to skip
-        /// </summary>
-        /// <param name="pageNumber">Page number</param>
-        /// <returns>Number of pagest to skip</returns>
         private int GetNumberToSkip(int pageNumber)
         {
             return (pageNumber - 1) * ApplicationConstants.AdsPerPage;

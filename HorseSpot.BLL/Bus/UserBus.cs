@@ -1,4 +1,11 @@
-﻿using HorseSpot.BLL.Converters;
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Web.Security;
+using HorseSpot.BLL.Converters;
 using HorseSpot.BLL.Interfaces;
 using HorseSpot.DAL.Entities;
 using HorseSpot.DAL.Interfaces;
@@ -9,12 +16,6 @@ using HorseSpot.Infrastructure.MailService;
 using HorseSpot.Infrastructure.Resources;
 using HorseSpot.Infrastructure.Validators;
 using HorseSpot.Models.Models;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Web.Security;
 
 namespace HorseSpot.BLL.Bus
 {
@@ -28,11 +29,7 @@ namespace HorseSpot.BLL.Bus
         #endregion
 
         #region Constructor
-        /// <summary>
-        /// UserBus Constructor
-        /// </summary>
-        /// <param name="iAuthDao">Authorization Dao Interface</param>
-        /// <param name="iMailerService">Mailer Service Interface</param>
+
         public UserBus(IUserDao iAuthDao, IMailerService iMailerService)
         {
             _iMailerService = iMailerService;
@@ -43,11 +40,6 @@ namespace HorseSpot.BLL.Bus
 
         #region Public Methods
 
-        /// <summary>
-        /// Validates user model, register user, sends mail in case of success
-        /// </summary>
-        /// <param name="user">User model</param>
-        /// <returns>Exception if invalid data or registred user model</returns>
         public async Task<UserViewModel> RegisterUser(UserViewModel user)
         {
             ValidateUserRegistration(user);
@@ -77,12 +69,6 @@ namespace HorseSpot.BLL.Bus
             return UserConverter.FromUserModelToUserViewModel(userDboAfterSave);
         }
 
-        /// <summary>
-        /// Update an user profile
-        /// </summary>
-        /// <param name="id">User Id</param>
-        /// <param name="editProfile">User modified data</param>
-        /// <returns>Exception if invalid data or updated user model</returns>
         public async Task<UserDTO> EditProfile(string id, EditProfileViewModel editProfile)
         {
             UserModel userModel = _iUserDao.FindUserById(id);
@@ -95,12 +81,6 @@ namespace HorseSpot.BLL.Bus
             return await UpdateUserProfile(userModel, editProfile);
         }
 
-        /// <summary>
-        /// Change user password
-        /// </summary>
-        /// <param name="userId">User Id</param>
-        /// <param name="changePassword">Change password required information</param>
-        /// <returns>Exception if invalid data or task if success</returns>
         public async Task ChangePassword(string userId, ChangePasswordViewModel changePassword)
         {
             UserModel userModel = _iUserDao.FindUserById(userId);
@@ -115,10 +95,6 @@ namespace HorseSpot.BLL.Bus
             await _iUserDao.ChangeUserPassword(userId, changePassword.NewPassword);
         }
 
-        /// <summary>
-        /// Retrieve all users
-        /// </summary>
-        /// <returns>IEnumerable of users</returns>
         public IEnumerable<UserViewModel> GetAllUsers()
         {
             var users = _iUserDao.GetAllUsers();
@@ -126,11 +102,6 @@ namespace HorseSpot.BLL.Bus
             return users.Select(UserConverter.FromUserModelToUserViewModel);
         }
 
-        /// <summary>
-        /// Retrieve user details
-        /// </summary>
-        /// <param name="id">User Id</param>
-        /// <returns>Exception if not found, user details if success</returns>
         public UserDTO GetUserDetails(string id)
         {
             var user = _iUserDao.FindUserById(id);
@@ -143,11 +114,6 @@ namespace HorseSpot.BLL.Bus
             return UserConverter.FromUserModelToUserDTO(user);
         }
 
-        /// <summary>
-        /// Check if user is admin
-        /// </summary>
-        /// <param name="userId">User Id</param>
-        /// <returns>True/False</returns>
         public async Task<bool> CheckIfAdmin(string userId)
         {
             var userRoles = await _iUserDao.UserRoles(userId);
@@ -155,11 +121,6 @@ namespace HorseSpot.BLL.Bus
             return userRoles.Contains(ApplicationConstants.ADMIN);
         }
 
-        /// <summary>
-        /// Delete an user account
-        /// </summary>
-        /// <param name="userId">User Id</param>
-        /// <returns>Exception if not found, task if success</returns>
         public async Task Delete(string userId)
         {
             UserModel userModel = _iUserDao.FindUserById(userId);
@@ -172,11 +133,6 @@ namespace HorseSpot.BLL.Bus
             await _iUserDao.DeleteUser(userModel);
         }
 
-        /// <summary>
-        /// Generates new password for a specific registred email and sends email with the password
-        /// </summary>
-        /// <param name="email">Registred email</param>
-        /// <returns>Exception if invalid email, task if success</returns>
         public async Task ForgotPassword(string email)
         {
             if (email == null)
@@ -209,10 +165,6 @@ namespace HorseSpot.BLL.Bus
             await _iMailerService.SendMail(emailModel);
         }
 
-        /// <summary>
-        /// Add an email to newsletter subscription list
-        /// </summary>
-        /// <param name="email">Email to add to list</param>
         public void SubscribeToNewsletter(string email)
         {
             Regex emailRegex = new Regex(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
@@ -234,16 +186,48 @@ namespace HorseSpot.BLL.Bus
             _iUserDao.RegisterToNewsletter(subscriber);
         }
 
+        public GetHorseAdListResultsDTO GetAllForUser(int pageNumber, string userId)
+        {
+            var user = _iUserDao.FindUserById(userId);
+
+            if (user == null)
+            {
+                throw new ValidationException(Resources.InvalidUserIdentifier);
+            }
+
+            var skipNumber = GetNumberToSkip(pageNumber);
+            var usersHorseAds = user.HorseAds.Where(x => !x.IsDeleted && !x.IsSold);
+
+            var results = new GetHorseAdListResultsDTO();
+            results.TotalCount = usersHorseAds.Count();
+            results.HorseAdList = usersHorseAds.Skip(skipNumber).Take(ApplicationConstants.AdsPerPage).Select(HorseAdConverter.FromHorseAdToHorseAdListModel);
+
+            return results;
+        }
+
+        public GetHorseAdListResultsDTO GetReferencesForUser(int pageNumber, string userId)
+        {
+            var user = _iUserDao.FindUserById(userId);
+
+            if (user == null)
+            {
+                throw new ValidationException(Resources.InvalidUserIdentifier);
+            }
+
+            var skipNumber = GetNumberToSkip(pageNumber);
+            var usersHorseAds = user.HorseAds.Where(x => x.IsSold);
+
+            var results = new GetHorseAdListResultsDTO();
+            results.TotalCount = usersHorseAds.Count();
+            results.HorseAdList = usersHorseAds.Skip(skipNumber).Take(ApplicationConstants.AdsPerPage).Select(HorseAdConverter.FromHorseAdToHorseAdListModel);
+
+            return results;
+        }
+
         #endregion
 
         #region Private Methods
 
-        /// <summary>
-        /// Validates the data of the change password model
-        /// </summary>
-        /// <param name="user">User Model</param>
-        /// <param name="changePassword">Change passowrd model</param>
-        /// <returns>Exception or Task</returns>
         private async Task ValidateChangePassword(UserModel user, ChangePasswordViewModel changePassword)
         {
             ValidationHelper.ValidateModelAttributes<ChangePasswordViewModel>(changePassword);
@@ -261,10 +245,6 @@ namespace HorseSpot.BLL.Bus
             }
         }
 
-        /// <summary>
-        /// Validates the data of the user model when registrating
-        /// </summary>
-        /// <param name="user">User Model</param>
         private void ValidateUserRegistration(UserViewModel user)
         {
             if (user == null)
@@ -303,12 +283,6 @@ namespace HorseSpot.BLL.Bus
             }
         }
 
-        /// <summary>
-        /// Validates and Updates user model
-        /// </summary>
-        /// <param name="user">User Model</param>
-        /// <param name="editProfile">Updated data</param>
-        /// <returns>Exception or updated user model</returns>
         private async Task<UserDTO> UpdateUserProfile(UserModel user, EditProfileViewModel editProfile)
         {
             user.FirstName = (editProfile.FirstName != null) ? editProfile.FirstName : user.FirstName;
@@ -328,11 +302,6 @@ namespace HorseSpot.BLL.Bus
             return UserConverter.FromUserModelToUserDTO(user);
         }
 
-        /// <summary>
-        /// Check if the user exists in database by email
-        /// </summary>
-        /// <param name="email">Email to look for</param>
-        /// <returns>True/False</returns>
         private bool FindUserByEmail(string email)
         {
             UserModel user = _iUserDao.FindUserByEmail(email);
@@ -343,6 +312,11 @@ namespace HorseSpot.BLL.Bus
             }
 
             return false;
+        }
+
+        private int GetNumberToSkip(int pageNumber)
+        {
+            return (pageNumber - 1) * ApplicationConstants.AdsPerPage;
         }
 
         #endregion

@@ -11,6 +11,6 @@ namespace HorseSpot.DAL.Models
         public Nullable<bool> NewsletterSubscription { get; set; }
         public string ImagePath { get; set; }
 
-        public ICollection<HorseAd> FavoriteHorseAds { get; set; }
+        public virtual ICollection<HorseAd> HorseAds { get; set; }
     }
 }

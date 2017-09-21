@@ -15,5 +15,7 @@ namespace HorseSpot.BLL.Interfaces
         Task ForgotPassword(string email);
         void SubscribeToNewsletter(string email);
         Task<bool> CheckIfAdmin(string userId);
+        GetHorseAdListResultsDTO GetAllForUser(int pageNumber, string userId);
+        GetHorseAdListResultsDTO GetReferencesForUser(int pageNumber, string userId);
     }
 }
