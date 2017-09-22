@@ -198,18 +198,18 @@ namespace HorseSpot.BLL.Bus
         /// <param name="userId">User id</param>
         public async Task AddToFavorite(int id, string userId)
         {
-            //var horseAd = _iHorseAdDao.GetById(id);
+            var horseAd = _iHorseAdDao.GetById(id);
 
-            //if (horseAd == null)
-            //{
-            //    throw new ResourceNotFoundException(Resources.InvalidAdIdentifier);
-            //}
+            if (horseAd == null)
+            {
+                throw new ResourceNotFoundException(Resources.InvalidAdIdentifier);
+            }
 
-            //var user = _iUserDao.FindUserById(userId);
+            var user = _iUserDao.FindUserById(userId);
 
             //var favoritesList = user.FavoriteHorseAds;
 
-            //if (favoritesList.Select(x => x.Id == id).Count() > 0) 
+            //if (favoritesList.Select(x => x.Id == id).Count() > 0)
             //{
             //    favoritesList.Add(horseAd);
             //}
@@ -218,7 +218,7 @@ namespace HorseSpot.BLL.Bus
             //    favoritesList.Remove(horseAd);
             //}
 
-            //var updatedUser = await _iUserDao.UpdateUser(user);
+            var updatedUser = await _iUserDao.UpdateUser(user);
         }
 
         /// <summary>

@@ -85,7 +85,7 @@ namespace HorseSpot.Api.Controllers
         [Route("api/account/userhorsefavorites/{pageNumber}")]
         public GetHorseAdListResultsDTO GetHorseAdsFavoritesForUser(int pageNumber, string userId)
         {
-            return _iUserBus.GetUserFavorites(pageNumber, userId);
+            throw new KeyNotFoundException(); //_iUserBus.GetUserFavorites(pageNumber, userId);
         }
 
         [HttpGet]

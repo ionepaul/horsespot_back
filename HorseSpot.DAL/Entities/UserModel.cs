@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using HorseSpot.DAL.Entities;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace HorseSpot.DAL.Models
 {
@@ -12,5 +13,6 @@ namespace HorseSpot.DAL.Models
         public string ImagePath { get; set; }
 
         public virtual ICollection<HorseAd> HorseAds { get; set; }
+        public virtual ICollection<UserFavoriteHorseAd> FavoriteHorseAds { get; set; }
     }
 }

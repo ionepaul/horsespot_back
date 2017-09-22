@@ -145,6 +145,7 @@
     <Compile Include="Entities\PriceRange.cs" />
     <Compile Include="Entities\RecommendedRider.cs" />
     <Compile Include="Entities\RefreshToken.cs" />
+    <Compile Include="Entities\UserFavoriteHorseAd.cs" />
     <Compile Include="HorseSpotDataContext.cs" />
     <Compile Include="Interfaces\IAppointmentDao.cs" />
     <Compile Include="Interfaces\IClientDao.cs" />
@@ -158,24 +159,12 @@
     <Compile Include="Interfaces\IRecommendedRiderDao.cs" />
     <Compile Include="Interfaces\ISearchHelper.cs" />
     <Compile Include="Interfaces\IRefreshTokenDao.cs" />
-    <Compile Include="Migrations\201705231655293_InitialCreate.cs" />
-    <Compile Include="Migrations\201705231655293_InitialCreate.Designer.cs">
-      <DependentUpon>201705231655293_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709091744421_HorseAds.cs" />
-    <Compile Include="Migrations\201709091744421_HorseAds.Designer.cs">
-      <DependentUpon>201709091744421_HorseAds.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709091926372_HorseAds_v2.cs" />
-    <Compile Include="Migrations\201709091926372_HorseAds_v2.Designer.cs">
-      <DependentUpon>201709091926372_HorseAds_v2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709191730142_ImagesUpdate.cs" />
-    <Compile Include="Migrations\201709191730142_ImagesUpdate.Designer.cs">
-      <DependentUpon>201709191730142_ImagesUpdate.cs</DependentUpon>
+    <Compile Include="Entities\Address.cs" />
+    <Compile Include="Migrations\201709220605412_InitialCreate.cs" />
+    <Compile Include="Migrations\201709220605412_InitialCreate.Designer.cs">
+      <DependentUpon>201709220605412_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Entities\Address.cs" />
     <Compile Include="Models\GetHorseAdListResults.cs" />
     <Compile Include="Entities\HorseAd.cs" />
     <Compile Include="Models\SearchModelDao.cs" />
@@ -209,17 +198,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705231655293_InitialCreate.resx">
-      <DependentUpon>201705231655293_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709091744421_HorseAds.resx">
-      <DependentUpon>201709091744421_HorseAds.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709091926372_HorseAds_v2.resx">
-      <DependentUpon>201709091926372_HorseAds_v2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709191730142_ImagesUpdate.resx">
-      <DependentUpon>201709191730142_ImagesUpdate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709220605412_InitialCreate.resx">
+      <DependentUpon>201709220605412_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

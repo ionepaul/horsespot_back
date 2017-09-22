@@ -39,9 +39,9 @@ namespace HorseSpot.DAL.Dao
             var totalNumber = _ctx.Users.Where(e=> e.Id == userId).Select(u => u.FavoriteHorseAds).FirstOrDefault().ToList().Count;
 
             var results = new GetHorseAdListResults();
-            results.TotalCount = totalNumber;
-            results.HorseAdList = _ctx.Users.Where(u=> u.Id ==userId).Select(x => x.FavoriteHorseAds).FirstOrDefault()
-                                      .OrderByDescending(e => e.DatePosted).Skip(skipNumber).ToList().Take(ApplicationConstants.AdsPerPage);
+            //results.TotalCount = totalNumber;
+            //results.HorseAdList = _ctx.Users.Where(u=> u.Id ==userId).Select(x => x.FavoriteHorseAds).FirstOrDefault()
+            //                          .OrderByDescending(e => e.FavoriteHorseAd.DatePosted).Skip(skipNumber).ToList().Take(ApplicationConstants.AdsPerPage);
 
             return results;
         }

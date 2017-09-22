@@ -1,8 +1,8 @@
-﻿using HorseSpot.DAL.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using HorseSpot.DAL.Entities;
 
 namespace HorseSpot.DAL.Models
 {
@@ -52,9 +52,9 @@ namespace HorseSpot.DAL.Models
         public virtual UserModel User { get; set; }
 
         public virtual ICollection<Image> Images { get; set; }
-        public virtual ICollection<UserModel> FavoriteFor { get; set; }
         public virtual ICollection<HorseAbility> Abilities { get; set; }
         public virtual ICollection<RecommendedRider> RecomendedRiders { get; set; }
+        public virtual ICollection<UserFavoriteHorseAd> FavoriteFor { get; set; }
 
         [NotMapped]
         public IEnumerable<int> RecommendedRiderIds { get; set; }

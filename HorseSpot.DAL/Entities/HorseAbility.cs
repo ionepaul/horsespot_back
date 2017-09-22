@@ -12,6 +12,6 @@ namespace HorseSpot.DAL.Entities
         [MaxLength(50)]
         public string Ability { get; set; }
 
-        public ICollection<HorseAd> HorseAds { get; set; }
+        public virtual ICollection<HorseAd> HorseAds { get; set; }
     }
 }
