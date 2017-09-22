@@ -25,6 +25,8 @@ namespace HorseSpot.Models.Models
         [Required]
         public string ConfirmPassword { get; set; }
 
+        public string ProfileImage { get; set; }
+
         public bool? NewsletterSubscription { get; set; }
 
         public string RoleName { get; set; }

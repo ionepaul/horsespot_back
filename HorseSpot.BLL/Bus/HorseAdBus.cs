@@ -13,6 +13,7 @@ using System;
 using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace HorseSpot.BLL.Bus
 {
@@ -207,16 +208,27 @@ namespace HorseSpot.BLL.Bus
 
             var user = _iUserDao.FindUserById(userId);
 
-            //var favoritesList = user.FavoriteHorseAds;
+            if (user == null)
+            {
+                throw new ResourceNotFoundException(Resources.InvalidUserIdentifier);
+            }
 
-            //if (favoritesList.Select(x => x.Id == id).Count() > 0)
-            //{
-            //    favoritesList.Add(horseAd);
-            //}
-            //else
-            //{
-            //    favoritesList.Remove(horseAd);
-            //}
+            var favoritesList = user.FavoriteHorseAds.Where(x => x.HorseAdId == id);
+
+            if (favoritesList != null && favoritesList.Any())
+            {
+                favoritesList.First().IsDeleted = !favoritesList.First().IsDeleted;
+            }
+            else
+            {
+                user.FavoriteHorseAds = new List<UserFavoriteHorseAd>();
+                user.FavoriteHorseAds.Add(new UserFavoriteHorseAd
+                {
+                    UserId = userId,
+                    HorseAdId = id,
+                    IsDeleted = false
+                });
+            }
 
             var updatedUser = await _iUserDao.UpdateUser(user);
         }

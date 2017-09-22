@@ -135,6 +135,9 @@ namespace HorseSpot.Api.Providers
                 },
                 {
                     "firstName", user.FirstName
+                },
+                {
+                    "profilePic", user.ProfileImage
                 }
             });
 

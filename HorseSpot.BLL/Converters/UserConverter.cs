@@ -1,6 +1,7 @@
 ﻿using HorseSpot.Models.Models;
 using HorseSpot.DAL.Models;
 using HorseSpot.Infrastructure.Constants;
+using System.Configuration;
 
 namespace HorseSpot.BLL.Converters
 {
@@ -20,7 +21,7 @@ namespace HorseSpot.BLL.Converters
             {
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                ImagePath = ApplicationConstants.DefaultProfilePhoto,
+                ImagePath = ConfigurationManager.AppSettings["DefaultPicName"],
                 NewsletterSubscription = user.NewsletterSubscription,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
@@ -46,7 +47,8 @@ namespace HorseSpot.BLL.Converters
                 LastName = user.LastName,
                 Email = user.Email,
                 NewsletterSubscription = user.NewsletterSubscription,
-                PhoneNumber = user.PhoneNumber
+                PhoneNumber = user.PhoneNumber,
+                ProfileImage = user.ImagePath
             };
 
             return userViewModel;

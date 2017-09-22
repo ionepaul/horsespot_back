@@ -149,7 +149,7 @@ namespace HorseSpot.BLL.Converters
                 Title = horseAd.Title,
                 IsValidated = horseAd.IsValidated,
                 HeightInCm = horseAd.Height,
-                //CountFavoritesFor = horseAd.FavoriteFor?.Count ?? 0,
+                CountFavoritesFor = horseAd.FavoriteFor?.Count ?? 0,
                 Views = horseAd.Views
             };
 
@@ -259,7 +259,7 @@ namespace HorseSpot.BLL.Converters
                 Price = horseAd.Price.ToString(), 
                 IsValidated = horseAd.IsValidated,
                 UserId = horseAd.UserId,
-                //CountFavoritesFor = horseAd.FavoriteFor.Count,
+                CountFavoritesFor = horseAd.FavoriteFor?.Count ?? 0,
                 Views = horseAd.Views,
                 Country = horseAd.Address.Country,
                 Gender = horseAd.Gender,

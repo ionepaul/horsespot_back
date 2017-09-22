@@ -58,12 +58,13 @@ namespace HorseSpot.Api.Controllers
                 var profileImage = uploadFiles[0];
                 var profilePicturesDir = ConfigurationManager.AppSettings["ProfilePicturesDirectory"];
                 var serverPath = HttpContext.Current.Server.MapPath(profilePicturesDir);
-                var path = Path.Combine(serverPath, profileImage.FileName);
+                var imageName = Guid.NewGuid() + profileImage.FileName;
+                var path = Path.Combine(serverPath, imageName);
 
                 CreateDirectoryIfNotExist(serverPath);
                 profileImage.SaveAs(path);
 
-                _iUtilBus.SetUserProfilePicture(path, id);
+                _iUtilBus.SetUserProfilePicture(imageName, id);
 
                 return Request.CreateResponse(HttpStatusCode.OK);
             }

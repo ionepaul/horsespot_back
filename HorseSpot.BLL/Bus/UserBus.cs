@@ -224,6 +224,25 @@ namespace HorseSpot.BLL.Bus
             return results;
         }
 
+        public GetHorseAdListResultsDTO GetUserFavorites(int pageNumber, string userId)
+        {
+            var user = _iUserDao.FindUserById(userId);
+
+            if (user == null)
+            {
+                throw new ValidationException(Resources.InvalidUserIdentifier);
+            }
+
+            var skipNumber = GetNumberToSkip(pageNumber);
+            var usersHorseAds = user.FavoriteHorseAds.Where(x => !x.IsDeleted).Select(x => x.FavoriteHorseAd);
+
+            var results = new GetHorseAdListResultsDTO();
+            results.TotalCount = usersHorseAds.Count();
+            results.HorseAdList = usersHorseAds.Skip(skipNumber).Take(ApplicationConstants.AdsPerPage).Select(HorseAdConverter.FromHorseAdToHorseAdListModel);
+
+            return results;
+        }
+
         #endregion
 
         #region Private Methods

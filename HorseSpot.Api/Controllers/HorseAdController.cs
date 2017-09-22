@@ -49,10 +49,6 @@ namespace HorseSpot.Api.Controllers
             await _iHorseAdBus.Validate(id);
         }
 
-        /// <summary>
-        /// API Interface to add an advertisment to wish list
-        /// </summary>
-        /// <param name="id">Horse Advertisment Id</param>
         [HttpPost]
         [Authorize]
         [Route("api/horses/favorite/{id}")]

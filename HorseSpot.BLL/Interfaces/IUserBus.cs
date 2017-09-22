@@ -17,5 +17,6 @@ namespace HorseSpot.BLL.Interfaces
         Task<bool> CheckIfAdmin(string userId);
         GetHorseAdListResultsDTO GetAllForUser(int pageNumber, string userId);
         GetHorseAdListResultsDTO GetReferencesForUser(int pageNumber, string userId);
+        GetHorseAdListResultsDTO GetUserFavorites(int pageNumber, string userId);
     }
 }
