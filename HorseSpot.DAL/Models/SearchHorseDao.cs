@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace HorseSpot.DAL.Models
 {
@@ -60,7 +61,7 @@ namespace HorseSpot.DAL.Models
 
             var subpredicate = PredicateBuilder.True<HorseAd>();
 
-            subpredicate = subpredicate.And(ad => ad.IsValidated);
+            subpredicate = subpredicate.And(ad => ad.IsValidated && !ad.IsDeleted);
 
             return subpredicate.Expand();
         }
@@ -264,17 +265,9 @@ namespace HorseSpot.DAL.Models
             return predicate;
         }
 
-        /// <summary>
-        /// Creates the order predicate
-        /// </summary>
-        /// <returns>Order expresion to be applied in sort</returns>
-        public Expression<Func<HorseAd, object>> GetOrderPredicate()
+        public PropertyInfo GetOrderProperty()
         {
-            var param = Expression.Parameter(typeof(HorseAd), "horseAd");
-
-            var orderExpression = Expression.Lambda<Func<HorseAd, object>>(Expression.Convert(Expression.Property(param, _sortAfter), typeof(object)), param);
-
-            return orderExpression;
+            return typeof(HorseAd).GetProperty(_sortAfter);
         }
 
         /// <summary>

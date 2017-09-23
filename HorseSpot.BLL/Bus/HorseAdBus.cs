@@ -219,7 +219,15 @@ namespace HorseSpot.BLL.Bus
             {
                 favoritesList.First().IsDeleted = !favoritesList.First().IsDeleted;
             }
-            else
+            else if (user.FavoriteHorseAds != null)
+            {
+                user.FavoriteHorseAds?.Add(new UserFavoriteHorseAd
+                {
+                    UserId = userId,
+                    HorseAdId = id,
+                    IsDeleted = false
+                });
+            } else
             {
                 user.FavoriteHorseAds = new List<UserFavoriteHorseAd>();
                 user.FavoriteHorseAds.Add(new UserFavoriteHorseAd

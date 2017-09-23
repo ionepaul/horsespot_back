@@ -41,6 +41,21 @@ namespace HorseSpot.Api.Controllers
 
         [HttpPost]
         [Authorize]
+        [Route("api/images/delete")]
+        public void DeleteImageByName(string imageName)
+        {
+            var horseAdvImageDir = ConfigurationManager.AppSettings["HorseAdsImgDirectory"];
+            var serverPath = HttpContext.Current.Server.MapPath(horseAdvImageDir);
+
+            if (Directory.Exists(Path.GetDirectoryName(serverPath)))
+            {
+                var path = Path.Combine(serverPath, imageName);
+                File.Delete(path);
+            }
+        }
+
+        [HttpPost]
+        [Authorize]
         [Route("api/horses/images/profilepic/{imageId}")]
         public void SetAsAdProfilePicture([FromUri] int imageId)
         {

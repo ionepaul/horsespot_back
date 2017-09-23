@@ -77,7 +77,7 @@ namespace HorseSpot.DAL.Dao
             var results = new GetHorseAdListResults();
 
             var searchPredicate = searchQuery.GetSearchPredicate();
-            var orderPredicate = searchQuery.GetOrderPredicate();
+            var orderProperty = searchQuery.GetOrderProperty();
             var isAscendingSortOrder = searchQuery.IsAscendingSortOrder();
 
             var totalNumber = _ctx.HorseAds.AsQueryable().AsExpandable().Where(searchPredicate).ToList().Count;
@@ -86,13 +86,13 @@ namespace HorseSpot.DAL.Dao
 
             if (isAscendingSortOrder)
             {
-                results.HorseAdList = _ctx.HorseAds.AsQueryable().AsExpandable().Where(searchPredicate)
-                                      .OrderBy(orderPredicate).Skip(skipNumber).Take(ApplicationConstants.AdsPerPage).ToList();
+                results.HorseAdList = _ctx.HorseAds.AsQueryable().AsExpandable().Where(searchPredicate).AsEnumerable()
+                                      .OrderBy(x => orderProperty.GetValue(x, null)).Skip(skipNumber).Take(ApplicationConstants.AdsPerPage).ToList();
             }
             else
             {
-                results.HorseAdList = _ctx.HorseAds.AsQueryable().AsExpandable().Where(searchPredicate)
-                                      .OrderByDescending(orderPredicate).Skip(skipNumber).Take(ApplicationConstants.AdsPerPage).ToList();
+                results.HorseAdList = _ctx.HorseAds.AsQueryable().AsExpandable().Where(searchPredicate).AsEnumerable()
+                                      .OrderByDescending(x => orderProperty.GetValue(x, null)).Skip(skipNumber).Take(ApplicationConstants.AdsPerPage).ToList();
             }
 
             return results;

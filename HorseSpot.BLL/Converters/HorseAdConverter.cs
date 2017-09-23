@@ -150,7 +150,8 @@ namespace HorseSpot.BLL.Converters
                 IsValidated = horseAd.IsValidated,
                 HeightInCm = horseAd.Height,
                 CountFavoritesFor = horseAd.FavoriteFor?.Count ?? 0,
-                Views = horseAd.Views
+                Views = horseAd.Views,
+                FavoritesFor = horseAd.FavoriteFor?.Select(x => x.UserId) ?? new List<string>()
             };
 
             return horseAdDTO;

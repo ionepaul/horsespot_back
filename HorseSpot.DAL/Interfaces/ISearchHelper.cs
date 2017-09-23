@@ -1,14 +1,14 @@
 ﻿using System;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace HorseSpot.DAL.Interfaces
 {
     public interface ISearchHelper<T>
     {
         Expression<Func<T, bool>> GetSearchPredicate();
-
-        Expression<Func<T, object>> GetOrderPredicate();
-
+        PropertyInfo GetOrderProperty();
         bool IsAscendingSortOrder();
     }
 }
