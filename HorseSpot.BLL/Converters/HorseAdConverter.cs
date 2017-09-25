@@ -268,21 +268,21 @@ namespace HorseSpot.BLL.Converters
             };
         }
 
-        public static Image FromImageDTOToImage(ImageDTO imageDTOObj)
+        public static ImageModel FromImageDTOToImage(ImageDTO imageDTOObj)
         {
             if (imageDTOObj == null)
             {
                 return null;
             }
 
-            return new Image
+            return new ImageModel
             {
                 Name = imageDTOObj.ImageName,
                 IsProfilePic = imageDTOObj.IsProfilePic
             };
         }
 
-        public static ImageDTO FromImageToImageDTO(Image imageObj)
+        public static ImageDTO FromImageToImageDTO(ImageModel imageObj)
         {
             if (imageObj == null)
             {

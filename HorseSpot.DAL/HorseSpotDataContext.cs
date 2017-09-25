@@ -27,7 +27,7 @@ namespace HorseSpot.DAL
 
         public DbSet<Address> Addresses { get; set; }
 
-        public DbSet<Image> Images { get; set; }
+        public DbSet<ImageModel> Images { get; set; }
 
         public DbSet<Pedigree> Pedigrees { get; set; }
 

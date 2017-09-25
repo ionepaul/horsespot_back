@@ -164,6 +164,10 @@
     <Compile Include="Migrations\201709220605412_InitialCreate.Designer.cs">
       <DependentUpon>201709220605412_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709251735400_ImageNameUpdate.cs" />
+    <Compile Include="Migrations\201709251735400_ImageNameUpdate.Designer.cs">
+      <DependentUpon>201709251735400_ImageNameUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\GetHorseAdListResults.cs" />
     <Compile Include="Entities\HorseAd.cs" />
@@ -200,6 +204,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201709220605412_InitialCreate.resx">
       <DependentUpon>201709220605412_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709251735400_ImageNameUpdate.resx">
+      <DependentUpon>201709251735400_ImageNameUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

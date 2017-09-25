@@ -5,7 +5,7 @@ using System.Data.Entity;
 
 namespace HorseSpot.DAL.Dao
 {
-    public class ImageDao : AbstractDao<Image>, IImageDao
+    public class ImageDao : AbstractDao<ImageModel>, IImageDao
     {
         #region Constructor
 
@@ -17,7 +17,7 @@ namespace HorseSpot.DAL.Dao
         #endregion
 
         #region Public Methods
-        public void Update(Image image)
+        public void Update(ImageModel image)
         {
             _ctx.Entry(image).State = EntityState.Modified;
             //_ctx.Entry(horseAd).State = EntityState.Modified;

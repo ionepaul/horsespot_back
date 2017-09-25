@@ -380,7 +380,7 @@ namespace HorseSpot.BLL.Bus
                 throw new ForbiddenException(Resources.ActionRequiresAdditionalRights);
             }
 
-            var image = new Image { Name = imageName, IsProfilePic = false };
+            var image = new ImageModel { Name = imageName, IsProfilePic = false };
             horseAd.Images.Add(image);
 
             await _iHorseAdDao.UpdateAsync(horseAd);

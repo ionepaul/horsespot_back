@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HorseSpot.DAL.Entities
 {
-    public class Image
+    public class ImageModel
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

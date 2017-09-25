@@ -3,8 +3,8 @@ using HorseSpot.DAL.Models;
 
 namespace HorseSpot.DAL.Interfaces
 {
-    public interface IImageDao : IDao<Image>
+    public interface IImageDao : IDao<ImageModel>
     {
-        void Update(Image image); 
+        void Update(ImageModel image); 
     }
 }
