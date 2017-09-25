@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HorseSpot.DAL.Models
+namespace HorseSpot.DAL.Entities
 {
     public class Pedigree
     {

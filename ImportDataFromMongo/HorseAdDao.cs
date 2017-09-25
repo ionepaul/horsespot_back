@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System;
 using MongoDB.Driver.GridFS;
 using MongoDB.Bson;
+using HorseSpot.DAL.Entities;
 
 namespace ImportDataFromMongo
 {

@@ -1,20 +1,11 @@
-﻿using HorseSpot.Models.Models;
-using HorseSpot.DAL.Models;
-using HorseSpot.Infrastructure.Constants;
-using System.Configuration;
+﻿using System.Configuration;
+using HorseSpot.DAL.Entities;
+using HorseSpot.Models.Models;
 
 namespace HorseSpot.BLL.Converters
 {
-    /// <summary>
-    /// Static class used to map the user database model to aplication view model an vice-versa
-    /// </summary>
     public static class UserConverter
     {
-        /// <summary>
-        /// Converts the user view model to database user model
-        /// </summary>
-        /// <param name="user">User View Model</param>
-        /// <returns>User Database Model</returns>
         public static UserModel ConvertUserViewModelToUserModel(UserViewModel user)
         {
             return new UserModel
@@ -29,17 +20,13 @@ namespace HorseSpot.BLL.Converters
             };
         }
 
-        /// <summary>
-        /// Converts user database model to user view model
-        /// </summary>
-        /// <param name="user">User Database Model</param>
-        /// <returns>User View Model</returns>
         public static UserViewModel FromUserModelToUserViewModel(UserModel user)
         {
             if (user == null)
             {
                 return null;
             }
+
             var userViewModel = new UserViewModel
             {
                 Id = user.Id,
@@ -54,11 +41,6 @@ namespace HorseSpot.BLL.Converters
             return userViewModel;
         }
 
-        /// <summary>
-        /// Converts database model to user domanin transfer object
-        /// </summary>
-        /// <param name="user">User database model</param>
-        /// <returns>UserDTO</returns>
         public static UserDTO FromUserModelToUserDTO(UserModel user)
         {
             return new UserDTO

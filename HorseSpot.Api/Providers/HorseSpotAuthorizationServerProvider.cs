@@ -128,7 +128,7 @@ namespace HorseSpot.Api.Providers
                     "username", context.UserName
                 },
                 {
-                    "isAdmin", (userRoles.Contains("Admin")) ? "true" : "false"
+                    "isAdmin", (userRoles.ToList().Contains("Admin")) ? "true" : "false"
                 },
                 {
                     "userId", user.Id

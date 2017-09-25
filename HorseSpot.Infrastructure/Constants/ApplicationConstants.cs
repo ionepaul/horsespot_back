@@ -1,9 +1,12 @@
-﻿namespace HorseSpot.Infrastructure.Constants
+﻿using System;
+using System.Configuration;
+
+namespace HorseSpot.Infrastructure.Constants
 {
     public static class ApplicationConstants
     {
         //DAL Constants
-        public const int AdsPerPage = 8;
+        public static int AdsPerPage = Convert.ToInt16(ConfigurationManager.AppSettings["AdsPerPage"]);
         public const int DefaultSortDirection = 1;
         public const string UserRole = "User";
 

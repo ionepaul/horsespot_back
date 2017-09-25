@@ -97,7 +97,7 @@ namespace HorseSpot.BLL.Bus
         /// </summary>
         /// <param name="id">User Id</param>
         /// <returns>List of user roles</returns>
-        public async Task<IList<string>> UserRoles(string id)
+        public async Task<IEnumerable<string>> UserRoles(string id)
         {
             return await _iUserDao.UserRoles(id);
         }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using HorseSpot.DAL.Entities;
 
 namespace HorseSpot.DAL.Models
 {

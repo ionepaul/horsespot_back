@@ -1,7 +1,6 @@
-﻿using HorseSpot.DAL.Entities;
-using HorseSpot.DAL.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using HorseSpot.DAL.Entities;
 
 namespace HorseSpot.DAL.Interfaces
 {
@@ -9,7 +8,7 @@ namespace HorseSpot.DAL.Interfaces
     {
         Task<UserModel> RegisterUser(UserModel userModel, string password);
         Task<UserModel> FindUser(string userName, string password);
-        Task<IList<string>> UserRoles(string userId);
+        Task<IEnumerable<string>> UserRoles(string userId);
         UserModel FindUserById(string userId);
         Task<UserModel> UpdateUser(UserModel userModel);
         Task ChangeUserPassword(string userId, string newPassword);

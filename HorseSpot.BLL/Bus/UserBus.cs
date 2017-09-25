@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -30,10 +29,10 @@ namespace HorseSpot.BLL.Bus
 
         #region Constructor
 
-        public UserBus(IUserDao iAuthDao, IMailerService iMailerService)
+        public UserBus(IUserDao iUserDao, IMailerService iMailerService)
         {
             _iMailerService = iMailerService;
-            _iUserDao = iAuthDao;
+            _iUserDao = iUserDao;
         }
 
         #endregion
@@ -46,51 +45,36 @@ namespace HorseSpot.BLL.Bus
 
             var userModel = UserConverter.ConvertUserViewModelToUserModel(user);
 
-            var userDboAfterSave = await _iUserDao.RegisterUser(userModel, user.Password);
+            var savedUser = await _iUserDao.RegisterUser(userModel, user.Password);
             
-            EmailModel emailModel = new EmailModel
-            {
-                Sender = ConfigurationManager.AppSettings["AdminEmail"],
-                Receiver = user.Email,
-                ReceiverFirstName = user.FirstName,
-                ReceiverLastName = user.LastName,
-                EmailSubject = EmailSubjects.WelecomeSubject,
-                EmailTemplatePath = EmailTemplatesPath.WelcomeTemplate
-            };
-
             if (user.NewsletterSubscription.HasValue && user.NewsletterSubscription.Value)
             {
                 var subscriber = new Subscriber(user.Email);
+
                 _iUserDao.RegisterToNewsletter(subscriber);
             }
 
-            await _iMailerService.SendMail(emailModel);
+            await SendWelcomeEmail(userModel);
 
-            return UserConverter.FromUserModelToUserViewModel(userDboAfterSave);
+            return UserConverter.FromUserModelToUserViewModel(savedUser);
         }
 
         public async Task<UserDTO> EditProfile(string id, EditProfileViewModel editProfile)
         {
             UserModel userModel = _iUserDao.FindUserById(id);
 
-            if (userModel == null)
-            {
-                throw new ResourceNotFoundException(Resources.InvalidUserIdentifier);
-            }
+            CheckIfUserExists(userModel);
 
-            return await UpdateUserProfile(userModel, editProfile);
+            return await UpdateUserInformation(userModel, editProfile);
         }
 
         public async Task ChangePassword(string userId, ChangePasswordViewModel changePassword)
         {
             UserModel userModel = _iUserDao.FindUserById(userId);
 
-            if (userModel == null)
-            {
-                throw new ResourceNotFoundException(Resources.InvalidUserIdentifier);
-            }
+            CheckIfUserExists(userModel);
    
-            await ValidateChangePassword(userModel, changePassword);
+            await ValidateChangePasswordModel(userModel, changePassword);
 
             await _iUserDao.ChangeUserPassword(userId, changePassword.NewPassword);
         }
@@ -106,10 +90,7 @@ namespace HorseSpot.BLL.Bus
         {
             var user = _iUserDao.FindUserById(id);
 
-            if (user == null)
-            {
-                throw new ValidationException(Resources.InvalidUserIdentifier);
-            }
+            CheckIfUserExists(user);
 
             return UserConverter.FromUserModelToUserDTO(user);
         }
@@ -125,10 +106,7 @@ namespace HorseSpot.BLL.Bus
         {
             UserModel userModel = _iUserDao.FindUserById(userId);
 
-            if (userModel == null)
-            {
-                throw new ResourceNotFoundException(Resources.InvalidUserIdentifier);
-            }
+            CheckIfUserExists(userModel);
 
             await _iUserDao.DeleteUser(userModel);
         }
@@ -142,37 +120,18 @@ namespace HorseSpot.BLL.Bus
 
             var user = _iUserDao.FindUserByEmail(email);
 
-            if (user == null)
-            {
-                throw new ValidationException(Resources.EmailDoesNotExist);
-            }
+            CheckIfUserExists(user);
 
-            var temporaryPassowrd = Membership.GeneratePassword(10, 0);
+            var temporaryPassword = Membership.GeneratePassword(10, 0);
 
-            await _iUserDao.ChangeUserPassword(user.Id, temporaryPassowrd);
+            await _iUserDao.ChangeUserPassword(user.Id, temporaryPassword);
 
-            EmailModel emailModel = new EmailModel
-            {
-                Sender = ConfigurationManager.AppSettings["AdminEmail"],
-                Receiver = user.Email,
-                ReceiverFirstName = user.FirstName,
-                ReceiverLastName = user.LastName,
-                TemporaryPassword = temporaryPassowrd,
-                EmailSubject = EmailSubjects.ForgotPassword,
-                EmailTemplatePath = EmailTemplatesPath.ForgotPassword
-            };
-
-            await _iMailerService.SendMail(emailModel);
+            await SendPasswordRecoveryEmail(user, temporaryPassword);
         }
 
         public void SubscribeToNewsletter(string email)
         {
-            Regex emailRegex = new Regex(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
-
-            if (!emailRegex.IsMatch(email))
-            {
-                throw new ValidationException(Resources.InvalidEmailFormat);
-            }
+            ValidateEmail(email);
 
             var existingSubscriber = _iUserDao.FindSubscriberByEmail(email);
 
@@ -190,70 +149,46 @@ namespace HorseSpot.BLL.Bus
         {
             var user = _iUserDao.FindUserById(userId);
 
-            if (user == null)
-            {
-                throw new ValidationException(Resources.InvalidUserIdentifier);
-            }
+            CheckIfUserExists(user);
 
-            var skipNumber = GetNumberToSkip(pageNumber);
-            var usersHorseAds = user.HorseAds.Where(x => !x.IsDeleted && !x.IsSold);
+            var userHorseAds = user.HorseAds.Where(x => !x.IsDeleted && !x.IsSold);
 
-            var results = new GetHorseAdListResultsDTO();
-            results.TotalCount = usersHorseAds.Count();
-            results.HorseAdList = usersHorseAds.Skip(skipNumber).Take(ApplicationConstants.AdsPerPage).Select(HorseAdConverter.FromHorseAdToHorseAdListModel);
-
-            return results;
+            return CreateHorseListResult(userHorseAds, pageNumber);
         }
 
         public GetHorseAdListResultsDTO GetReferencesForUser(int pageNumber, string userId)
         {
             var user = _iUserDao.FindUserById(userId);
 
-            if (user == null)
-            {
-                throw new ValidationException(Resources.InvalidUserIdentifier);
-            }
+            CheckIfUserExists(user);
 
-            var skipNumber = GetNumberToSkip(pageNumber);
-            var usersHorseAds = user.HorseAds.Where(x => x.IsSold);
+            var userSoldHorseAds = user.HorseAds.Where(x => x.IsSold);
 
-            var results = new GetHorseAdListResultsDTO();
-            results.TotalCount = usersHorseAds.Count();
-            results.HorseAdList = usersHorseAds.Skip(skipNumber).Take(ApplicationConstants.AdsPerPage).Select(HorseAdConverter.FromHorseAdToHorseAdListModel);
-
-            return results;
+            return CreateHorseListResult(userSoldHorseAds, pageNumber);
         }
 
         public GetHorseAdListResultsDTO GetUserFavorites(int pageNumber, string userId)
         {
             var user = _iUserDao.FindUserById(userId);
 
-            if (user == null)
-            {
-                throw new ValidationException(Resources.InvalidUserIdentifier);
-            }
+            CheckIfUserExists(user);
 
-            var skipNumber = GetNumberToSkip(pageNumber);
-            var usersHorseAds = user.FavoriteHorseAds.Where(x => !x.IsDeleted).Select(x => x.FavoriteHorseAd);
+            var userFavoriteHorseAds = user.FavoriteHorseAds.Where(x => !x.IsDeleted).Select(x => x.FavoriteHorseAd);
 
-            var results = new GetHorseAdListResultsDTO();
-            results.TotalCount = usersHorseAds.Count();
-            results.HorseAdList = usersHorseAds.Skip(skipNumber).Take(ApplicationConstants.AdsPerPage).Select(HorseAdConverter.FromHorseAdToHorseAdListModel);
-
-            return results;
+            return CreateHorseListResult(userFavoriteHorseAds, pageNumber);       
         }
 
         #endregion
 
         #region Private Methods
 
-        private async Task ValidateChangePassword(UserModel user, ChangePasswordViewModel changePassword)
+        private async Task ValidateChangePasswordModel(UserModel user, ChangePasswordViewModel changePassword)
         {
             ValidationHelper.ValidateModelAttributes<ChangePasswordViewModel>(changePassword);
 
-            var getUserByCurrentPassowrd = await _iUserDao.FindUser(user.UserName, changePassword.CurrentPassword);
+            var userByCredentials = await _iUserDao.FindUser(user.UserName, changePassword.CurrentPassword);
 
-            if (getUserByCurrentPassowrd == null)
+            if (userByCredentials == null)
             {
                 throw new ConflictException(Resources.InccorectCurrentPassword);
             }
@@ -273,13 +208,9 @@ namespace HorseSpot.BLL.Bus
 
             ValidationHelper.ValidateModelAttributes<UserViewModel>(user);
 
-            Regex emailRegex = new Regex(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
             Regex phoneNumberRegex = new Regex(@"^(\+\d{1,3}[- ]?)?\d{10}$");
 
-            if (!emailRegex.IsMatch(user.Email))
-            {
-                throw new ValidationException(Resources.InvalidEmailFormat);
-            }
+            ValidateEmail(user.Email);
 
             if (user.Password.Length < 6)
             {
@@ -302,10 +233,10 @@ namespace HorseSpot.BLL.Bus
             }
         }
 
-        private async Task<UserDTO> UpdateUserProfile(UserModel user, EditProfileViewModel editProfile)
+        private async Task<UserDTO> UpdateUserInformation(UserModel user, EditProfileViewModel editProfile)
         {
-            user.FirstName = (editProfile.FirstName != null) ? editProfile.FirstName : user.FirstName;
-            user.LastName = (editProfile.LastName != null) ? editProfile.LastName : user.LastName;
+            user.FirstName = editProfile.FirstName != null ? editProfile.FirstName : user.FirstName;
+            user.LastName = editProfile.LastName != null ? editProfile.LastName : user.LastName;
 
             Regex phoneNumberRegex = new Regex(@"^(\+\d{1,3}[- ]?)?\d{10}$");
 
@@ -314,7 +245,7 @@ namespace HorseSpot.BLL.Bus
                 throw new ValidationException(Resources.InvalidPhoneNumberFormat);
             }
 
-            user.PhoneNumber = (editProfile.PhoneNumber != null) ? editProfile.PhoneNumber : user.PhoneNumber;
+            user.PhoneNumber = editProfile.PhoneNumber != null ? editProfile.PhoneNumber : user.PhoneNumber;
 
             var editedUser = await _iUserDao.UpdateUser(user);
 
@@ -336,6 +267,68 @@ namespace HorseSpot.BLL.Bus
         private int GetNumberToSkip(int pageNumber)
         {
             return (pageNumber - 1) * ApplicationConstants.AdsPerPage;
+        }
+
+        private void CheckIfUserExists(UserModel userModel)
+        {
+            if (userModel == null)
+            {
+                throw new ResourceNotFoundException(Resources.InvalidUserIdentifier);
+            }
+        }
+
+        private void ValidateEmail(string email)
+        {
+            Regex emailRegex = new Regex(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
+
+            if (!emailRegex.IsMatch(email))
+            {
+                throw new ValidationException(Resources.InvalidEmailFormat);
+            }
+        }
+
+        private GetHorseAdListResultsDTO CreateHorseListResult(IEnumerable<HorseAd> horseAdList, int pageNumber)
+        {
+            var skipNumber = GetNumberToSkip(pageNumber);
+
+            var horseAdListResult = new GetHorseAdListResultsDTO()
+            {
+                TotalCount = horseAdList.Count(),
+                HorseAdList = horseAdList.Skip(skipNumber).Take(ApplicationConstants.AdsPerPage).Select(HorseAdConverter.FromHorseAdToHorseAdListModel)
+            };
+
+            return horseAdListResult;
+        }
+
+        private async Task SendWelcomeEmail(UserModel user)
+        {
+            EmailModel emailModel = new EmailModel
+            {
+                Sender = ConfigurationManager.AppSettings["AdminEmail"],
+                Receiver = user.Email,
+                ReceiverFirstName = user.FirstName,
+                ReceiverLastName = user.LastName,
+                EmailSubject = EmailSubjects.WelecomeSubject,
+                EmailTemplatePath = EmailTemplatesPath.WelcomeTemplate
+            };
+
+            await _iMailerService.SendMail(emailModel);
+        }
+
+        private async Task SendPasswordRecoveryEmail(UserModel user, string temporaryPassword)
+        {
+            EmailModel emailModel = new EmailModel
+            {
+                Sender = ConfigurationManager.AppSettings["AdminEmail"],
+                Receiver = user.Email,
+                ReceiverFirstName = user.FirstName,
+                ReceiverLastName = user.LastName,
+                TemporaryPassword = temporaryPassword,
+                EmailSubject = EmailSubjects.ForgotPassword,
+                EmailTemplatePath = EmailTemplatesPath.ForgotPassword
+            };
+
+            await _iMailerService.SendMail(emailModel);
         }
 
         #endregion

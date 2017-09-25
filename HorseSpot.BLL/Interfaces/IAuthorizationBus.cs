@@ -1,6 +1,6 @@
-﻿using HorseSpot.Models.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using HorseSpot.Models.Models;
 
 namespace HorseSpot.BLL.Interfaces
 {
@@ -11,6 +11,6 @@ namespace HorseSpot.BLL.Interfaces
         Task<RefreshTokenDTO> FindRefreshToken(string hashedTokenId);
         Task<bool> RemoveRefreshToken(string hashedTokenId);
         Task<bool> AddRefreshToken(RefreshTokenDTO token);
-        Task<IList<string>> UserRoles(string id);
+        Task<IEnumerable<string>> UserRoles(string id);
     }
 }

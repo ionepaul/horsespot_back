@@ -1,5 +1,6 @@
-﻿using HorseSpot.DAL.Models;
+﻿using HorseSpot.DAL.Entities;
 using System.Threading.Tasks;
+using HorseSpot.DAL.Models;
 
 namespace HorseSpot.DAL.Interfaces
 {

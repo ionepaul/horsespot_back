@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using HorseSpot.DAL.Entities;
 
-namespace HorseSpot.DAL.Models
+namespace HorseSpot.DAL.Entities
 {
     public class HorseAd
     {

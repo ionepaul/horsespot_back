@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using HorseSpot.DAL.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace HorseSpot.DAL.Models
+namespace HorseSpot.DAL.Entities
 {
     public class UserModel : IdentityUser
     {
