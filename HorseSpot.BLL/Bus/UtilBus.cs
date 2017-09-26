@@ -16,6 +16,7 @@ using HorseSpot.BLL.Converters;
 using HorseSpot.Infrastructure.MailService;
 using System.Text.RegularExpressions;
 using HorseSpot.Infrastructure.Constants;
+using HorseSpot.DAL.Entities;
 
 namespace HorseSpot.BLL.Bus
 {
@@ -23,21 +24,28 @@ namespace HorseSpot.BLL.Bus
     {
         #region Local Variables
 
-        private IImageDao _iImageDao;
-        private IUserDao _iUserDao;
-        private IHorseAdDao _iHorseAdDao;
-        private IMailerService _iMailerService;
-
+        private readonly IImageDao _iImageDao;
+        private readonly IUserDao _iUserDao;
+        private readonly IHorseAdDao _iHorseAdDao;
+        private readonly IMailerService _iMailerService;
+        private readonly ICountryDao _iCountryDao;
+        private readonly IRecommendedRiderDao _iRecommendedRiderDao;
+        private readonly IHorseAbilityDao _iHorseAbilityDao;
+        private readonly IPriceRangeDao _iPriceRangeDao;
         #endregion
 
         #region Constructor
 
-        public UtilBus(IImageDao iImageDao, IHorseAdDao iHorseAdDao, IUserDao iUserDao, IMailerService iMailerService)
+        public UtilBus(IImageDao iImageDao, IHorseAdDao iHorseAdDao, IUserDao iUserDao, IMailerService iMailerService, ICountryDao iCountryDao, IRecommendedRiderDao iRecommendedRiderDao, IHorseAbilityDao iHorseAbilityDao, IPriceRangeDao iPriceRangeDao)
         {
             _iImageDao = iImageDao;
             _iHorseAdDao = iHorseAdDao;
             _iUserDao = iUserDao;
             _iMailerService = iMailerService;
+            _iCountryDao = iCountryDao;
+            _iRecommendedRiderDao = iRecommendedRiderDao;
+            _iHorseAbilityDao = iHorseAbilityDao;
+            _iPriceRangeDao = iPriceRangeDao;
         }
 
         #endregion
@@ -174,6 +182,34 @@ namespace HorseSpot.BLL.Bus
             {
                 throw new ValidationException(Resources.InvalidPictureFormat);
             }
+        }
+
+        public IEnumerable<string> GetAllCountries()
+        {
+            IEnumerable<Country> countries = _iCountryDao.GetAll();
+
+            return countries.Select(c => c.CountryName);
+        }
+
+        public IEnumerable<HorseAbilityDTO> GetAllAbilities()
+        {
+            IEnumerable<HorseAbility> abilites = _iHorseAbilityDao.GetAll();
+
+            return abilites.Select(HorseAbilityConverter.FromHorseAbilityToHorseAbilityDTO);
+        }
+
+        public IEnumerable<PriceRangeDTO> GetAllPriceRanges()
+        {
+            IEnumerable<PriceRange> priceRanges = _iPriceRangeDao.GetAll();
+
+            return priceRanges.Select(PriceRangeConverter.FromPriceRangeToPriceRangeDTO);
+        }
+
+        public IEnumerable<RecommendedRiderDTO> GetAllRecommendedRiders()
+        {
+            IEnumerable<RecommendedRider> recommendedRiders = _iRecommendedRiderDao.GetAll();
+
+            return recommendedRiders.Select(RecommendedRiderConverter.FromRiderToRiderDTO);
         }
 
         #endregion

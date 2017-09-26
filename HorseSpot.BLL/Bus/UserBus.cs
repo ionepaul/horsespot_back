@@ -22,8 +22,8 @@ namespace HorseSpot.BLL.Bus
     {
         #region Local Variables
 
-        private IMailerService _iMailerService;
-        private IUserDao _iUserDao;
+        private readonly IMailerService _iMailerService;
+        private readonly IUserDao _iUserDao;
 
         #endregion
 

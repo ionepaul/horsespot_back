@@ -1,21 +1,21 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.IO;
 using System.Net;
 using System.Net.Http;
-using HorseSpot.Infrastructure.Resources;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using HorseSpot.BLL.Interfaces;
-using System;
-using System.Threading.Tasks;
-using HorseSpot.Models.Models;
 using HorseSpot.Api.Utils;
+using HorseSpot.BLL.Interfaces;
+using HorseSpot.Infrastructure.Resources;
+using HorseSpot.Models.Models;
 
 namespace HorseSpot.Api.Controllers
 {
     public class UtilsController : ApiController
     {
-        private IUtilBus _iUtilBus;
+        private readonly IUtilBus _iUtilBus;
 
         public UtilsController(IUtilBus iUtilBus)
         {
@@ -126,6 +126,38 @@ namespace HorseSpot.Api.Controllers
         {
             await _iUtilBus.ReceiveEmailFromContactPage(contactPageEmailModel);
         }
+
+        #region HttpGet
+
+        [HttpGet]
+        [Route("api/countries")]
+        public IEnumerable<string> GetAllCountries()
+        {
+            return _iUtilBus.GetAllCountries();
+        }
+
+        [HttpGet]
+        [Route("api/abilities")]
+        public IEnumerable<HorseAbilityDTO> GetAllAbilities()
+        {
+            return _iUtilBus.GetAllAbilities();
+        }
+
+        [HttpGet]
+        [Route("api/priceranges")]
+        public IEnumerable<PriceRangeDTO> GetAllPriceRanges()
+        {
+            return _iUtilBus.GetAllPriceRanges();
+        }
+
+        [HttpGet]
+        [Route("api/recommendedriders")]
+        public IEnumerable<RecommendedRiderDTO> GetAllRecommendedRiders()
+        {
+            return _iUtilBus.GetAllRecommendedRiders();
+        }
+
+        #endregion
 
         #region Private Methods
         private void CreateDirectoryIfNotExist(string serverPath)

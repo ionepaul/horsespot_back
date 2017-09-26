@@ -9,7 +9,7 @@ namespace HorseSpot.Api.Controllers
 {
     public class AccountController : ApiController
     {
-        private IUserBus _iUserBus;
+        private readonly IUserBus _iUserBus;
 
         public AccountController(IUserBus iUserBus)
         {

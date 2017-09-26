@@ -1,9 +1,6 @@
-﻿using HorseSpot.Models.Models;
-using MongoDB.Driver.GridFS;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Web;
+using HorseSpot.Models.Models;
 
 namespace HorseSpot.BLL.Interfaces
 {
@@ -15,5 +12,9 @@ namespace HorseSpot.BLL.Interfaces
         void SetHorseAdProfilePicture(int imageId, string v);
         Task ReceiveEmailFromContactPage(ContactPageEmailModel emailModelDTO);
         void CheckFormat(string path);
+        IEnumerable<RecommendedRiderDTO> GetAllRecommendedRiders();
+        IEnumerable<PriceRangeDTO> GetAllPriceRanges();
+        IEnumerable<HorseAbilityDTO> GetAllAbilities();
+        IEnumerable<string> GetAllCountries();
     }
 }
