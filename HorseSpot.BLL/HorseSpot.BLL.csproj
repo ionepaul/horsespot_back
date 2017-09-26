@@ -93,11 +93,7 @@
   <ItemGroup>
     <Compile Include="Bus\AppointmentBus.cs" />
     <Compile Include="Bus\AuthorizationBus.cs" />
-    <Compile Include="Bus\CountryBus.cs" />
-    <Compile Include="Bus\HorseAbilityBus.cs" />
     <Compile Include="Bus\HorseAdBus.cs" />
-    <Compile Include="Bus\PriceRangeBus.cs" />
-    <Compile Include="Bus\RecommendedRiderBus.cs" />
     <Compile Include="Bus\UserBus.cs" />
     <Compile Include="Bus\UtilBus.cs" />
     <Compile Include="Converters\AppointmentConverter.cs" />
@@ -110,11 +106,7 @@
     <Compile Include="Converters\UserConverter.cs" />
     <Compile Include="Interfaces\IAppointmentBus.cs" />
     <Compile Include="Interfaces\IAuthorizationBus.cs" />
-    <Compile Include="Interfaces\ICountryBus.cs" />
-    <Compile Include="Interfaces\IHorseAbilityBus.cs" />
     <Compile Include="Interfaces\IHorseAdBus.cs" />
-    <Compile Include="Interfaces\IPriceRangeBus.cs" />
-    <Compile Include="Interfaces\IRecommendedRiderBus.cs" />
     <Compile Include="Interfaces\IUserBus.cs" />
     <Compile Include="Interfaces\IUtilBus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
