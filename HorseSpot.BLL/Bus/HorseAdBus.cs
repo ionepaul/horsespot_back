@@ -28,6 +28,7 @@ namespace HorseSpot.BLL.Bus
         private IRecommendedRiderDao _iRecommendedRiderDao;
         private IAppointmentDao _iAppointmentDao;
         private IMailerService _iMailerService;
+        private IImageDao _iImageDao;
 
         #endregion
 
@@ -35,7 +36,7 @@ namespace HorseSpot.BLL.Bus
 
         public HorseAdBus(IHorseAdDao iHorseAdDao, IUserDao iAuthDao,
             IPriceRangeDao iPriceRangeDao, IHorseAbilityDao iHorseAbilityDao, IRecommendedRiderDao iRecommendedRiderDao, 
-            IAppointmentDao iAppointmentDao, IMailerService iMailerService)
+            IAppointmentDao iAppointmentDao, IMailerService iMailerService, IImageDao iImageDao)
         {
             _iHorseAdDao = iHorseAdDao;
             _iUserDao = iAuthDao;
@@ -44,6 +45,7 @@ namespace HorseSpot.BLL.Bus
             _iRecommendedRiderDao = iRecommendedRiderDao;
             _iMailerService = iMailerService;
             _iAppointmentDao = iAppointmentDao;
+            _iImageDao = iImageDao;
         }
 
         #endregion
@@ -384,6 +386,46 @@ namespace HorseSpot.BLL.Bus
             horseAd.Images.Add(image);
 
             await _iHorseAdDao.UpdateAsync(horseAd);
+        }
+
+        public string DeleteImage(int imageId, string userId)
+        {
+            var image = _iImageDao.GetById(imageId);
+
+            if (image == null)
+            {
+                throw new ResourceNotFoundException(Resources.ImageNotFoundInAdImagesList);
+            }
+
+            if (image.HorseAd.UserId != userId)
+            {
+                throw new ForbiddenException(Resources.ActionRequiresAdditionalRights);
+            }
+
+            var imageName = image.Name;
+            _iImageDao.Delete(image);
+
+            return imageName;
+        }
+
+        public void SetHorseAdProfilePicture(int imageId, string userId)
+        {
+            var image = _iImageDao.GetById(imageId);
+
+            if (image == null)
+            {
+                throw new ResourceNotFoundException(Resources.ImageNotFoundInAdImagesList);
+            }
+
+            if (image.HorseAd.UserId != userId)
+            {
+                throw new ForbiddenException(Resources.ActionRequiresAdditionalRights);
+            }
+
+            image.HorseAd.Images.Where(img => img.IsProfilePic).FirstOrDefault().IsProfilePic = false;
+            image.IsProfilePic = true;
+
+            _iImageDao.Update(image);
         }
 
         #endregion

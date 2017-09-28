@@ -1,22 +1,20 @@
-﻿using HorseSpot.BLL.Interfaces;
-using HorseSpot.DAL.Interfaces;
-using HorseSpot.Infrastructure.Exceptions;
-using HorseSpot.Infrastructure.Resources;
-using HorseSpot.Models.Enums;
-using MongoDB.Driver.GridFS;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using HorseSpot.Models.Models;
-using HorseSpot.Infrastructure.Validators;
-using HorseSpot.BLL.Converters;
-using HorseSpot.Infrastructure.MailService;
 using System.Text.RegularExpressions;
-using HorseSpot.Infrastructure.Constants;
+using System.Threading.Tasks;
+using HorseSpot.BLL.Converters;
+using HorseSpot.BLL.Interfaces;
 using HorseSpot.DAL.Entities;
+using HorseSpot.DAL.Interfaces;
+using HorseSpot.Infrastructure.Constants;
+using HorseSpot.Infrastructure.Exceptions;
+using HorseSpot.Infrastructure.MailService;
+using HorseSpot.Infrastructure.Resources;
+using HorseSpot.Infrastructure.Validators;
+using HorseSpot.Models.Enums;
+using HorseSpot.Models.Models;
 
 namespace HorseSpot.BLL.Bus
 {
@@ -51,76 +49,6 @@ namespace HorseSpot.BLL.Bus
         #endregion
 
         #region Public Methods
-
-        public string DeleteImage(int imageId, string userId)
-        {
-            var image = _iImageDao.GetById(imageId);
-            
-            if (image == null)
-            {
-                throw new ResourceNotFoundException(Resources.ImageNotFoundInAdImagesList);
-            }
-
-            if (image.HorseAd.UserId != userId)
-            {
-                throw new ForbiddenException(Resources.ActionRequiresAdditionalRights);
-            }
-
-            var imageName = image.Name;
-            _iImageDao.Delete(image);
-
-            return imageName;
-        }
-
-        public void SetHorseAdProfilePicture(int imageId, string userId)
-        {
-            var image = _iImageDao.GetById(imageId);
-
-            if (image == null)
-            {
-                throw new ResourceNotFoundException(Resources.ImageNotFoundInAdImagesList);
-            }
-
-            if (image.HorseAd.UserId != userId)
-            {
-                throw new ForbiddenException(Resources.ActionRequiresAdditionalRights);
-            }
-
-            image.HorseAd.Images.Where(img => img.IsProfilePic).FirstOrDefault().IsProfilePic = false;
-            image.IsProfilePic = true;
-
-            _iImageDao.Update(image);
-        }
-
-        public async Task SetUserProfilePicture(string path, string id)
-        {
-            var user = _iUserDao.FindUserById(id);
-
-            if (user == null)
-            {
-                throw new ValidationException(Resources.InvalidUserIdentifier);
-            }
-
-            if (user.ImagePath == ApplicationConstants.DefaultProfilePhoto)
-            {
-                CheckFormat(path);
-                user.ImagePath = path;
-            }
-            else
-            {
-                CheckFormat(path);
-
-                var currentImagePath = user.ImagePath;
-                if (File.Exists(currentImagePath))
-                {
-                    File.Delete(currentImagePath);
-                }
-
-                user.ImagePath = path;
-            }
-
-            await _iUserDao.UpdateUser(user);
-        }
 
         public async Task EmailSendingBetweenUsers(EmailModelDTO emailModelDTO)
         {

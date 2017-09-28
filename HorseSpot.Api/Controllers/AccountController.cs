@@ -1,8 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using HorseSpot.Api.Utils;
 using HorseSpot.BLL.Interfaces;
+using HorseSpot.Infrastructure.Exceptions;
+using HorseSpot.Infrastructure.Resources;
+using HorseSpot.Models.Enums;
 using HorseSpot.Models.Models;
 
 namespace HorseSpot.Api.Controllers
@@ -104,6 +113,55 @@ namespace HorseSpot.Api.Controllers
         public async Task Delete()
         {
             await _iUserBus.Delete(UserIdExtractor.GetUserIdFromRequest(Request));
+        }
+
+        [HttpPost]
+        [Route("api/user/profilephoto/upload/{id}")]
+        public HttpResponseMessage UploadProfilePhoto([FromUri] string id)
+        {
+            var uploadFiles = HttpContext.Current.Request.Files;
+
+            if (uploadFiles.Count > 0)
+            {
+                var profileImage = uploadFiles[0];
+                CheckFormat(profileImage.FileName);
+
+                var profilePicturesDir = ConfigurationManager.AppSettings["ProfilePicturesDirectory"];
+                var serverPath = HttpContext.Current.Server.MapPath(profilePicturesDir);
+                var imageName = Guid.NewGuid() + profileImage.FileName;
+                var path = Path.Combine(serverPath, imageName);
+
+                CreateDirectoryIfNotExist(serverPath);
+                profileImage.SaveAs(path);
+
+                _iUserBus.SetUserProfilePicture(imageName, id);
+
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.BadRequest, Resources.PleaseUpdateAtLeastOneImage);
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void CreateDirectoryIfNotExist(string serverPath)
+        {
+            if (!Directory.Exists(serverPath))
+            {
+                Directory.CreateDirectory(serverPath);
+            }
+        }
+
+        public void CheckFormat(string path)
+        {
+            var extension = Path.GetExtension(path).Replace(".", "");
+
+            if (!Enum.IsDefined(typeof(SupportedImageExtensionEnum), extension.ToUpper()))
+            {
+                throw new ValidationException(Resources.InvalidPictureFormat);
+            }
         }
 
         #endregion

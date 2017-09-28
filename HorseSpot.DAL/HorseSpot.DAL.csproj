@@ -160,13 +160,9 @@
     <Compile Include="Interfaces\ISearchHelper.cs" />
     <Compile Include="Interfaces\IRefreshTokenDao.cs" />
     <Compile Include="Entities\Address.cs" />
-    <Compile Include="Migrations\201709220605412_InitialCreate.cs" />
-    <Compile Include="Migrations\201709220605412_InitialCreate.Designer.cs">
-      <DependentUpon>201709220605412_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709251735400_ImageNameUpdate.cs" />
-    <Compile Include="Migrations\201709251735400_ImageNameUpdate.Designer.cs">
-      <DependentUpon>201709251735400_ImageNameUpdate.cs</DependentUpon>
+    <Compile Include="Migrations\201709261952481_HorseAdsToProdDB.cs" />
+    <Compile Include="Migrations\201709261952481_HorseAdsToProdDB.Designer.cs">
+      <DependentUpon>201709261952481_HorseAdsToProdDB.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\GetHorseAdListResults.cs" />
@@ -202,11 +198,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201709220605412_InitialCreate.resx">
-      <DependentUpon>201709220605412_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709251735400_ImageNameUpdate.resx">
-      <DependentUpon>201709251735400_ImageNameUpdate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709261952481_HorseAdsToProdDB.resx">
+      <DependentUpon>201709261952481_HorseAdsToProdDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

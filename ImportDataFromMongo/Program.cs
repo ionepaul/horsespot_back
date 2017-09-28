@@ -114,18 +114,16 @@ namespace ImportDataFromMongo
                         if (i != null)
                         {
                             var imageStream = i.Item1;
-                            var imageName = Guid.NewGuid() + ad.HorseName + ".jpg";
+                            var imageName = Guid.NewGuid() + ad.HorseName.Replace(" ", "") + ".jpg";
                             var location = "D:\\HORSE_SPOT\\horsespot_back\\HorseSpot.Api\\Images\\HorseAdsImg\\" + imageName;
 
                             Image.FromStream(imageStream, false).Save(location, System.Drawing.Imaging.ImageFormat.Jpeg);
 
-                            //var img = new ImageModel { Name = imageName };
-                            //imgList.Add(img);
+                            var img = new ImageModel { Name = imageName };
+                            imgList.Add(img);
                         }
                         Console.WriteLine("Finish images for horse: {0}", y);
                     }
-                    var img = new ImageModel { Name = "ceva.jpg" };
-                    imgList.Add(img);
                     horseAd.Images = imgList;
 
                     Console.WriteLine("Setting profile pic for horse: {0}", y);

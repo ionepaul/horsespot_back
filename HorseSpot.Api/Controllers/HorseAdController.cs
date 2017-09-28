@@ -4,6 +4,9 @@ using HorseSpot.Models.Models;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Script.Serialization;
+using System.Configuration;
+using System.Web;
+using System.IO;
 
 namespace HorseSpot.Api.Controllers
 {
@@ -135,6 +138,31 @@ namespace HorseSpot.Api.Controllers
         public async Task SaveNewImage([FromUri] int adId, [FromUri] string imageName)
         {
             await _iHorseAdBus.SaveNewImage(adId, imageName, UserIdExtractor.GetUserIdFromRequest(Request));
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("api/horses/images/delete/{imageId}")]
+        public void Delete([FromUri] int imageId)
+        {
+            var imageName = _iHorseAdBus.DeleteImage(imageId, UserIdExtractor.GetUserIdFromRequest(Request));
+
+            var horseAdvImageDir = ConfigurationManager.AppSettings["HorseAdsImgDirectory"];
+            var serverPath = HttpContext.Current.Server.MapPath(horseAdvImageDir);
+
+            if (Directory.Exists(Path.GetDirectoryName(serverPath)))
+            {
+                var path = Path.Combine(serverPath, imageName);
+                File.Delete(path);
+            }
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("api/horses/images/profilepic/{imageId}")]
+        public void SetAsAdProfilePicture([FromUri] int imageId)
+        {
+            _iHorseAdBus.SetHorseAdProfilePicture(imageId, UserIdExtractor.GetUserIdFromRequest(Request));
         }
     }
 }

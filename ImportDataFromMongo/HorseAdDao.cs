@@ -32,7 +32,7 @@ namespace ImportDataFromMongo
         {
             var filter = Builders<HorseAdOld>.Filter.Empty;
             var sort = Builders<HorseAdOld>.Sort.Descending(e => e.DatePosted);
-            return _context.HorseAds.Find(filter).ToList().Take(1);
+            return _context.HorseAds.Find(filter).ToList();
         }
 
         public Tuple<GridFSDownloadStream, string> GetImages(string imageId)

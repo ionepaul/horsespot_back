@@ -12,7 +12,7 @@ namespace HorseSpot.Infrastructure.Constants
 
         //BLL Constants
         public const int MaximumFileToUpload = 6;
-        public const string DefaultProfilePhoto = "D:\\HORSE_SPOT\\HorseSpot_Services_LOCAL\\Images\\ProfilePhotos\\default.jpg";
+        public static string DefaultProfilePhoto = ConfigurationManager.AppSettings["DefaultProfilePhotoName"];
         public const string ADMIN = "Admin";
 
         //Sort

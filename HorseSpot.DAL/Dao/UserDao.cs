@@ -97,11 +97,11 @@ namespace HorseSpot.DAL.Dao
             return _ctx.Subscribers.Where(x => x.Email == email).FirstOrDefault();
         }
 
-        public async Task<IEnumerable<string>> UserRoles(string userId)
+        public async Task<IList<string>> UserRoles(string userId)
         {
             IEnumerable<string> roles = await _userManager.GetRolesAsync(userId);
 
-            return roles;
+            return roles.ToList();
         }
 
         public void Dispose()

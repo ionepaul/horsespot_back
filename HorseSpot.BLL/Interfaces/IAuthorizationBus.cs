@@ -11,6 +11,6 @@ namespace HorseSpot.BLL.Interfaces
         Task<RefreshTokenDTO> FindRefreshToken(string hashedTokenId);
         Task<bool> RemoveRefreshToken(string hashedTokenId);
         Task<bool> AddRefreshToken(RefreshTokenDTO token);
-        Task<IEnumerable<string>> UserRoles(string id);
+        Task<IList<string>> UserRoles(string id);
     }
 }

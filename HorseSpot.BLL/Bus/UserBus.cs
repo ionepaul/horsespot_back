@@ -8,7 +8,6 @@ using HorseSpot.BLL.Converters;
 using HorseSpot.BLL.Interfaces;
 using HorseSpot.DAL.Entities;
 using HorseSpot.DAL.Interfaces;
-using HorseSpot.DAL.Models;
 using HorseSpot.Infrastructure.Constants;
 using HorseSpot.Infrastructure.Exceptions;
 using HorseSpot.Infrastructure.MailService;
@@ -46,7 +45,7 @@ namespace HorseSpot.BLL.Bus
             var userModel = UserConverter.ConvertUserViewModelToUserModel(user);
 
             var savedUser = await _iUserDao.RegisterUser(userModel, user.Password);
-            
+
             if (user.NewsletterSubscription.HasValue && user.NewsletterSubscription.Value)
             {
                 var subscriber = new Subscriber(user.Email);
@@ -73,7 +72,7 @@ namespace HorseSpot.BLL.Bus
             UserModel userModel = _iUserDao.FindUserById(userId);
 
             CheckIfUserExists(userModel);
-   
+
             await ValidateChangePasswordModel(userModel, changePassword);
 
             await _iUserDao.ChangeUserPassword(userId, changePassword.NewPassword);
@@ -175,7 +174,18 @@ namespace HorseSpot.BLL.Bus
 
             var userFavoriteHorseAds = user.FavoriteHorseAds.Where(x => !x.IsDeleted).Select(x => x.FavoriteHorseAd);
 
-            return CreateHorseListResult(userFavoriteHorseAds, pageNumber);       
+            return CreateHorseListResult(userFavoriteHorseAds, pageNumber);
+        }
+
+        public async Task SetUserProfilePicture(string path, string id)
+        {
+            var user = _iUserDao.FindUserById(id);
+
+            CheckIfUserExists(user);
+
+            user.ImagePath = path;
+
+            await _iUserDao.UpdateUser(user);
         }
 
         #endregion
