@@ -1,12 +1,12 @@
-﻿using HorseSpot.Api.Utils;
-using HorseSpot.BLL.Interfaces;
-using HorseSpot.Models.Models;
+﻿using System.Configuration;
+using System.IO;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Script.Serialization;
-using System.Configuration;
-using System.Web;
-using System.IO;
+using HorseSpot.Api.Utils;
+using HorseSpot.BLL.Interfaces;
+using HorseSpot.Models.Models;
 
 namespace HorseSpot.Api.Controllers
 {
@@ -18,6 +18,52 @@ namespace HorseSpot.Api.Controllers
         {
             _iHorseAdBus = iHorseAdBus;
         }
+
+        #region HttpGet
+
+        [HttpGet]
+        [Route("api/horses/get/{id}")]
+        public HorseAdDTO Get([FromUri] int id)
+        {
+            return _iHorseAdBus.GetById(id);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        [Route("api/horses/unvalidated/{pageNumber}")]
+        public GetHorseAdListResultsDTO GetAllForAdmin(int pageNumber)
+        {
+            return _iHorseAdBus.GetAllForAdmin(pageNumber);
+        }
+
+        [HttpGet]
+        [Authorize]
+        [Route("api/horses/ispostowner/{adId}")]
+        public bool CheckPostOwner([FromUri] int adId)
+        {
+            return _iHorseAdBus.CheckPostOwner(adId, UserIdExtractor.GetUserIdFromRequest(Request));
+        }
+
+        [HttpGet]
+        [Route("api/horses/search")]
+        public GetHorseAdListResultsDTO Search(string searchModel = "")
+        {
+            HorseAdSearchViewModel horseFilter = new HorseAdSearchViewModel();
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            horseFilter = js.Deserialize<HorseAdSearchViewModel>(searchModel);
+
+            if (horseFilter == null)
+            {
+                horseFilter = new HorseAdSearchViewModel();
+            }
+
+            return _iHorseAdBus.SearchHorses(horseFilter);
+        }
+
+        #endregion
+
+        #region HttpPost
 
         [HttpPost]
         [Authorize]
@@ -60,76 +106,11 @@ namespace HorseSpot.Api.Controllers
             _iHorseAdBus.AddToFavorite(id, UserIdExtractor.GetUserIdFromRequest(Request));
         }
 
-        /// <summary>
-        /// API Interface to increase views on an advertisment
-        /// </summary>
-        /// <param name="id">Horse advertisment id</param>
-        /// <returns>Task</returns>
         [HttpPost]
         [Route("api/horses/views/{id}")]
         public async Task IncreaseViews([FromUri] int id)
         {
             await _iHorseAdBus.IncreaseViews(id);
-        }
-
-        /// <summary>
-        /// API Interface to get a horse advertisment details
-        /// </summary>
-        /// <param name="id">Horse Advertisment Id</param>
-        /// <returns>Horse Advertisment Model</returns>
-        [HttpGet]
-        [Route("api/horses/get/{id}")]
-        public HorseAdDTO Get([FromUri] int id)
-        {
-            return _iHorseAdBus.GetById(id);
-        }
-
-        /// <summary>
-        /// API Interface to get all the unvalidated horses by page number
-        /// </summary>
-        /// <param name="pageNumber">Number of the page to retrieve</param>
-        /// <returns>Model containing total number of unvalidated ads and list of unvalidated ads</returns>
-        [HttpGet]
-        [Authorize(Roles = "Admin")]
-        [Route("api/horses/unvalidated/{pageNumber}")]
-        public GetHorseAdListResultsDTO GetAllForAdmin(int pageNumber)
-        {
-            return _iHorseAdBus.GetAllForAdmin(pageNumber);
-        }
-
-        /// <summary>
-        /// API Interface to check if user how tries to edit an advertisment is the owner of the post
-        /// </summary>
-        /// <param name="adId">Horse Advertisment Id</param>
-        /// <returns>True/False</returns>
-        [HttpGet]
-        [Authorize]
-        [Route("api/horses/ispostowner/{adId}")]
-        public bool CheckPostOwner([FromUri] int adId)
-        {
-            return _iHorseAdBus.CheckPostOwner(adId, UserIdExtractor.GetUserIdFromRequest(Request));
-        }
-
-        /// <summary>
-        /// API Interface to search for horses
-        /// </summary>
-        /// <param name="searchModel">Search Model containing the searching criteria</param>
-        /// <returns>Model containing of total number matched and list of horses that were found</returns>
-        [HttpGet]
-        [Route("api/horses/search")]
-        public GetHorseAdListResultsDTO Search(string searchModel = "")
-        {
-            HorseAdSearchViewModel horseFilter = new HorseAdSearchViewModel();
-
-            JavaScriptSerializer js = new JavaScriptSerializer();
-            horseFilter = js.Deserialize<HorseAdSearchViewModel>(searchModel);
-
-            if (horseFilter == null)
-            {
-                horseFilter = new HorseAdSearchViewModel();
-            }
-
-            return _iHorseAdBus.SearchHorses(horseFilter);
         }
 
         [HttpPost]
@@ -138,6 +119,32 @@ namespace HorseSpot.Api.Controllers
         public async Task SaveNewImage([FromUri] int adId, [FromUri] string imageName)
         {
             await _iHorseAdBus.SaveNewImage(adId, imageName, UserIdExtractor.GetUserIdFromRequest(Request));
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("api/horses/images/upload")]
+        public HttpResponseMessage UploadHorseAdImage()
+        {
+            var uploadFiles = HttpContext.Current.Request.Files;
+
+            if (uploadFiles.Count > 0)
+            {
+                var image = uploadFiles[0];
+                CheckFormat(image.FileName);
+
+                var horseAdvImageDir = ConfigurationManager.AppSettings["HorseAdsImgDirectory"];
+                var serverPath = HttpContext.Current.Server.MapPath(horseAdvImageDir);
+                var imageName = Guid.NewGuid() + image.FileName;
+                var path = Path.Combine(serverPath, imageName);
+
+                CreateDirectoryIfNotExist(serverPath);
+                image.SaveAs(path);
+
+                return Request.CreateResponse(HttpStatusCode.OK, imageName);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.BadRequest, Resources.PleaseUpdateAtLeastOneImage);
         }
 
         [HttpPost]
@@ -159,10 +166,49 @@ namespace HorseSpot.Api.Controllers
 
         [HttpPost]
         [Authorize]
+        [Route("api/horses/images/delete")]
+        public void DeleteImageByName(string imageName)
+        {
+            var horseAdvImageDir = ConfigurationManager.AppSettings["HorseAdsImgDirectory"];
+            var serverPath = HttpContext.Current.Server.MapPath(horseAdvImageDir);
+
+            if (Directory.Exists(Path.GetDirectoryName(serverPath)))
+            {
+                var path = Path.Combine(serverPath, imageName);
+                File.Delete(path);
+            }
+        }
+
+        [HttpPost]
+        [Authorize]
         [Route("api/horses/images/profilepic/{imageId}")]
         public void SetAsAdProfilePicture([FromUri] int imageId)
         {
             _iHorseAdBus.SetHorseAdProfilePicture(imageId, UserIdExtractor.GetUserIdFromRequest(Request));
         }
+
+        #endregion
+
+        #region Private Methods
+
+        private void CreateDirectoryIfNotExist(string serverPath)
+        {
+            if (!Directory.Exists(serverPath))
+            {
+                Directory.CreateDirectory(serverPath);
+            }
+        }
+
+        public void CheckFormat(string path)
+        {
+            var extension = Path.GetExtension(path).Replace(".", "");
+
+            if (!Enum.IsDefined(typeof(SupportedImageExtensionEnum), extension.ToUpper()))
+            {
+                throw new ValidationException(Resources.InvalidPictureFormat);
+            }
+        }
+
+        #endregion
     }
 }

@@ -9,11 +9,6 @@ namespace HorseSpot.Infrastructure.MailService
 {
     public class MailerService : IMailerService
     {
-        /// <summary>
-        /// Sends emails async
-        /// </summary>
-        /// <param name="emailModel">Email Model</param>
-        /// <returns>Task</returns>
         public async Task SendMail(EmailModel emailModel)
         {
             var message = new MailMessage();

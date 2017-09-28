@@ -40,16 +40,13 @@ namespace HorseSpot.Api
             container.RegisterType<IHorseAdDao, HorseAdDao>();
             container.RegisterType<IAuthorizationBus, AuthorizationBus>();
             container.RegisterType<IMailerService, MailerService>();
-            container.RegisterType<IPriceRangeDao, PriceRangeDao>();
-            container.RegisterType<IHorseAbilityDao, HorseAbilityDao>();
             container.RegisterType<IUtilBus, UtilBus>();
-            container.RegisterType<IRecommendedRiderDao, RecommendedRiderDao>();
             container.RegisterType<IAppointmentBus, AppointmentBus>();
             container.RegisterType<IAppointmentDao, AppointmentDao>();
-            container.RegisterType<ICountryDao, CountryDao>();
             container.RegisterType<IRefreshTokenDao, RefreshTokenDao>();
             container.RegisterType<IClientDao, ClientDao>();
             container.RegisterType<IImageDao, ImageDao>();
+            container.RegisterType<IUtilDao, UtilDao>();
 
             container.RegisterInstance(typeof(HttpConfiguration), GlobalConfiguration.Configuration);
         }

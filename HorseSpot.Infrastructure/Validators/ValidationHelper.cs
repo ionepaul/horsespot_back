@@ -6,11 +6,6 @@ namespace HorseSpot.Infrastructure.Validators
 {
     public static class ValidationHelper
     {
-        /// <summary>
-        /// Validates a model by it's data anotation attributes
-        /// </summary>
-        /// <typeparam name="T">Model</typeparam>
-        /// <param name="model">Model</param>
         public static void ValidateModelAttributes<T>(T model)
         {
             var context = new ValidationContext(model, null, null);

@@ -25,47 +25,6 @@ namespace HorseSpot.Api.Controllers
         #region HttpPost
 
         [HttpPost]
-        [Authorize]
-        [Route("api/images/delete")]
-        public void DeleteImageByName(string imageName)
-        {
-            var horseAdvImageDir = ConfigurationManager.AppSettings["HorseAdsImgDirectory"];
-            var serverPath = HttpContext.Current.Server.MapPath(horseAdvImageDir);
-
-            if (Directory.Exists(Path.GetDirectoryName(serverPath)))
-            {
-                var path = Path.Combine(serverPath, imageName);
-                File.Delete(path);
-            }
-        }
-
-        [HttpPost]
-        [Authorize]
-        [Route("api/horses/images/upload")]
-        public HttpResponseMessage UploadHorseAdImage()
-        {
-            var uploadFiles = HttpContext.Current.Request.Files;
-
-            if (uploadFiles.Count > 0)
-            {
-                var image = uploadFiles[0];
-                _iUtilBus.CheckFormat(image.FileName);
-
-                var horseAdvImageDir = ConfigurationManager.AppSettings["HorseAdsImgDirectory"];
-                var serverPath = HttpContext.Current.Server.MapPath(horseAdvImageDir);
-                var imageName = Guid.NewGuid() + image.FileName;
-                var path = Path.Combine(serverPath, imageName);
-
-                CreateDirectoryIfNotExist(serverPath);
-                image.SaveAs(path);
-
-                return Request.CreateResponse(HttpStatusCode.OK, imageName);
-            }
-
-            return Request.CreateResponse(HttpStatusCode.BadRequest, Resources.PleaseUpdateAtLeastOneImage);
-        }
-
-        [HttpPost]
         [Route("api/sendemail")]
         public async Task SendMail([FromBody] EmailModelDTO emailModelDTO)
         {
@@ -109,18 +68,6 @@ namespace HorseSpot.Api.Controllers
         public IEnumerable<RecommendedRiderDTO> GetAllRecommendedRiders()
         {
             return _iUtilBus.GetAllRecommendedRiders();
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        private void CreateDirectoryIfNotExist(string serverPath)
-        {
-            if (!Directory.Exists(serverPath))
-            {
-                Directory.CreateDirectory(serverPath);
-            }
         }
 
         #endregion
