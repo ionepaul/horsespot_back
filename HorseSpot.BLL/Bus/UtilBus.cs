@@ -4,7 +4,6 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using HorseSpot.BLL.Converters;
 using HorseSpot.BLL.Interfaces;
-using HorseSpot.DAL.Dao;
 using HorseSpot.DAL.Entities;
 using HorseSpot.DAL.Interfaces;
 using HorseSpot.Infrastructure.Exceptions;
@@ -29,7 +28,7 @@ namespace HorseSpot.BLL.Bus
         public UtilBus(IMailerService iMailerService, IUtilDao iUtilDao)
         {
             _iMailerService = iMailerService;
-            _iUtilDao = _iUtilDao;
+            _iUtilDao = iUtilDao;
         }
 
         #endregion

@@ -12,7 +12,7 @@ namespace HorseSpot.Api.Controllers
 {
     public class HorseAdController : ApiController
     {
-        private IHorseAdBus _iHorseAdBus;
+        private readonly IHorseAdBus _iHorseAdBus;
 
         public HorseAdController(IHorseAdBus iHorseAdBus)
         {
@@ -68,13 +68,12 @@ namespace HorseSpot.Api.Controllers
         [HttpPost]
         [Authorize]
         [Route("api/horses/post")]
-        public async Task<string> Post([FromBody] HorseAdDTO horseAdDTO)
+        public async Task Post([FromBody] HorseAdDTO horseAdDTO)
         {
-            var horseAdId = await _iHorseAdBus.Add(horseAdDTO, UserIdExtractor.GetUserIdFromRequest(Request));
-            return horseAdId;
+            await _iHorseAdBus.Add(horseAdDTO, UserIdExtractor.GetUserIdFromRequest(Request));
         }
 
-        [HttpPut]
+        [HttpPost]
         [Authorize]
         [Route("api/horses/update/{id}")]
         public void Put([FromUri] int id, [FromBody] HorseAdDTO horseAdDTO)
@@ -83,7 +82,7 @@ namespace HorseSpot.Api.Controllers
         }
 
         [Authorize]
-        [HttpDelete]
+        [HttpPost]
         [Route("api/horses/delete/{id}/{isSold}")]
         public async Task Delete([FromUri] int id, bool isSold)
         {

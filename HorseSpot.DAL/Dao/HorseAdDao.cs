@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using HorseSpot.Infrastructure.Exceptions;
 
 namespace HorseSpot.DAL.Dao
 {
@@ -109,13 +110,20 @@ namespace HorseSpot.DAL.Dao
             horseAd.RecomendedRiders = new List<RecommendedRider>();
             horseAd.Abilities = new List<HorseAbility>();
 
+            var priceRange = _ctx.PriceRanges.FirstOrDefault(p => p.Id == horseAd.PriceRangeId);
+            
+            if (priceRange == null)
+            {
+                throw new ValidationException(Resources.InvalidPriceRangeIdentifier);
+            }
+
             horseAd.HorseAbilitesIds.ForEach(id =>
             {
                 var horseAbility = _ctx.HorseAbilities.FirstOrDefault(a => a.Id == id);
 
                 if (horseAbility == null)
                 {
-                    throw new Exception(Resources.InvalidAbilityIdentifier);
+                    throw new ValidationException(Resources.InvalidAbilityIdentifier);
                 }
 
                 horseAd.Abilities.Add(horseAbility);
@@ -127,7 +135,7 @@ namespace HorseSpot.DAL.Dao
 
                 if (recommendedRider == null)
                 {
-                    throw new Exception(Resources.InvalidRecommendedRiderIdentifier);
+                    throw new ValidationException(Resources.InvalidRecommendedRiderIdentifier);
                 }
 
                 horseAd.RecomendedRiders.Add(recommendedRider);
@@ -139,7 +147,7 @@ namespace HorseSpot.DAL.Dao
 
         #endregion
 
-        #region PrivateMethods
+        #region Private Methods
 
         private int GetNumberToSkip(int pageNumber)
         {

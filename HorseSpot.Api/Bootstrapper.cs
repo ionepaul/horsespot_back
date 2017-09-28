@@ -1,12 +1,12 @@
-﻿using HorseSpot.BLL.Bus;
+﻿using System.Web.Http;
+using System.Web.Mvc;
+using HorseSpot.BLL.Bus;
 using HorseSpot.BLL.Interfaces;
 using HorseSpot.DAL.Dao;
 using HorseSpot.DAL.Interfaces;
 using HorseSpot.Infrastructure.MailService;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Mvc;
-using System.Web.Http;
-using System.Web.Mvc;
 
 namespace HorseSpot.Api
 {

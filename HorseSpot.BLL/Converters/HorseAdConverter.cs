@@ -296,5 +296,16 @@ namespace HorseSpot.BLL.Converters
                 ImageId = imageObj.ImageId
             };
         }
+
+        public static GetHorseAdListResultsDTO ConvertHorseListResult(GetHorseAdListResults result)
+        {
+            var horseAdListResult = new GetHorseAdListResultsDTO()
+            {
+                TotalCount = result.TotalCount,
+                HorseAdList = result.HorseAdList.Select(HorseAdConverter.FromHorseAdToHorseAdListModel)
+            };
+
+            return horseAdListResult;
+        }
     }
 }
