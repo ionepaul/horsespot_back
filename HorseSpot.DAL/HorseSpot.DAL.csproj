@@ -128,14 +128,11 @@
     <Compile Include="Dao\AbstractDao.cs" />
     <Compile Include="Dao\AppointmentDao.cs" />
     <Compile Include="Dao\ClientDao.cs" />
-    <Compile Include="Dao\CountryDao.cs" />
-    <Compile Include="Dao\HorseAbilityDao.cs" />
     <Compile Include="Dao\ImageDao.cs" />
-    <Compile Include="Dao\PriceRangeDao.cs" />
     <Compile Include="Dao\UserDao.cs" />
     <Compile Include="Dao\HorseAdDao.cs" />
-    <Compile Include="Dao\RecommendedRiderDao.cs" />
     <Compile Include="Dao\RefreshTokenDao.cs" />
+    <Compile Include="Dao\UtilDao.cs" />
     <Compile Include="Entities\Appointment.cs" />
     <Compile Include="Entities\Client.cs" />
     <Compile Include="Entities\Country.cs" />
@@ -149,17 +146,14 @@
     <Compile Include="HorseSpotDataContext.cs" />
     <Compile Include="Interfaces\IAppointmentDao.cs" />
     <Compile Include="Interfaces\IClientDao.cs" />
-    <Compile Include="Interfaces\ICountryDao.cs" />
     <Compile Include="Interfaces\IImageDao.cs" />
     <Compile Include="Interfaces\IUserDao.cs" />
     <Compile Include="Interfaces\IDao.cs" />
-    <Compile Include="Interfaces\IHorseAbilityDao.cs" />
     <Compile Include="Interfaces\IHorseAdDao.cs" />
-    <Compile Include="Interfaces\IPriceRangeDao.cs" />
-    <Compile Include="Interfaces\IRecommendedRiderDao.cs" />
     <Compile Include="Interfaces\ISearchHelper.cs" />
     <Compile Include="Interfaces\IRefreshTokenDao.cs" />
     <Compile Include="Entities\Address.cs" />
+    <Compile Include="Interfaces\IUtilDao.cs" />
     <Compile Include="Migrations\201709261952481_HorseAdsToProdDB.cs" />
     <Compile Include="Migrations\201709261952481_HorseAdsToProdDB.Designer.cs">
       <DependentUpon>201709261952481_HorseAdsToProdDB.cs</DependentUpon>
