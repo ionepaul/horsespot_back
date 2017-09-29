@@ -1,5 +1,5 @@
-﻿using HorseSpot.DAL.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using HorseSpot.DAL.Entities;
 
 namespace HorseSpot.DAL.Interfaces
 {

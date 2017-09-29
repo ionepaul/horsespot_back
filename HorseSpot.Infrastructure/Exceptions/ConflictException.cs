@@ -2,9 +2,6 @@
 
 namespace HorseSpot.Infrastructure.Exceptions
 {
-    /// <summary>
-    /// Custom Conflict Exception
-    /// </summary>
     public class ConflictException : Exception
     {
         public ConflictException() { }

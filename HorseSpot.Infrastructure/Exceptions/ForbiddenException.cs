@@ -2,9 +2,6 @@
 
 namespace HorseSpot.Infrastructure.Exceptions
 {
-    /// <summary>
-    /// Custom Forbbiden Exception
-    /// </summary>
     public class ForbiddenException : Exception
     {
         public ForbiddenException() { }

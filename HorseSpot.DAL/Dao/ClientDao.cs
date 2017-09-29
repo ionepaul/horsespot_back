@@ -16,11 +16,6 @@ namespace HorseSpot.DAL.Dao
 
         #region Public Methods
 
-        /// <summary>
-        /// Find application possible client type from database by client id
-        /// </summary>
-        /// <param name="clientId">Client Id</param>
-        /// <returns>Client Model</returns>
         public Client FindClient(string clientId)
         {
             var client = _dbset.Find(clientId);

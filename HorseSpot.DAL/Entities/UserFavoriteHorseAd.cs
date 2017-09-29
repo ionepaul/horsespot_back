@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using HorseSpot.DAL.Models;
 
 namespace HorseSpot.DAL.Entities
 {

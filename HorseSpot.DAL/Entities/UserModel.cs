@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using HorseSpot.DAL.Entities;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace HorseSpot.DAL.Entities
 {

@@ -16,6 +16,7 @@ namespace HorseSpot.Infrastructure.Validators
             if (!isValid)
             {
                 var errorMessages = new StringBuilder();
+
                 foreach (var msg in validationResults)
                 {
                     errorMessages.Append(msg.ErrorMessage);

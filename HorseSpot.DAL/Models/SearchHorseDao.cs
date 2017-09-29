@@ -1,11 +1,10 @@
-﻿using HorseSpot.DAL.Entities;
-using HorseSpot.DAL.Interfaces;
-using LinqKit;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using HorseSpot.DAL.Entities;
+using HorseSpot.DAL.Interfaces;
 
 namespace HorseSpot.DAL.Models
 {
@@ -270,10 +269,6 @@ namespace HorseSpot.DAL.Models
             return typeof(HorseAd).GetProperty(_sortAfter);
         }
 
-        /// <summary>
-        /// Check if ascending order
-        /// </summary>
-        /// <returns>True/False</returns>
         public bool IsAscendingSortOrder()
         {
             if (_sortDirection == 0)
