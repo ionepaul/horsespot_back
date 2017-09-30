@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace HorseSpot.Api.App_Start
 {
     public class RouteConfig
     {
-        /// <summary>
-        /// Route configuration
-        /// </summary>
-        /// <param name="routes">Route Collection</param>
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");

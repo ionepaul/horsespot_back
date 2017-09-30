@@ -62,22 +62,6 @@
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MongoDB.Bson, Version=2.2.4.26, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MongoDB.Bson.2.2.4\lib\net45\MongoDB.Bson.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MongoDB.Driver, Version=2.2.4.26, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MongoDB.Driver.2.2.4\lib\net45\MongoDB.Driver.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MongoDB.Driver.Core, Version=2.2.4.26, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MongoDB.Driver.Core.2.2.4\lib\net45\MongoDB.Driver.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MongoDB.Driver.GridFS, Version=2.2.4.26, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MongoDB.Driver.GridFS.2.2.4\lib\net45\MongoDB.Driver.GridFS.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -98,11 +82,8 @@
     <Compile Include="Bus\UtilBus.cs" />
     <Compile Include="Converters\AppointmentConverter.cs" />
     <Compile Include="Converters\AuthorizationConverter.cs" />
-    <Compile Include="Converters\EmailSendingConverter.cs" />
-    <Compile Include="Converters\HorseAbilityConverter.cs" />
+    <Compile Include="Converters\UtilConverter.cs" />
     <Compile Include="Converters\HorseAdConverter.cs" />
-    <Compile Include="Converters\PriceRangeConverter.cs" />
-    <Compile Include="Converters\RecommendedRiderConverter.cs" />
     <Compile Include="Converters\UserConverter.cs" />
     <Compile Include="Interfaces\IAppointmentBus.cs" />
     <Compile Include="Interfaces\IAuthorizationBus.cs" />

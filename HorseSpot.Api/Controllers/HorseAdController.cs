@@ -1,11 +1,17 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.IO;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Script.Serialization;
 using HorseSpot.Api.Utils;
 using HorseSpot.BLL.Interfaces;
+using HorseSpot.Infrastructure.Exceptions;
+using HorseSpot.Infrastructure.Resources;
+using HorseSpot.Models.Enums;
 using HorseSpot.Models.Models;
 
 namespace HorseSpot.Api.Controllers
@@ -76,9 +82,9 @@ namespace HorseSpot.Api.Controllers
         [HttpPost]
         [Authorize]
         [Route("api/horses/update/{id}")]
-        public void Put([FromUri] int id, [FromBody] HorseAdDTO horseAdDTO)
+        public async Task Update([FromUri] int id, [FromBody] HorseAdDTO horseAdDTO)
         {
-            _iHorseAdBus.Update(id, horseAdDTO, UserIdExtractor.GetUserIdFromRequest(Request));
+            await _iHorseAdBus.Update(id, horseAdDTO, UserIdExtractor.GetUserIdFromRequest(Request));
         }
 
         [Authorize]
@@ -209,5 +215,6 @@ namespace HorseSpot.Api.Controllers
         }
 
         #endregion
+
     }
 }

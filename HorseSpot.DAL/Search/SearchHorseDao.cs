@@ -5,8 +5,10 @@ using System.Linq.Expressions;
 using System.Reflection;
 using HorseSpot.DAL.Entities;
 using HorseSpot.DAL.Interfaces;
+using HorseSpot.DAL.Models;
+using LinqKit;
 
-namespace HorseSpot.DAL.Models
+namespace HorseSpot.DAL.Search
 {
     public class SearchHorseDao : ISearchHelper<HorseAd>
     {

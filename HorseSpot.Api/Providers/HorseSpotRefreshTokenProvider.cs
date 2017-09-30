@@ -1,10 +1,10 @@
-﻿using HorseSpot.BLL.Interfaces;
+﻿using System;
+using System.Threading.Tasks;
+using System.Web.Http;
+using HorseSpot.BLL.Interfaces;
 using HorseSpot.Infrastructure.Utils;
 using HorseSpot.Models.Models;
 using Microsoft.Owin.Security.Infrastructure;
-using System;
-using System.Threading.Tasks;
-using System.Web.Http;
 
 namespace HorseSpot.Api.Providers
 {
@@ -12,11 +12,6 @@ namespace HorseSpot.Api.Providers
     {
         private IAuthorizationBus _iAuthorizationBus;
 
-        /// <summary>
-        /// Creates Refresh Token
-        /// </summary>
-        /// <param name="context">Authentication Token Context</param>
-        /// <returns>Task</returns>
         public async Task CreateAsync(AuthenticationTokenCreateContext context)
         {
             _iAuthorizationBus = (IAuthorizationBus)GlobalConfiguration.Configuration.DependencyResolver.GetService(typeof(IAuthorizationBus));
@@ -54,11 +49,6 @@ namespace HorseSpot.Api.Providers
             }
         }
 
-        /// <summary>
-        /// Receive Refresh Token
-        /// </summary>
-        /// <param name="context">Authentication Token Receive Context</param>
-        /// <returns>Task</returns>
         public async Task ReceiveAsync(AuthenticationTokenReceiveContext context)
         {
             _iAuthorizationBus = (IAuthorizationBus)GlobalConfiguration.Configuration.DependencyResolver.GetService(typeof(IAuthorizationBus));
@@ -77,19 +67,11 @@ namespace HorseSpot.Api.Providers
             }
         }
 
-        /// <summary>
-        /// Receive
-        /// </summary>
-        /// <param name="context">Context</param>
         public void Receive(AuthenticationTokenReceiveContext context)
         {
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Create
-        /// </summary>
-        /// <param name="context">Context</param>
         public void Create(AuthenticationTokenCreateContext context)
         {
             throw new NotImplementedException();

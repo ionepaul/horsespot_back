@@ -46,7 +46,7 @@ namespace HorseSpot.BLL.Bus
 
             ValidateEmailAndMessage(emailModelDTO.Sender, emailModelDTO.Message);
 
-            EmailModel emailModel = EmailSendingConverter.FromEmailModelDTOTOEmailModel(emailModelDTO);
+            EmailModel emailModel = UtilConverter.FromEmailModelDTOTOEmailModel(emailModelDTO);
 
             await _iMailerService.SendMail(emailModel);
         }
@@ -62,7 +62,7 @@ namespace HorseSpot.BLL.Bus
 
             ValidateEmailAndMessage(contactPageEmailModel.Sender, contactPageEmailModel.Message);
 
-            EmailModel emailModel = EmailSendingConverter.FromContactPageEmailModelTOEmailModel(contactPageEmailModel);
+            EmailModel emailModel = UtilConverter.FromContactPageEmailModelTOEmailModel(contactPageEmailModel);
 
             await _iMailerService.SendMail(emailModel);
         }
@@ -78,21 +78,21 @@ namespace HorseSpot.BLL.Bus
         {
             IEnumerable<HorseAbility> abilites = _iUtilDao.GetAllAbilities();
 
-            return abilites.Select(HorseAbilityConverter.FromHorseAbilityToHorseAbilityDTO);
+            return abilites.Select(UtilConverter.FromHorseAbilityToHorseAbilityDTO);
         }
 
         public IEnumerable<PriceRangeDTO> GetAllPriceRanges()
         {
             IEnumerable<PriceRange> priceRanges = _iUtilDao.GetAllPriceRanges();
 
-            return priceRanges.Select(PriceRangeConverter.FromPriceRangeToPriceRangeDTO);
+            return priceRanges.Select(UtilConverter.FromPriceRangeToPriceRangeDTO);
         }
 
         public IEnumerable<RecommendedRiderDTO> GetAllRecommendedRiders()
         {
             IEnumerable<RecommendedRider> recommendedRiders = _iUtilDao.GetAllRecommendedRiders();
 
-            return recommendedRiders.Select(RecommendedRiderConverter.FromRiderToRiderDTO);
+            return recommendedRiders.Select(UtilConverter.FromRiderToRiderDTO);
         }
 
         #endregion

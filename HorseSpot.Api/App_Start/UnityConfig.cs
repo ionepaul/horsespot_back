@@ -1,14 +1,11 @@
-using Microsoft.Practices.Unity;
 using System.Web.Http;
+using Microsoft.Practices.Unity;
 using Unity.WebApi;
 
 namespace HorseSpot.Api
 {
     public static class UnityConfig
     {
-        /// <summary>
-        /// Unity Configuration
-        /// </summary>
         public static void RegisterComponents()
         {
 			var container = new UnityContainer();

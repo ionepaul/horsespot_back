@@ -1,17 +1,17 @@
-﻿using HorseSpot.BLL.Interfaces;
-using HorseSpot.Infrastructure.Exceptions;
-using HorseSpot.Infrastructure.Resources;
-using HorseSpot.Models.Enums;
-using HorseSpot.Models.Models;
-using Microsoft.Web.WebSockets;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using HorseSpot.BLL.Interfaces;
+using HorseSpot.Infrastructure.Exceptions;
+using HorseSpot.Infrastructure.Resources;
+using HorseSpot.Models.Enums;
+using HorseSpot.Models.Models;
+using Microsoft.Web.WebSockets;
+using Newtonsoft.Json;
 
 namespace HorseSpot.Api.Controllers
 {
@@ -19,58 +19,29 @@ namespace HorseSpot.Api.Controllers
     {
         private IAppointmentBus _iAppointmentBus;
 
-        /// <summary>
-        /// Appointment Controller Constructor
-        /// </summary>
-        /// <param name="iAppointmentBus">Appointment Bussines Logic Interface</param>
         public AppointmentController(IAppointmentBus iAppointmentBus)
         {
             _iAppointmentBus = iAppointmentBus;
         }
 
-        /// <summary>
-        /// API Interface to cancel appointment
-        /// </summary>
-        /// <param name="cancelAppointmentModel">Cancel Appointment Model</param>
-        [Route("api/appointments/cancel")]
-        [Authorize]
-        [HttpPost]
-        public void CancelAppointment([FromBody] CancelAppointmentModel cancelAppointmentModel)
-        {
-            _iAppointmentBus.CancelAppointment(cancelAppointmentModel);
-        }
+        #region HttpGet
 
-        /// <summary>
-        /// API Interface to get apppointments for an user
-        /// </summary>
-        /// <param name="userId">User Id</param>
-        /// <returns>Model containing of lists of all appointment types</returns>
-        [Route("api/appointments/user/{userId}")]
-        [Authorize]
         [HttpGet]
+        [Authorize]
+        [Route("api/appointments/user/{userId}")]
         public UserAppointmentsViewModel GetUpcomingAppointmentsOwner([FromUri] string userId)
         {
             return _iAppointmentBus.GetUserAppointmentsViewModel(userId);
         }
 
-        /// <summary>
-        /// Get unseen appointments for an user by id
-        /// </summary>
-        /// <param name="userId">User Id</param>
-        /// <returns>List of appointments</returns>
-        [Route("api/appointments/unseen/{userId}")]
-        [Authorize]
         [HttpGet]
+        [Authorize]
+        [Route("api/appointments/unseen/{userId}")]
         public IEnumerable<AppointmentDTO> GetUnseenAppointmentsForUser([FromUri] string userId)
         {
             return _iAppointmentBus.GetUnseenAppointmentsForUser(userId);
         }
 
-        /// <summary>
-        /// Switch protocol to websocket if user is connected to application
-        /// </summary>
-        /// <param name="userId">User Id</param>
-        /// <returns>Switching Protocols or Exception</returns>
         [Route("api/appointment")]
         public HttpResponseMessage Get(string userId)
         {
@@ -85,38 +56,39 @@ namespace HorseSpot.Api.Controllers
             }
         }
 
-        /// <summary>
-        /// Class that handles web socket requests
-        /// </summary>
+        #endregion
+
+        #region HttpPost
+
+        [HttpPost]
+        [Authorize]
+        [Route("api/appointments/cancel")]
+        public void CancelAppointment([FromBody] CancelAppointmentModel cancelAppointmentModel)
+        {
+            _iAppointmentBus.CancelAppointment(cancelAppointmentModel);
+        }
+
+        #endregion
+
+        #region WebSocket
+
         class AppointmentWebSocketHandler : WebSocketHandler
         {
             private static WebSocketCollection _clients = new WebSocketCollection();
             private IAppointmentBus _iAppointmentBus;
             private string _userId;
 
-            /// <summary>
-            /// Appointment Web Socket Handler Constructor
-            /// </summary>
-            /// <param name="userId">User Id to connect</param>
-            /// <param name="iAppointmentBus">Appointment Bussines Logic Interface</param>
             public AppointmentWebSocketHandler(string userId, IAppointmentBus iAppointmentBus)
             {
                 _iAppointmentBus = iAppointmentBus;
                 _userId = userId;
             }
 
-            /// <summary>
-            /// Add clients on open
-            /// </summary>
             public override void OnOpen()
             {
                 _clients.Add(this);
             }
 
-            /// <summary>
-            /// Handles message exchanges
-            /// </summary>
-            /// <param name="message">Message Received</param>
             public override void OnMessage(string message)
             {
                 try
@@ -154,10 +126,6 @@ namespace HorseSpot.Api.Controllers
                 }
             }
 
-            /// <summary>
-            /// Send notification for appointment created to advertisment owner
-            /// </summary>
-            /// <param name="appointmentDTO">Appointment Model</param>
             public void AppoinmentCreated(AppointmentDTO appointmentDTO)
             {
                 var appointmentNotification = _iAppointmentBus.MakeAppointment(appointmentDTO);
@@ -165,10 +133,6 @@ namespace HorseSpot.Api.Controllers
                 _clients.FirstOrDefault(r => ((AppointmentWebSocketHandler)r)._userId == appointmentDTO.AdvertismentOwnerId).Send(send);
             }
 
-            /// <summary>
-            /// If date change by initiator send notification for date changed to advertisment owner
-            /// </summary>
-            /// <param name="appointmentDTO">Appointment Model</param>
             public void AppointmentDateChangedByInitiator(AppointmentDTO appointmentDTO)
             {
                 var appointmentNotification = _iAppointmentBus.UpdateAppointmentDateChangedByOwner(appointmentDTO);
@@ -176,10 +140,6 @@ namespace HorseSpot.Api.Controllers
                 _clients.FirstOrDefault(r => ((AppointmentWebSocketHandler)r)._userId == appointmentDTO.InitiatorId).Send(send);
             }
 
-            /// <summary>
-            /// If date change by owner send notification for date changed to appointment initiator
-            /// </summary>
-            /// <param name="appointmentDTO">Appointment Model</param>
             public void AppointmentDateChangedByOwner(AppointmentDTO appointmentDTO)
             {
                 var appointmentNotification = _iAppointmentBus.UpdateAppointmentDateChangedByInitiator(appointmentDTO);
@@ -187,10 +147,6 @@ namespace HorseSpot.Api.Controllers
                 _clients.FirstOrDefault(r => ((AppointmentWebSocketHandler)r)._userId == appointmentDTO.AdvertismentOwnerId).Send(send);
             }
 
-            /// <summary>
-            /// If appointment accepted by owner send notification to initiator
-            /// </summary>
-            /// <param name="appointmentDTO">Appointment Model</param>
             public void AppointmentAcceptedByOwner(AppointmentDTO appointmentDTO)
             {
                 var appointmentNotification = _iAppointmentBus.UpdateAppointmentAcceptedByOwner(appointmentDTO);
@@ -198,10 +154,6 @@ namespace HorseSpot.Api.Controllers
                 _clients.FirstOrDefault(r => ((AppointmentWebSocketHandler)r)._userId == appointmentDTO.InitiatorId).Send(send);
             }
 
-            /// <summary>
-            /// If appointment accepted by initiator send notification to ad owner
-            /// </summary>
-            /// <param name="appointmentDTO">Appointment Model</param>
             public void AppointmentAcceptedByInitiator(AppointmentDTO appointmentDTO)
             {
                 var appointmentNotification = _iAppointmentBus.UpdateAppointmentAcceptedByInitiator(appointmentDTO);
@@ -209,10 +161,6 @@ namespace HorseSpot.Api.Controllers
                 _clients.FirstOrDefault(r => ((AppointmentWebSocketHandler)r)._userId == appointmentDTO.AdvertismentOwnerId).Send(send);
             }
 
-            /// <summary>
-            /// Set appointments as seen an notify user
-            /// </summary>
-            /// <param name="appointmentDTO">Appointment Model</param>
             public void SetSeenAppointments(AppointmentDTO appointmentDTO)
             {
                 _iAppointmentBus.SetAppointmentsAsSeen(appointmentDTO.UserWhoSeenId, appointmentDTO.SeenAppointmentsIds);
@@ -221,5 +169,7 @@ namespace HorseSpot.Api.Controllers
                 _clients.FirstOrDefault(r => ((AppointmentWebSocketHandler)r)._userId == appointmentDTO.UserWhoSeenId).Send(send);
             }
         }
+
+        #endregion
     }
 }

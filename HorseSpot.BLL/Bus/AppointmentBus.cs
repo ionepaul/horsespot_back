@@ -1,18 +1,17 @@
-﻿using HorseSpot.BLL.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using HorseSpot.Models.Models;
-using HorseSpot.DAL.Interfaces;
-using HorseSpot.BLL.Converters;
-using HorseSpot.Infrastructure.Exceptions;
-using HorseSpot.Infrastructure.Validators;
-using HorseSpot.DAL.Entities;
 using System.Configuration;
+using System.Linq;
+using HorseSpot.BLL.Converters;
+using HorseSpot.BLL.Interfaces;
+using HorseSpot.DAL.Entities;
+using HorseSpot.DAL.Interfaces;
+using HorseSpot.Infrastructure.Exceptions;
 using HorseSpot.Infrastructure.MailService;
-using HorseSpot.DAL.Models;
-using HorseSpot.Models.Enums;
 using HorseSpot.Infrastructure.Resources;
+using HorseSpot.Infrastructure.Validators;
+using HorseSpot.Models.Enums;
+using HorseSpot.Models.Models;
 
 namespace HorseSpot.BLL.Bus
 {
@@ -24,39 +23,24 @@ namespace HorseSpot.BLL.Bus
         private IUserDao _iUserDao;
         private IMailerService _iMailerService;
         private IHorseAdDao _iHorseAdDao;
-        private ICountryDao _iCountryDao;
 
         #endregion
 
         #region Constructor
 
-        /// <summary>
-        /// AppointmentBus Constructor
-        /// </summary>
-        /// <param name="iAppointmentDao">Appointment Dao Interface</param>
-        /// <param name="iUserDao">User Dao Interface</param>
-        /// <param name="iMailerService">Mailer Service Interface</param>
-        /// <param name="iHorseAdDao">HorseAd Dao Interface</param>
-        /// <param name="iCountryDao">Country Dao Interface</param>
         public AppointmentBus(IAppointmentDao iAppointmentDao, IUserDao iUserDao, IMailerService iMailerService, 
-                              IHorseAdDao iHorseAdDao, ICountryDao iCountryDao)
+                              IHorseAdDao iHorseAdDao)
         {
             _iAppointmentDao = iAppointmentDao;
             _iUserDao = iUserDao;
             _iMailerService = iMailerService;
             _iHorseAdDao = iHorseAdDao;
-            _iCountryDao = iCountryDao;
         }
 
         #endregion
 
         #region Public Methods
 
-        /// <summary>
-        /// Creates an appointment and sends email to adverstisment owner
-        /// </summary>
-        /// <param name="appointmentDTO">Appointment Model</param>
-        /// <returns>Created Appointment</returns>
         public AppointmentDTO MakeAppointment(AppointmentDTO appointmentDTO)
         {
             var validatedAppointmentDTO = ValidateAndSetAppointment(appointmentDTO, AppointmentStatus.CREATED);
@@ -86,11 +70,6 @@ namespace HorseSpot.BLL.Bus
             return CreateAppoinmentNotification(appointment, owner, initiator);
         }
 
-        /// <summary>
-        /// Gets the unseen appointments for a user
-        /// </summary>
-        /// <param name="userId">User Id</param>
-        /// <returns>List of unseen appointments</returns>
         public IEnumerable<AppointmentDTO> GetUnseenAppointmentsForUser(string userId)
         {
             var notifications = new List<AppointmentDTO>();
@@ -105,11 +84,6 @@ namespace HorseSpot.BLL.Bus
             return notifications.AsEnumerable();
         }
 
-        /// <summary>
-        /// Set the unseen appointments
-        /// </summary>
-        /// <param name="userId">User Id</param>
-        /// <param name="unseenAppointmentsId">List of appointment ids</param>
         public void SetAppointmentsAsSeen(string userId, IEnumerable<int> unseenAppointmentsId)
         {
             foreach(var id in unseenAppointmentsId)
@@ -130,11 +104,6 @@ namespace HorseSpot.BLL.Bus
             }
         }
 
-        /// <summary>
-        /// Updates the appointment date when changed by owner and sends email to the appointment initiator
-        /// </summary>
-        /// <param name="appointmentDTO">Appointment Model</param>
-        /// <returns>Updated Appointment Model</returns>
         public AppointmentDTO UpdateAppointmentDateChangedByOwner(AppointmentDTO appointmentDTO)
         {
             var appointment = ValidateAndSetUpdateAppointment(appointmentDTO, AppointmentStatus.DATE_CHANGED_BY_OWNER);
@@ -163,11 +132,6 @@ namespace HorseSpot.BLL.Bus
             return CreateAppoinmentNotification(appointment, owner, initiator);
         }
 
-        /// <summary>
-        /// Updates the appointment date when changed by initiator and sends email to the advertisment owner
-        /// </summary>
-        /// <param name="appointmentDTO">Appointment Model</param>
-        /// <returns>Updated Appointment Model</returns>
         public AppointmentDTO UpdateAppointmentDateChangedByInitiator(AppointmentDTO appointmentDTO)
         {
             var appointment = ValidateAndSetUpdateAppointment(appointmentDTO, AppointmentStatus.DATE_CHANGED_BY_INITIATOR);
@@ -196,11 +160,6 @@ namespace HorseSpot.BLL.Bus
             return CreateAppoinmentNotification(appointment, owner, initiator);
         }
 
-        /// <summary>
-        /// Updates the appointment when accepted by owner and sends email to the appointment initiator
-        /// </summary>
-        /// <param name="appointmentDTO">Appointment Model</param>
-        /// <returns>Updated Appointment Model</returns>
         public AppointmentDTO UpdateAppointmentAcceptedByOwner(AppointmentDTO appointmentDTO)
         {
             var appointment = ValidateAndSetUpdateAppointment(appointmentDTO, AppointmentStatus.ACCEPTED_BY_OWNER);
@@ -229,11 +188,6 @@ namespace HorseSpot.BLL.Bus
             return CreateAppoinmentNotification(appointment, owner, initiator);
         }
 
-        /// <summary>
-        /// Updates the appointment when accepted by initiator and sends email to the advertisment owner
-        /// </summary>
-        /// <param name="appointmentDTO">Appointment Model</param>
-        /// <returns>Updated Appointment Model</returns>
         public AppointmentDTO UpdateAppointmentAcceptedByInitiator(AppointmentDTO appointmentDTO)
         {
             var appointment = ValidateAndSetUpdateAppointment(appointmentDTO, AppointmentStatus.ACCEPTED_BY_INITIATOR);
@@ -262,11 +216,6 @@ namespace HorseSpot.BLL.Bus
             return CreateAppoinmentNotification(appointment, owner, initiator);
         }
 
-        /// <summary>
-        /// Get all appointments for a user
-        /// </summary>
-        /// <param name="userId">User Id</param>
-        /// <returns>Model containig lists of all appointments types</returns>
         public UserAppointmentsViewModel GetUserAppointmentsViewModel(string userId)
         {
             var userAppointmentsViewModel = new UserAppointmentsViewModel();
@@ -318,10 +267,6 @@ namespace HorseSpot.BLL.Bus
             return userAppointmentsViewModel;
         }
 
-        /// <summary>
-        /// Cancel an appointment
-        /// </summary>
-        /// <param name="cancelAppointmentModel">Cancel Appointment Model</param>
         public void CancelAppointment(CancelAppointmentModel cancelAppointmentModel)
         {
             var appointment = _iAppointmentDao.GetById(cancelAppointmentModel.AppointmentId);
@@ -368,9 +313,6 @@ namespace HorseSpot.BLL.Bus
 
         }
 
-        /// <summary>
-        /// Check for upcoming appointments in two days and send emails to notify participants
-        /// </summary>
         public void SendEmailForAppointmentsComingInTwoDays()
         {
             var upcomingAppointments = _iAppointmentDao.GetAppointmentsComingInTwoDays();
@@ -386,9 +328,6 @@ namespace HorseSpot.BLL.Bus
             }
         }
 
-        /// <summary>
-        /// Check for appointments that took place and ask the participants for feedback
-        /// </summary>
         public void SendEmailForResolvedAppointments()
         {
             var resolvedAppointments = _iAppointmentDao.GetDoneAppointments();
@@ -411,11 +350,6 @@ namespace HorseSpot.BLL.Bus
             _iAppointmentDao.SaveChanges();
         }
 
-        /// <summary>
-        /// Check if user exists by id
-        /// </summary>
-        /// <param name="userId">User Id</param>
-        /// <returns>True/False</returns>
         public bool CheckUserId(string userId)
         {
             if (_iUserDao.FindUserById(userId) != null)
@@ -430,12 +364,6 @@ namespace HorseSpot.BLL.Bus
 
         #region Private Methods
 
-        /// <summary>
-        /// Validates and set appointment current status
-        /// </summary>
-        /// <param name="appointmentDTO">Appointemnt Model</param>
-        /// <param name="status">Status</param>
-        /// <returns>Updated Appoinment or Exception if invalid data</returns>
         private AppointmentDTO ValidateAndSetAppointment(AppointmentDTO appointmentDTO, string status)
         {
             if (appointmentDTO == null)
@@ -469,12 +397,6 @@ namespace HorseSpot.BLL.Bus
             return appointmentDTO;
         }
 
-        /// <summary>
-        /// Validate and updates an appointment
-        /// </summary>
-        /// <param name="appointmentDTO">Appointment Model</param>
-        /// <param name="status">Status</param>
-        /// <returns>Updated appointment or Exception if invalid data</returns>
         private Appointment ValidateAndSetUpdateAppointment(AppointmentDTO appointmentDTO, string status)
         {
             var appointment = _iAppointmentDao.GetById(appointmentDTO.Id);
@@ -491,13 +413,6 @@ namespace HorseSpot.BLL.Bus
             return appointment;
         }
 
-        /// <summary>
-        /// Create the notification message that will be send to end user
-        /// </summary>
-        /// <param name="appointment">Appointment Model</param>
-        /// <param name="owner">Advertisment Owner User Model</param>
-        /// <param name="initiator">Appointment Initiator User Model</param>
-        /// <returns></returns>
         private AppointmentDTO CreateAppoinmentNotification(Appointment appointment, UserModel owner, UserModel initiator)
         {
             var appointmentNotif = new AppointmentDTO();
@@ -540,13 +455,6 @@ namespace HorseSpot.BLL.Bus
             return appointmentNotif;
         }
 
-        /// <summary>
-        /// Send email to notify owner that an appointment is coming in two days
-        /// </summary>
-        /// <param name="owner">Advertisment Owner User Model</param>
-        /// <param name="appointment">Appointment Model</param>
-        /// <param name="initiator">Appointment Initiator User Model</param>
-        /// <param name="horseAd">Advertisment Model</param>
         private void SendTwoDaysNotifierEmailOwner(UserModel owner, Appointment appointment, UserModel initiator, HorseAd horseAd)
         {
             EmailModelAppointment emailModel = new EmailModelAppointment
@@ -568,13 +476,6 @@ namespace HorseSpot.BLL.Bus
             _iMailerService.SendMailAppointments(emailModel);
         }
 
-        /// <summary>
-        /// Send email to notify initiator that an appointment is coming in two days
-        /// </summary>
-        /// <param name="owner">Advertisment Owner User Model</param>
-        /// <param name="appointment">Appointment Model</param>
-        /// <param name="initiator">Appointment Initiator User Model</param>
-        /// <param name="horseAd">Advertisment Model</param>
         private void SendTwoDaysNotifierEmailInitiator(UserModel initiator, Appointment appointment, UserModel owner, HorseAd horseAd)
         {
             EmailModelAppointment emailModel = new EmailModelAppointment
@@ -595,12 +496,7 @@ namespace HorseSpot.BLL.Bus
 
             _iMailerService.SendMailAppointments(emailModel);
         }
-        
-        /// <summary>
-        /// Ask owner for feedback after an appointment took place
-        /// </summary>
-        /// <param name="owner">Advertisment Owner Model</param>
-        /// <param name="horseAd">Advertisment Model</param>
+
         private void SendEmailForDoneAppointmentToOwner(UserModel owner, HorseAd horseAd)
         {
             EmailModelAppointment emailModel = new EmailModelAppointment
@@ -617,11 +513,6 @@ namespace HorseSpot.BLL.Bus
             _iMailerService.SendMailAppointments(emailModel);
         }
 
-        /// <summary>
-        /// Ask initiator for feedback after an appointment took place
-        /// </summary>
-        /// <param name="owner">Advertisment Owner Model</param>
-        /// <param name="horseAd">Advertisment Model</param>
         private void SendEmailForDoneAppointmentToInitiator(UserModel initiator, HorseAd horseAd)
         {
             EmailModelAppointment emailModel = new EmailModelAppointment

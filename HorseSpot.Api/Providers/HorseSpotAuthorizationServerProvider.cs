@@ -1,14 +1,14 @@
-﻿using HorseSpot.BLL.Interfaces;
+﻿using System.Collections.Generic;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using System.Web.Http;
+using HorseSpot.BLL.Interfaces;
 using HorseSpot.Infrastructure.Constants;
 using HorseSpot.Infrastructure.Resources;
 using HorseSpot.Infrastructure.Utils;
 using HorseSpot.Models.Models;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
-using System.Collections.Generic;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web.Http;
 
 namespace HorseSpot.Api.Providers
 {
@@ -16,11 +16,6 @@ namespace HorseSpot.Api.Providers
     {
         private IAuthorizationBus _iAuthorizationBus;
 
-        /// <summary>
-        /// Validate Client Authentication
-        /// </summary>
-        /// <param name="context">OAuth Context</param>
-        /// <returns>Task</returns>
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
             _iAuthorizationBus = (IAuthorizationBus)GlobalConfiguration.Configuration.DependencyResolver.GetService(typeof(IAuthorizationBus));
@@ -79,11 +74,6 @@ namespace HorseSpot.Api.Providers
             return Task.FromResult<object>(null);
         }
 
-        /// <summary>
-        /// Grant Client Access
-        /// </summary>
-        /// <param name="context">OAuth Grant Context</param>
-        /// <returns>Task</returns>
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             _iAuthorizationBus = (IAuthorizationBus)GlobalConfiguration.Configuration.DependencyResolver.GetService(typeof(IAuthorizationBus));
@@ -146,11 +136,6 @@ namespace HorseSpot.Api.Providers
             context.Validated(ticket);
         }
 
-        /// <summary>
-        /// Get Refresh Token
-        /// </summary>
-        /// <param name="context">OAuth Refresh Token Context</param>
-        /// <returns>Task</returns>
         public override Task GrantRefreshToken(OAuthGrantRefreshTokenContext context)
         {
             _iAuthorizationBus = (IAuthorizationBus)GlobalConfiguration.Configuration.DependencyResolver.GetService(typeof(IAuthorizationBus));
@@ -172,11 +157,6 @@ namespace HorseSpot.Api.Providers
             return Task.FromResult<object>(null);
         }
 
-        /// <summary>
-        /// Token End Point
-        /// </summary>
-        /// <param name="context">OAuth Token Context</param>
-        /// <returns></returns>
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)
         {
             foreach (KeyValuePair<string, string> property in context.Properties.Dictionary)

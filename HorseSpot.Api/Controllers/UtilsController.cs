@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.IO;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
 using HorseSpot.BLL.Interfaces;
-using HorseSpot.Infrastructure.Resources;
 using HorseSpot.Models.Models;
 
 namespace HorseSpot.Api.Controllers
@@ -21,24 +14,6 @@ namespace HorseSpot.Api.Controllers
         {
             _iUtilBus = iUtilBus;
         }
-
-        #region HttpPost
-
-        [HttpPost]
-        [Route("api/sendemail")]
-        public async Task SendMail([FromBody] EmailModelDTO emailModelDTO)
-        {
-            await _iUtilBus.EmailSendingBetweenUsers(emailModelDTO);
-        }
-
-        [HttpPost]
-        [Route("api/contactformemail")]
-        public async Task ReceiveEmailFromContact([FromBody] ContactPageEmailModel contactPageEmailModel)
-        {
-            await _iUtilBus.ReceiveEmailFromContactPage(contactPageEmailModel);
-        }
-
-        #endregion
 
         #region HttpGet
 
@@ -71,5 +46,24 @@ namespace HorseSpot.Api.Controllers
         }
 
         #endregion
+
+        #region HttpPost
+
+        [HttpPost]
+        [Route("api/sendemail")]
+        public async Task SendMail([FromBody] EmailModelDTO emailModelDTO)
+        {
+            await _iUtilBus.EmailSendingBetweenUsers(emailModelDTO);
+        }
+
+        [HttpPost]
+        [Route("api/contactformemail")]
+        public async Task ReceiveEmailFromContact([FromBody] ContactPageEmailModel contactPageEmailModel)
+        {
+            await _iUtilBus.ReceiveEmailFromContactPage(contactPageEmailModel);
+        }
+
+        #endregion
+
     }
 }

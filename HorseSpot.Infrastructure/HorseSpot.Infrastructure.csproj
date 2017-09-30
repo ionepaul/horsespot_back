@@ -77,11 +77,6 @@
     <Compile Include="Validators\ValidationHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\HorseSpot.Models\HorseSpot.Models.csproj">
       <Project>{B1969906-4A8E-4493-A0C9-D1522A707C6A}</Project>
       <Name>HorseSpot.Models</Name>
@@ -96,6 +91,9 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.ro.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

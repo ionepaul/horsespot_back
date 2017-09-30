@@ -1,12 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using HorseSpot.DAL.Entities;
 using HorseSpot.DAL.Interfaces;
 using HorseSpot.DAL.Models;
+using HorseSpot.DAL.Search;
 using HorseSpot.Infrastructure.Constants;
 using HorseSpot.Infrastructure.Exceptions;
 using HorseSpot.Infrastructure.Resources;
+using LinqKit;
 
 namespace HorseSpot.DAL.Dao
 {
@@ -60,25 +64,61 @@ namespace HorseSpot.DAL.Dao
 
         public async Task UpdateAsync(HorseAd horseAd)
         {
-            _ctx.Entry(horseAd).State = EntityState.Modified;
+            var updatedHorseAd = CheckAndAddAbilitiesAndRecommendedRiders(horseAd, true);
+
+            try
+            {
+                _ctx.Entry(updatedHorseAd).State = EntityState.Modified;
+
+                await _ctx.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }            
+        }
+
+        public async Task AddHorse(HorseAd horseAd)
+        {
+            var horseAdToSave = CheckAndAddAbilitiesAndRecommendedRiders(horseAd, false);
+
+            _ctx.HorseAds.Add(horseAdToSave);
+
             await _ctx.SaveChangesAsync();
         }
 
-        public void AddHorse(HorseAd horseAd)
-        {
-            horseAd.RecomendedRiders = new List<RecommendedRider>();
-            horseAd.Abilities = new List<HorseAbility>();
+        #endregion
 
-            var priceRange = _ctx.PriceRanges.FirstOrDefault(p => p.Id == horseAd.PriceRangeId);
-            
+        #region Private Methods
+
+        private int GetNumberToSkip(int pageNumber)
+        {
+            return (pageNumber - 1) * ApplicationConstants.AdsPerPage;
+        }
+
+        private HorseAd CheckAndAddAbilitiesAndRecommendedRiders(HorseAd horseAd, bool isUpdate)
+        {
+            var priceRange = _ctx.PriceRanges.Find(horseAd.PriceRangeId);
+
             if (priceRange == null)
             {
                 throw new ValidationException(Resources.InvalidPriceRangeIdentifier);
             }
 
+            if (isUpdate)
+            {
+                horseAd.RecomendedRiders.Clear();
+                horseAd.Abilities.Clear();
+            }
+            else
+            {
+                horseAd.RecomendedRiders = new List<RecommendedRider>();
+                horseAd.Abilities = new List<HorseAbility>();
+            }
+
             horseAd.HorseAbilitesIds.ForEach(id =>
             {
-                var horseAbility = _ctx.HorseAbilities.FirstOrDefault(a => a.Id == id);
+                var horseAbility = _ctx.HorseAbilities.Find(id);
 
                 if (horseAbility == null)
                 {
@@ -90,7 +130,7 @@ namespace HorseSpot.DAL.Dao
 
             horseAd.RecommendedRiderIds.ForEach(id =>
             {
-                var recommendedRider = _ctx.RecommendedRiders.FirstOrDefault(r => r.Id == id);
+                var recommendedRider = _ctx.RecommendedRiders.Find(id);
 
                 if (recommendedRider == null)
                 {
@@ -100,17 +140,7 @@ namespace HorseSpot.DAL.Dao
                 horseAd.RecomendedRiders.Add(recommendedRider);
             });
 
-            _ctx.HorseAds.Add(horseAd);
-            _ctx.SaveChanges();
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        private int GetNumberToSkip(int pageNumber)
-        {
-            return (pageNumber - 1) * ApplicationConstants.AdsPerPage;
+            return horseAd;
         }
 
         #endregion

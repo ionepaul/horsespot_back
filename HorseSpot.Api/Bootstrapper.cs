@@ -6,7 +6,7 @@ using HorseSpot.DAL.Dao;
 using HorseSpot.DAL.Interfaces;
 using HorseSpot.Infrastructure.MailService;
 using Microsoft.Practices.Unity;
-using Microsoft.Practices.Unity.Mvc;
+using Unity.WebApi;
 
 namespace HorseSpot.Api
 {

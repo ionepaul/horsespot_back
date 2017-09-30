@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +7,7 @@ using HorseSpot.BLL.Interfaces;
 using HorseSpot.DAL.Entities;
 using HorseSpot.DAL.Interfaces;
 using HorseSpot.DAL.Models;
+using HorseSpot.DAL.Search;
 using HorseSpot.Infrastructure.Constants;
 using HorseSpot.Infrastructure.Exceptions;
 using HorseSpot.Infrastructure.MailService;
@@ -50,7 +50,7 @@ namespace HorseSpot.BLL.Bus
 
             var horseAd = HorseAdConverter.FromHorseAdDTOToHorseAd(horseAdDTO, userId);
 
-            _iHorseAdDao.AddHorse(horseAd);
+            await _iHorseAdDao.AddHorse(horseAd);
 
             await SendEmailToAdmin();
         }
@@ -63,7 +63,7 @@ namespace HorseSpot.BLL.Bus
 
             CheckHorseAdAndUserIdentity(horseAd, userId);
             
-            var updatedHorseAd = HorseAdConverter.FromHorseAdDTOToHorseAd(horseAdDTO, horseAd.UserId);
+            var updatedHorseAd = UpdateHorseAd(horseAd, horseAdDTO);
 
             await _iHorseAdDao.UpdateAsync(updatedHorseAd);
         }
@@ -177,7 +177,7 @@ namespace HorseSpot.BLL.Bus
 
         public GetHorseAdListResultsDTO SearchHorses(HorseAdSearchViewModel searchViewModel)
         { 
-            SearchModelDao searchModelDao = HorseAdConverter.FromSearchModelToSearchModelDao(searchViewModel);
+            SearchModelDao searchModelDao = UtilConverter.FromSearchModelToSearchModelDao(searchViewModel);
 
             if (searchModelDao.SortAfter != ApplicationConstants.SortAge && searchModelDao.SortAfter != ApplicationConstants.SortDatePosted 
                 && searchModelDao.SortAfter != ApplicationConstants.SortHeight && searchModelDao.SortAfter != ApplicationConstants.SortPrice 
@@ -305,6 +305,53 @@ namespace HorseSpot.BLL.Bus
             {
                 throw new ForbiddenException(Resources.ActionRequiresAdditionalRights);
             }
+        }
+
+        private HorseAd UpdateHorseAd(HorseAd horseAd, HorseAdDTO horseAdDTO)
+        {
+            horseAd.HorseName = horseAdDTO.HorseName;
+            horseAd.HorseAbilitesIds = horseAdDTO.AbilityIds;
+            horseAd.Price = horseAdDTO.Price;
+            horseAd.PriceRangeId = horseAdDTO.PriceRangeId;
+            horseAd.Breed = horseAdDTO.Breed;
+            horseAd.Age = horseAdDTO.Age;
+            horseAd.Description = horseAdDTO.Description;
+            horseAd.Gender = horseAdDTO.Gender;
+            horseAd.HaveCompetionalExperience = horseAdDTO.HaveCompetionalExperience;
+            horseAd.HaveXRays = horseAdDTO.HaveXRays;
+            horseAd.RecommendedRiderIds = horseAdDTO.RecomendedRidersIds;
+            horseAd.IsSponsorized = horseAdDTO.IsSponsorized;
+            horseAd.VideoLink = horseAdDTO.VideoLink;
+            horseAd.Title = HorseAdConverter.SetAdTitle(horseAdDTO);
+            horseAd.Height = horseAdDTO.HeightInCm;
+
+            horseAd.Address.City = horseAdDTO.Address.City;
+            horseAd.Address.Country = horseAdDTO.Address.Country;
+            horseAd.Address.Street = horseAdDTO.Address.Street;
+
+            if (horseAd.Pedigree != null)
+            {
+                horseAd.Pedigree.Father = horseAdDTO.Pedigree.Father;
+                horseAd.Pedigree.Father_Father = horseAdDTO.Pedigree.Father_Father;
+                horseAd.Pedigree.Father_Mother = horseAdDTO.Pedigree.Father_Mother;
+                horseAd.Pedigree.Father_Father_Father = horseAdDTO.Pedigree.Father_Father_Father;
+                horseAd.Pedigree.Father_Father_Mother = horseAdDTO.Pedigree.Father_Father_Mother;
+                horseAd.Pedigree.Father_Mother_Father = horseAdDTO.Pedigree.Father_Mother_Father;
+                horseAd.Pedigree.Father_Mother_Mother = horseAdDTO.Pedigree.Father_Mother_Mother;
+                horseAd.Pedigree.Mother = horseAdDTO.Pedigree.Mother;
+                horseAd.Pedigree.Mother_Father = horseAdDTO.Pedigree.Mother_Father;
+                horseAd.Pedigree.Mother_Mother = horseAdDTO.Pedigree.Mother_Mother;
+                horseAd.Pedigree.Mother_Father_Father = horseAdDTO.Pedigree.Mother_Father_Father;
+                horseAd.Pedigree.Mother_Father_Mother = horseAdDTO.Pedigree.Mother_Father_Mother;
+                horseAd.Pedigree.Mother_Mother_Father = horseAdDTO.Pedigree.Mother_Mother_Father;
+                horseAd.Pedigree.Mother_Mother_Mother = horseAdDTO.Pedigree.Mother_Mother_Mother;
+            }
+            else
+            {
+                horseAd.Pedigree = HorseAdConverter.FromPedigreeDTOToPedigree(horseAdDTO.Pedigree);
+            }
+
+            return horseAd;
         }
 
         private async Task SendEmailToAdmin()

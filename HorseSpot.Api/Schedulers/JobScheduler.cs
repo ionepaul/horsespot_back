@@ -1,13 +1,10 @@
-﻿using Quartz;
-using Quartz.Impl;
-using System;
+﻿using System;
 using System.Configuration;
+using Quartz;
+using Quartz.Impl;
 
 public class JobScheduler
 {
-    /// <summary>
-    /// Schedule Jobs For Execution, it will be exectued each day
-    /// </summary>
     public static void Start()
     {
         IScheduler scheduler = StdSchedulerFactory.GetDefaultScheduler();

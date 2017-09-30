@@ -1,9 +1,9 @@
-﻿using HorseSpot.DAL.Entities;
-using HorseSpot.DAL.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using HorseSpot.DAL.Entities;
+using HorseSpot.DAL.Interfaces;
 
 namespace HorseSpot.DAL.Dao
 {
@@ -20,11 +20,6 @@ namespace HorseSpot.DAL.Dao
 
         #region Public Methods
 
-        /// <summary>
-        /// Retrieve apppointments from database for a user
-        /// </summary>
-        /// <param name="userId">User Id</param>
-        /// <returns>List of appointments</returns>
         public IEnumerable<Appointment> GetUserAppointments(string userId)
         {
             return  _ctx.Appointments
@@ -33,10 +28,6 @@ namespace HorseSpot.DAL.Dao
                         .AsEnumerable();
         }
 
-        /// <summary>
-        /// Gets the appointments that are going to take place in two days
-        /// </summary>
-        /// <returns>List of appointments</returns>
         public IEnumerable<Appointment> GetAppointmentsComingInTwoDays()
         {
             var appointments = from x in _ctx.Appointments
@@ -48,10 +39,6 @@ namespace HorseSpot.DAL.Dao
             return appointments.AsEnumerable();
         }
 
-        /// <summary>
-        /// Get the appointments that have took place one day before the current time
-        /// </summary>
-        /// <returns></returns>
         public IEnumerable<Appointment> GetDoneAppointments()
         {
             var appointments = from x in _ctx.Appointments
@@ -63,11 +50,6 @@ namespace HorseSpot.DAL.Dao
             return appointments.AsEnumerable();
         }
 
-        /// <summary>
-        /// Gets the unseen appointments for a user
-        /// </summary>
-        /// <param name="userId">User Id</param>
-        /// <returns>List of appointments</returns>
         public IEnumerable<Appointment> GetUnseenAppointments(string userId)
         {
             var appointments = from x in _ctx.Appointments
@@ -77,21 +59,12 @@ namespace HorseSpot.DAL.Dao
             return appointments.AsEnumerable();
         }
 
-        /// <summary>
-        /// Update an appointment
-        /// </summary>
-        /// <param name="appointment">Appointment Model</param>
         public void UpdateAppointment(Appointment appointment)
         {
             _ctx.Entry(appointment).State = EntityState.Modified;
             _ctx.SaveChanges();
         }
 
-        /// <summary>
-        /// Gets the associated appointments for an advertisment
-        /// </summary>
-        /// <param name="horseAdId">Advertisment Id</param>
-        /// <returns>List of appointments</returns>
         public IEnumerable<Appointment> GetAppointmentsByHorseAdvertismentId(int horseAdId)
         {
             var appointments = from app in _ctx.Appointments where app.AdvertismentId == horseAdId select app;

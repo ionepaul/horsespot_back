@@ -1,26 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using HorseSpot.DAL.Entities;
 using HorseSpot.DAL.Models;
 using HorseSpot.Models.Models;
-using MongoDB.Bson;
-using HorseSpot.DAL.Entities;
 
 namespace HorseSpot.BLL.Converters
 {
-    /// <summary>
-    /// Static class used to map the horse ad database model to domain trasfer objects and vice-versa
-    /// </summary>
     public class HorseAdConverter
     {
-        /// <summary>
-        /// Converts horseDTO ad to horse ad database model
-        /// </summary>
-        /// <param name="adId">Horse Advertisment Id</param>
-        /// <param name="horseAdDTO">Horse ad Advertisment DTO</param>
-        /// <returns>Horse ad Database Model</returns>
+
+        #region Public Methods
+
         public static HorseAd FromHorseAdDTOToHorseAd(HorseAdDTO horseAdDTO, string userId)
         {
             var horseAd = new HorseAd
@@ -43,7 +34,7 @@ namespace HorseSpot.BLL.Converters
                 DatePosted = DateTime.UtcNow,
                 Title = SetAdTitle(horseAdDTO),
                 Height = horseAdDTO.HeightInCm,
-                Images = horseAdDTO.Images.Select(FromImageDTOToImage).ToList(),
+                Images = horseAdDTO.Images.Select(UtilConverter.FromImageDTOToImage).ToList(),
                 IsValidated = false,
                 UserId = userId
             };
@@ -51,24 +42,48 @@ namespace HorseSpot.BLL.Converters
             return horseAd;
         }
 
-        /// <summary>
-        /// Generates the advertisment title
-        /// </summary>
-        /// <param name="horseAdDTO">Horse Advertisment Model</param>
-        /// <returns>Horse Advertisment Title</returns>
-        private static string SetAdTitle(HorseAdDTO horseAdDTO)
+        public static HorseAdDTO FromHorseAdToHorseAdDTO(HorseAd horseAd)
+        {
+            var horseAdDTO = new HorseAdDTO
+            {
+                Id = horseAd.Id.ToString(),
+                UserId = horseAd.UserId,
+                HorseName = horseAd.HorseName,
+                Abilities = horseAd.Abilities.Select(UtilConverter.FromHorseAbilityToHorseAbilityDTO),
+                Address = FromAddressToAddressDTO(horseAd.Address),
+                Pedigree = FromPedigreeToPedigreeDTO(horseAd.Pedigree),
+                Price = horseAd.Price,
+                PriceRange = UtilConverter.FromPriceRangeToPriceRangeDTO(horseAd.PriceRange),
+                Breed = horseAd.Breed,
+                Age = horseAd.Age,
+                Description = horseAd.Description,
+                Gender = horseAd.Gender,
+                HaveCompetionalExperience = horseAd.HaveCompetionalExperience,
+                HaveXRays = horseAd.HaveXRays,
+                Images = horseAd.Images.Select(UtilConverter.FromImageToImageDTO),
+                RecomendedRiders = horseAd.RecomendedRiders.Select(UtilConverter.FromRiderToRiderDTO),
+                IsSponsorized = horseAd.IsSponsorized,
+                VideoLink = horseAd.VideoLink,
+                DatePosted = horseAd.DatePosted,
+                Title = horseAd.Title,
+                IsValidated = horseAd.IsValidated,
+                HeightInCm = horseAd.Height,
+                CountFavoritesFor = horseAd.FavoriteFor?.Count ?? 0,
+                Views = horseAd.Views,
+                FavoritesFor = horseAd.FavoriteFor?.Select(x => x.UserId) ?? new List<string>()
+            };
+
+            return horseAdDTO;
+        }
+
+        public static string SetAdTitle(HorseAdDTO horseAdDTO)
         {
             var title = horseAdDTO.Age + "y " + horseAdDTO.HorseName;
 
             return title;
         }
 
-        /// <summary>
-        /// Converts PedigreeDTO to pedigree database model
-        /// </summary>
-        /// <param name="pedigreeDTO">Pedigree domain transfer object</param>
-        /// <returns>Pedigree database model</returns>
-        private static Pedigree FromPedigreeDTOToPedigree(PedigreeDTO pedigreeDTO)
+        public static Pedigree FromPedigreeDTOToPedigree(PedigreeDTO pedigreeDTO)
         {
             if (pedigreeDTO == null)
             {
@@ -96,72 +111,45 @@ namespace HorseSpot.BLL.Converters
             return pedigree;
         }
 
-        /// <summary>
-        /// Converts AddressDTO to address database model
-        /// </summary>
-        /// <param name="addressDTO">Address domain object model</param>
-        /// <returns>Address database model</returns>
-        private static Address FromAddressDTOToAddress(AddressDTO addressDTO)
+        public static HorseAdListModel FromHorseAdToHorseAdListModel(HorseAd horseAd)
         {
-            if (addressDTO == null)
-            {
-                return null;
-            }
+            var profilePic = horseAd.Images.Where(img => img.IsProfilePic).Select(img => img.Name).FirstOrDefault();
 
-            var address = new Address
-            {
-                Country = addressDTO.Country,
-                City = addressDTO.City,
-                Street = addressDTO.Street
-            };
-
-            return address;
-        }
-
-        /// <summary>
-        /// Converts horse ad database model to horse DTO
-        /// </summary>
-        /// <param name="horseAd">Horse ad database model</param>
-        /// <returns>HorseAdDTO</returns>
-        public static HorseAdDTO FromHorseAdToHorseAdDTO(HorseAd horseAd)
-        {
-            var horseAdDTO = new HorseAdDTO
+            return new HorseAdListModel
             {
                 Id = horseAd.Id.ToString(),
-                UserId = horseAd.UserId,
-                HorseName = horseAd.HorseName,
-                Abilities = horseAd.Abilities.Select(HorseAbilityConverter.FromHorseAbilityToHorseAbilityDTO),
-                Address = FromAddressToAddressDTO(horseAd.Address),
-                Pedigree = FromPedigreeToPedigreeDTO(horseAd.Pedigree),
-                Price = horseAd.Price,
-                PriceRange = PriceRangeConverter.FromPriceRangeToPriceRangeDTO(horseAd.PriceRange),
-                Breed = horseAd.Breed,
-                Age = horseAd.Age,
-                Description = horseAd.Description,
-                Gender = horseAd.Gender,
-                HaveCompetionalExperience = horseAd.HaveCompetionalExperience,
-                HaveXRays = horseAd.HaveXRays,
-                Images = horseAd.Images.Select(FromImageToImageDTO),
-                RecomendedRiders = horseAd.RecomendedRiders.Select(RecommendedRiderConverter.FromRiderToRiderDTO),
-                IsSponsorized = horseAd.IsSponsorized,
-                VideoLink = horseAd.VideoLink,
-                DatePosted = horseAd.DatePosted,
                 Title = horseAd.Title,
+                ImageId = profilePic ?? horseAd.Images.Select(img => img.Name).FirstOrDefault(),
+                Age = horseAd.Age,
+                Breed = horseAd.Breed,
+                HorseName = horseAd.HorseName,
+                PriceRange = horseAd.PriceRange.PriceRangeValue,
+                Price = horseAd.Price.ToString(),
                 IsValidated = horseAd.IsValidated,
-                HeightInCm = horseAd.Height,
+                UserId = horseAd.UserId,
                 CountFavoritesFor = horseAd.FavoriteFor?.Count ?? 0,
                 Views = horseAd.Views,
-                FavoritesFor = horseAd.FavoriteFor?.Select(x => x.UserId) ?? new List<string>()
+                Country = horseAd.Address.Country,
+                Gender = horseAd.Gender,
+                DatePosted = horseAd.DatePosted
             };
-
-            return horseAdDTO;
         }
 
-        /// <summary>
-        /// Converts pedigree database model to pedigree DTO
-        /// </summary>
-        /// <param name="pedigree">Pedigree database model</param>
-        /// <returns>Pedigree DTO</returns>
+        public static GetHorseAdListResultsDTO ConvertHorseListResult(GetHorseAdListResults result)
+        {
+            var horseAdListResult = new GetHorseAdListResultsDTO()
+            {
+                TotalCount = result.TotalCount,
+                HorseAdList = result.HorseAdList.Select(HorseAdConverter.FromHorseAdToHorseAdListModel)
+            };
+
+            return horseAdListResult;
+        }
+
+        #endregion
+
+        #region Private Methods
+
         private static PedigreeDTO FromPedigreeToPedigreeDTO(Pedigree pedigree)
         {
             if (pedigree == null)
@@ -188,40 +176,23 @@ namespace HorseSpot.BLL.Converters
             };
         }
 
-        /// <summary>
-        /// Creates the search model dao from search view model
-        /// </summary>
-        /// <param name="searchModel">Search view model</param>
-        /// <returns>Search model dao</returns>
-        public static SearchModelDao FromSearchModelToSearchModelDao(HorseAdSearchViewModel searchModel)
+        private static Address FromAddressDTOToAddress(AddressDTO addressDTO)
         {
-            return new SearchModelDao
+            if (addressDTO == null)
             {
-                PageNumber = searchModel.PageNumber,
-                AbilityId = searchModel.AbilityId,
-                AfterFatherName = searchModel.AfterFatherName,
-                MaxAge = searchModel.AgeModel.MaxAge,
-                MaxHeight = searchModel.HeightModel.MaxHeight,
-                MinAge = searchModel.AgeModel.MinAge,
-                MinHeight = searchModel.HeightModel.MinHeight,
-                SuitableFor = searchModel.SuitableFor,
-                Breed = searchModel.Breed,
-                Gender = searchModel.Gender,
-                PriceRangeId = searchModel.PriceRangeId,
-                ToHaveCompetionalExperience = searchModel.ToHaveCompetionalExperience,
-                ToHaveVideo = searchModel.ToHaveVideo,
-                ToHaveXRays = searchModel.ToHaveXRays,
-                Country = searchModel.Country,
-                SortAfter = searchModel.SortModel.SortAfter,
-                SortDirection = searchModel.SortModel.SortDirection
+                return null;
+            }
+
+            var address = new Address
+            {
+                Country = addressDTO.Country,
+                City = addressDTO.City,
+                Street = addressDTO.Street
             };
+
+            return address;
         }
 
-        /// <summary>
-        /// Converts address database model to address DTO
-        /// </summary>
-        /// <param name="address">Address database model</param>
-        /// <returns>Address DTO</returns>
         private static AddressDTO FromAddressToAddressDTO(Address address)
         {
             if (address == null)
@@ -239,73 +210,7 @@ namespace HorseSpot.BLL.Converters
             return addressDTO;
         }
 
-        /// <summary>
-        /// Generates a Horse Advertisment List Model from horse advertisment database model
-        /// </summary>
-        /// <param name="horseAd">Horse Advertisment database model</param>
-        /// <returns>Horse advertisment list model</returns>
-        public static HorseAdListModel FromHorseAdToHorseAdListModel(HorseAd horseAd)
-        {
-            var profilePic = horseAd.Images.Where(img => img.IsProfilePic).Select(img => img.Name).FirstOrDefault();
+        #endregion
 
-            return new HorseAdListModel
-            {
-                Id = horseAd.Id.ToString(),
-                Title = horseAd.Title,
-                ImageId = profilePic ?? horseAd.Images.Select(img=> img.Name).FirstOrDefault(),
-                Age = horseAd.Age,
-                Breed = horseAd.Breed,
-                HorseName = horseAd.HorseName,
-                PriceRange = horseAd.PriceRange.PriceRangeValue,
-                Price = horseAd.Price.ToString(), 
-                IsValidated = horseAd.IsValidated,
-                UserId = horseAd.UserId,
-                CountFavoritesFor = horseAd.FavoriteFor?.Count ?? 0,
-                Views = horseAd.Views,
-                Country = horseAd.Address.Country,
-                Gender = horseAd.Gender,
-                DatePosted = horseAd.DatePosted
-            };
-        }
-
-        public static ImageModel FromImageDTOToImage(ImageDTO imageDTOObj)
-        {
-            if (imageDTOObj == null)
-            {
-                return null;
-            }
-
-            return new ImageModel
-            {
-                Name = imageDTOObj.ImageName,
-                IsProfilePic = imageDTOObj.IsProfilePic
-            };
-        }
-
-        public static ImageDTO FromImageToImageDTO(ImageModel imageObj)
-        {
-            if (imageObj == null)
-            {
-                return null;
-            }
-
-            return new ImageDTO
-            {
-                ImageName = imageObj.Name,
-                IsProfilePic = imageObj.IsProfilePic,
-                ImageId = imageObj.ImageId
-            };
-        }
-
-        public static GetHorseAdListResultsDTO ConvertHorseListResult(GetHorseAdListResults result)
-        {
-            var horseAdListResult = new GetHorseAdListResultsDTO()
-            {
-                TotalCount = result.TotalCount,
-                HorseAdList = result.HorseAdList.Select(HorseAdConverter.FromHorseAdToHorseAdListModel)
-            };
-
-            return horseAdListResult;
-        }
     }
 }

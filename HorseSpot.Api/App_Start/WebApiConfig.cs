@@ -1,25 +1,14 @@
-﻿using HorseSpot.Api.Utils;
-using Newtonsoft.Json.Serialization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Formatting;
-using System.Web.Http;
-using System.Web.Http.Cors;
+﻿using System.Web.Http;
+using HorseSpot.Api.Utils;
 
 namespace HorseSpot.Api
 {
     public static class WebApiConfig
     {
-        /// <summary>
-        /// WebAPi Configuration
-        /// </summary>
-        /// <param name="config">Http Configuration</param>
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-
-            config.Filters.Add(new HorseSpotExceptionFilterAttribute());
+             config.Filters.Add(new HorseSpotExceptionFilterAttribute());
 
             // Web API routes
             config.MapHttpAttributeRoutes();

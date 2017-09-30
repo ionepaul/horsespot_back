@@ -1,7 +1,7 @@
-﻿using HorseSpot.Infrastructure.Exceptions;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Web.Http.Filters;
+using HorseSpot.Infrastructure.Exceptions;
 
 namespace HorseSpot.Api.Utils
 {
@@ -9,10 +9,6 @@ namespace HorseSpot.Api.Utils
     {
         private const string TehnicalErrorMessage = "An unexpected error occured";
 
-        /// <summary>
-        /// Custom Horse Spot exception filter
-        /// </summary>
-        /// <param name="actionExecutedContext">Execution Context</param>
         public override void OnException(HttpActionExecutedContext actionExecutedContext)
         {
             var exception = actionExecutedContext.Exception;

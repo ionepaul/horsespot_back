@@ -1,7 +1,6 @@
-﻿using HorseSpot.DAL.Entities;
-using HorseSpot.DAL.Models;
+﻿using System.Data.Entity;
+using HorseSpot.DAL.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System.Data.Entity;
 
 namespace HorseSpot.DAL
 {

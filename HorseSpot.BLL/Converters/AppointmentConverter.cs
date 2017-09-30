@@ -1,20 +1,10 @@
-﻿using HorseSpot.Models.Models;
-using HorseSpot.DAL.Entities;
-using HorseSpot.DAL.Models;
+﻿using HorseSpot.DAL.Entities;
+using HorseSpot.Models.Models;
 
 namespace HorseSpot.BLL.Converters
 {
-    /// <summary>
-    /// Static class used to map the appointment database model to aplication view model an vice-versa
-    /// </summary>
     public static class AppointmentConverter
     {
-        /// <summary>
-        /// Converts appointment database model to appointment data transfer object
-        /// </summary>
-        /// <param name="appointment">Appointment Model</param>
-        /// <param name="horseAd">Horse Ad Model</param>
-        /// <returns>Appointment Data Transfer Object</returns>
         public static AppointmentDTO FromAppointmentToAppointmentDTO(Appointment appointment, HorseAd horseAd)
         {
             return new AppointmentDTO
@@ -37,11 +27,6 @@ namespace HorseSpot.BLL.Converters
             };
         }
 
-        /// <summary>
-        /// Converts appponintment data transfer object to appointment database model
-        /// </summary>
-        /// <param name="appointmentDTO">Appointment DTO Model</param>
-        /// <returns>Apppointment Database Model</returns>
         public static Appointment FromAppointmentDTOToAppointment(AppointmentDTO appointmentDTO)
         {
             return new Appointment

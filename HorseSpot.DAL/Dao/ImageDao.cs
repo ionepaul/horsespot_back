@@ -1,4 +1,5 @@
-﻿using HorseSpot.DAL.Entities;
+﻿using System.Data.Entity;
+using HorseSpot.DAL.Entities;
 using HorseSpot.DAL.Interfaces;
 
 namespace HorseSpot.DAL.Dao

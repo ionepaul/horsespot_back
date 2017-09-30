@@ -1,9 +1,9 @@
-﻿using HorseSpot.Models.Models;
-using RazorEngine;
-using System.IO;
+﻿using System.IO;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web;
+using HorseSpot.Models.Models;
+using RazorEngine;
 
 namespace HorseSpot.Infrastructure.MailService
 {
