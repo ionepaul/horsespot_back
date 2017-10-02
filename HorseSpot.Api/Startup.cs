@@ -1,22 +1,23 @@
-﻿using HorseSpot.Api.App_Start;
-using HorseSpot.Api.Providers;
-using Microsoft.Owin;
-using Microsoft.Owin.Security.OAuth;
-using Owin;
-using System;
+﻿using System;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
+using HorseSpot.Api.App_Start;
+using HorseSpot.Api.Providers;
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin;
+using Microsoft.Owin.Security.Facebook;
+using Microsoft.Owin.Security.OAuth;
+using Owin;
 
 [assembly: OwinStartup(typeof(HorseSpot.Api.Startup))]
 namespace HorseSpot.Api
 {
     public class Startup
     {
-        /// <summary>
-        /// Application Configuration
-        /// </summary>
-        /// <param name="app">Application Builder</param>
+        public static OAuthBearerAuthenticationOptions OAuthBearerOptions { get; private set; }
+        public static FacebookAuthenticationOptions FacebookAuthOptions { get; private set; }
+
         public void Configuration(IAppBuilder app)
         {
             HttpConfiguration config = new HttpConfiguration();
@@ -34,13 +35,12 @@ namespace HorseSpot.Api
             JobScheduler.Start();
         }
 
-        /// <summary>
-        /// Configuration for OAuth
-        /// </summary>
-        /// <param name="app">Aplication Builder</param>
         public void ConfigureOAuth(IAppBuilder app)
         {
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
+
+            //use a cookie to temporarily store information about a user logging in with a third party login provider
+            app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
             {
@@ -51,9 +51,20 @@ namespace HorseSpot.Api
                 RefreshTokenProvider = new HorseSpotRefreshTokenProvider(),
             };
 
-            // Token Generation
+            //Configure OAuth Berar Token
             app.UseOAuthAuthorizationServer(OAuthServerOptions);
-            app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
+            app.UseOAuthBearerAuthentication(OAuthBearerOptions);
+
+            //Configur Facebook external login
+            FacebookAuthOptions = new FacebookAuthenticationOptions()
+            {
+                AppId = "xx",
+                AppSecret = "xx",
+                Provider = new FacebookAuthProvider()
+            };
+
+            app.UseFacebookAuthentication(FacebookAuthOptions);
         }
+
     }
 }

@@ -39,6 +39,20 @@ namespace HorseSpot.DAL.Dao
             return currentUser;
         }
 
+        public async Task<IdentityResult> CreateAsync(UserModel user)
+        {
+            var result = await _userManager.CreateAsync(user);
+
+            return result;
+        }
+
+        public async Task<IdentityResult> AddLoginAsync(string userId, UserLoginInfo login)
+        {
+            var result = await _userManager.AddLoginAsync(userId, login);
+
+            return result;
+        }
+
         public async Task<UserModel> UpdateUser(UserModel userModel)
         {
             var result = await _userManager.UpdateAsync(userModel);
@@ -51,6 +65,13 @@ namespace HorseSpot.DAL.Dao
         public async Task<UserModel> FindUser(string userName, string password)
         {
             UserModel user = await _userManager.FindAsync(userName, password);
+
+            return user;
+        }
+
+        public async Task<UserModel> FindUserByLoginInfo(UserLoginInfo loginInfo)
+        {
+            UserModel user = await _userManager.FindAsync(loginInfo);
 
             return user;
         }

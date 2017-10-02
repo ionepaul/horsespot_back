@@ -36,6 +36,7 @@
   <ItemGroup>
     <Compile Include="Enums\AppointmentStatus.cs" />
     <Compile Include="Enums\SupportedImageExtensionEnum.cs" />
+    <Compile Include="Models\ExternalLoginViewModel.cs" />
     <Compile Include="Models\AddressDTO.cs" />
     <Compile Include="Models\AppointmentDTO.cs" />
     <Compile Include="Models\AppointmentNotificationMsgDTO.cs" />
@@ -55,10 +56,12 @@
     <Compile Include="Models\HorseAdListModel.cs" />
     <Compile Include="Models\HorseAdSearchViewModel.cs" />
     <Compile Include="Models\ImageDTO.cs" />
+    <Compile Include="Models\ParsedExternalAccessToken.cs" />
     <Compile Include="Models\PedigreeDTO.cs" />
     <Compile Include="Models\PriceRangeDTO.cs" />
     <Compile Include="Models\RecommendedRiderDTO.cs" />
     <Compile Include="Models\RefreshTokenDTO.cs" />
+    <Compile Include="Models\RegisterExternalBindingModel.cs" />
     <Compile Include="Models\UserAppointmentsViewModel.cs" />
     <Compile Include="Models\UserDTO.cs" />
     <Compile Include="Models\UserViewModel.cs" />

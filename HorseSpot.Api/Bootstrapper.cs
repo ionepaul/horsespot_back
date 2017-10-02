@@ -18,7 +18,7 @@ namespace HorseSpot.Api
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
 
-            GlobalConfiguration.Configuration.DependencyResolver = new Unity.WebApi.UnityDependencyResolver(container);
+            GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
 
             return container;
         }

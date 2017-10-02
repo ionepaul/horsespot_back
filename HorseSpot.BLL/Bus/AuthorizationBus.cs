@@ -6,6 +6,7 @@ using HorseSpot.DAL.Entities;
 using HorseSpot.DAL.Interfaces;
 using HorseSpot.Infrastructure.Exceptions;
 using HorseSpot.Models.Models;
+using Microsoft.AspNet.Identity;
 
 namespace HorseSpot.BLL.Bus
 {
@@ -73,6 +74,23 @@ namespace HorseSpot.BLL.Bus
         public async Task<bool> RemoveRefreshToken(string hashedTokenId)
         {
             return await _iRefreshTokenDao.RemoveRefreshToken(hashedTokenId);
+        }
+
+        public Task<UserModel> FindUserByLoginInfo(UserLoginInfo loginInfo)
+        {
+            return _iUserDao.FindUserByLoginInfo(loginInfo);
+        }
+
+        public async Task<IdentityResult> CreateExternalUser(string userName)
+        {
+            var user = new UserModel { UserName = userName };
+
+            return await _iUserDao.CreateAsync(user);
+        }
+
+        public async Task<IdentityResult> AddLoginAsync(string userId, UserLoginInfo login)
+        {
+            return await _iUserDao.AddLoginAsync(userId, login);
         }
 
         #endregion
