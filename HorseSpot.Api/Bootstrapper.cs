@@ -6,7 +6,7 @@ using HorseSpot.DAL.Dao;
 using HorseSpot.DAL.Interfaces;
 using HorseSpot.Infrastructure.MailService;
 using Microsoft.Practices.Unity;
-using Unity.WebApi;
+using Microsoft.Practices.Unity.Mvc;
 
 namespace HorseSpot.Api
 {
@@ -18,7 +18,7 @@ namespace HorseSpot.Api
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
 
-            GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
+            GlobalConfiguration.Configuration.DependencyResolver = new Unity.WebApi.UnityDependencyResolver(container);
 
             return container;
         }

@@ -38,6 +38,7 @@ namespace HorseSpot.Api
         public void ConfigureOAuth(IAppBuilder app)
         {
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
+            OAuthBearerOptions = new OAuthBearerAuthenticationOptions();
 
             //use a cookie to temporarily store information about a user logging in with a third party login provider
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
