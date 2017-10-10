@@ -79,9 +79,9 @@ namespace HorseSpot.Api.Controllers
             return await _iUserBus.CheckIfAdmin(userId);
         }
 
-        [AllowAnonymous]
         [HttpGet]
-        [Route("ObtainLocalAccessToken")]
+        [AllowAnonymous]
+        [Route("api/account/obtainLocalAccessToken")]
         public async Task<IHttpActionResult> ObtainLocalAccessToken(string provider, string externalAccessToken)
         {
 
@@ -241,6 +241,7 @@ namespace HorseSpot.Api.Controllers
 
         }
 
+        [HttpPost]
         [AllowAnonymous]
         [Route("api/account/RegisterExternal")]
         public async Task<IHttpActionResult> RegisterExternal(RegisterExternalBindingModel model)
@@ -265,18 +266,6 @@ namespace HorseSpot.Api.Controllers
             if (hasRegistered)
             {
                 throw new ConflictException("External user is already registered");
-            }
-
-            try
-            {
-                WebClient webClient = new WebClient();
-                var localFileName = ConfigurationManager.AppSettings["ProfilePicturesDirectory"] + Guid.NewGuid() + ".jpg";
-                webClient.DownloadFile(model.ImageUrl, localFileName);
-                model.ImageUrl = localFileName;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Unable to download the profile picture from provider: " + ex.Message);
             }
             
             user = await _iAuthorizationBus.CreateExternalUser(model);
@@ -393,7 +382,7 @@ namespace HorseSpot.Api.Controllers
                 //You can get it from here: https://developers.facebook.com/tools/accesstoken/
                 //More about debug_tokn here: http://stackoverflow.com/questions/16641083/how-does-one-get-the-app-access-token-for-debug-token-inspection-on-facebook
 
-                var appToken = "xxx";
+                var appToken = "275509216289907|clvDhcc6GFtnlVBxSRXhNCofV_4";
                 verifyTokenEndPoint = string.Format("https://graph.facebook.com/debug_token?input_token={0}&access_token={1}", accessToken, appToken);
             }
             else if (provider == "Google")
@@ -464,7 +453,7 @@ namespace HorseSpot.Api.Controllers
                                                 new JProperty("expires_in", tokenExpiration.TotalSeconds.ToString()),
                                                 new JProperty(".issued", ticket.Properties.IssuedUtc.ToString()),
                                                 new JProperty(".expires", ticket.Properties.ExpiresUtc.ToString()),
-                                                new JProperty("userid", user.Id),
+                                                new JProperty("userId", user.Id),
                                                 new JProperty("firstName", user.FirstName + " " + user.LastName),
                                                 new JProperty("profilePic", user.ImagePath),
                                                 new JProperty("isAdmin", (userRoles.Contains("Admin")) ? "true" : "false"));
