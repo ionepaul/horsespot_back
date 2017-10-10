@@ -59,9 +59,11 @@ namespace HorseSpot.Api
             //Configur Facebook external login
             FacebookAuthOptions = new FacebookAuthenticationOptions()
             {
-                AppId = "xx",
-                AppSecret = "xx",
-                Provider = new FacebookAuthProvider()
+                AppId = "275509216289907",
+                AppSecret = "9ae2fbf6d721a5701b51b5deb2b6bbe3",
+                Scope = { "public_profile", "email" },
+                Provider = new FacebookAuthProvider(),
+                UserInformationEndpoint = "https://graph.facebook.com/v2.5/me?fields=id,name,email,first_name,last_name,picture"
             };
 
             app.UseFacebookAuthentication(FacebookAuthOptions);

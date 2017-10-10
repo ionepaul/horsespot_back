@@ -81,11 +81,13 @@ namespace HorseSpot.BLL.Bus
             return _iUserDao.FindUserByLoginInfo(loginInfo);
         }
 
-        public async Task<IdentityResult> CreateExternalUser(string userName)
+        public async Task<UserModel> CreateExternalUser(string userName)
         {
             var user = new UserModel { UserName = userName };
 
-            return await _iUserDao.CreateAsync(user);
+            await _iUserDao.CreateAsync(user);
+
+            return user;
         }
 
         public async Task<IdentityResult> AddLoginAsync(string userId, UserLoginInfo login)

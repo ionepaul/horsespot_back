@@ -16,6 +16,7 @@ using HorseSpot.Infrastructure.Resources;
 using HorseSpot.Models.Enums;
 using HorseSpot.Models.Models;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
@@ -187,7 +188,7 @@ namespace HorseSpot.Api.Controllers
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
         [AllowAnonymous]
-        [Route("ExternalLogin", Name = "ExternalLogin")]
+        [Route("api/account/ExternalLogin")]
         public async Task<IHttpActionResult> GetExternalLogin(string provider, string error = null)
         {
             string redirectUri = string.Empty;
@@ -226,21 +227,22 @@ namespace HorseSpot.Api.Controllers
 
             bool hasRegistered = user != null;
 
-            redirectUri = string.Format("{0}#external_access_token={1}&provider={2}&haslocalaccount={3}&external_user_name={4}",
+            redirectUri = string.Format("{0}#external_access_token={1}&provider={2}&haslocalaccount={3}&external_user_name={4}&external_email={5}",
                                             redirectUri,
                                             externalLogin.ExternalAccessToken,
                                             externalLogin.LoginProvider,
                                             hasRegistered.ToString(),
-                                            externalLogin.UserName);
+                                            externalLogin.UserName,
+                                            externalLogin.Email);
 
             return Redirect(redirectUri);
 
         }
 
         [AllowAnonymous]
-        [Route("RegisterExternal")]
+        [Route("api/account/RegisterExternal")]
         public async Task<IHttpActionResult> RegisterExternal(RegisterExternalBindingModel model)
-        {
+            {
 
             if (!ModelState.IsValid)
             {
@@ -262,9 +264,14 @@ namespace HorseSpot.Api.Controllers
                 return BadRequest("External user is already registered");
             }
 
-            IdentityResult result = await _iAuthorizationBus.CreateExternalUser(model.UserName);
+            WebClient webClient = new WebClient();
+            var localFileName = ConfigurationManager.AppSettings["ProfilePicturesDirectory"] + Guid.NewGuid() + '.jpg';
 
-            if (!result.Succeeded)
+            webClient.DownloadFile(model.ImageUrl, localFileName);
+
+            user = await _iAuthorizationBus.CreateExternalUser(model.UserName);
+
+            if (user == null)
             {
                 //return GetErrorResult(result);
             }
@@ -272,10 +279,10 @@ namespace HorseSpot.Api.Controllers
             var info = new ExternalLoginInfo()
             {
                 DefaultUserName = model.UserName,
-                Login = new UserLoginInfo(model.Provider, verifiedAccessToken.user_id)
+                Login = new UserLoginInfo(model.Provider, verifiedAccessToken.app_id)
             };
 
-            result = await _iAuthorizationBus.AddLoginAsync(user.Id, info.Login);
+            var result = await _iAuthorizationBus.AddLoginAsync(user.Id, info.Login);
 
             if (!result.Succeeded)
             {
@@ -343,7 +350,7 @@ namespace HorseSpot.Api.Controllers
                 return string.Format("Client_id '{0}' is not registered in the system.", clientId);
             }
 
-            if (!string.Equals(client.AllowedOrigin, redirectUri.GetLeftPart(UriPartial.Authority), StringComparison.OrdinalIgnoreCase))
+            if (!string.Equals(client.AllowedOrigin, "*") && !string.Equals(client.AllowedOrigin, redirectUri.GetLeftPart(UriPartial.Authority), StringComparison.OrdinalIgnoreCase))
             {
                 return string.Format("The given URL is not allowed by Client_id '{0}' configuration.", clientId);
             }
@@ -373,6 +380,7 @@ namespace HorseSpot.Api.Controllers
             public string ProviderKey { get; set; }
             public string UserName { get; set; }
             public string ExternalAccessToken { get; set; }
+            public string Email { get; set; }
 
             public static ExternalLoginData FromIdentity(ClaimsIdentity identity)
             {
@@ -398,6 +406,7 @@ namespace HorseSpot.Api.Controllers
                     LoginProvider = providerKeyClaim.Issuer,
                     ProviderKey = providerKeyClaim.Value,
                     UserName = identity.FindFirstValue(ClaimTypes.Name),
+                    Email = identity.FindFirstValue(ClaimTypes.Email),
                     ExternalAccessToken = identity.FindFirstValue("ExternalAccessToken"),
                 };
             }
@@ -414,7 +423,7 @@ namespace HorseSpot.Api.Controllers
                 //You can get it from here: https://developers.facebook.com/tools/accesstoken/
                 //More about debug_tokn here: http://stackoverflow.com/questions/16641083/how-does-one-get-the-app-access-token-for-debug-token-inspection-on-facebook
 
-                var appToken = "xxxxx";
+                var appToken = "275509216289907|clvDhcc6GFtnlVBxSRXhNCofV_4";
                 verifyTokenEndPoint = string.Format("https://graph.facebook.com/debug_token?input_token={0}&access_token={1}", accessToken, appToken);
             }
             else if (provider == "Google")
@@ -474,12 +483,13 @@ namespace HorseSpot.Api.Controllers
             var accessToken = Startup.OAuthBearerOptions.AccessTokenFormat.Protect(ticket);
 
             JObject tokenResponse = new JObject(
-                                        new JProperty("userName", userName),
+                                        new JProperty("user_name", userName),
                                         new JProperty("access_token", accessToken),
                                         new JProperty("token_type", "bearer"),
                                         new JProperty("expires_in", tokenExpiration.TotalSeconds.ToString()),
                                         new JProperty(".issued", ticket.Properties.IssuedUtc.ToString()),
                                         new JProperty(".expires", ticket.Properties.ExpiresUtc.ToString()));
+                                        new JProperty("pic", pic);
 
             return tokenResponse;
         }
