@@ -11,7 +11,7 @@ namespace HorseSpot.Api.Providers
             context.Identity.AddClaim(new Claim("ExternalAccessToken", context.AccessToken));
             TryParseProperty(context, "first_name", "FirstName");
             TryParseProperty(context, "last_name", "LastName");
-            TryParseProperty(context, "picture.data.url", "Picture");
+            TryParseProperty(context, "picture.data.url", "ImageUrl");
             TryParseProperty(context, "Email", "Email");
 
             return Task.FromResult<object>(null);

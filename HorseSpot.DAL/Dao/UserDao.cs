@@ -23,25 +23,22 @@ namespace HorseSpot.DAL.Dao
             _userManager.UserValidator = new UserValidator<UserModel>(_userManager) { AllowOnlyAlphanumericUserNames = false };
         }
 
+        #region Public Methods
+
         public async Task<UserModel> RegisterUser(UserModel userModel, string password)
         {
             var result = await _userManager.CreateAsync(userModel, password);
 
-            UserModel currentUser = null;
+            AddUserRole(result, userModel.UserName);
 
-            if (result.Succeeded)
-            {
-                currentUser = _userManager.FindByName(userModel.UserName);
-
-                var roleresult = _userManager.AddToRole(currentUser.Id, ApplicationConstants.UserRole);
-            }
-
-            return currentUser;
+            return userModel;
         }
 
         public async Task<IdentityResult> CreateAsync(UserModel user)
         {
             var result = await _userManager.CreateAsync(user);
+
+            AddUserRole(result, user.UserName);
 
             return result;
         }
@@ -130,5 +127,23 @@ namespace HorseSpot.DAL.Dao
             _ctx.Dispose();
             _userManager.Dispose();
         }
+
+        #endregion
+
+        #region Private Methods
+
+        private void AddUserRole(IdentityResult result, string userName)
+        {
+            UserModel currentUser = null;
+
+            if (result.Succeeded)
+            {
+                currentUser = _userManager.FindByName(userName);
+
+                var roleresult = _userManager.AddToRole(currentUser.Id, ApplicationConstants.UserRole);
+            }
+        }
+
+        #endregion
     }
 }

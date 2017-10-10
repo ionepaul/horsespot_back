@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorseSpot.Infrastructure", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorseSpot.Models", "HorseSpot.Models\HorseSpot.Models.csproj", "{B1969906-4A8E-4493-A0C9-D1522A707C6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImportDataFromMongo", "ImportDataFromMongo\ImportDataFromMongo.csproj", "{95FB715A-76F2-4CC4-B4C1-5A38019D81DD}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,10 +39,6 @@ Global
 		{B1969906-4A8E-4493-A0C9-D1522A707C6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1969906-4A8E-4493-A0C9-D1522A707C6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1969906-4A8E-4493-A0C9-D1522A707C6A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{95FB715A-76F2-4CC4-B4C1-5A38019D81DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{95FB715A-76F2-4CC4-B4C1-5A38019D81DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{95FB715A-76F2-4CC4-B4C1-5A38019D81DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{95FB715A-76F2-4CC4-B4C1-5A38019D81DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

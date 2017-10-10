@@ -16,7 +16,6 @@ using HorseSpot.Infrastructure.Resources;
 using HorseSpot.Models.Enums;
 using HorseSpot.Models.Models;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
@@ -88,13 +87,14 @@ namespace HorseSpot.Api.Controllers
 
             if (string.IsNullOrWhiteSpace(provider) || string.IsNullOrWhiteSpace(externalAccessToken))
             {
-                return BadRequest("Provider or external access token is not sent");
+                throw new ValidationException("Provider or external access token is not sent");
             }
 
             var verifiedAccessToken = await VerifyExternalAccessToken(provider, externalAccessToken);
+
             if (verifiedAccessToken == null)
             {
-                return BadRequest("Invalid Provider or External Access Token");
+                throw new ValidationException("Invalid Provider or External Access Token");
             }
 
             var user = await _iAuthorizationBus.FindUserByLoginInfo(new UserLoginInfo(provider, verifiedAccessToken.user_id));
@@ -103,14 +103,12 @@ namespace HorseSpot.Api.Controllers
 
             if (!hasRegistered)
             {
-                return BadRequest("External user is not registered");
+                throw new ConflictException("External user is not registered");
             }
 
-            //generate access token response
-            var accessTokenResponse = GenerateLocalAccessTokenResponse(user.UserName);
+            var accessTokenResponse = await GenerateLocalAccessTokenResponse(user.Email);
 
             return Ok(accessTokenResponse);
-
         }
 
         #endregion
@@ -122,7 +120,7 @@ namespace HorseSpot.Api.Controllers
         {
             return await _iUserBus.RegisterUser(userViewModel);
         }
-        
+
         [HttpPost]
         [Authorize]
         public async Task<UserDTO> Edit([FromBody] EditProfileViewModel editProfile)
@@ -195,7 +193,7 @@ namespace HorseSpot.Api.Controllers
 
             if (error != null)
             {
-                return BadRequest(Uri.EscapeDataString(error));
+                throw new ValidationException(Uri.EscapeDataString(error));
             }
 
             if (!User.Identity.IsAuthenticated)
@@ -207,19 +205,20 @@ namespace HorseSpot.Api.Controllers
 
             if (!string.IsNullOrWhiteSpace(redirectUriValidationResult))
             {
-                return BadRequest(redirectUriValidationResult);
+                throw new ValidationException(redirectUriValidationResult);
             }
 
             ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
 
             if (externalLogin == null)
             {
-                return InternalServerError();
+                throw new ValidationException("Invalid external login request.");
             }
 
             if (externalLogin.LoginProvider != provider)
             {
                 Request.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+
                 return new ChallengeResult(provider, this);
             }
 
@@ -227,13 +226,16 @@ namespace HorseSpot.Api.Controllers
 
             bool hasRegistered = user != null;
 
-            redirectUri = string.Format("{0}#external_access_token={1}&provider={2}&haslocalaccount={3}&external_user_name={4}&external_email={5}",
+            redirectUri = string.Format("{0}#external_access_token={1}&provider={2}&haslocalaccount={3}&external_user_name={4}&external_email={5}&firstName={6}&lastName={7}&imageUrl={8}",
                                             redirectUri,
                                             externalLogin.ExternalAccessToken,
                                             externalLogin.LoginProvider,
                                             hasRegistered.ToString(),
                                             externalLogin.UserName,
-                                            externalLogin.Email);
+                                            externalLogin.Email,
+                                            externalLogin.FirstName,
+                                            externalLogin.LastName,
+                                            externalLogin.ImageUrl);
 
             return Redirect(redirectUri);
 
@@ -242,17 +244,18 @@ namespace HorseSpot.Api.Controllers
         [AllowAnonymous]
         [Route("api/account/RegisterExternal")]
         public async Task<IHttpActionResult> RegisterExternal(RegisterExternalBindingModel model)
-            {
+        {
 
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                throw new ValidationException("Invalid register external binding model.");
             }
 
             var verifiedAccessToken = await VerifyExternalAccessToken(model.Provider, model.ExternalAccessToken);
+
             if (verifiedAccessToken == null)
             {
-                return BadRequest("Invalid Provider or External Access Token");
+                throw new ValidationException("Invalid Provider or External Access Token");
             }
 
             var user = await _iAuthorizationBus.FindUserByLoginInfo(new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
@@ -261,19 +264,26 @@ namespace HorseSpot.Api.Controllers
 
             if (hasRegistered)
             {
-                return BadRequest("External user is already registered");
+                throw new ConflictException("External user is already registered");
             }
 
-            WebClient webClient = new WebClient();
-            var localFileName = ConfigurationManager.AppSettings["ProfilePicturesDirectory"] + Guid.NewGuid() + '.jpg';
-
-            webClient.DownloadFile(model.ImageUrl, localFileName);
-
-            user = await _iAuthorizationBus.CreateExternalUser(model.UserName);
+            try
+            {
+                WebClient webClient = new WebClient();
+                var localFileName = ConfigurationManager.AppSettings["ProfilePicturesDirectory"] + Guid.NewGuid() + ".jpg";
+                webClient.DownloadFile(model.ImageUrl, localFileName);
+                model.ImageUrl = localFileName;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Unable to download the profile picture from provider: " + ex.Message);
+            }
+            
+            user = await _iAuthorizationBus.CreateExternalUser(model);
 
             if (user == null)
             {
-                //return GetErrorResult(result);
+                throw new Exception("Cannot create user from external provider.");
             }
 
             var info = new ExternalLoginInfo()
@@ -286,11 +296,10 @@ namespace HorseSpot.Api.Controllers
 
             if (!result.Succeeded)
             {
-                //return GetErrorResult(result);
+                throw new Exception("Cannot save external login.");
             }
 
-            //generate access token response
-            var accessTokenResponse = GenerateLocalAccessTokenResponse(model.UserName);
+            var accessTokenResponse = await GenerateLocalAccessTokenResponse(model.Email);
 
             return Ok(accessTokenResponse);
         }
@@ -326,39 +335,38 @@ namespace HorseSpot.Api.Controllers
 
             if (string.IsNullOrWhiteSpace(redirectUriString))
             {
-                return "redirect_uri is required";
+                throw new ValidationException("redirect_uri is required");
             }
 
             bool validUri = Uri.TryCreate(redirectUriString, UriKind.Absolute, out redirectUri);
 
             if (!validUri)
             {
-                return "redirect_uri is invalid";
+                throw new ValidationException("redirect_uri is invalid");
             }
 
             var clientId = GetQueryString(Request, "client_id");
 
             if (string.IsNullOrWhiteSpace(clientId))
             {
-                return "client_Id is required";
+                throw new ValidationException("client_Id is required");
             }
 
             var client = _iAuthorizationBus.FindClient(clientId);
 
             if (client == null)
             {
-                return string.Format("Client_id '{0}' is not registered in the system.", clientId);
+                throw new ValidationException(string.Format("Client_id '{0}' is not registered in the system.", clientId));
             }
 
             if (!string.Equals(client.AllowedOrigin, "*") && !string.Equals(client.AllowedOrigin, redirectUri.GetLeftPart(UriPartial.Authority), StringComparison.OrdinalIgnoreCase))
             {
-                return string.Format("The given URL is not allowed by Client_id '{0}' configuration.", clientId);
+                throw new ValidationException(string.Format("The given URL is not allowed by Client_id '{0}' configuration.", clientId));
             }
 
             redirectUriOutput = redirectUri.AbsoluteUri;
 
             return string.Empty;
-
         }
 
         private string GetQueryString(HttpRequestMessage request, string key)
@@ -374,44 +382,6 @@ namespace HorseSpot.Api.Controllers
             return match.Value;
         }
 
-        private class ExternalLoginData
-        {
-            public string LoginProvider { get; set; }
-            public string ProviderKey { get; set; }
-            public string UserName { get; set; }
-            public string ExternalAccessToken { get; set; }
-            public string Email { get; set; }
-
-            public static ExternalLoginData FromIdentity(ClaimsIdentity identity)
-            {
-                if (identity == null)
-                {
-                    return null;
-                }
-
-                Claim providerKeyClaim = identity.FindFirst(ClaimTypes.NameIdentifier);
-
-                if (providerKeyClaim == null || String.IsNullOrEmpty(providerKeyClaim.Issuer) || String.IsNullOrEmpty(providerKeyClaim.Value))
-                {
-                    return null;
-                }
-
-                if (providerKeyClaim.Issuer == ClaimsIdentity.DefaultIssuer)
-                {
-                    return null;
-                }
-
-                return new ExternalLoginData
-                {
-                    LoginProvider = providerKeyClaim.Issuer,
-                    ProviderKey = providerKeyClaim.Value,
-                    UserName = identity.FindFirstValue(ClaimTypes.Name),
-                    Email = identity.FindFirstValue(ClaimTypes.Email),
-                    ExternalAccessToken = identity.FindFirstValue("ExternalAccessToken"),
-                };
-            }
-        }
-
         private async Task<ParsedExternalAccessToken> VerifyExternalAccessToken(string provider, string accessToken)
         {
             ParsedExternalAccessToken parsedToken = null;
@@ -423,7 +393,7 @@ namespace HorseSpot.Api.Controllers
                 //You can get it from here: https://developers.facebook.com/tools/accesstoken/
                 //More about debug_tokn here: http://stackoverflow.com/questions/16641083/how-does-one-get-the-app-access-token-for-debug-token-inspection-on-facebook
 
-                var appToken = "275509216289907|clvDhcc6GFtnlVBxSRXhNCofV_4";
+                var appToken = "xxx";
                 verifyTokenEndPoint = string.Format("https://graph.facebook.com/debug_token?input_token={0}&access_token={1}", accessToken, appToken);
             }
             else if (provider == "Google")
@@ -462,15 +432,21 @@ namespace HorseSpot.Api.Controllers
             return parsedToken;
         }
 
-        private JObject GenerateLocalAccessTokenResponse(string userName)
+        private async Task<JObject> GenerateLocalAccessTokenResponse(string email)
         {
-
-            var tokenExpiration = TimeSpan.FromDays(1);
+            var tokenExpiration = TimeSpan.FromHours(6);
+            var user = _iUserBus.FindUserByEmail(email);
+            var userRoles = await _iAuthorizationBus.UserRoles(user.Id);
 
             ClaimsIdentity identity = new ClaimsIdentity(OAuthDefaults.AuthenticationType);
 
-            identity.AddClaim(new Claim(ClaimTypes.Name, userName));
-            identity.AddClaim(new Claim("role", "user"));
+            identity.AddClaim(new Claim(ClaimTypes.Name, email));
+            identity.AddClaim(new Claim("UserId", user.Id));
+
+            foreach (var role in userRoles)
+            {
+                identity.AddClaim(new Claim(ClaimTypes.Role, role));
+            }
 
             var props = new AuthenticationProperties()
             {
@@ -482,14 +458,16 @@ namespace HorseSpot.Api.Controllers
 
             var accessToken = Startup.OAuthBearerOptions.AccessTokenFormat.Protect(ticket);
 
-            JObject tokenResponse = new JObject(
-                                        new JProperty("user_name", userName),
-                                        new JProperty("access_token", accessToken),
-                                        new JProperty("token_type", "bearer"),
-                                        new JProperty("expires_in", tokenExpiration.TotalSeconds.ToString()),
-                                        new JProperty(".issued", ticket.Properties.IssuedUtc.ToString()),
-                                        new JProperty(".expires", ticket.Properties.ExpiresUtc.ToString()));
-                                        new JProperty("pic", pic);
+            JObject tokenResponse = new JObject(new JProperty("username", email),
+                                                new JProperty("access_token", accessToken),
+                                                new JProperty("token_type", "bearer"),
+                                                new JProperty("expires_in", tokenExpiration.TotalSeconds.ToString()),
+                                                new JProperty(".issued", ticket.Properties.IssuedUtc.ToString()),
+                                                new JProperty(".expires", ticket.Properties.ExpiresUtc.ToString()),
+                                                new JProperty("userid", user.Id),
+                                                new JProperty("firstName", user.FirstName + " " + user.LastName),
+                                                new JProperty("profilePic", user.ImagePath),
+                                                new JProperty("isAdmin", (userRoles.Contains("Admin")) ? "true" : "false"));
 
             return tokenResponse;
         }

@@ -58,6 +58,15 @@ namespace HorseSpot.BLL.Bus
             return UserConverter.FromUserModelToUserViewModel(savedUser);
         }
 
+        public UserDTO FindUserByEmail(string email)
+        {
+            var userModel = _iUserDao.FindUserByEmail(email);
+
+            CheckIfUserExists(userModel);
+
+            return UserConverter.FromUserModelToUserDTO(userModel);
+        }
+
         public async Task<UserDTO> EditProfile(string id, EditProfileViewModel editProfile)
         {
             UserModel userModel = _iUserDao.FindUserById(id);
@@ -237,7 +246,7 @@ namespace HorseSpot.BLL.Bus
                 throw new ValidationException(Resources.InvalidPhoneNumberFormat);
             }
 
-            if (!FindUserByEmail(user.Email))
+            if (!CheckIfUserExistsByEmail(user.Email))
             {
                 throw new ConflictException(Resources.ExistUserEmail);
             }
@@ -262,7 +271,7 @@ namespace HorseSpot.BLL.Bus
             return UserConverter.FromUserModelToUserDTO(user);
         }
 
-        private bool FindUserByEmail(string email)
+        private bool CheckIfUserExistsByEmail(string email)
         {
             UserModel user = _iUserDao.FindUserByEmail(email);
 

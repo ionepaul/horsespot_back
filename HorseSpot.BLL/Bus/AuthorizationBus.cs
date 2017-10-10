@@ -81,9 +81,16 @@ namespace HorseSpot.BLL.Bus
             return _iUserDao.FindUserByLoginInfo(loginInfo);
         }
 
-        public async Task<UserModel> CreateExternalUser(string userName)
+        public async Task<UserModel> CreateExternalUser(RegisterExternalBindingModel model)
         {
-            var user = new UserModel { UserName = userName };
+            var user = new UserModel
+            {
+                UserName = model.UserName,
+                FirstName = model.FirstName, 
+                LastName = model.LastName,
+                Email = model.Email,
+                ImagePath = model.ImageUrl
+            };
 
             await _iUserDao.CreateAsync(user);
 

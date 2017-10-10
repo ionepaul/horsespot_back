@@ -15,7 +15,7 @@ namespace HorseSpot.BLL.Interfaces
         Task<bool> AddRefreshToken(RefreshTokenDTO token);
         Task<IList<string>> UserRoles(string id);
         Task<UserModel> FindUserByLoginInfo(UserLoginInfo loginInfo);
-        Task<UserModel> CreateExternalUser(string userName);
+        Task<UserModel> CreateExternalUser(RegisterExternalBindingModel model);
         Task<IdentityResult> AddLoginAsync(string userId, UserLoginInfo login);
     }
 }
