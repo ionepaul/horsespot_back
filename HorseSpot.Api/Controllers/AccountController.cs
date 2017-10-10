@@ -19,6 +19,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace HorseSpot.Api.Controllers
@@ -226,16 +227,41 @@ namespace HorseSpot.Api.Controllers
 
             bool hasRegistered = user != null;
 
-            redirectUri = string.Format("{0}#external_access_token={1}&provider={2}&haslocalaccount={3}&external_user_name={4}&external_email={5}&firstName={6}&lastName={7}&imageUrl={8}",
+            if (!hasRegistered)
+            {
+                var externalBinding = new RegisterExternalBindingModel
+                {
+                    FirstName = externalLogin.FirstName,
+                    Email = externalLogin.Email,
+                    LastName = externalLogin.LastName,
+                    ImageUrl = externalLogin.ImageUrl,
+                    UserName = externalLogin.UserName
+                };
+
+                var createdUser = await _iAuthorizationBus.CreateExternalUser(externalBinding);
+
+                var verifiedAccessToken = await VerifyExternalAccessToken(externalLogin.LoginProvider, externalLogin.ExternalAccessToken);
+
+                var info = new ExternalLoginInfo()
+                {
+                    DefaultUserName = externalLogin.UserName,
+                    Login = new UserLoginInfo(externalLogin.LoginProvider, verifiedAccessToken.app_id)
+                };
+
+                var result = await _iAuthorizationBus.AddLoginAsync(createdUser.Id, info.Login);
+
+                redirectUri = string.Format("{0}?firstRegistration={1}&q={2}",
+                                           redirectUri,
+                                           true,
+                                           createdUser.Id);
+
+                return Redirect(redirectUri);
+            }
+
+            redirectUri = string.Format("{0}?haslocalaccount={1}&q={2}",
                                             redirectUri,
-                                            externalLogin.ExternalAccessToken,
-                                            externalLogin.LoginProvider,
-                                            hasRegistered.ToString(),
-                                            externalLogin.UserName,
-                                            externalLogin.Email,
-                                            externalLogin.FirstName,
-                                            externalLogin.LastName,
-                                            externalLogin.ImageUrl);
+                                            false,
+                                            externalLogin.Email);
 
             return Redirect(redirectUri);
 
@@ -382,7 +408,7 @@ namespace HorseSpot.Api.Controllers
                 //You can get it from here: https://developers.facebook.com/tools/accesstoken/
                 //More about debug_tokn here: http://stackoverflow.com/questions/16641083/how-does-one-get-the-app-access-token-for-debug-token-inspection-on-facebook
 
-                var appToken = "275509216289907|clvDhcc6GFtnlVBxSRXhNCofV_4";
+                var appToken = "xxx";
                 verifyTokenEndPoint = string.Format("https://graph.facebook.com/debug_token?input_token={0}&access_token={1}", accessToken, appToken);
             }
             else if (provider == "Google")
