@@ -1,5 +1,5 @@
-﻿using System;
-using System.Security.Claims;
+﻿using System.Security.Claims;
+using HorseSpot.Models.Models;
 using Microsoft.AspNet.Identity;
 
 namespace HorseSpot.Api.Utils
@@ -24,7 +24,7 @@ namespace HorseSpot.Api.Utils
 
             Claim providerKeyClaim = identity.FindFirst(ClaimTypes.NameIdentifier);
 
-            if (providerKeyClaim == null || String.IsNullOrEmpty(providerKeyClaim.Issuer) || String.IsNullOrEmpty(providerKeyClaim.Value))
+            if (providerKeyClaim == null || string.IsNullOrEmpty(providerKeyClaim.Issuer) || string.IsNullOrEmpty(providerKeyClaim.Value))
             {
                 return null;
             }
@@ -40,10 +40,10 @@ namespace HorseSpot.Api.Utils
                 ProviderKey = providerKeyClaim.Value,
                 UserName = identity.FindFirstValue(ClaimTypes.Name),
                 Email = identity.FindFirstValue(ClaimTypes.Email),
-                FirstName = identity.FindFirstValue("FirstName"),
-                LastName = identity.FindFirstValue("LastName"),
-                ImageUrl = identity.FindFirstValue("ImageUrl"),
-                ExternalAccessToken = identity.FindFirstValue("ExternalAccessToken"),
+                FirstName = identity.FindFirstValue(ExternalAuthConstants.CustomClaims.FirstName),
+                LastName = identity.FindFirstValue(ExternalAuthConstants.CustomClaims.LastName),
+                ImageUrl = identity.FindFirstValue(ExternalAuthConstants.CustomClaims.ImageUrl),
+                ExternalAccessToken = identity.FindFirstValue(ExternalAuthConstants.CustomClaims.ExternalAccessToken)
             };
         }
     }

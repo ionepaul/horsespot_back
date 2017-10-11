@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 
-namespace HorseSpot.Api.Controllers
+namespace HorseSpot.Api.Utils
 {
     public class ChallengeResult : IHttpActionResult
     {

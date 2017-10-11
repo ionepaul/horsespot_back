@@ -264,7 +264,7 @@ namespace HorseSpot.BLL.Bus
                 throw new ValidationException(Resources.InvalidPhoneNumberFormat);
             }
 
-            user.PhoneNumber = editProfile.PhoneNumber != null ? editProfile.PhoneNumber : user.PhoneNumber;
+            user.PhoneNumber = editProfile.PhoneNumber;
 
             var editedUser = await _iUserDao.UpdateUser(user);
 
