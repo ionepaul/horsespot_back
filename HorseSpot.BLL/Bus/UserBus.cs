@@ -259,7 +259,7 @@ namespace HorseSpot.BLL.Bus
 
             Regex phoneNumberRegex = new Regex(@"^(\+\d{1,3}[- ]?)?\d{10}$");
 
-            if (editProfile.PhoneNumber != null && !phoneNumberRegex.IsMatch(user.PhoneNumber))
+            if (editProfile.PhoneNumber != null && !phoneNumberRegex.IsMatch(editProfile.PhoneNumber))
             {
                 throw new ValidationException(Resources.InvalidPhoneNumberFormat);
             }
