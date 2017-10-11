@@ -87,6 +87,28 @@ namespace HorseSpot.DAL.Dao
             await _ctx.SaveChangesAsync();
         }
 
+        public Dictionary<string, IEnumerable<HorseAd>> GetLatestHorses()
+        {
+            var horses = _ctx.HorseAds.OrderBy(x => x.DatePosted);
+
+            var showJumping = horses.Where(x => x.Abilities.Any(y => y.Id == 1)).Take(2).AsEnumerable();
+
+            var dressage = horses.Where(x => x.Abilities.Any(y => y.Id == 2) && !showJumping.Contains(x)).Take(2).AsEnumerable();
+
+            var eventing = horses.Where(x => x.Abilities.Any(y => y.Id == 3) && !dressage.Contains(x) && !showJumping.Contains(x)).Take(2).AsEnumerable();
+
+            var endurance = horses.Where(x => x.Abilities.Any(y => y.Id == 4) && !dressage.Contains(x) && !showJumping.Contains(x) && !eventing.Contains(x)).Take(2).AsEnumerable();
+
+            var latestHorsesDictionary = new Dictionary<string, IEnumerable<HorseAd>>();
+
+            latestHorsesDictionary.Add("_showJumping", showJumping);
+            latestHorsesDictionary.Add("_dressage", dressage);
+            latestHorsesDictionary.Add("_eventing", eventing);
+            latestHorsesDictionary.Add("_endurance", endurance);
+
+            return latestHorsesDictionary;
+        }
+
         #endregion
 
         #region Private Methods

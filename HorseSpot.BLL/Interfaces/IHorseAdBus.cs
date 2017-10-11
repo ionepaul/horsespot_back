@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using HorseSpot.Models.Models;
 
 namespace HorseSpot.BLL.Interfaces
@@ -18,5 +19,6 @@ namespace HorseSpot.BLL.Interfaces
         Task SaveNewImage(int adId, string imageName, string userId);
         string DeleteImage(int imageId, string userId);
         void SetHorseAdProfilePicture(int imageId, string userId);
+        LatestHorsesHomePageViewModel GetLatestHorsesForHomePage();
     }
 }

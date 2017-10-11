@@ -33,5 +33,7 @@ namespace HorseSpot.Models.Models
         public string Gender { get; set; }
 
         public DateTime DatePosted { get; set; }
+
+        public string Description { get; set; }
     }
 }

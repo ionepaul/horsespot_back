@@ -131,7 +131,8 @@ namespace HorseSpot.BLL.Converters
                 Views = horseAd.Views,
                 Country = horseAd.Address.Country,
                 Gender = horseAd.Gender,
-                DatePosted = horseAd.DatePosted
+                DatePosted = horseAd.DatePosted,
+                Description = horseAd.Description
             };
         }
 

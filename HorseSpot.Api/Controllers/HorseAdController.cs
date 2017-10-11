@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Net;
@@ -65,6 +66,13 @@ namespace HorseSpot.Api.Controllers
             }
 
             return _iHorseAdBus.SearchHorses(horseFilter);
+        }
+
+        [HttpGet]
+        [Route("api/horses/latest")]
+        public LatestHorsesHomePageViewModel GetLatestForHomePage()
+        {
+            return _iHorseAdBus.GetLatestHorsesForHomePage();
         }
 
         #endregion
