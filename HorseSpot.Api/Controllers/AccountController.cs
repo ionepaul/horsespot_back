@@ -154,7 +154,7 @@ namespace HorseSpot.Api.Controllers
                 return await RegisterExternalUser(externalLogin, redirectUri);
             }
 
-            redirectUri = CreateRedirectUri(redirectUri, false, externalLogin.ExternalAccessToken, externalLogin.LoginProvider, externalLogin.Email);
+            redirectUri = CreateRedirectUri(redirectUri, false, externalLogin.ExternalAccessToken, externalLogin.LoginProvider);
 
             return Redirect(redirectUri);
         }
@@ -444,7 +444,7 @@ namespace HorseSpot.Api.Controllers
                 throw new Exception(Resources.CannotSaveExternalLogin);
             }
 
-            redirectUri = CreateRedirectUri(redirectUri, true, externalLogin.ExternalAccessToken, externalLogin.LoginProvider, createdUser.Id);
+            redirectUri = CreateRedirectUri(redirectUri, true, externalLogin.ExternalAccessToken, externalLogin.LoginProvider);
 
             return Redirect(redirectUri);
         }
@@ -468,14 +468,13 @@ namespace HorseSpot.Api.Controllers
             };
         }
 
-        private string CreateRedirectUri(string redirectUri, bool firstReg, string externalToken, string provider, string q)
+        private string CreateRedirectUri(string redirectUri, bool firstReg, string externalToken, string provider)
         {
             return string.Format("{0}?firstReg={1}&external_token={2}&provider={3}&q={4}",
                                  redirectUri,
                                  firstReg,
                                  externalToken,
-                                 provider,
-                                 q);
+                                 provider);
         }
 
         #endregion
