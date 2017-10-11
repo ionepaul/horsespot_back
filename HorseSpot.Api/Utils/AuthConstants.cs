@@ -5,7 +5,7 @@ using System.Web;
 
 namespace HorseSpot.Api.Utils
 {
-    public static class ExternalAuthConstants
+    public static class AuthConstants
     {
         public static class Providers
         {
@@ -24,6 +24,17 @@ namespace HorseSpot.Api.Utils
             public const string LastName = "LastName";
             public const string ImageUrl = "ImageUrl";
             public const string ExternalAccessToken = "ExternalAccessToken";
+            public const string UserId = "UserId";
+        }
+
+        public static class CustomAuthProps
+        {
+            public const string UserName = "username";
+            public const string ClientId = "as:client_id";
+            public const string IsAdmin = "isAdmin";
+            public const string UserId = "userId";
+            public const string FullName = "fullName";
+            public const string ProfilePic = "profilePic";
         }
     }
 }

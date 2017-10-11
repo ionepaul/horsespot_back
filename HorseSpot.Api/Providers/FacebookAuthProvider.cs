@@ -10,10 +10,10 @@ namespace HorseSpot.Api.Providers
         public override Task Authenticated(FacebookAuthenticatedContext context)
         {
             context.Identity.AddClaim(new Claim("ExternalAccessToken", context.AccessToken));
-            TryParseProperty(context, "first_name", ExternalAuthConstants.CustomClaims.FirstName);
-            TryParseProperty(context, "last_name", ExternalAuthConstants.CustomClaims.LastName);
-            TryParseProperty(context, "picture.data.url", ExternalAuthConstants.CustomClaims.ImageUrl);
-            TryParseProperty(context, "Email", ExternalAuthConstants.CustomClaims.Email);
+            TryParseProperty(context, "first_name", AuthConstants.CustomClaims.FirstName);
+            TryParseProperty(context, "last_name", AuthConstants.CustomClaims.LastName);
+            TryParseProperty(context, "picture.data.url", AuthConstants.CustomClaims.ImageUrl);
+            TryParseProperty(context, "Email", AuthConstants.CustomClaims.Email);
 
             return Task.FromResult<object>(null);
         }

@@ -97,11 +97,65 @@ namespace HorseSpot.Infrastructure.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot save external login..
+        /// </summary>
+        public static string CannotSaveExternalLogin {
+            get {
+                return ResourceManager.GetString("CannotSaveExternalLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You cannot upload more than five pictures..
         /// </summary>
         public static string CannotUploadMoreThan5 {
             get {
                 return ResourceManager.GetString("CannotUploadMoreThan5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The given URL is not allowed by Client_id &apos;{0}&apos; configuration..
+        /// </summary>
+        public static string ClientIdDoesNotHaveEnoughRight {
+            get {
+                return ResourceManager.GetString("ClientIdDoesNotHaveEnoughRight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to client_Id is required..
+        /// </summary>
+        public static string ClientIdIsRequired {
+            get {
+                return ResourceManager.GetString("ClientIdIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Client_id &apos;{0}&apos; is not registered in the system..
+        /// </summary>
+        public static string ClientIdNotRegistred {
+            get {
+                return ResourceManager.GetString("ClientIdNotRegistred", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Client is inactive..
+        /// </summary>
+        public static string ClientInactive {
+            get {
+                return ResourceManager.GetString("ClientInactive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Client secret should be sent..
+        /// </summary>
+        public static string ClientSecretShouldBeSent {
+            get {
+                return ResourceManager.GetString("ClientSecretShouldBeSent", resourceCulture);
             }
         }
         
@@ -138,6 +192,15 @@ namespace HorseSpot.Infrastructure.Resources {
         public static string ExistUserUsername {
             get {
                 return ResourceManager.GetString("ExistUserUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exteranl user is not registred..
+        /// </summary>
+        public static string ExternalUserIsNotRegistred {
+            get {
+                return ResourceManager.GetString("ExternalUserIsNotRegistred", resourceCulture);
             }
         }
         
@@ -187,6 +250,15 @@ namespace HorseSpot.Infrastructure.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Client secret is invalid..
+        /// </summary>
+        public static string InvalidClientSecret {
+            get {
+                return ResourceManager.GetString("InvalidClientSecret", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm Password field didn&apos;t match Password field.
         /// </summary>
         public static string InvalidConfirmPasswordFormat {
@@ -219,6 +291,15 @@ namespace HorseSpot.Infrastructure.Resources {
         public static string InvalidEmailOrPassword {
             get {
                 return ResourceManager.GetString("InvalidEmailOrPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid external login request..
+        /// </summary>
+        public static string InvalidExternalLoginRequest {
+            get {
+                return ResourceManager.GetString("InvalidExternalLoginRequest", resourceCulture);
             }
         }
         
@@ -313,11 +394,29 @@ namespace HorseSpot.Infrastructure.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid Provider or External Token..
+        /// </summary>
+        public static string InvalidProviderOrExternalToken {
+            get {
+                return ResourceManager.GetString("InvalidProviderOrExternalToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid recommended rider identifier..
         /// </summary>
         public static string InvalidRecommendedRiderIdentifier {
             get {
                 return ResourceManager.GetString("InvalidRecommendedRiderIdentifier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to redirect_uri is invalid..
+        /// </summary>
+        public static string InvalidRedirectUri {
+            get {
+                return ResourceManager.GetString("InvalidRedirectUri", resourceCulture);
             }
         }
         
@@ -372,6 +471,15 @@ namespace HorseSpot.Infrastructure.Resources {
         public static string PleaseUpdateAtLeastOneImage {
             get {
                 return ResourceManager.GetString("PleaseUpdateAtLeastOneImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh token is issued to a different clientId..
+        /// </summary>
+        public static string RefreshTokenIssuedToDifferentClient {
+            get {
+                return ResourceManager.GetString("RefreshTokenIssuedToDifferentClient", resourceCulture);
             }
         }
         

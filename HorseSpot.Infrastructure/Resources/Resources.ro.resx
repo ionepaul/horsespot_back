@@ -129,8 +129,26 @@
   <data name="CannotHaveMoreThan5PerAd" xml:space="preserve">
     <value>Nu poti avea mai mult de 5 imagine pe anunt.</value>
   </data>
+  <data name="CannotSaveExternalLogin" xml:space="preserve">
+    <value>Nu s-a putut salva conectare externa.</value>
+  </data>
   <data name="CannotUploadMoreThan5" xml:space="preserve">
     <value>Nu poti incarca mai mult de 5 imagini.</value>
+  </data>
+  <data name="ClientIdDoesNotHaveEnoughRight" xml:space="preserve">
+    <value>Url dorit nu este configurat pentru clientul '{0}'.</value>
+  </data>
+  <data name="ClientIdIsRequired" xml:space="preserve">
+    <value>client_id este necesar.</value>
+  </data>
+  <data name="ClientIdNotRegistred" xml:space="preserve">
+    <value>Clientul '{0}' nu este inregistrat.</value>
+  </data>
+  <data name="ClientInactive" xml:space="preserve">
+    <value>Clientul este inactiv.</value>
+  </data>
+  <data name="ClientSecretShouldBeSent" xml:space="preserve">
+    <value>Secretul clientului ar trebui trimis.</value>
   </data>
   <data name="ConfirmPasswordNotMatch" xml:space="preserve">
     <value>Campul parola nu se potriveste cu campul confirma parola.</value>
@@ -143,6 +161,9 @@
   </data>
   <data name="ExistUserUsername" xml:space="preserve">
     <value>Exista deja un utilizator cu acest username.</value>
+  </data>
+  <data name="ExternalUserIsNotRegistred" xml:space="preserve">
+    <value>User-ul extern nu este inregistrat.</value>
   </data>
   <data name="ImageNotFoundInAdImagesList" xml:space="preserve">
     <value>Imaginea nu a fost gasita in lista anuntului dorit.</value>
@@ -159,6 +180,9 @@
   <data name="InvalidChangePasswordRequest" xml:space="preserve">
     <value>Cerere de schimbare a parolei invalida.</value>
   </data>
+  <data name="InvalidClientSecret" xml:space="preserve">
+    <value>Secretul clientului este invalid.</value>
+  </data>
   <data name="InvalidConfirmPasswordFormat" xml:space="preserve">
     <value>Confirmarea parolei nu se potriveste.</value>
   </data>
@@ -170,6 +194,9 @@
   </data>
   <data name="InvalidEmailOrPassword" xml:space="preserve">
     <value>Email sau parola invalida.</value>
+  </data>
+  <data name="InvalidExternalLoginRequest" xml:space="preserve">
+    <value>Conectare externa invalida.</value>
   </data>
   <data name="InvalidHorseAdRequest" xml:space="preserve">
     <value>Datele introduse sunt invalide pentru un anunt in sectiunea cal de vanzare.</value>
@@ -201,8 +228,14 @@
   <data name="InvalidPriceRangeIdentifier" xml:space="preserve">
     <value>Identificatorul pentru incadrarea pretului este invalid.</value>
   </data>
+  <data name="InvalidProviderOrExternalToken" xml:space="preserve">
+    <value>Provider invalid sau token extern invalid.</value>
+  </data>
   <data name="InvalidRecommendedRiderIdentifier" xml:space="preserve">
     <value>Identificatorul pentru calaret recomandat este invalid.</value>
+  </data>
+  <data name="InvalidRedirectUri" xml:space="preserve">
+    <value>redirect_uri este invalid.</value>
   </data>
   <data name="InvalidRegistrationRequest" xml:space="preserve">
     <value>Cerere de inregistrare invalida.</value>
@@ -221,6 +254,9 @@
   </data>
   <data name="PleaseUpdateAtLeastOneImage" xml:space="preserve">
     <value>Te rugam sa incarci cel putin o imagine.</value>
+  </data>
+  <data name="RefreshTokenIssuedToDifferentClient" xml:space="preserve">
+    <value>Token-nul de refresh este pentru alt client.</value>
   </data>
   <data name="WebSocketConnectionForbidden" xml:space="preserve">
     <value>Connexiune nepermisa.</value>

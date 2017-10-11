@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
+using HorseSpot.Api.Utils;
 using HorseSpot.BLL.Interfaces;
 using HorseSpot.Infrastructure.Constants;
 using HorseSpot.Infrastructure.Resources;
@@ -48,14 +49,14 @@ namespace HorseSpot.Api.Providers
             {
                 if (string.IsNullOrWhiteSpace(clientSecret))
                 {
-                    context.SetError("invalid_clientId", "client secret should be sent.");
+                    context.SetError("invalid_clientId", Resources.ClientSecretShouldBeSent);
                     return Task.FromResult<object>(null);
                 }
                 else
                 {
                     if (client.Secret != Helper.GetHash(clientSecret))
                     {
-                        context.SetError("invalid_clientId", "client secret is invalid");
+                        context.SetError("invalid_clientId", Resources.InvalidClientSecret);
                         return Task.FromResult<object>(null);
                     }
                 }
@@ -63,7 +64,7 @@ namespace HorseSpot.Api.Providers
 
             if (!client.Active)
             {
-                context.SetError("invalid_clientId", "Client is inactive");
+                context.SetError("invalid_clientId", Resources.ClientInactive);
                 return Task.FromResult<object>(null);
             }
 
@@ -105,7 +106,7 @@ namespace HorseSpot.Api.Providers
 
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
             identity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
-            identity.AddClaim(new Claim("UserId", user.Id));
+            identity.AddClaim(new Claim(AuthConstants.CustomClaims.UserId, user.Id));
 
             foreach (var role in userRoles)
             {
@@ -115,22 +116,22 @@ namespace HorseSpot.Api.Providers
             var props = new AuthenticationProperties(new Dictionary<string, string>
             {
                 {
-                    "as:client_id", (context.ClientId == null) ? string.Empty : context.ClientId
+                    AuthConstants.CustomAuthProps.ClientId, (context.ClientId == null) ? string.Empty : context.ClientId
                 },
                 {
-                    "username", context.UserName
+                    AuthConstants.CustomAuthProps.UserName, context.UserName
                 },
                 {
-                    "isAdmin", (userRoles.Contains("Admin")) ? "true" : "false"
+                    AuthConstants.CustomAuthProps.IsAdmin, (userRoles.Contains(ApplicationConstants.ADMIN)) ? "true" : "false"
                 },
                 {
-                    "userId", user.Id
+                    AuthConstants.CustomAuthProps.UserId, user.Id
                 },
                 {
-                    "firstName", user.FirstName
+                    AuthConstants.CustomAuthProps.FullName, user.FirstName + " " + user.LastName
                 },
                 {
-                    "profilePic", user.ProfileImage
+                    AuthConstants.CustomAuthProps.ProfilePic, user.ProfileImage
                 }
             });
 
@@ -148,7 +149,7 @@ namespace HorseSpot.Api.Providers
 
             if (originalClient != currentClinet)
             {
-                context.SetError("invalid_clientId", "refresh token is issued to a different clientId");
+                context.SetError("invalid_clientId", Resources.RefreshTokenIssuedToDifferentClient);
                 return Task.FromResult<object>(null);
             }
 

@@ -11,6 +11,7 @@ using System.Web;
 using System.Web.Http;
 using HorseSpot.Api.Utils;
 using HorseSpot.BLL.Interfaces;
+using HorseSpot.Infrastructure.Constants;
 using HorseSpot.Infrastructure.Exceptions;
 using HorseSpot.Infrastructure.Resources;
 using HorseSpot.Models.Enums;
@@ -19,7 +20,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace HorseSpot.Api.Controllers
@@ -345,14 +345,14 @@ namespace HorseSpot.Api.Controllers
 
             var verifyTokenEndPoint = "";
 
-            if (string.Equals(provider, ExternalAuthConstants.Providers.Facebook))
+            if (string.Equals(provider, AuthConstants.Providers.Facebook))
             {
                 var appToken = "xxx";
-                verifyTokenEndPoint = string.Format(ExternalAuthConstants.Providers.FacebookVerifyTokenEndPoint, accessToken, appToken);
+                verifyTokenEndPoint = string.Format(AuthConstants.Providers.FacebookVerifyTokenEndPoint, accessToken, appToken);
             }
-            else if (string.Equals(provider, ExternalAuthConstants.Providers.Google))
+            else if (string.Equals(provider, AuthConstants.Providers.Google))
             {
-                verifyTokenEndPoint = string.Format(ExternalAuthConstants.Providers.GoogleVerifyTokenEndPoint, accessToken);
+                verifyTokenEndPoint = string.Format(AuthConstants.Providers.GoogleVerifyTokenEndPoint, accessToken);
             }
             else
             {
@@ -371,7 +371,7 @@ namespace HorseSpot.Api.Controllers
 
                 parsedToken = new ParsedExternalAccessToken();
 
-                if (string.Equals(provider, ExternalAuthConstants.Providers.Facebook))
+                if (string.Equals(provider, AuthConstants.Providers.Facebook))
                 {
                     parsedToken.user_id = jObj["data"]["user_id"];
                     parsedToken.app_id = jObj["data"]["app_id"];
@@ -396,7 +396,7 @@ namespace HorseSpot.Api.Controllers
             ClaimsIdentity identity = new ClaimsIdentity(OAuthDefaults.AuthenticationType);
 
             identity.AddClaim(new Claim(ClaimTypes.Name, email));
-            identity.AddClaim(new Claim("UserId", user.Id));
+            identity.AddClaim(new Claim(AuthConstants.CustomClaims.UserId, user.Id));
 
             foreach (var role in userRoles)
             {
@@ -413,16 +413,16 @@ namespace HorseSpot.Api.Controllers
 
             var accessToken = Startup.OAuthBearerOptions.AccessTokenFormat.Protect(ticket);
 
-            JObject tokenResponse = new JObject(new JProperty("username", email),
+            JObject tokenResponse = new JObject(new JProperty(AuthConstants.CustomAuthProps.UserName, email),
                                                 new JProperty("access_token", accessToken),
                                                 new JProperty("token_type", "bearer"),
                                                 new JProperty("expires_in", tokenExpiration.TotalSeconds.ToString()),
                                                 new JProperty(".issued", ticket.Properties.IssuedUtc.ToString()),
                                                 new JProperty(".expires", ticket.Properties.ExpiresUtc.ToString()),
-                                                new JProperty("userId", user.Id),
-                                                new JProperty("firstName", user.FirstName + " " + user.LastName),
-                                                new JProperty("profilePic", user.ImagePath),
-                                                new JProperty("isAdmin", (userRoles.Contains("Admin")) ? "true" : "false"));
+                                                new JProperty(AuthConstants.CustomAuthProps.UserId, user.Id),
+                                                new JProperty(AuthConstants.CustomAuthProps.FullName, user.FirstName + " " + user.LastName),
+                                                new JProperty(AuthConstants.CustomAuthProps.ProfilePic, user.ImagePath),
+                                                new JProperty(AuthConstants.CustomAuthProps.IsAdmin, (userRoles.Contains(ApplicationConstants.ADMIN)) ? "true" : "false"));
 
             return tokenResponse;
         }

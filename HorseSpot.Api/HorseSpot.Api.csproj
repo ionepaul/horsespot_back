@@ -270,7 +270,7 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AppointmentController.cs" />
-    <Compile Include="Controllers\ChallengeResult.cs" />
+    <Compile Include="Utils\ChallengeResult.cs" />
     <Compile Include="Controllers\HorseAdController.cs" />
     <Compile Include="Controllers\UtilsController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -281,6 +281,7 @@
     <Compile Include="Schedulers\JobScheduler.cs" />
     <Compile Include="Schedulers\TwoDaysBeforeAppointmentEmailJob.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utils\AuthConstants.cs" />
     <Compile Include="Utils\ExternalLoginData.cs" />
     <Compile Include="Utils\HorseSpotExceptionFilterAttribute.cs" />
     <Compile Include="Utils\UserIdExtractor.cs" />

@@ -129,8 +129,26 @@
   <data name="CannotHaveMoreThan5PerAd" xml:space="preserve">
     <value>You cannot have more than five pictures per advertisment.</value>
   </data>
+  <data name="CannotSaveExternalLogin" xml:space="preserve">
+    <value>Cannot save external login.</value>
+  </data>
   <data name="CannotUploadMoreThan5" xml:space="preserve">
     <value>You cannot upload more than five pictures.</value>
+  </data>
+  <data name="ClientIdDoesNotHaveEnoughRight" xml:space="preserve">
+    <value>The given URL is not allowed by Client_id '{0}' configuration.</value>
+  </data>
+  <data name="ClientIdIsRequired" xml:space="preserve">
+    <value>client_Id is required.</value>
+  </data>
+  <data name="ClientIdNotRegistred" xml:space="preserve">
+    <value>Client_id '{0}' is not registered in the system.</value>
+  </data>
+  <data name="ClientInactive" xml:space="preserve">
+    <value>Client is inactive.</value>
+  </data>
+  <data name="ClientSecretShouldBeSent" xml:space="preserve">
+    <value>Client secret should be sent.</value>
   </data>
   <data name="ConfirmPasswordNotMatch" xml:space="preserve">
     <value>Confirm Password field didn't match Password field.</value>
@@ -143,6 +161,9 @@
   </data>
   <data name="ExistUserUsername" xml:space="preserve">
     <value>A user with this username is already registered.</value>
+  </data>
+  <data name="ExternalUserIsNotRegistred" xml:space="preserve">
+    <value>Exteranl user is not registred.</value>
   </data>
   <data name="ImageNotFoundInAdImagesList" xml:space="preserve">
     <value>The image was not found in the advertisment images list.</value>
@@ -159,6 +180,9 @@
   <data name="InvalidChangePasswordRequest" xml:space="preserve">
     <value>Invalid change password request.</value>
   </data>
+  <data name="InvalidClientSecret" xml:space="preserve">
+    <value>Client secret is invalid.</value>
+  </data>
   <data name="InvalidConfirmPasswordFormat" xml:space="preserve">
     <value>Confirm Password field didn't match Password field</value>
   </data>
@@ -170,6 +194,9 @@
   </data>
   <data name="InvalidEmailOrPassword" xml:space="preserve">
     <value>Invalid email or password.</value>
+  </data>
+  <data name="InvalidExternalLoginRequest" xml:space="preserve">
+    <value>Invalid external login request.</value>
   </data>
   <data name="InvalidHorseAdRequest" xml:space="preserve">
     <value>Invalid horse advertisment request.</value>
@@ -201,8 +228,14 @@
   <data name="InvalidPriceRangeIdentifier" xml:space="preserve">
     <value>Invalid price range identifier.</value>
   </data>
+  <data name="InvalidProviderOrExternalToken" xml:space="preserve">
+    <value>Invalid Provider or External Token.</value>
+  </data>
   <data name="InvalidRecommendedRiderIdentifier" xml:space="preserve">
     <value>Invalid recommended rider identifier.</value>
+  </data>
+  <data name="InvalidRedirectUri" xml:space="preserve">
+    <value>redirect_uri is invalid.</value>
   </data>
   <data name="InvalidRegistrationRequest" xml:space="preserve">
     <value>Invalid registration request.</value>
@@ -221,6 +254,9 @@
   </data>
   <data name="PleaseUpdateAtLeastOneImage" xml:space="preserve">
     <value>Please update at least one image.</value>
+  </data>
+  <data name="RefreshTokenIssuedToDifferentClient" xml:space="preserve">
+    <value>Refresh token is issued to a different clientId.</value>
   </data>
   <data name="WebSocketConnectionForbidden" xml:space="preserve">
     <value>Connection forbidden.</value>

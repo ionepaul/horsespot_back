@@ -40,10 +40,10 @@ namespace HorseSpot.Api.Utils
                 ProviderKey = providerKeyClaim.Value,
                 UserName = identity.FindFirstValue(ClaimTypes.Name),
                 Email = identity.FindFirstValue(ClaimTypes.Email),
-                FirstName = identity.FindFirstValue(ExternalAuthConstants.CustomClaims.FirstName),
-                LastName = identity.FindFirstValue(ExternalAuthConstants.CustomClaims.LastName),
-                ImageUrl = identity.FindFirstValue(ExternalAuthConstants.CustomClaims.ImageUrl),
-                ExternalAccessToken = identity.FindFirstValue(ExternalAuthConstants.CustomClaims.ExternalAccessToken)
+                FirstName = identity.FindFirstValue(AuthConstants.CustomClaims.FirstName),
+                LastName = identity.FindFirstValue(AuthConstants.CustomClaims.LastName),
+                ImageUrl = identity.FindFirstValue(AuthConstants.CustomClaims.ImageUrl),
+                ExternalAccessToken = identity.FindFirstValue(AuthConstants.CustomClaims.ExternalAccessToken)
             };
         }
     }
