@@ -138,13 +138,13 @@
     <Compile Include="Interfaces\IRefreshTokenDao.cs" />
     <Compile Include="Entities\Address.cs" />
     <Compile Include="Interfaces\IUtilDao.cs" />
-    <Compile Include="Migrations\201709261952481_HorseAdsToProdDB.cs" />
-    <Compile Include="Migrations\201709261952481_HorseAdsToProdDB.Designer.cs">
-      <DependentUpon>201709261952481_HorseAdsToProdDB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Entities\HorseAd.cs" />
     <Compile Include="Entities\Pedigree.cs" />
+    <Compile Include="Migrations\201710101348530_InitialCreate.cs" />
+    <Compile Include="Migrations\201710101348530_InitialCreate.Designer.cs">
+      <DependentUpon>201710101348530_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\GetHorseAdListResults.cs" />
     <Compile Include="Models\SearchModelDao.cs" />
     <Compile Include="Search\SearchHorseDao.cs" />
@@ -176,8 +176,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201709261952481_HorseAdsToProdDB.resx">
-      <DependentUpon>201709261952481_HorseAdsToProdDB.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201710101348530_InitialCreate.resx">
+      <DependentUpon>201710101348530_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

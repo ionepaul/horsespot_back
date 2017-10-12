@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -59,8 +60,8 @@ namespace HorseSpot.Api
             //Configur Facebook external login
             FacebookAuthOptions = new FacebookAuthenticationOptions()
             {
-                AppId = "xxx",
-                AppSecret = "xxx",
+                AppId = ConfigurationManager.AppSettings["FacebookAppId"],
+                AppSecret = ConfigurationManager.AppSettings["FacebookAppSecret"],
                 Scope = { "public_profile", "email" },
                 Provider = new FacebookAuthProvider(),
                 UserInformationEndpoint = "https://graph.facebook.com/v2.5/me?fields=id,name,email,first_name,last_name,picture"

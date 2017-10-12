@@ -347,7 +347,7 @@ namespace HorseSpot.Api.Controllers
 
             if (string.Equals(provider, AuthConstants.Providers.Facebook))
             {
-                var appToken = "xxx";
+                var appToken = ConfigurationManager.AppSettings["FacebookAppToken"];
                 verifyTokenEndPoint = string.Format(AuthConstants.Providers.FacebookVerifyTokenEndPoint, accessToken, appToken);
             }
             else if (string.Equals(provider, AuthConstants.Providers.Google))
