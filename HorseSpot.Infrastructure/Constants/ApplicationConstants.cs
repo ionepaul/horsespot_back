@@ -17,5 +17,10 @@ namespace HorseSpot.Infrastructure.Constants
         public const string SortHeight = "Height";
         public const string SortPrice = "Price";
         public const string SortViews = "Views";
+
+        public const string LatestDictionaryShowJumpingKey = "_showJumping";
+        public const string LatestDictionaryDressageKey = "_dressage";
+        public const string LatestDictionaryEventingKey = "_eventing";
+        public const string LatestDictionaryEnduranceKey = "_endurance";
     }
 }

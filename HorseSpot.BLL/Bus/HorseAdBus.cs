@@ -256,11 +256,10 @@ namespace HorseSpot.BLL.Bus
             var latestDbHorsesDictionary = _iHorseAdDao.GetLatestHorses();
             var latestHorses = new LatestHorsesHomePageViewModel();
 
-            latestHorses.LatestInShowJumping = latestDbHorsesDictionary["_showJumping"].Select(HorseAdConverter.FromHorseAdToHorseAdListModel);
-            latestHorses.LatestInDressage = latestDbHorsesDictionary["_dressage"].Select(HorseAdConverter.FromHorseAdToHorseAdListModel);
-            latestHorses.LatestInEventing = latestDbHorsesDictionary["_eventing"].Select(HorseAdConverter.FromHorseAdToHorseAdListModel);
-            latestHorses.LatestInEndurance = latestDbHorsesDictionary["_endurance"].Select(HorseAdConverter.FromHorseAdToHorseAdListModel);
-
+            latestHorses.LatestInShowJumping = latestDbHorsesDictionary[ApplicationConstants.LatestDictionaryShowJumpingKey].Select(HorseAdConverter.FromHorseAdToHorseAdListModel);
+            latestHorses.LatestInDressage = latestDbHorsesDictionary[ApplicationConstants.LatestDictionaryDressageKey].Select(HorseAdConverter.FromHorseAdToHorseAdListModel);
+            latestHorses.LatestInEventing = latestDbHorsesDictionary[ApplicationConstants.LatestDictionaryEventingKey].Select(HorseAdConverter.FromHorseAdToHorseAdListModel);
+            latestHorses.LatestInEndurance = latestDbHorsesDictionary[ApplicationConstants.LatestDictionaryEnduranceKey].Select(HorseAdConverter.FromHorseAdToHorseAdListModel);
 
             return latestHorses;
         }

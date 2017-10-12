@@ -132,7 +132,7 @@ namespace HorseSpot.BLL.Converters
                 Country = horseAd.Address.Country,
                 Gender = horseAd.Gender,
                 DatePosted = horseAd.DatePosted,
-                Description = horseAd.Description
+                Description = horseAd.Description.Substring(0, 100) + "..."
             };
         }
 

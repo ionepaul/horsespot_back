@@ -101,10 +101,10 @@ namespace HorseSpot.DAL.Dao
 
             var latestHorsesDictionary = new Dictionary<string, IEnumerable<HorseAd>>();
 
-            latestHorsesDictionary.Add("_showJumping", showJumping);
-            latestHorsesDictionary.Add("_dressage", dressage);
-            latestHorsesDictionary.Add("_eventing", eventing);
-            latestHorsesDictionary.Add("_endurance", endurance);
+            latestHorsesDictionary.Add(ApplicationConstants.LatestDictionaryShowJumpingKey, showJumping);
+            latestHorsesDictionary.Add(ApplicationConstants.LatestDictionaryDressageKey, dressage);
+            latestHorsesDictionary.Add(ApplicationConstants.LatestDictionaryEventingKey, eventing);
+            latestHorsesDictionary.Add(ApplicationConstants.LatestDictionaryEnduranceKey, endurance);
 
             return latestHorsesDictionary;
         }
