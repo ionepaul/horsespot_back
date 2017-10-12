@@ -110,10 +110,8 @@ namespace HorseSpot.BLL.Bus
             return userRoles.Contains(ApplicationConstants.ADMIN);
         }
 
-        public async Task Delete(string userId)
+        public async Task Delete(UserModel userModel)
         {
-            UserModel userModel = _iUserDao.FindUserById(userId);
-
             CheckIfUserExists(userModel);
 
             await _iUserDao.DeleteUser(userModel);

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using HorseSpot.DAL.Entities;
 using HorseSpot.Models.Models;
 
 namespace HorseSpot.BLL.Interfaces
@@ -8,7 +9,7 @@ namespace HorseSpot.BLL.Interfaces
     {
         Task<UserViewModel> RegisterUser(UserViewModel user);
         Task<UserDTO> EditProfile(string id, EditProfileViewModel editProfile);
-        Task Delete(string userId);
+        Task Delete(UserModel userModel);
         Task ChangePassword(string id, ChangePasswordViewModel changePassword);
         IEnumerable<UserViewModel> GetAllUsers();
         UserDTO GetUserDetails(string id);

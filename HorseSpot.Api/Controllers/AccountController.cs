@@ -199,9 +199,18 @@ namespace HorseSpot.Api.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task Delete()
+        public async Task Delete(string provider, string externalToken)
         {
-            await _iUserBus.Delete(UserIdExtractor.GetUserIdFromRequest(Request));
+            var verifiedAccessToken = await VerifyExternalAccessToken(provider, externalToken);
+
+            if (verifiedAccessToken == null)
+            {
+                throw new ValidationException(Resources.InvalidProviderOrExternalToken);
+            }
+
+            var user = await _iAuthorizationBus.FindUserByLoginInfo(new UserLoginInfo(provider, verifiedAccessToken.user_id));
+
+            await _iUserBus.Delete(user);
         }
 
         [HttpPost]

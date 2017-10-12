@@ -56,6 +56,7 @@
     <Compile Include="Models\HorseAdListModel.cs" />
     <Compile Include="Models\HorseAdSearchViewModel.cs" />
     <Compile Include="Models\ImageDTO.cs" />
+    <Compile Include="Models\LatestHorsesHomePageViewModel.cs" />
     <Compile Include="Models\ParsedExternalAccessToken.cs" />
     <Compile Include="Models\PedigreeDTO.cs" />
     <Compile Include="Models\PriceRangeDTO.cs" />
