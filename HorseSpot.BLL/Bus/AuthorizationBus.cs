@@ -83,10 +83,6 @@ namespace HorseSpot.BLL.Bus
 
         public async Task<UserModel> CreateExternalUser(RegisterExternalBindingModel model)
         {
-            if (!CheckIfUserExistsByEmail(model.Email)) {
-                throw new ConflictException("Local user found with this email.");
-            }
-
             var user = new UserModel
             {
                 UserName = model.UserName,
@@ -104,22 +100,6 @@ namespace HorseSpot.BLL.Bus
         public async Task<IdentityResult> AddLoginAsync(string userId, UserLoginInfo login)
         {
             return await _iUserDao.AddLoginAsync(userId, login);
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        private bool CheckIfUserExistsByEmail(string email)
-        {
-            UserModel user = _iUserDao.FindUserByEmail(email);
-
-            if (user == null)
-            {
-                return true;
-            }
-
-            return false;
         }
 
         #endregion

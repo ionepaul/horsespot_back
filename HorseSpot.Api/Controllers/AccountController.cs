@@ -161,7 +161,7 @@ namespace HorseSpot.Api.Controllers
                 return await RegisterExternalUser(externalLogin, redirectUri);
             }
 
-            redirectUri = CreateRedirectUri(redirectUri, false, externalLogin.ExternalAccessToken, externalLogin.LoginProvider);
+            redirectUri = CreateRedirectUri(redirectUri, false, externalLogin.ExternalAccessToken, externalLogin.LoginProvider, false, "");
 
             return Redirect(redirectUri);
         }
@@ -445,6 +445,15 @@ namespace HorseSpot.Api.Controllers
 
         private async Task<IHttpActionResult> RegisterExternalUser(ExternalLoginData externalLogin, string redirectUri)
         {
+            var user = _iUserBus.FindUserByEmail(externalLogin.Email);
+
+            if (user != null)
+            {
+                redirectUri = CreateRedirectUri(redirectUri, true, "", "", true, externalLogin.Email);
+
+                return Redirect(redirectUri);
+            }
+            
             var createdUser = await _iAuthorizationBus.CreateExternalUser(FromExternalDataToRegisterBindingModel(externalLogin));
 
             var info = new ExternalLoginInfo()
@@ -460,7 +469,7 @@ namespace HorseSpot.Api.Controllers
                 throw new Exception(Resources.CannotSaveExternalLogin);
             }
 
-            redirectUri = CreateRedirectUri(redirectUri, true, externalLogin.ExternalAccessToken, externalLogin.LoginProvider);
+            redirectUri = CreateRedirectUri(redirectUri, true, externalLogin.ExternalAccessToken, externalLogin.LoginProvider, false, "");
 
             return Redirect(redirectUri);
         }
@@ -484,13 +493,15 @@ namespace HorseSpot.Api.Controllers
             };
         }
 
-        private string CreateRedirectUri(string redirectUri, bool firstReg, string externalToken, string provider)
+        private string CreateRedirectUri(string redirectUri, bool firstReg, string externalToken, string provider, bool externalEmailAlreadyRegistred, string localEmail)
         {
-            return string.Format("{0}?firstReg={1}&external_token={2}&provider={3}",
+            return string.Format("{0}?first_reg={1}&external_token={2}&provider={3}&haslocalaccount={4}&email={5}",
                                  redirectUri,
                                  firstReg.ToString(),
                                  externalToken,
-                                 provider);
+                                 provider,
+                                 externalEmailAlreadyRegistred.ToString(),
+                                 localEmail);
         }
 
         #endregion
