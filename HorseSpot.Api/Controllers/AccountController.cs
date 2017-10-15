@@ -81,6 +81,13 @@ namespace HorseSpot.Api.Controllers
         }
 
         [HttpGet]
+        [Route("api/account/fullProfile/{userId}")]
+        public UserFullProfile GetUserFullProfile([FromUri] string userId)
+        {
+            return _iUserBus.GetUserFullProfile(userId);
+        }
+
+        [HttpGet]
         [AllowAnonymous]
         [Route("api/account/obtainLocalAccessToken")]
         public async Task<JObject> ObtainLocalAccessToken(string provider, string externalAccessToken)
@@ -479,9 +486,9 @@ namespace HorseSpot.Api.Controllers
 
         private string CreateRedirectUri(string redirectUri, bool firstReg, string externalToken, string provider)
         {
-            return string.Format("{0}?firstReg={1}&external_token={2}&provider={3}&q={4}",
+            return string.Format("{0}?firstReg={1}&external_token={2}&provider={3}",
                                  redirectUri,
-                                 firstReg,
+                                 firstReg.ToString(),
                                  externalToken,
                                  provider);
         }

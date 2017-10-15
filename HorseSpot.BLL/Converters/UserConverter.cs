@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System.Linq;
+using System.Configuration;
 using HorseSpot.DAL.Entities;
 using HorseSpot.Models.Models;
 
@@ -51,6 +52,25 @@ namespace HorseSpot.BLL.Converters
                 Email = user.Email,
                 ImagePath = user.ImagePath,
                 PhoneNumber = user.PhoneNumber
+            };
+        }
+
+        public static UserFullProfile FromUserModelToUserFullProfile(UserModel user)
+        {
+            var forSaleQuery = user.HorseAds?.Where(x => !x.IsSold && !x.IsDeleted && x.IsValidated);
+            var forSaleReference = user.HorseAds?.Where(x => x.IsSold);
+
+            return new UserFullProfile
+            {
+                UserId = user.Id,
+                FullName = user.FirstName + " " + user.LastName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                TotalForSale = forSaleQuery?.Count() ?? 0,
+                TotalReferenes = forSaleReference?.Count() ?? 0,
+                FavoriteHorses = user.FavoriteHorseAds.Select(x => HorseAdConverter.FromHorseAdToHorseAdListModel(x.FavoriteHorseAd)).AsEnumerable(),
+                HorsesForSale = forSaleQuery?.OrderByDescending(x => x.DatePosted).Take(3).Select(HorseAdConverter.FromHorseAdToHorseAdListModel),
+                ReferenceHorses = forSaleReference?.OrderByDescending(x => x.DatePosted).Take(3).Select(HorseAdConverter.FromHorseAdToHorseAdListModel)
             };
         }
     }

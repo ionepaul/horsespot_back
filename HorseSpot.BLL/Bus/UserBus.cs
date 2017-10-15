@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -195,6 +196,18 @@ namespace HorseSpot.BLL.Bus
             await _iUserDao.UpdateUser(user);
         }
 
+        public UserFullProfile GetUserFullProfile(string userId)
+        {
+            var user = _iUserDao.FindUserById(userId);
+
+            CheckIfUserExists(user);
+
+            var userFullProfile = UserConverter.FromUserModelToUserFullProfile(user);
+
+            return userFullProfile;
+        }
+
+
         #endregion
 
         #region Private Methods
@@ -290,7 +303,7 @@ namespace HorseSpot.BLL.Bus
         {
             if (userModel == null)
             {
-                throw new ResourceNotFoundException(Resources.InvalidUserIdentifier);
+                throw new ValidationException(Resources.InvalidUserIdentifier);
             }
         }
 

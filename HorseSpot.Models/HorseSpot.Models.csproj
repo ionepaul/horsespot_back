@@ -65,6 +65,7 @@
     <Compile Include="Models\RegisterExternalBindingModel.cs" />
     <Compile Include="Models\UserAppointmentsViewModel.cs" />
     <Compile Include="Models\UserDTO.cs" />
+    <Compile Include="Models\UserFullProfile.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
