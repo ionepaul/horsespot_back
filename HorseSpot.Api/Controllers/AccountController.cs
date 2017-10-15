@@ -480,7 +480,7 @@ namespace HorseSpot.Api.Controllers
                 ImageUrl = externalLogin.ImageUrl,
                 LastName = externalLogin.LastName,
                 Provider = externalLogin.LoginProvider,
-                UserName = externalLogin.UserName
+                UserName = externalLogin.Email
             };
         }
 
