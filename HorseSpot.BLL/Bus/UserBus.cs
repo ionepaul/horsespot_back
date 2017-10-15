@@ -63,7 +63,8 @@ namespace HorseSpot.BLL.Bus
         {
             var userModel = _iUserDao.FindUserByEmail(email);
 
-            CheckIfUserExists(userModel);
+            //Do not check for user null used to see if external user has local account
+            //CheckIfUserExists(userModel);
 
             return UserConverter.FromUserModelToUserDTO(userModel);
         }

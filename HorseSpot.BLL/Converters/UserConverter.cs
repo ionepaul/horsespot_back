@@ -44,6 +44,11 @@ namespace HorseSpot.BLL.Converters
 
         public static UserDTO FromUserModelToUserDTO(UserModel user)
         {
+            if (user == null)
+            {
+                return null;
+            }
+
             return new UserDTO
             {
                 Id = user.Id,
