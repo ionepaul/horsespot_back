@@ -6,7 +6,7 @@ namespace HorseSpot.BLL.Interfaces
     public interface IHorseAdBus
     {
         Task Add(HorseAdDTO horseAdDTO, string userId);
-        Task Update(int id, HorseAdDTO horseAdDTO, string userId);
+        Task EditHorseAd(int id, HorseAdDTO horseAdDTO, string userId);
         Task Delete(int id, string userId, bool isSold);
         Task Validate(int id);
         Task AddToFavorite(int id, string userId);

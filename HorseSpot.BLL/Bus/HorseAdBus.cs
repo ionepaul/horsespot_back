@@ -55,7 +55,7 @@ namespace HorseSpot.BLL.Bus
             await SendEmailToAdmin();
         }
         
-        public async Task Update(int id, HorseAdDTO horseAdDTO, string userId)
+        public async Task EditHorseAd(int id, HorseAdDTO horseAdDTO, string userId)
         {
             ValidateHorseAd(horseAdDTO);
 
@@ -65,7 +65,7 @@ namespace HorseSpot.BLL.Bus
             
             var updatedHorseAd = UpdateHorseAd(horseAd, horseAdDTO);
 
-            await _iHorseAdDao.UpdateAsync(updatedHorseAd);
+            await _iHorseAdDao.EditHorseAdAsync(updatedHorseAd);
         }
 
         public async Task Delete(int id, string userId, bool isSold)

@@ -37,7 +37,7 @@ namespace HorseSpot.DAL.Dao
             {
                 TotalCount = horseAds.Count(),
                 HorseAdList = horseAds.OrderByDescending(e => e.DatePosted).Skip(skipNumber).ToList().Take(ApplicationConstants.AdsPerPage)
-            };   
+            };
 
             return results;
         }
@@ -64,18 +64,18 @@ namespace HorseSpot.DAL.Dao
 
         public async Task UpdateAsync(HorseAd horseAd)
         {
+            _ctx.Entry(horseAd).State = EntityState.Modified;
+
+            await _ctx.SaveChangesAsync();
+        }
+
+        public async Task EditHorseAdAsync(HorseAd horseAd)
+        {
             var updatedHorseAd = CheckAndAddAbilitiesAndRecommendedRiders(horseAd, true);
 
-            try
-            {
-                _ctx.Entry(updatedHorseAd).State = EntityState.Modified;
+            _ctx.Entry(updatedHorseAd).State = EntityState.Modified;
 
-                await _ctx.SaveChangesAsync();
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            }            
+            await _ctx.SaveChangesAsync();
         }
 
         public async Task AddHorse(HorseAd horseAd)

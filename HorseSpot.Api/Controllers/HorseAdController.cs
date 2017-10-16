@@ -92,7 +92,7 @@ namespace HorseSpot.Api.Controllers
         [Route("api/horses/update/{id}")]
         public async Task Update([FromUri] int id, [FromBody] HorseAdDTO horseAdDTO)
         {
-            await _iHorseAdBus.Update(id, horseAdDTO, UserIdExtractor.GetUserIdFromRequest(Request));
+            await _iHorseAdBus.EditHorseAd(id, horseAdDTO, UserIdExtractor.GetUserIdFromRequest(Request));
         }
 
         [Authorize]
