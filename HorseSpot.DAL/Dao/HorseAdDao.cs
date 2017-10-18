@@ -89,7 +89,7 @@ namespace HorseSpot.DAL.Dao
 
         public Dictionary<string, IEnumerable<HorseAd>> GetLatestHorses()
         {
-            var horses = _ctx.HorseAds.OrderByDescending(x => x.DatePosted).Where(x => x.IsValidated);
+            var horses = _ctx.HorseAds.OrderByDescending(x => x.DatePosted).Where(x => x.IsValidated && !x.IsSold && !x.IsDeleted);
 
             var showJumping = horses.Where(x => x.Abilities.Any(y => y.Id == 1)).Take(2).AsEnumerable();
 

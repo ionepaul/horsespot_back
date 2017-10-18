@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace HorseSpot.Models.Models
 {
@@ -12,6 +8,7 @@ namespace HorseSpot.Models.Models
         public string FullName { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
+        public string ImagePath { get; set; }
         public int TotalForSale { get; set; }
         public int TotalReferenes { get; set; }
         public int TotalMeetings { get; set; }

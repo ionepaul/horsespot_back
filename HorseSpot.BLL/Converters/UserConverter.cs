@@ -71,9 +71,10 @@ namespace HorseSpot.BLL.Converters
                 FullName = user.FirstName + " " + user.LastName,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
+                ImagePath = user.ImagePath,
                 TotalForSale = forSaleQuery?.Count() ?? 0,
                 TotalReferenes = forSaleReference?.Count() ?? 0,
-                FavoriteHorses = user.FavoriteHorseAds.Select(x => HorseAdConverter.FromHorseAdToHorseAdListModel(x.FavoriteHorseAd)).AsEnumerable(),
+                FavoriteHorses = user.FavoriteHorseAds.Where(x => !x.IsDeleted).Select(x => HorseAdConverter.FromHorseAdToHorseAdListModel(x.FavoriteHorseAd)).AsEnumerable(),
                 HorsesForSale = forSaleQuery?.OrderByDescending(x => x.DatePosted).Take(3).Select(HorseAdConverter.FromHorseAdToHorseAdListModel),
                 ReferenceHorses = forSaleReference?.OrderByDescending(x => x.DatePosted).Take(3).Select(HorseAdConverter.FromHorseAdToHorseAdListModel)
             };
