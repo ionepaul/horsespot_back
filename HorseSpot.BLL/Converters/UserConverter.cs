@@ -52,7 +52,7 @@ namespace HorseSpot.BLL.Converters
             return new UserDTO
             {
                 Id = user.Id,
-                FirstName = user.FirstName,
+                FirstName = user.FirstName + " " + user.LastName,
                 LastName = user.LastName,
                 Email = user.Email,
                 ImagePath = user.ImagePath,
@@ -64,6 +64,7 @@ namespace HorseSpot.BLL.Converters
         {
             var forSaleQuery = user.HorseAds?.Where(x => !x.IsSold && !x.IsDeleted && x.IsValidated);
             var forSaleReference = user.HorseAds?.Where(x => x.IsSold);
+            var favoritesQuery = user.FavoriteHorseAds.Where(x => !x.IsDeleted);
 
             return new UserFullProfile
             {
@@ -74,7 +75,8 @@ namespace HorseSpot.BLL.Converters
                 ImagePath = user.ImagePath,
                 TotalForSale = forSaleQuery?.Count() ?? 0,
                 TotalReferenes = forSaleReference?.Count() ?? 0,
-                FavoriteHorses = user.FavoriteHorseAds.Where(x => !x.IsDeleted).Select(x => HorseAdConverter.FromHorseAdToHorseAdListModel(x.FavoriteHorseAd)).AsEnumerable(),
+                TotalFavorites = favoritesQuery?.Count() ?? 0,
+                FavoriteHorses = favoritesQuery.Select(x => HorseAdConverter.FromHorseAdToHorseAdListModel(x.FavoriteHorseAd)).AsEnumerable(),
                 HorsesForSale = forSaleQuery?.OrderByDescending(x => x.DatePosted).Take(3).Select(HorseAdConverter.FromHorseAdToHorseAdListModel),
                 ReferenceHorses = forSaleReference?.OrderByDescending(x => x.DatePosted).Take(3).Select(HorseAdConverter.FromHorseAdToHorseAdListModel)
             };

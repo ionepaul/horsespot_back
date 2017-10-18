@@ -11,6 +11,7 @@ namespace HorseSpot.Models.Models
         public string ImagePath { get; set; }
         public int TotalForSale { get; set; }
         public int TotalReferenes { get; set; }
+        public int TotalFavorites { get; set; }
         public int TotalMeetings { get; set; }
         public int TotalFeedback { get; set; }
         public IEnumerable<HorseAdListModel> HorsesForSale { get; set; }
