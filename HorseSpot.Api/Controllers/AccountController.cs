@@ -241,7 +241,7 @@ namespace HorseSpot.Api.Controllers
 
                 _iUserBus.SetUserProfilePicture(imageName, id);
 
-                return Request.CreateResponse(HttpStatusCode.OK);
+                return Request.CreateResponse(HttpStatusCode.OK, imageName);
             }
 
             return Request.CreateResponse(HttpStatusCode.BadRequest, Resources.PleaseUpdateAtLeastOneImage);
@@ -436,7 +436,7 @@ namespace HorseSpot.Api.Controllers
                                                 new JProperty(".issued", ticket.Properties.IssuedUtc.ToString()),
                                                 new JProperty(".expires", ticket.Properties.ExpiresUtc.ToString()),
                                                 new JProperty(AuthConstants.CustomAuthProps.UserId, user.Id),
-                                                new JProperty(AuthConstants.CustomAuthProps.FullName, user.FirstName + " " + user.LastName),
+                                                new JProperty(AuthConstants.CustomAuthProps.FullName, user.FirstName),
                                                 new JProperty(AuthConstants.CustomAuthProps.ProfilePic, user.ImagePath),
                                                 new JProperty(AuthConstants.CustomAuthProps.IsAdmin, (userRoles.Contains(ApplicationConstants.ADMIN)) ? "true" : "false"));
 

@@ -243,6 +243,11 @@ namespace HorseSpot.BLL.Bus
 
             ValidateEmail(user.Email);
 
+            if (string.IsNullOrEmpty(user.FirstName) || string.IsNullOrEmpty(user.LastName))
+            {
+                throw new ValidationException(Resources.InvalidRegistrationRequest);
+            }
+
             if (user.Password.Length < 6)
             {
                 throw new ValidationException(Resources.InvalidPasswordFormat);

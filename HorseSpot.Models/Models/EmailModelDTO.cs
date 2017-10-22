@@ -16,7 +16,6 @@ namespace HorseSpot.Models.Models
         [Required]
         public string SenderName { get; set; }
 
-        [Required]
         public string HorseAdTitle { get; set; }
 
         [Required]
