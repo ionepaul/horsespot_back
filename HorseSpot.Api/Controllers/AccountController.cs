@@ -60,10 +60,11 @@ namespace HorseSpot.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [Route("api/account/userhorsefavorites/{pageNumber}")]
-        public GetHorseAdListResultsDTO GetHorseAdsFavoritesForUser(int pageNumber, string userId)
+        public GetHorseAdListResultsDTO GetHorseAdsFavoritesForUser(int pageNumber)
         {
-            return _iUserBus.GetUserFavorites(pageNumber, userId);
+            return _iUserBus.GetUserFavorites(pageNumber, UserIdExtractor.GetUserIdFromRequest(Request));
         }
 
         [HttpGet]
