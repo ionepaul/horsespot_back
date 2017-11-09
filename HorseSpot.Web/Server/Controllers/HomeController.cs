@@ -1,18 +1,9 @@
-using Asp2017.Server.Helpers;
+using System;
 using System.Threading.Tasks;
+using HorseSpot.Web.Server.Helpers;
 using Microsoft.AspNetCore.Mvc;
 
-using Microsoft.AspNetCore.SpaServices.Prerendering;
-using Microsoft.AspNetCore.NodeServices;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http.Features;
-using Microsoft.AspNetCore.Http;
-using System.Diagnostics;
-using System;
-using Asp2017.Server.Models;
-
-namespace AspCoreServer.Controllers
+namespace HorseSpot.Web.Controllers
 {
   public class HomeController : Controller
   {

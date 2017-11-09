@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Asp2017.Server.Models
+namespace HorseSpot.Web.Server.Models
 {
   public class TransferData
   {

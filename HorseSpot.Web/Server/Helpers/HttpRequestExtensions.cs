@@ -1,18 +1,15 @@
-using Asp2017.Server.Models;
+using System.Threading.Tasks;
+using HorseSpot.Web.Server.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.NodeServices;
 using Microsoft.AspNetCore.SpaServices.Prerendering;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Asp2017.Server.Helpers
+namespace HorseSpot.Web.Server.Helpers
 {
-    public static class HttpRequestExtensions
+  public static class HttpRequestExtensions
     {
     public static IRequest AbstractRequestInfo(this HttpRequest request)
     {
