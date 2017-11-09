@@ -1,0 +1,230 @@
+<account-menu></account-menu>
+
+<div class="container appointments">
+
+<h3 class="page-title-account">{{'APPOINTMENTS.TITLE' | translate}}</h3>
+
+<div class="legend">
+<ul>
+  <li class="redL">{{'APPOINTMENTS.RED_BAR' | translate}}</li>
+  <li class="yellowL">{{'APPOINTMENTS.YELLOW_BAR' | translate}}</li>
+  <li class="greenL">{{'APPOINTMENTS.GREEN_BAR' | translate}}</li>
+</ul>
+</div><!-- legend -->
+
+  <div class="row">
+
+    <div class="col-sm-6">
+      <h3>{{'APPOINTMENTS.PENDING' | translate}}</h3>
+
+      <h4 *ngIf="pendingAppointmentsOwner.length == 0 && pendingAppointmentsInitiator.length == 0">{{'APPOINTMENTS.NO_PENDING' | translate}} </h4>
+
+      <div *ngIf="pendingAppointmentsOwner.length != 0" class="owner layout">
+
+        <h4>{{'APPOINTMENTS.PENDING_USERS_PLANNED' | translate}}</h4>
+        
+        <section *ngFor="let appointment of pendingAppointmentsOwner; let ind = index" class="card" [ngClass]="{'border-red': appointment.STATUS == appointmentStatus.DATE_CHANGED_BY_INITIATOR || appointment.STATUS == appointmentStatus.CREATED,
+                                                                                   'border-yellow': appointment.STATUS == appointmentStatus.DATE_CHANGED_BY_OWNER}">
+
+          <div class="date">
+            <p>{{appointment.AppointmentDateTime | dateFormatPipe: true}}</p>
+            <p>{{appointment.AppointmentDateTime | dateFormatHourPipe }}</p>
+          </div><!-- date -->
+
+          <div class="owner">
+             <p class="h-name">{{'APPOINTMENTS.APPOINTMENT_FOR' | translate}} {{appointment.AdvertismentTitle}}</p>
+             <p class="name"><fa name="user"></fa> {{appointment.InitiatorFullName}}</p>
+             <p class="phone">{{appointment.InitiatorPhoneNumber}}</p>
+             <p class="email">{{appointment.InitiatorEmail}}</p>
+             <p class="loc"><fa name="map-marker"></fa> {{appointment.AdvertismentLocation}}</p>
+          </div><!-- owner -->
+
+          <div class="buttons">
+            <button *ngIf="appointment.STATUS == appointmentStatus.DATE_CHANGED_BY_INITIATOR || appointment.STATUS == appointmentStatus.CREATED" (click)="openAcceptAppointmentModal(appointment)" class="accept">{{'APPOINTMENTS.ACCEPT_BTN' | translate}}</button>
+            <button *ngIf="appointment.STATUS == appointmentStatus.DATE_CHANGED_BY_INITIATOR || appointment.STATUS == appointmentStatus.CREATED" (click)="openChangeDateModal(appointment, ind)" class="date-b">{{'APPOINTMENTS.CHANGE_DATE_BTN' | translate}}</button>
+            <button (click)="openCancelModal(appointment)" class="cancel">{{'APPOINTMENTS.CANCEL_BTN' | translate}}</button>
+          </div>
+
+        </section><!-- card -->
+
+        <hr *ngIf="pendingAppointmentsInitiator.length != 0 && pendingAppointmentsOwner.length != 0">
+      </div><!-- owner -->
+
+      <div *ngIf="pendingAppointmentsInitiator.length != 0" class="owner layout">
+
+        <h4>{{'APPOINTMENTS.PENDING_OWNER_PLANNED' | translate}}</h4>
+        
+        <section *ngFor="let appointment of pendingAppointmentsInitiator; let ind = index" class="card" [ngClass]="{'border-red': appointment.STATUS == appointmentStatus.DATE_CHANGED_BY_OWNER,
+                                                                                                   'border-yellow': appointment.STATUS == appointmentStatus.DATE_CHANGED_BY_INITIATOR || appointment.STATUS == appointmentStatus.CREATED }">
+
+          <div class="date">
+            <p>{{appointment.AppointmentDateTime | dateFormatPipe: true}}</p>
+            <p>{{appointment.AppointmentDateTime | dateFormatHourPipe }}</p>
+          </div><!-- date -->
+
+          <div class="owner">
+             <p class="h-name">{{'APPOINTMENTS.APPOINTMENT_FOR' | translate}} {{appointment.AdvertismentTitle}}</p>
+             <p class="name"><fa name="user"></fa> {{appointment.OwnerFullName}}</p>
+             <p class="phone">{{appointment.OwnerEmail}}</p>
+             <p class="email">{{appointment.OwnerPhoneNumber}}</p>
+             <p class="loc"><fa name="map-marker"></fa> {{appointment.AdvertismentLocation}}</p>
+          </div><!-- owner -->
+
+          <div class="buttons">
+            <button *ngIf="appointment.STATUS == appointmentStatus.DATE_CHANGED_BY_OWNER" (click)="openAcceptAppointmentModal(appointment)" class="accept">{{'APPOINTMENTS.ACCEPT_BTN' | translate}}</button>
+            <button *ngIf="appointment.STATUS == appointmentStatus.DATE_CHANGED_BY_OWNER" (click)="openChangeDateModal(appointment, ind)" class="date-b">{{'APPOINTMENTS.CHANGE_DATE_BTN' | translate}}</button>
+            <button (click)="openCancelModal(appointment)" class="cancel">{{'APPOINTMENTS.CANCEL_BTN' | translate}}</button>
+          </div>
+
+        </section><!-- card -->
+
+      </div><!-- owner -->
+
+    </div><!-- col-sm-6 -->
+
+    <div class="col-sm-6">
+
+      <h3>{{'APPOINTMENTS.UPCOMING' | translate}}</h3>
+       
+        <h4 *ngIf="upcomingAppointmentsOwner.length == 0 && upcomingAppointmentsInitiator.length == 0">{{'APPOINTMENTS.NO_UPCOMING' | translate}}</h4>
+
+       <div *ngIf="upcomingAppointmentsOwner.length != 0" class="owner layout">
+
+        <h4>{{'APPOINTMENTS.UPCOMING_EXPECTING' | translate}}</h4>
+        
+        <section *ngFor="let appointment of upcomingAppointmentsOwner" class="card border-green">
+
+          <div class="date">
+            <p>{{appointment.AppointmentDateTime | dateFormatPipe: true}}</p>
+            <p>{{appointment.AppointmentDateTime | dateFormatHourPipe }}</p>
+          </div><!-- date -->
+
+          <div class="owner">
+             <p class="h-name">{{'APPOINTMENTS.APPOINTMENT_FOR' | translate}} {{appointment.AdvertismentTitle}}</p>
+             <p class="name"><fa name="user"></fa> {{appointment.InitiatorFullName}}</p>
+             <p class="phone">{{appointment.InitiatorPhoneNumber}}</p>
+             <p class="email">{{appointment.InitiatorEmail}}</p>
+             <p class="loc"><fa name="map-marker"></fa> {{appointment.AdvertismentLocation}}</p>
+          </div><!-- owner -->
+
+          <div class="buttons">
+            <button (click)="openCancelModal(appointment)" class="cancel">{{'APPOINTMENTS.CANCEL_BTN' | translate}}</button>
+          </div>
+
+        </section><!-- card -->
+
+        <hr *ngIf="upcomingAppointmentsInitiator.length != 0 &&  upcomingAppointmentsOwner.length != 0">
+      </div><!-- owner -->
+
+       <div *ngIf="upcomingAppointmentsInitiator.length != 0" class="owner layout">
+        
+        <h4>{{'APPOINTMENTS.UPCOMING_EXPECTED' | translate}}</h4>
+        
+        <section *ngFor="let appointment of upcomingAppointmentsInitiator" class="card border-green">
+
+          <div class="date">
+            <p>{{appointment.AppointmentDateTime | dateFormatPipe: true}}</p>
+            <p>{{appointment.AppointmentDateTime | dateFormatHourPipe }}</p>
+          </div><!-- date -->
+
+          <div class="owner">
+             <p class="h-name">{{'APPOINTMENTS.APPOINTMENT_FOR' | translate}} {{appointment.AdvertismentTitle}}</p>
+             <p class="name"><fa name="user"></fa> {{appointment.OwnerFullName}}</p>
+             <p class="phone">{{appointment.OwnerEmail}}</p>
+             <p class="email">{{appointment.OwnerPhoneNumber}}</p>
+             <p class="loc"><fa name="map-marker"></fa> {{appointment.AdvertismentLocation}}</p>
+          </div><!-- owner -->
+
+          <div class="buttons">
+             <button (click)="openCancelModal(appointment)" class="cancel">{{'APPOINTMENTS.CANCEL_BTN' | translate}}</button>
+          </div>
+
+        </section><!-- card -->
+
+      </div><!-- owner -->
+
+    </div><!-- col-sm-6 -->
+
+  </div><!-- row -->
+
+</div><!-- appointments -->
+
+<!-- Change Appointment Date Modal -->
+<modal #changeAppointmentDateModal class="make-app" (onClose)="hideChangeDateModal()">
+  <modal-content>
+      <h3>{{'APPOINTMENTS.CHANGE_DATE_MODAL_TITLE' | translate}}</h3>
+      <p *ngIf="dateChosedIsPast" class="client-side-validation-error">{{'APPOINTMENTS.CHANGE_DATE_MODAL_ERROR' | translate}}</p>
+      <label>{{'APPOINTMENTS.CHANGE_DATE_MODAL_SELECT_DATE' | translate}}</label>
+      
+      <datepicker [(ngModel)]="newAppointmentDate" [showWeeks]="true" (ngModelChange)="dateChanged()"></datepicker>
+      <label>{{'APPOINTMENTS.CHANGE_DATE_MODAL_SELECT_TIME' | translate}}</label>
+      <timepicker [showMeridian]="false" [(ngModel)]="newAppointmentDate" (ngModelChange)="dateChanged()"></timepicker>
+
+      <button class="action save" (click)="changeAppointmentDate()" [disabled]="dateChosedIsPast">{{'APPOINTMENTS.CONFIRM_BTN' | translate}}</button>
+      <button class="action cancel" (click)="hideChangeDateModal()">{{'APPOINTMENTS.CANCEL_BTN' | translate}}</button>
+  </modal-content>
+</modal>
+<!-- End Change Appointment Date Modal -->
+
+<!-- Cancel appointment Modal -->
+<modal #cancelAppointmentModal class="cancel-app" (onClose)="hideCancelModal()">
+  <modal-content>
+
+       <div id="cancel-app" class="myWrapper">
+
+      <div class="picture">
+      </div><!-- picture -->
+
+      <form #cancelForm="ngForm" class="form">
+
+          <div class="error-head">
+             <!-- <img src="../../../../../wwwroot/assets/images/error-head.png" alt="Error Head">-->
+          </div><!-- error head -->
+
+          <h3>{{'APPOINTMENTS.CANCEL_MODAL_TITLE' | translate}}</h3>
+          <p *ngIf="feedbackMessage.errors && feedbackMessage.touched" class="client-side-validation-error">{{'APPOINTMENTS.CANCEL_MESSAGE' | translate}}</p>
+          <textarea placeholder="{{'APPOINTMENTS.CANCEL_MODAL_TEXTAREA_PLACEHOLDER' | translate}}" [(ngModel)]="cancelAppointmentModel.FeedbackMessage" required #feedbackMessage="ngModel" name="feedbackMessage"></textarea>
+          <button class="save" [disabled]="!cancelForm.valid" (click)="cancelAppointment()">{{'APPOINTMENTS.CONFIRM_BTN' | translate}}</button>
+          <button class="cancel" (click)="hideCancelModal()">{{'APPOINTMENTS.CANCEL_BTN' | translate}}</button>
+
+      </form><!-- form -->
+
+        </div><!-- myWrapper -->
+
+  </modal-content>
+</modal>
+<!-- End cancel appointment Modal -->
+
+<!-- Accept appointment Modal -->
+<modal #acceptAppointmentModal class="accept-appointment-modal" (onClose)="hideAcceptAppointmentModal()">
+  <modal-content>
+
+     <div id="accept-app" class="myWrapper">
+
+      <div class="picture picture-delete">
+      </div><!-- picture -->
+
+      <div class="form">
+
+          <div class="error-head">
+            <!--  <img src="../../../../../wwwroot/assets/images/error-head.png" alt="Error Head">-->
+          </div><!-- error head -->
+
+          <h3>{{'APPOINTMENTS.ACCEPT_MODAL_TITLE' | translate}} {{acceptAppointmentModel.AdvertismentTitle}}</h3>
+
+          <div class="appointmentDetailsModal">
+          <p><fa name="clock-o"></fa> {{acceptAppointmentModel.AppointmentDateTime | dateFormatPipe: true}} {{acceptAppointmentModel.AppointmentDateTime | dateFormatHourPipe}}</p>
+          <p><fa name="map-marker"></fa> {{acceptAppointmentModel.AdvertismentLocation}}</p>
+          </div>
+
+          <p>{{'APPOINTMENTS.ACCEPT_MODAL_QUESTION' | translate}}</p>
+          
+          <button class="delete" (click)="acceptAppointment()">{{'APPOINTMENTS.ACCEPT_BTN' | translate}}</button>
+          <button class="cancel-delete" (click)="hideAcceptAppointmentModal()">{{'APPOINTMENTS.CANCEL_BTN' | translate}}</button>
+
+      </div><!-- form -->
+
+    </div><!-- myWrapper -->
+  </modal-content>
+</modal>
+<!-- End Accept Appointment Modal -->

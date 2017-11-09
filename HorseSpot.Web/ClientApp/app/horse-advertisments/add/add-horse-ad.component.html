@@ -1,0 +1,350 @@
+<div class="container add-horse-container">
+    <h1 class="page-title">{{'ADD_AND_EDIT_PAGE.TITLE_ADD' | translate}}</h1>
+    <h5>{{'ADD_AND_EDIT_PAGE.ALL_FIELDS' | translate}} <span class="required-indicatior">*</span> {{'ADD_AND_EDIT_PAGE.ARE_REQUIRED' | translate}}</h5>
+    
+    <p *ngIf="errorMessage" style="text-align: center" class="server-error">{{errorMessage}}</p>
+
+    <div class="add-errors-client-side">
+        <p *ngIf="horseAbilityNotSelected" class="client-side-validation-error">{{'ADD_AND_EDIT_PAGE.DETAILS.HORSE_ABILITY_ERROR' | translate}}</p>
+        <p *ngIf="recommendedRiderNotSelected" class="client-side-validation-error">{{'ADD_AND_EDIT_PAGE.DETAILS.RECOMMENDED_RIDER_ERROR' | translate}}</p>
+        <p *ngIf="notUploadedPhoto" class="client-side-validation-error">{{'ADD_AND_EDIT_PAGE.MEDIA.PHOTO_ERROR_1' | translate}}</p>
+        <p *ngIf="imagesSizeExceed" class="client-side-validation-error">{{'ADD_AND_EDIT_PAGE.MEDIA.IMAGES_SIZE_EXEEDED' | translate}}</p>
+    </div>
+
+    <h3 class="section-title"><span>{{'ADD_AND_EDIT_PAGE.GENERAL_SECTION.TITLE' | translate}}</span></h3>
+
+    <div class="info-container">
+        
+        <form #generalInfoForm="ngForm" class="general">
+
+            <div class="form-group">
+                <label for="horse-name">
+                    {{'ADD_AND_EDIT_PAGE.GENERAL_SECTION.HORSE_NAME' | translate}} <span class="required-indicatior">*</span>
+                    <div *ngIf="horseName.errors && horseName.touched" class="client-side-validation-error addHorseErr">
+                        <small [hidden]="!horseName.errors.required">
+                             {{'ADD_AND_EDIT_PAGE.GENERAL_SECTION.HORSE_NAME_ERROR' | translate}}
+                        </small>
+                    </div> <!-- horse-name client-side-validation-error -->
+                </label>
+                <div class="input-group">
+                <input name="horseName" type="text" class="form-control" id="horse-name" autocomplete="off" required [(ngModel)]="horseAdModel.HorseName" #horseName="ngModel">
+                </div><!-- input-group -->
+            </div><!-- form-group -->
+
+            <div class="form-group client-side">
+                <label for="gender">{{'ADD_AND_EDIT_PAGE.GENERAL_SECTION.GENDER' | translate}} <span class="required-indicatior">*</span></label>
+                <select class="form-control" id="gender" name="gender" [(ngModel)]="horseAdModel.Gender">
+                    <option *ngFor="let gender of genders" [ngValue]="gender"> {{gender}} </option>
+                </select>
+            </div><!-- form-group -->
+
+            <div class="form-group">
+                <label for="price-range">{{'ADD_AND_EDIT_PAGE.GENERAL_SECTION.PRICE_RANGE' | translate}} <span class="required-indicatior">*</span> (<fa name="eur"></fa>)</label>
+                <select class="form-control" id="price-range" name="priceRange" [(ngModel)]="horseAdModel.PriceRangeId">
+                    <option *ngFor="let priceRange of priceRanges" [ngValue]="priceRange.Id"> {{priceRange.PriceRangeValue}} </option>
+                </select>
+            </div><!-- form-group -->
+
+            <div class="form-group client-side">
+               
+                <label for="age">
+                    {{'ADD_AND_EDIT_PAGE.GENERAL_SECTION.AGE' | translate}} <span class="required-indicatior">*</span>
+                    <div *ngIf="age.errors && age.touched" class="client-side-validation-error addHorseErr">
+                        <small [hidden]="!age.errors.required">
+                        {{'ADD_AND_EDIT_PAGE.GENERAL_SECTION.AGE_ERROR' | translate}}
+                        </small>
+                        <small [hidden]="!age.errors.pattern">
+                        {{'ADD_AND_EDIT_PAGE.GENERAL_SECTION.AGE_INVALID_ERROR' | translate}}
+                        </small>
+                    </div> <!-- age client-side-validation-error -->
+                </label>
+                <div class="input-group">
+                <input name="age" type="text" class="form-control" id="age" autocomplete="off" required pattern="^[0-9]*$" [(ngModel)]="horseAdModel.Age" #age="ngModel">
+                </div><!-- input-group -->
+            </div><!-- form-group -->
+
+        </form>
+
+
+    </div><!-- info-container -->
+
+    <h3 class="section-title"><span>{{'ADD_AND_EDIT_PAGE.DETAILS.TITLE' | translate}}</span></h3>
+
+    <div class="info-container">
+
+        <form #detailsForm="ngForm" class="details">
+
+            <div class="horse-ability">
+                <h4>{{'ADD_AND_EDIT_PAGE.DETAILS.HORSE_ABILITY' | translate}} <span class="required-indicatior">*</span></h4>
+                <p *ngIf="horseAbilityNotSelected" class="client-side-validation-error">{{'ADD_AND_EDIT_PAGE.DETAILS.HORSE_ABILITY_ERROR' | translate}}</p>
+
+                <div *ngFor="let ability of horseAbilities" class="checkbox">
+                    <label>
+                        <input type="checkbox" id="{{ability.Ability}}" autocomplete="off" name="abilities" value="{{ability}}" (change)="addHorseAbility(ability)"> {{ability.Ability}}
+                    </label>
+                </div><!-- checkbox -->
+            </div><!-- horse-ability -->
+
+            <div class="rider">
+                <h4>{{'ADD_AND_EDIT_PAGE.DETAILS.RECOMMENDED_RIDER' | translate}} <span class="required-indicatior">*</span></h4>
+                <p *ngIf="recommendedRiderNotSelected" class="client-side-validation-error">{{'ADD_AND_EDIT_PAGE.DETAILS.RECOMMENDED_RIDER_ERROR' | translate}}</p>
+
+                <div *ngFor="let rider of recommendedRiders" class="checkbox">
+                    <label >
+                        <input type="checkbox" id="{{rider.Rider}}" autocomplete="off" name="recommendedRider" value="{{rider}}" (change)="addHorseRecommendedRider(rider)"> {{rider.Rider}}
+                    </label>
+                </div><!-- checkbox -->
+            </div><!-- rider -->
+
+            <div class="form-group height">
+                <label for="breed">
+                    {{'ADD_AND_EDIT_PAGE.DETAILS.BREED' | translate}} <span class="required-indicatior">*</span>
+                    <div *ngIf="breed.errors && breed.touched" class="client-side-validation-error addHorseErr">
+                        <small [hidden]="!breed.errors.required">
+                            {{'ADD_AND_EDIT_PAGE.DETAILS.BREED_ERROR' | translate}}
+                        </small>
+                    </div> <!-- breed client-side-validation-error -->
+                </label>
+                <div class="input-group">
+                <input name="breed" type="text" class="form-control" autocomplete="off" id="breed" required [(ngModel)]="horseAdModel.Breed" #breed="ngModel">
+                </div><!-- input-group -->
+            </div><!-- form-group -->
+
+            <div class="form-group breed">
+                <label for="height">
+                    {{'ADD_AND_EDIT_PAGE.DETAILS.HEIGHT' | translate}} <span class="required-indicatior">*</span>
+                    <div *ngIf="height.errors && height.touched" class="client-side-validation-error addHorseErr">
+                        <small [hidden]="!height.errors.required">
+                            {{'ADD_AND_EDIT_PAGE.DETAILS.HEIGHT_ERROR' | translate}}
+                        </small>
+                        <small style="font-size:11px" [hidden]="!height.errors.pattern">
+                            {{'ADD_AND_EDIT_PAGE.DETAILS.HEIGHT_INVALID_ERROR' | translate}}
+                        </small>
+                    </div> <!--height client-side-validation-error-->
+                </label>
+                <div class="input-group">
+                <input name="height" type="text" class="form-control" autocomplete="off" id="height" required pattern="^[0-9]*$" [(ngModel)]="horseAdModel.HeightInCm" #height="ngModel">
+                </div><!-- input-group -->
+            </div><!-- form-group -->
+
+            <div class="form-group price">
+                <label for="price">
+                    {{'ADD_AND_EDIT_PAGE.DETAILS.PRICE' | translate}} (<fa name="eur"></fa>)
+                    <div *ngIf="price.errors && price.touched" class="client-side-validation-error addHorseErr">
+                        <small [hidden]="!price.errors.pattern">
+                            {{'ADD_AND_EDIT_PAGE.DETAILS.PRICE_ERROR' | translate}}
+                        </small>
+                    </div><!-- price client-side-validation-error -->
+                </label>
+                <div class="input-group">
+                <input name="price" type="text" class="form-control" autocomplete="off" id="price" pattern="^[0-9]*$" [(ngModel)]="horseAdModel.Price" #price="ngModel">
+                </div><!-- input-group -->
+            </div><!-- form-group -->
+
+            <div class="form-group height country">
+                <label for="country">
+                    {{'ADD_AND_EDIT_PAGE.DETAILS.COUNTRY' | translate}} <span class="required-indicatior">*</span>
+                    <div *ngIf="typeaheadNoResults" class="client-side-validation-error addHorseErr">
+                        <small [hidden]="!typeaheadNoResults">
+                            {{'ADD_AND_EDIT_PAGE.DETAILS.COUNTRY_INVALID_ERROR' | translate}}
+                        </small>
+                    </div><!-- country client-side-validation-error -->
+                    <div *ngIf="country.errors && country.touched" class="client-side-validation-error addHorseErr">
+                        <small [hidden]="!country.errors.required">
+                            {{'ADD_AND_EDIT_PAGE.DETAILS.COUNTRY_ERROR' | translate}}
+                        </small>
+                    </div><!-- country client-side-validation-error -->
+                </label>
+                <div class="input-group">
+                <!--<input name="text" type="text" class="form-control" id="country">-->
+                <input [(ngModel)]="horseAdModel.Address.Country"
+                   autocomplete="off"
+                   name="country"
+                   required
+                   [typeahead]="countries"
+                   [typeaheadOptionsLimit]="7"
+                   (typeaheadNoResults)="changeTypeaheadNoResults($event)"
+                   [typeaheadMinLength]="0"
+                   placeholder="Select country"
+                   class="form-control"
+                   id="country"
+                   #country="ngModel">
+                </div><!-- input-group -->
+            </div><!-- form-group -->
+
+            <div class="form-group breed city">
+                <label for="city">
+                    {{'ADD_AND_EDIT_PAGE.DETAILS.CITY' | translate}} <span class="required-indicatior">*</span>
+                    <div *ngIf="city.errors && city.touched" class="client-side-validation-error addHorseErr">
+                        <small [hidden]="!city.errors.required">
+                            {{'ADD_AND_EDIT_PAGE.DETAILS.CITY_ERROR' | translate}}
+                        </small>
+                    </div><!--  city client-side-validation-error -->
+                </label>
+                <div class="input-group">
+                    <input name="city" type="text" autocomplete="off" class="form-control" id="city" required [(ngModel)]="horseAdModel.Address.City" #city="ngModel">
+                </div><!-- input-group -->
+            </div><!-- form-group -->
+
+            <div class="form-group price street">
+                <label for="street">
+                    {{'ADD_AND_EDIT_PAGE.DETAILS.STREET' | translate}} <span class="required-indicatior">*</span>
+                    <div *ngIf="street.errors && street.touched" class="client-side-validation-error addHorseErr">
+                        <small [hidden]="!street.errors.required">
+                            {{'ADD_AND_EDIT_PAGE.DETAILS.STREET_ERROR' | translate}}
+                        </small>
+                    </div><!-- street client-side-validation-error -->
+                </label>
+                <div class="input-group">
+                <input name="street" type="text" autocomplete="off" class="form-control" id="street" required [(ngModel)]="horseAdModel.Address.Street" #street="ngModel">
+                </div><!-- input-group -->
+            </div><!-- form-group -->
+
+            <div class="description">
+                <label for="description">
+                    {{'ADD_AND_EDIT_PAGE.DETAILS.DESCRIPTION' | translate}} <span class="required-indicatior">*</span>
+                    <div *ngIf="description.errors && description.touched" class="client-side-validation-error addHorseErr">
+                        <small [hidden]="!description.errors.required">
+                           {{'ADD_AND_EDIT_PAGE.DETAILS.DESCRIPTION_ERROR' | translate}}
+                        </small>
+                    </div> <!-- description client-side-validation-error -->
+                </label>
+                <textarea name="description" class="form-control" rows="3" id="description" required [(ngModel)]="horseAdModel.Description" #description="ngModel"></textarea>
+            </div><!-- description -->
+
+            <div class="checkbox x-rays">
+                <label><input type="checkbox" name="competitionalExp" [(ngModel)]="horseAdModel.HaveCompetionalExperience" value="">{{'ADD_AND_EDIT_PAGE.DETAILS.COMP_EXP_QUESTION' | translate}}</label>
+            </div><!-- checkbox -->
+
+            <div class="checkbox">
+                <label><input type="checkbox" name="xRays" [(ngModel)]="horseAdModel.HaveXRays" value="">{{'ADD_AND_EDIT_PAGE.DETAILS.X_RAYS_QUESTION' | translate}}</label>
+            </div><!-- checkbox -->
+
+        </form>
+
+    </div><!-- info-container -->
+
+    <h3 class="section-title"><span>{{'ADD_AND_EDIT_PAGE.PEDIGREE_TITLE' | translate}}</span></h3>
+
+    <div class="info-container pedigree">
+
+        <div class="pedigree-scroll">
+
+        <table class="pedigree">
+
+        <tbody><tr><td rowspan="15" ><input type="text" name="father" [(ngModel)]="horseAdModel.Pedigree.Father"></td></tr>
+
+        <tr><td rowspan="7"><input type="text" name="father father" [(ngModel)]="horseAdModel.Pedigree.Father_Father"></td></tr>
+
+        <tr><td rowspan="3"><input type="text" name="father father father" [(ngModel)]="horseAdModel.Pedigree.Father_Father_Father"></td></tr>
+
+        <tr><td><input type="text" name="father father father father" [(ngModel)]="horseAdModel.Pedigree.Father_Father_Father_Father"></td></tr>
+
+        <tr><td><input type="text" name="father father father mother" [(ngModel)]="horseAdModel.Pedigree.Father_Father_Father_Mother"></td></tr>
+
+        <tr><td rowspan="3"><input type="text" name="father father mother" [(ngModel)]="horseAdModel.Pedigree.Father_Father_Mother"></td></tr>
+
+        <tr><td><input type="text" name="father father mother father" [(ngModel)]="horseAdModel.Pedigree.Father_Father_Mother_Father"></td></tr>
+
+        <tr><td ><input type="text"name="father father mother mother" [(ngModel)]="horseAdModel.Pedigree.Father_Father_Mother_Mother"></td></tr>
+
+        <tr><td rowspan="7"><input type="text" name="father mother" [(ngModel)]="horseAdModel.Pedigree.Father_Mother"></td></tr>
+
+        <tr><td rowspan="3"><input type="text" name="father mother father" [(ngModel)]="horseAdModel.Pedigree.Father_Mother_Father"></td></tr>
+
+        <tr><td><input type="text" name="father mother father father" [(ngModel)]="horseAdModel.Pedigree.Father_Mother_Father_Father"></td></tr>
+
+        <tr><td><input type="text" name="father mother father mother" [(ngModel)]="horseAdModel.Pedigree.Father_Mother_Father_Mother"></td></tr>
+
+        <tr><td rowspan="3"><input type="text" name="father mother mother" [(ngModel)]="horseAdModel.Pedigree.Father_Mother_Mother"></td></tr>
+
+        <tr><td><input type="text" name="father mother mother father" [(ngModel)]="horseAdModel.Pedigree.Father_Mother_Mother_Father"></td></tr>
+
+        <tr><td><input type="text" name="father mother mother mother" [(ngModel)]="horseAdModel.Pedigree.Father_Mother_Mother_Mother"></td></tr>
+
+        <tr><td rowspan="15"><input type="text" name="mother" [(ngModel)]="horseAdModel.Pedigree.Mother"></td></tr>
+
+        <tr><td rowspan="7"><input type="text" name="mother father" [(ngModel)]="horseAdModel.Pedigree.Mother_Father"></td></tr>
+
+        <tr><td rowspan="3"><input type="text" name="mother father father" [(ngModel)]="horseAdModel.Pedigree.Mother_Father_Father"></td></tr>
+
+        <tr><td><input type="text" name="mother father father father" [(ngModel)]="horseAdModel.Pedigree.Mother_Father_Father_Father"></td></tr>
+
+        <tr><td><input type="text" name="mother father father mother" [(ngModel)]="horseAdModel.Pedigree.Mother_Father_Father_Mother"></td></tr>
+
+        <tr><td rowspan="3"><input type="text" name="mother father mother" [(ngModel)]="horseAdModel.Pedigree.Mother_Father_Mother"></td></tr>
+
+        <tr><td><input type="text" name="mother father mother father" [(ngModel)]="horseAdModel.Pedigree.Mother_Father_Mother_Father"></td></tr>
+
+        <tr><td><input type="text" name="mother father mother mother" [(ngModel)]="horseAdModel.Pedigree.Mother_Father_Mother_Mother"></td></tr>
+
+        <tr><td rowspan="7"><input type="text" name="mother mother" [(ngModel)]="horseAdModel.Pedigree.Mother_Mother"></td></tr>
+
+        <tr><td rowspan="3"><input type="text" name="mother mother father" [(ngModel)]="horseAdModel.Pedigree.Mother_Mother_Father"></td></tr>
+
+        <tr><td><input type="text" name="mother mother father father" [(ngModel)]="horseAdModel.Pedigree.Mother_Mother_Father_Father"></td></tr>
+
+        <tr><td><input type="text" name="mother mother father mother" [(ngModel)]="horseAdModel.Pedigree.Mother_Mother_Father_Mother"></td></tr>
+
+        <tr><td rowspan="3"><input type="text" name="mother mother mother" [(ngModel)]="horseAdModel.Pedigree.Mother_Mother_Mother"></td></tr>
+
+        <tr><td><input type="text" name="mother mother mother father" [(ngModel)]="horseAdModel.Pedigree.Mother_Mother_Mother_Father"></td></tr>
+
+        <tr><td><input type="text" name="mother mother mother mother" [(ngModel)]="horseAdModel.Pedigree.Mother_Mother_Mother_Mother"></td></tr>
+
+        </tbody>
+
+        </table>
+
+        </div><!-- pedigree-scroll -->
+
+    </div><!-- info-container -->
+
+    <h3 class="section-title"><span>{{'ADD_AND_EDIT_PAGE.MEDIA.TITLE' | translate}}</span></h3>
+
+     <div class="info-container">
+
+        <div class="form-group video">
+            <label for="video">{{'ADD_AND_EDIT_PAGE.MEDIA.YT_LINK' | translate}}</label>
+            <div *ngIf="videoLinkError" class="client-side-validation-error">
+                {{'ADD_AND_EDIT_PAGE.MEDIA.YT_LINK_ERROR' | translate}}    
+            </div>
+            <div class="input-group">
+                <input name="video" type="text" autocomplete="off" class="form-control" id="video" (ngModelChange)="setVideoFrame($event)" 
+                [ngModel]="horseAdModel.VideoLink">
+                <iframe #horseVideoFrame class="video-frame" src=""></iframe> 
+            </div><!-- input-group -->
+        </div><!-- form-group -->
+
+        <p *ngIf="notUploadedPhoto" class="client-side-validation-error">{{'ADD_AND_EDIT_PAGE.MEDIA.PHOTO_ERROR_1' | translate}}</p>
+        <p *ngIf="imagesSizeExceed" class="client-side-validation-error">{{'ADD_AND_EDIT_PAGE.MEDIA.IMAGES_SIZE_EXEEDED' | translate}}</p>
+
+        <div class="drag-media" ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" 
+            (fileOver)="fileOverBase($event)" [uploader]="uploader">
+            <div class="media-upload">
+            <p><label for="upload-media"><fa name="upload"></fa></label></p>
+            <p class="files">{{'ADD_AND_EDIT_PAGE.MEDIA.SELECT_UPLOAD' | translate}}</p>
+            <p class="drag">{{'ADD_AND_EDIT_PAGE.MEDIA.DRAG_UPLOAD' | translate}}</p>
+            <input name="upload" type="file" class="form-control" id="upload-media" ng2FileSelect 
+                   [uploader]="uploader" multiple (change)="onFileInputEventChange($event)">
+            </div><!-- media-upload -->
+        </div><!-- drag-media -->
+
+        <div class="images-wrapper">
+            <ul class="uploaded-img" >
+                <li *ngFor="let item of horseAdModel.Images">
+                    <div class="font-awesome">
+                        <fa title="{{'ADD_AND_EDIT_PAGE.MEDIA.REMOVE_TOOLTIP' | translate}}" (click)="deleteUnsavedImage(item.ImageName)" name="minus-circle"></fa>
+                        <fa title="{{'ADD_AND_EDIT_PAGE.MEDIA.PRIMARY_TOOLTIP' | translate}}" (click)="setAdvertismentFirstPicture(item.ImageName)" name="flag" class="flag"></fa>
+                    </div><!-- font-awesome -->
+                <img src="{{imageDisplayUrl}}{{item.ImageName}}"/></li>
+            </ul>
+        </div><!-- images wrapper -->
+
+     </div><!-- info-container -->
+
+</div><!-- container add-horse-container -->
+
+<div class="horse-bg">
+    <button class="add-horse" (click)="addHorseAd()" [disabled]="!detailsForm.form.valid || !generalInfoForm.form.valid || typeaheadNoResults"><span>{{'ADD_AND_EDIT_PAGE.ADD_HORSE_BTN' | translate}}</span></button>
+</div><!-- horse-bg -->

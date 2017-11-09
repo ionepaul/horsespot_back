@@ -1,0 +1,24 @@
+<div class="error-wrapper">
+
+  <div class="row">
+
+    <div class="col-sm-6">
+      <div class="logo-wrapper">
+      <!--    <img src="../../../../wwwroot/assets/images/error-head.png" alt="Horse Spot Icon Logo">-->
+      </div><!-- logo-wrapper -->
+
+    </div><!-- col-sm-6 -->
+
+    <div class="col-sm-6">
+      <div class="text-wrapper">
+          <h1>{{statusCode}}</h1>
+          <h2>{{statusCodeInfo}}</h2>
+          <div class="message"><p>{{additionalInfo}}</p></div>
+          <a (click)="navigateTo()">{{buttonText}}</a>
+      </div><!-- text-wrapper -->
+    </div><!-- col-sm-6 -->
+
+  </div><!-- row -->
+
+
+</div><!-- error-wrapper -->

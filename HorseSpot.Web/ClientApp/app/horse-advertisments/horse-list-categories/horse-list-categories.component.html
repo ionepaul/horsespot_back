@@ -1,0 +1,103 @@
+<div class="form-bg" *ngIf="!hideQuickSearchPanel">
+
+<div class="container horses-form">
+
+    <form>
+        <div class="suitable-for">
+            <div class="form-group">
+                <h4>Suitable For</h4>
+                <div class="checkbox">
+                    <label><input type="checkbox" value="">Children</label>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" value="">Junior</label>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" value="">Young rider</label>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" value="">Amateur</label>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" value="">Beginner</label>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" value="">Experienced Rider</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="details-inputs">
+            <div class="form-group">
+                <!--<img src="../../../../wwwroot/assets/images/female_form.png" alt="Gender Icon">-->
+                <select class="form-control">
+                    <option value="" disabled selected hidden>Gender</option>
+                    <option>Test 2</option>
+                    <option>Test 3</option>
+                    <option>Test 4</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <!--<img src="../../../../wwwroot/assets/images/pin_form.png" alt="Location Icon">-->
+                <input placeholder="Country" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <!--<img src="../../../../wwwroot/assets/images/breed_form.png" alt="Breed Icon">-->
+                <input placeholder="Breed" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <!--<img src="../../../../wwwroot/assets/images/father_form.png" alt="Search Icon">-->
+                <input placeholder="Father's name" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <!--<img src="../../../../wwwroot/assets/images/sortby_form.png" alt="Sort Icon">-->
+                <select class="form-control">
+                    <option value="" disabled selected hidden>Sort by</option>
+                    <option>Test 2</option>
+                    <option>Test 3</option>
+                    <option>Test 4</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <!--<img src="../../../../wwwroot/assets/images/sortoder_form.png" alt="Sort Order Icon">-->
+                <select class="form-control">
+                    <option value="" disabled selected hidden>Sort order</option>
+                    <option>Test 2</option>
+                    <option>Test 3</option>
+                    <option>Test 4</option>
+                </select>
+            </div>     
+        </div>  
+
+        <p>ageRange: {{ageRange[0] + ' - ' + ageRange[1]}}</p>
+    <!--    <p-slider [(ngModel)]="ageRange" [style]="{'width':'200px'}" [range]="true" name="ageRange" [min]="0" [max]="35"></p-slider>-->
+        
+        <p>heightRange: {{heightRange[0] + ' - ' + heightRange[1]}}</p>
+<!--        <p-slider [(ngModel)]="heightRange" [style]="{'width':'200px'}" [range]="true" name="heightRange" [min]="0" [max]="199"></p-slider>-->
+
+        <p>price: {{price[0] + ' - ' + price[1]}}</p>
+        <!--<p-slider [(ngModel)]="price" [style]="{'width':'200px'}" [range]="true" name="price" [min]="0" [max]="3.000" [step]="1.000"></p-slider>-->
+    </form>
+</div><!-- horses-form -->
+
+</div><!-- form-bg -->
+<div class="serach-hide-bar" *ngIf="showHideSearchBar" (click)="hideSearchPanel()">
+    <span><fa name="angle-up"></fa> Hide Search</span>
+</div>
+
+<div class="mobile-search-bar" *ngIf="hideQuickSearchPanel" (click)="showSearchPanel()">
+    <span><fa name="search"></fa> Search</span>
+</div>
+
+<!-- <p *ngIf="categoryName" class="category-text">{{'NAVBAR.HORSES_FOR_SALE.TITLE' | translate}} > {{categoryName}}</p>  -->
+
+<h2 *ngIf="categoryHorseList.length == 0" class="no-horses-found-message">{{'CATEGORIES_SEARCH.NO_HORSES_FOUND_MSG' | translate}}</h2>  
+
+<div class="container horses-categories-list">
+<horse-list [horses]="categoryHorseList" [threeOnRow]="true"></horse-list>
+</div>   
+
+<pagination *ngIf="categoryHorseList.length != 0" [itemsPerPage]="8" [totalItems]="totalNumber" [(ngModel)]="pageNumber" [maxSize]="8"
+            class="pagination-sm" [boundaryLinks]="true" [rotate]="false" (pageChanged)="pageChanged($event)"
+            previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+</pagination>

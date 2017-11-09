@@ -1,0 +1,14 @@
+<account-menu></account-menu>
+
+<div class="container profile-info-container extra">
+    <h3 class="page-title-account">{{'UNVALIDATED_POSTS.TITLE' | translate}}</h3>
+</div>
+
+<h2 class="no-horses-found-message" *ngIf="unvalidatedHorseList.length == 0">{{'UNVALIDATED_POSTS.NO_UNVALIDATED' | translate}}</h2>
+
+<horse-list [horses]="unvalidatedHorseList"></horse-list>
+
+<pagination *ngIf="unvalidatedHorseList.length != 0" [itemsPerPage]="8" [totalItems]="totalNumber" [(ngModel)]="pageNumber" [maxSize]="8" 
+            class="pagination-sm" [boundaryLinks]="true" [rotate]="false" (pageChanged)="pageChanged($event)"
+            previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+</pagination>

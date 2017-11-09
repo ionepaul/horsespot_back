@@ -1,0 +1,80 @@
+<footer class="footer">
+
+  <div class="container">
+    <div class="row">
+
+      <div class="col-sm-3 footer-1">
+          <h4>{{'FOOTER.ABOUT_TITLE' | translate}}</h4>
+          <p>{{'FOOTER.ABOUT_TEXT' | translate}}</p>
+      </div><!-- col-sm-3 -->
+
+      <div class="col-sm-3 footer-2">
+          <h4>{{'FOOTER.QUICK_LINKS.TITLE' | translate}}</h4>
+          <ul>
+            <li><a [routerLink]="['/home']">{{'FOOTER.QUICK_LINKS.HOME' | translate}}</a></li>
+            <li><a [routerLink]="['/about']">{{'FOOTER.QUICK_LINKS.ABOUT' | translate}}</a></li>
+            <li><a [routerLink]="['/get-involved']">{{'FOOTER.QUICK_LINKS.GET_INVOLVED' | translate}}</a></li>
+            <li><a [routerLink]="['/contact']">{{'FOOTER.QUICK_LINKS.CONTACT' | translate}}</a></li>
+            <li><a [routerLink]="['/account/login']">{{'FOOTER.QUICK_LINKS.LOGIN' | translate}}</a></li>
+            <li><a [routerLink]="['/account/register']">{{'FOOTER.QUICK_LINKS.SIGNUP' | translate}}</a></li>
+          </ul>
+      </div><!-- col-sm-3 -->
+
+      <div class="col-sm-3 footer-3">
+            <h4>{{'FOOTER.HORSES_FOR_SALE.TITLE' | translate}}</h4>
+            <ul>
+              <li><a [routerLink]="['/horses-for-sale/showjumping/1']">{{'FOOTER.HORSES_FOR_SALE.SHOWJUMPING' | translate}}</a></li>
+              <li><a [routerLink]="['/horses-for-sale/dressage/1']">{{'FOOTER.HORSES_FOR_SALE.DRESSAGE' | translate}}</a></li>
+              <li><a [routerLink]="['/horses-for-sale/eventing/1']">{{'FOOTER.HORSES_FOR_SALE.EVENTING' | translate}}</a></li>
+              <li><a [routerLink]="['/horses-for-sale/endurance/1']">{{'FOOTER.HORSES_FOR_SALE.ENDURANCE' | translate}}</a></li>
+              <li><a [routerLink]="['/horses-for-sale/driving/1']">{{'FOOTER.HORSES_FOR_SALE.DRIVING' | translate}}</a></li>
+              <li><a [routerLink]="['/horses-for-sale/leisure/1']">{{'FOOTER.HORSES_FOR_SALE.LEISURE' | translate}}</a></li>
+            </ul>
+      </div><!-- col-sm-3 -->
+
+      <div class="col-sm-3 footer-4">
+            <h4>{{'FOOTER.NEWSLETTER_TITLE' | translate}}</h4>
+            <p>{{'FOOTER.NEWSLETTER_TEXT' | translate}}</p>
+            <form #newsletterForm="ngForm" class="form-inline">
+              <div *ngIf="errorMessage" class="client-side-validation-error">
+                <small>{{errorMessage}}</small>
+              </div>
+              <div *ngIf="subcriberEmail.errors && subcriberEmail.touched" class="client-side-validation-error">
+                <small [hidden]="!subcriberEmail.errors.pattern">
+                 {{'GENERAL.INVALID_EMAIL_FORMAT' | translate}}
+                </small>
+              </div><!-- email client-side-validation-error -->
+              <div class="form-group">
+                  <input type="text" autocomplete="off" class="form-control" placeholder="{{'FOOTER.NEWSLETTER_INPUT_PLACEHOLDER' | translate}}" name="newsletter" [(ngModel)]="newsletterEmail" #subcriberEmail="ngModel" required pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$">
+              </div><!-- form-group -->
+               <button [disabled]="!newsletterForm.form.valid" type="submit" (click)="subscribeToNewsletter()">{{'FOOTER.NEWSLETTER_BUTTON' | translate}}</button>
+            </form>
+
+            <p style="margin-top: 25px;">&copy; {{'FOOTER.YEAR_HORSESPOT' |translate}} {{'FOOTER.RIGHTS' | translate}}</p>
+      </div><!-- col-sm-3 -->
+
+    </div><!-- row -->
+
+  </div><!-- container -->
+
+</footer>
+
+<div class="logos">
+
+  <div class="row">
+
+    <div class="col-sm-4 logo-1">
+        <a [routerLink]="['/get-involved']"><img src="../../../../wwwroot/assets/images/footer-logo-2.png" alt=""></a>
+    </div><!-- col-sm-4 -->
+
+    <div class="col-sm-4 logo-2">
+      <a [routerLink]="['/get-involved']"><img src="../../../../wwwroot/assets/images/footer-logo-1.png" alt=""></a>
+    </div><!-- col-sm-4 -->
+
+    <div class="col-sm-4 logo-3">
+        <a [routerLink]="['/get-involved']"><img src="../../../../wwwroot/assets/images/footer-logo-3.png" alt=""></a>
+    </div><!-- col-sm-4 -->
+
+  </div><!-- row -->
+
+</div><!-- logos -->

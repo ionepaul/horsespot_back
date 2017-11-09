@@ -1,0 +1,184 @@
+<div class="profile-info">
+
+    <div class="container">
+
+        <a (click)="back()" class="go-back"><i class="fa fa-angle-left" aria-hidden="true"></i> {{'HORSE_AD_DETAIL.BACK' | translate}}</a>
+
+        <div class="row">
+            <div class="col-sm-3 profile-image">
+                <img src="{{profilePhotoUrl}}">
+                <div *ngIf="userModel.UserId == currentUserId" class="change-img-hover">
+                    <input type="file" name="change-profile-pic" id="profile-pic" (change)="onFileInputEventChange($event)">
+                    <label for="profile-pic"><i class="fa fa-picture-o" aria-hidden="true"></i></label>
+                </div>
+                <p *ngIf="!validUpload" class="client-side-validation-error">{{'PROFILE.UNSUPPORTED_PIC' | translate}} </p>
+                <p *ngIf="!uploadImageErrorMessage" class="client-side-validation-error">{{uploadImageErrorMessage}} </p>
+            </div><!-- col-sm-3 -->
+            
+            <div class="col-sm-6 profile-details">
+                <div style="border-bottom: 1px solid #ccc;" *ngIf="userModel.UserId == currentUserId">
+                    <p *ngIf="!isEditMode" (click)="isEditMode=!isEditMode" class="edit-info-btn write">{{'PROFILE.EDIT_BTN' | translate}}</p>
+                    <p *ngIf="isEditMode" (click)="saveChanges()" class="save-btn write">{{ 'PROFILE.SAVE_BTN' | translate }}</p>
+                    <p *ngIf="isEditMode" (click)="isEditMode=!isEditMode" class="save-btn write"> Cancel</p>
+                    <p *ngIf="isEditMode && editErrorMessage" class="client-side-validation-error">{{editErrorMessage}}</p>
+                    <p *ngIf="profileNameError" class="client-side-validation-error"> Fill in your profile name.</p>                    
+                    <p *ngIf="!isEditMode" (click)="changePasswordModal.open()" class="changePass-btn write">change password</p>
+                </div>
+                
+                <div *ngIf="!isEditMode" class="main-info">
+                    <p class="name">{{userModel.FullName}}</p>
+                    <ul class="email">
+                        <li *ngIf="userModel.PhoneNumber"><a href="tel:{{userModel.PhoneNumber}}"><i class="fa fa-mobile" aria-hidden="true"></i> {{userModel.PhoneNumber}}</a></li>
+                        <li><a href="email:{{userModel.Email}}"><i class="fa fa-envelope" aria-hidden="true"></i> {{userModel.Email}}</a></li>
+                    </ul>
+                </div><!-- main-info -->
+
+                <div *ngIf="isEditMode" class="edit-info">
+                    <form class="cf">
+                        <div class="form-group profile-name">
+                            <div class="icon"><i class="fa fa-user" aria-hidden="true"></i></div>
+                            <input type="text" class="change-name form-control" name="fullName" [(ngModel)]="userModel.FullName">
+                        </div>
+
+                        <div class="form-group">
+                            <div class="icon"><i class="fa fa-mobile" aria-hidden="true"></i></div>
+                            <input type="tel" class="tel form-control"  name="phone" [(ngModel)]="userModel.PhoneNumber">
+                        </div>
+
+                        <div class="form-group">
+                            <div class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+                            <input disabled type="email" class="email form-control" name="email" [(ngModel)]="userModel.Email">
+                        </div>
+                    </form>
+                </div><!-- edit-info -->
+                <ul class="numbers">
+                    <li (click)="scrollInto('horses-for-sale')"><span class="number">{{userModel.TotalForSale}}</span> {{'PROFILE.HORSES_FOR_SALE' | translate}}</li>
+                    <li (click)="scrollInto('references')"><span class="number">{{userModel.TotalReferenes}}</span> {{'PROFILE.REFERENCES' | translate}}</li>
+                    <li (click)="scrollInto('favorites')" *ngIf="userModel.UserId == currentUserId"><span class="number">{{userModel.TotalFavorites}}</span> {{'PROFILE.WISH_LIST' | translate}}</li>
+                    <!--<li><span class="number">{{userModel.Email}}</span> meetings</li>
+                    <li><span class="number">{{userModel.Email}}</span>feedbacks</li>-->
+                </ul>
+            </div><!-- col-sm-6 -->
+
+            <div class="col-sm-3 ctas">
+                <a (click)="showSendEmailModal() ">{{'HORSE_AD_DETAIL.SEND_EMAIL' | translate}}</a>
+                <!--<a href="">Ask for a meeting</a>
+                <a href="">Write a review</a>-->
+            </div><!-- col-sm-3 -->
+        </div><!-- row -->
+
+        <div class="horse-wrapper">
+            <ul *ngIf="userModel.TotalForSale != 0" class="category-list-title">
+                <li class="category-title">{{'PROFILE.HORSES_FOR_SALE' | translate}}</li>
+                <li><a (click)="goToUserHorsesForSale()">{{ 'HORSE_LIST_VIEW_MORE' | translate }} <i aria-hidden="true" class="fa fa-angle-right"></i></a></li>
+            </ul>
+            <horse-list id="horses-for-sale" [horses]="userModel.HorsesForSale" [threeOnRow]="true"></horse-list>
+
+            <ul *ngIf="userModel.UserId == currentUserId && userModel.TotalFavorites != 0" class="category-list-title">
+                <li class="category-title">{{'PROFILE.WISH_LIST' | translate}}</li>
+                <li><a [routerLink]="['/account/wishlist/1']">{{ 'HORSE_LIST_VIEW_MORE' | translate }} <i aria-hidden="true" class="fa fa-angle-right"></i></a></li>
+            </ul>
+            <horse-list id="favorites" *ngIf="userModel.UserId == currentUserId" [horses]="userModel.FavoriteHorses" [threeOnRow]="true"></horse-list>
+            
+
+            <ul *ngIf="userModel.TotalReferenes" class="category-list-title">
+                <li class="category-title">{{'PROFILE.REFERENCES' | translate}}</li>
+                <li><a (click)="goToUserHorseReferences()">{{ 'HORSE_LIST_VIEW_MORE' | translate }} <i aria-hidden="true" class="fa fa-angle-right"></i></a></li>
+            </ul>
+            <horse-list id="references" [horses]="userModel.ReferenceHorses" [threeOnRow]="true"></horse-list>            
+        </div><!-- horse-wrapper-->
+    </div><!-- container -->
+
+</div><!--profile-info -->
+
+
+<modal #sendEmailFromProfile class="navbar-modals send-email" (onClose)="onSendEmailModalClose()">
+  <modal-content>
+    <p (click)="sendEmailFromProfile.close()" class="close-modal-mobile"><i class="fa fa-times" aria-hidden="true"></i></p>
+    <div class="horse-logo">
+        <!--  <img src="../../../../wwwroot/assets/images/logo_2.png" alt="Horse Spot Logo">-->
+    </div><!-- horse-logo -->
+
+      <div class="form">
+          <section *ngIf="errorMessage" class="client-side-validation-error">{{errorMessage}}</section>
+            <form #sendEmailForm="ngForm">
+            <!--Email input + client side validation-->
+              <div *ngIf="email.errors && email.touched" class="client-side-validation-error">
+                <small [hidden]="!email.errors.required">
+                  {{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.EMAIL_ERROR' | translate}}
+                </small>
+                <small [hidden]="!email.errors.pattern">
+                  {{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.EMAIL_INVALID' | translate}}
+                </small>
+              </div>  
+              <input type="text" [(ngModel)]="emailModel.Sender" required pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" #email="ngModel" 
+                    class="form-control" name="senderEmail" placeholder="{{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.EMAIL_PLACEHOLDER' | translate}}">
+     
+              <div *ngIf="senderName.errors && senderName.touched" class="client-side-validation-error">
+                  <small [hidden]="!senderName.errors.required">
+                    {{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.NAME_ERROR' | translate}}
+                  </small>
+              </div>
+              <input type="text" required #senderName="ngModel" [(ngModel)]="emailModel.SenderName" class="form-control" name="senderName" placeholder="{{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.NAME_PLACEHOLDER' | translate}}">
+
+              <div *ngIf="message.errors && message.touched" class="client-side-validation-error">
+                <small [hidden]="!message.errors.required">
+                  {{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.MSG_ERROR' | translate}}
+                </small>
+              </div>
+              <textarea name="message" required #message="ngModel" [(ngModel)]="emailModel.Message" rows="4" cols="50" placeholder="{{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.MSG_PLACEHOLDER' | translate}}"></textarea>
+            </form>
+            <button class="save" (click)="sendEmailToUser()" [disabled]="!sendEmailForm.form.valid">{{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.SEND_BTN' | translate}}</button>
+      </div><!-- form -->
+  </modal-content>
+</modal>
+<!-- End Send Email Modal -->
+
+<modal #changePasswordModal class="navbar-modals send-email" (onClose)="onChangePasswordModalClose()">
+  <modal-content>
+      <p (click)="changePasswordModal.close()" class="close-modal-mobile"><i class="fa fa-times" aria-hidden="true"></i></p>
+      <div class="horse-logo">
+        <!--  <img src="../../../../wwwroot/assets/images/logo_2.png" alt="Horse Spot Logo">-->
+      </div><!-- horse-logo -->
+
+      <div class="form">
+          <form #changePasswordForm="ngForm" action="">               
+            <p *ngIf="changePasswordErrorMessage" class="client-side-validation-error">{{changePasswordErrorMessage}}</p>
+
+            <div *ngIf="currentPassword.errors && currentPassword.touched" class="client-side-validation-error">
+                <small [hidden]="!currentPassword.errors.required">
+                    {{'PROFILE.CHANGE_PASS.CURR_PASS_ERR' | translate}}
+                </small>
+            </div> <!-- current-password client-side-validation-error -->
+
+            <div class="form-group">
+                <input name="current-password" type="password" class="form-control" id="cpass" required name="currentPassword" [(ngModel)]="changePasswordModel.CurrentPassword" #currentPassword="ngModel" placeholder="{{'PROFILE.CHANGE_PASS.CURR_PASS' | translate}}">
+            </div><!-- form-group -->
+
+            <div *ngIf="newPassword.errors && newPassword.touched" class="client-side-validation-error">
+                <small [hidden]="!newPassword.errors.required">
+                    {{'PROFILE.CHANGE_PASS.NEW_PASS_ERROR' | translate}}
+                </small>
+                <small [hidden]="!newPassword.errors.minlength">
+                    {{'PROFILE.CHANGE_PASS.NEW_PASS_INVALID' | translate}}
+                </small>
+            </div><!-- new-password client-side-validation-error -->
+
+            <div class="form-group">
+                <input name="new-password" type="password" class="form-control" id="npass" required name="newPassword" minlength="6" reverse="true" validateEqual="confirmPassword" [(ngModel)]="changePasswordModel.NewPassword" #newPassword="ngModel" placeholder="{{'PROFILE.CHANGE_PASS.NEW_PASS' | translate}}">
+            </div><!-- form-group -->
+
+            <div *ngIf="confirmPassword.errors && (confirmPassword.dirty || confirmPassword.touched)" class="client-side-validation-error">
+                <small [hidden]="!confirmPassword.errors">
+                    {{'PROFILE.CHANGE_PASS.CONFIRM_PASS_ERROR' | translate}}
+                </small>
+            </div><!-- confirm-password client-side-validation-error -->
+
+            <div class="form-group">
+                <input name="confirm-password" type="password" class="form-control" id="confpass" required name="confirmPassword" validateEqual="newPassword" [(ngModel)]="changePasswordModel.ConfirmPassword" #confirmPassword="ngModel" placeholder="{{'PROFILE.CHANGE_PASS.CONFIRM_PASS' | translate}}">
+            </div><!-- form-group -->
+          </form>
+          <button class="save" (click)="changePassword()" [disabled]="!changePasswordForm.form.valid">{{'PROFILE.CHANGE_PASS.SAVE_BTN' | translate}}</button>
+      </div><!-- form -->
+  </modal-content>
+</modal>

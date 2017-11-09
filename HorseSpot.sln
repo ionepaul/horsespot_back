@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorseSpot.Api", "HorseSpot.Api\HorseSpot.Api.csproj", "{353169E6-D5B6-4C2B-888C-326351F640AA}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorseSpot.Infrastructure", "HorseSpot.Infrastructure\HorseSpot.Infrastructure.csproj", "{86571571-A5E1-4947-B6E7-FDA0C73C56F0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HorseSpot.Models", "HorseSpot.Models\HorseSpot.Models.csproj", "{B1969906-4A8E-4493-A0C9-D1522A707C6A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorseSpot.Web", "HorseSpot.Web\HorseSpot.Web.csproj", "{31F83C36-4F03-4A2E-B5BB-8D9A61056A73}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,8 +41,15 @@ Global
 		{B1969906-4A8E-4493-A0C9-D1522A707C6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1969906-4A8E-4493-A0C9-D1522A707C6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1969906-4A8E-4493-A0C9-D1522A707C6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31F83C36-4F03-4A2E-B5BB-8D9A61056A73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31F83C36-4F03-4A2E-B5BB-8D9A61056A73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31F83C36-4F03-4A2E-B5BB-8D9A61056A73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31F83C36-4F03-4A2E-B5BB-8D9A61056A73}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D09C2638-712E-4D3B-BD7D-097622D64C36}
 	EndGlobalSection
 EndGlobal

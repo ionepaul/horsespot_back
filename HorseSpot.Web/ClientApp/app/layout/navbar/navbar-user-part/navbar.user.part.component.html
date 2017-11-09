@@ -1,0 +1,21 @@
+<!-- <i #notificationBell id="notificationBell" class="appointment-navbar-notif ci ci-bell" [popover]="notificationPopover"></i> -->
+
+<div class="user-bg-part">
+
+    <ul>
+        <!-- User profile picture  -->
+        <li class="profile-image-li"><img src="{{profilePhotoUrl}}" class="user-profile-picture"></li>
+        <!-- Logged in user menu -->
+        <li>
+            <a  (click)="showUserMenu = !showUserMenu" id="dropdown-link-button">{{userName}} <fa name=" fa-angle-down"></fa></a>
+        </li>
+    </ul>
+    <div *ngIf="showUserMenu" class="notif-wrapper">
+        <div class="popover-arrow"></div>
+        <a [routerLinkActive]="['active']" (click)="goToUserProfile()" class="dropdown-item" [routerLink]="['/account/profile']">{{'NAVBAR.ACCOUNT.MY_ACCOUNT' | translate}}</a>
+        <a [routerLinkActive]="['active']" (click)="itemClicked()" class="dropdown-item" [routerLink]="['/horses/add']">{{'NAVBAR.ACCOUNT.ADD_NEW' | translate }}</a>
+        <a *ngIf="isAdmin" [routerLinkActive]="['active']" (click)="itemClicked()" class="dropdown-item" [routerLink]="['/horses/unvalidated/1']">{{'NAVBAR.ACCOUNT.UNVALIDATED' | translate}}</a>        
+        <a class="dropdown-item" (click)="logOut()" [routerLink]="['/home']">{{'NAVBAR.ACCOUNT.LOGOUT' | translate}}</a>
+    </div>
+
+</div><!-- user-bg-part -->

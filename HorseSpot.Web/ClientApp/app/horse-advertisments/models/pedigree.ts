@@ -1,0 +1,65 @@
+export class PedigreeModel {
+    Father:string;
+    Father_Father:string;
+    Father_Mother:string;
+    Father_Father_Father:string;
+    Father_Father_Mother:string;
+    Father_Mother_Father:string;
+    Father_Mother_Mother:string;
+    Father_Father_Father_Father:string;
+    Father_Father_Father_Mother:string;
+    Father_Father_Mother_Father:string;
+    Father_Father_Mother_Mother:string;
+    Father_Mother_Father_Father:string;
+    Father_Mother_Father_Mother:string;
+    Father_Mother_Mother_Father:string;
+    Father_Mother_Mother_Mother:string;
+    Mother:string;
+    Mother_Father:string;
+    Mother_Mother:string;
+    Mother_Father_Father:string;
+    Mother_Father_Mother:string;
+    Mother_Mother_Father:string;
+    Mother_Mother_Mother:string;
+    Mother_Father_Father_Father:string;
+    Mother_Father_Father_Mother:string;
+    Mother_Father_Mother_Father:string;
+    Mother_Father_Mother_Mother:string;
+    Mother_Mother_Father_Father:string;
+    Mother_Mother_Father_Mother:string;
+    Mother_Mother_Mother_Father:string;
+    Mother_Mother_Mother_Mother:string;
+
+    constructor() {
+        this.Father = null;
+        this.Father_Father = null;
+        this.Father_Mother = null;
+        this.Father_Father_Father = null;
+        this.Father_Father_Mother = null;
+        this.Father_Mother_Father = null;
+        this.Father_Mother_Mother = null;
+        this.Father_Father_Father_Father = null;
+        this.Father_Father_Father_Mother = null;
+        this.Father_Father_Mother_Father = null;
+        this.Father_Father_Mother_Mother = null;
+        this.Father_Mother_Father_Father = null;
+        this.Father_Mother_Father_Mother = null;
+        this.Father_Mother_Mother_Father = null;
+        this.Father_Mother_Mother_Mother = null;
+        this.Mother = null;
+        this.Mother_Father = null;
+        this.Mother_Mother = null;
+        this.Mother_Father_Father = null;
+        this.Mother_Father_Mother = null;
+        this.Mother_Mother_Father = null;
+        this.Mother_Mother_Mother = null;
+        this.Mother_Father_Father_Father = null;
+        this.Mother_Father_Father_Mother = null;
+        this.Mother_Father_Mother_Father = null;
+        this.Mother_Father_Mother_Mother = null;
+        this.Mother_Mother_Father_Father = null;
+        this.Mother_Mother_Father_Mother = null;
+        this.Mother_Mother_Mother_Father = null;
+        this.Mother_Mother_Mother_Mother = null;
+    }
+}

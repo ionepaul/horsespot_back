@@ -1,0 +1,17 @@
+  <div class="container">
+      <a (click)="back()" class="go-back"><i class="fa fa-angle-left" aria-hidden="true"></i> {{'HORSE_AD_DETAIL.BACK' | translate}}</a>
+  <div class="horse-wrapper">
+ <ul class="category-list-title">
+                <li class="category-title">{{'PROFILE.WISH_LIST' | translate}}</li>
+                <!--<li><a [routerLink]="['/account/wishlist/1']">{{ 'HORSE_LIST_VIEW_MORE' | translate }} <i aria-hidden="true" class="fa fa-angle-right"></i></a></li>-->
+            </ul>
+ 
+
+<horse-list [horses]="userFavoritesPosts" [threeOnRow]="true"></horse-list>
+  </div>
+  </div>
+
+<pagination *ngIf="userFavoritesPosts.length != 0" [itemsPerPage]="16" [totalItems]="totalNumber" [(ngModel)]="pageNumber" [maxSize]="8" 
+            class="pagination-sm" [boundaryLinks]="true" [rotate]="false" (pageChanged)="pageChanged($event)"
+            previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+</pagination>

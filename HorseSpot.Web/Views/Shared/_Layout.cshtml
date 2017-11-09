@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base href="@(Url.Content("~/"))" />
+    <title>@ViewData["Title"]</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    @Html.Raw(ViewData["Meta"])
+    @Html.Raw(ViewData["Links"])
+
+    <!-- Favicon -->
+    <link rel="icon" href="~/assets/images/favicon.png">
+
+    @Html.Raw(ViewData["Styles"])
+  </head>
+  <body>
+    @RenderBody()
+
+    <!-- Here we're passing down any data to be used by grabbed and parsed by Angular -->
+    @Html.Raw(ViewData["TransferData"])
+    @Html.Raw(ViewData["Scripts"])
+
+    @RenderSection("scripts", required: false)
+
+  </body>
+</html>

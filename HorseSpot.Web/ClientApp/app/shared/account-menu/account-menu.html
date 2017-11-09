@@ -1,0 +1,32 @@
+<div class="account-bar">
+  <div class="row">
+    <div class="container">
+      <div [routerLinkActive]="['active']" class="col">
+        <div class="rotate">
+          <a [routerLink]="['/account/profile']"><i class=" fi fi-user"></i> {{'NAVBAR.ACCOUNT.PROFILE' | translate}}</a>
+        </div><!-- rotate -->
+      </div><!-- col-sm-3 -->
+
+      <div [routerLinkActive]="['active']" class="col">
+        <div class="rotate">
+          <a [routerLink]="['/account/posts/1']"><i class=" fi fi-post"></i> {{'NAVBAR.ACCOUNT.POSTS' | translate}}</a>
+        </div><!-- rotate -->
+      </div><!-- col-sm-3 -->
+
+      <div [routerLinkActive]="['active']" class="col">
+        <div class="rotate">
+          <a [routerLink]="['/account/wishlist/1']"><i class=" fi fi-wish"></i> {{'NAVBAR.ACCOUNT.FAVORITES' | translate}}</a>
+        </div><!-- rotate -->
+      </div><!-- col-sm-3 -->
+
+      <div [routerLinkActive]="['active']" class="col">
+        <div class="rotate">
+          <a [routerLink]="['/account/appointments']"><i class=" fi fi-app"></i> {{'NAVBAR.ACCOUNT.APPOINTMENTS' | translate}}</a>
+        </div><!-- rotate -->
+      </div><!-- col-sm-3 -->
+      
+    </div><!-- container -->
+
+  </div><!-- row -->
+
+</div><!-- account-bar -->
