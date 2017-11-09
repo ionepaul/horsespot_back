@@ -1,14 +1,16 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { NotificationService } from './shared/notifications/notification.service';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-import { AccountService } from './account/account.service';
-import { AuthService } from './shared/auth/auth.service';
-import { AppointmentsService } from './account/appointments/appointments.service';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Subscription } from 'rxjs/Subscription';
 import { Meta, Title, DOCUMENT, MetaDefinition } from '@angular/platform-browser';
+
+//SERVICES
+import { NotificationService } from './shared/notifications/notification.service';
+import { AccountService } from './account/account.service';
+import { AuthService } from './shared/auth/auth.service';
+//import { AppointmentsService } from './account/appointments/appointments.service';
 import { LinkService } from './shared/link.service';
 
 
@@ -37,7 +39,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private routerSub$: Subscription;
 
     constructor(public _accountService: AccountService, 
-                public _appointmentsService: AppointmentsService,
+                //public _appointmentsService: AppointmentsService,
                 public _router: Router,
                 private _activatedRoute: ActivatedRoute,
                 public _notificationService: NotificationService,
@@ -51,18 +53,17 @@ export class AppComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this._changeTitleOnNavigation();
 
+        this._translateService.setDefaultLang('en');
+        this._translateService.use('en');
+
         if (this._authService.isRefreshTokenExpired()) {
             this._authService.removeUserStoredInfo();
         }
 
-        let userId = this._accountService.getUserId();
-        
-        if (userId != null) {
-             this._appointmentsService.webSocketConnect(userId);        
-        }
-
-        this._translateService.setDefaultLang('en');
-        this._translateService.use('en');
+        //let userId = this._accountService.getUserId();       
+        //if (userId != null) {
+        //     this._appointmentsService.webSocketConnect(userId);        
+        //}
 
         if (isPlatformBrowser(this.platformId)) { 
             let browserLang = this._translateService.getBrowserLang();
@@ -77,7 +78,6 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        // Subscription clean-up
         this.routerSub$.unsubscribe();
     }
 
@@ -98,8 +98,6 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     private _setMetaAndLinks(event) {
-
-        // Set Title if available, otherwise leave the default Title
         const title = event['title']
             ? `${event['title']} - ${this.endPageTitle}`
             : `${this.defaultPageTitle} - ${this.endPageTitle}`;

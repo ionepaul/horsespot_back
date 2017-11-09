@@ -30,9 +30,9 @@ export let CONFIG = {
     genders: [ "Gelding", "Mare", "Stallion" ],
 
     languages: [ { value: "en", displayText: "English", imgUrl: "../../assets/images/english.png" }, 
-                 { value: "de", displayText: "Deutsch", imgUrl: "../../wwwroot/assets/images/germany.png" },
-                 { value: "fr", displayText: "French", imgUrl: "../../wwwroot/assets/images/france.png" },
-                 { value: "ro", displayText: "Romanian", imgUrl: "../../wwwroot/assets/images/romania.png" }]
+                 { value: "de", displayText: "Deutsch", imgUrl: "../../assets/images/germany.png" },
+                 { value: "fr", displayText: "French", imgUrl: "../../assets/images/france.png" },
+                 { value: "ro", displayText: "Romanian", imgUrl: "../../assets/images/romania.png" }]
 }
  
 export * from './config';

@@ -1,5 +1,3 @@
-<account-menu></account-menu>
-
 <div class="container appointments">
 
 <h3 class="page-title-account">{{'APPOINTMENTS.TITLE' | translate}}</h3>
@@ -150,7 +148,7 @@
 </div><!-- appointments -->
 
 <!-- Change Appointment Date Modal -->
-<modal #changeAppointmentDateModal class="make-app" (onClose)="hideChangeDateModal()">
+<!--<modal #changeAppointmentDateModal class="make-app" (onClose)="hideChangeDateModal()">
   <modal-content>
       <h3>{{'APPOINTMENTS.CHANGE_DATE_MODAL_TITLE' | translate}}</h3>
       <p *ngIf="dateChosedIsPast" class="client-side-validation-error">{{'APPOINTMENTS.CHANGE_DATE_MODAL_ERROR' | translate}}</p>
@@ -163,11 +161,11 @@
       <button class="action save" (click)="changeAppointmentDate()" [disabled]="dateChosedIsPast">{{'APPOINTMENTS.CONFIRM_BTN' | translate}}</button>
       <button class="action cancel" (click)="hideChangeDateModal()">{{'APPOINTMENTS.CANCEL_BTN' | translate}}</button>
   </modal-content>
-</modal>
+</modal>-->
 <!-- End Change Appointment Date Modal -->
 
 <!-- Cancel appointment Modal -->
-<modal #cancelAppointmentModal class="cancel-app" (onClose)="hideCancelModal()">
+<!--<modal #cancelAppointmentModal class="cancel-app" (onClose)="hideCancelModal()">
   <modal-content>
 
        <div id="cancel-app" class="myWrapper">
@@ -175,28 +173,28 @@
       <div class="picture">
       </div><!-- picture -->
 
-      <form #cancelForm="ngForm" class="form">
+      <!--<form #cancelForm="ngForm" class="form">
 
-          <div class="error-head">
+          <div class="error-head">-->
              <!-- <img src="../../../../../wwwroot/assets/images/error-head.png" alt="Error Head">-->
-          </div><!-- error head -->
+          <!--</div>--><!-- error head -->
 
-          <h3>{{'APPOINTMENTS.CANCEL_MODAL_TITLE' | translate}}</h3>
+          <!--<h3>{{'APPOINTMENTS.CANCEL_MODAL_TITLE' | translate}}</h3>
           <p *ngIf="feedbackMessage.errors && feedbackMessage.touched" class="client-side-validation-error">{{'APPOINTMENTS.CANCEL_MESSAGE' | translate}}</p>
           <textarea placeholder="{{'APPOINTMENTS.CANCEL_MODAL_TEXTAREA_PLACEHOLDER' | translate}}" [(ngModel)]="cancelAppointmentModel.FeedbackMessage" required #feedbackMessage="ngModel" name="feedbackMessage"></textarea>
           <button class="save" [disabled]="!cancelForm.valid" (click)="cancelAppointment()">{{'APPOINTMENTS.CONFIRM_BTN' | translate}}</button>
-          <button class="cancel" (click)="hideCancelModal()">{{'APPOINTMENTS.CANCEL_BTN' | translate}}</button>
+          <button class="cancel" (click)="hideCancelModal()">{{'APPOINTMENTS.CANCEL_BTN' | translate}}</button>-->
 
-      </form><!-- form -->
+      <!--</form>--><!-- form -->
 
-        </div><!-- myWrapper -->
+        <!--</div>--><!-- myWrapper -->
 
-  </modal-content>
-</modal>
+  <!--</modal-content>
+</modal>-->
 <!-- End cancel appointment Modal -->
 
 <!-- Accept appointment Modal -->
-<modal #acceptAppointmentModal class="accept-appointment-modal" (onClose)="hideAcceptAppointmentModal()">
+<!--<modal #acceptAppointmentModal class="accept-appointment-modal" (onClose)="hideAcceptAppointmentModal()">
   <modal-content>
 
      <div id="accept-app" class="myWrapper">
@@ -204,13 +202,13 @@
       <div class="picture picture-delete">
       </div><!-- picture -->
 
-      <div class="form">
+      <!--<div class="form">
 
-          <div class="error-head">
+          <div class="error-head">-->
             <!--  <img src="../../../../../wwwroot/assets/images/error-head.png" alt="Error Head">-->
-          </div><!-- error head -->
+          <!--</div>--><!-- error head -->
 
-          <h3>{{'APPOINTMENTS.ACCEPT_MODAL_TITLE' | translate}} {{acceptAppointmentModel.AdvertismentTitle}}</h3>
+          <!--<h3>{{'APPOINTMENTS.ACCEPT_MODAL_TITLE' | translate}} {{acceptAppointmentModel.AdvertismentTitle}}</h3>
 
           <div class="appointmentDetailsModal">
           <p><fa name="clock-o"></fa> {{acceptAppointmentModel.AppointmentDateTime | dateFormatPipe: true}} {{acceptAppointmentModel.AppointmentDateTime | dateFormatHourPipe}}</p>
@@ -222,9 +220,9 @@
           <button class="delete" (click)="acceptAppointment()">{{'APPOINTMENTS.ACCEPT_BTN' | translate}}</button>
           <button class="cancel-delete" (click)="hideAcceptAppointmentModal()">{{'APPOINTMENTS.CANCEL_BTN' | translate}}</button>
 
-      </div><!-- form -->
+      </div>--><!-- form -->
 
-    </div><!-- myWrapper -->
-  </modal-content>
-</modal>
+    <!--</div>--><!-- myWrapper -->
+  <!--</modal-content>
+</modal>-->
 <!-- End Accept Appointment Modal -->

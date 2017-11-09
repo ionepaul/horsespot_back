@@ -144,18 +144,18 @@
 </div>
 
 <!-- Send Email Modal -->
-<modal #sendEmailModal class="navbar-modals send-email">
+<!--<modal #sendEmailModal class="navbar-modals send-email">
   <modal-content>
     <p (click)="sendEmailModal.close()" class="close-modal-mobile"><i class="fa fa-times" aria-hidden="true"></i></p>
-    <div class="horse-logo">
+    <div class="horse-logo">-->
           <!--<img src="../../../../wwwroot/assets/images/logo_2.png" alt="Horse Spot Logo">-->
-    </div><!-- horse-logo -->
+    <!--</div>--><!-- horse-logo -->
 
-      <div class="form">
+      <!--<div class="form">
           <section *ngIf="errorMessage" class="client-side-validation-error">{{errorMessage}}</section>
-            <form #sendEmailForm="ngForm">
+            <form #sendEmailForm="ngForm">-->
             <!--Email input + client side validation-->
-              <div *ngIf="email.errors && email.touched" class="client-side-validation-error">
+              <!--<div *ngIf="email.errors && email.touched" class="client-side-validation-error">
                 <small [hidden]="!email.errors.required">
                   {{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.EMAIL_ERROR' | translate}}
                 </small>
@@ -181,28 +181,28 @@
               <textarea name="message" required #message="ngModel" [(ngModel)]="emailModel.Message" rows="4" cols="50" placeholder="{{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.MSG_PLACEHOLDER' | translate}}"></textarea>
             </form>
             <button class="save" (click)="sendEmailToUser()" [disabled]="!sendEmailForm.form.valid">{{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.SEND_BTN' | translate}}</button>
-      </div><!-- form -->
-  </modal-content>
-</modal>
+      </div>--><!-- form -->
+  <!--</modal-content>
+</modal>-->
 <!-- End Send Email Modal -->
 
 <!-- Delete Modal -->
-<modal #deleteModal class="navbar-modals delete-modal">
+<!--<modal #deleteModal class="navbar-modals delete-modal">
   <modal-content>
       <p (click)="deleteModal.close()" class="close-modal-mobile"><i class="fa fa-times" aria-hidden="true"></i></p>
-      <div class="horse-logo">
+      <div class="horse-logo">-->
           <!--<img src="../../../../wwwroot/assets/images/logo_2.png" alt="Horse Spot Logo">-->
-      </div><!-- horse-logo -->
-      <p>{{ 'HORSE_AD_DETAIL.MARK_AS_SOLD' | translate }}</p>
+      <!--</div>--><!-- horse-logo -->
+      <!--<p>{{ 'HORSE_AD_DETAIL.MARK_AS_SOLD' | translate }}</p>
       <br />
       <p class="just-delete">{{ 'HORSE_AD_DETAIL.JUST_DELETE' | translate }}</p>
       <button class="delete" (click)="deleteHorseAd(true)">{{'HORSE_AD_DETAIL.MARK_AS_SOLD_BTN' | translate}}</button>
       <button class="cancel-delete" (click)="deleteHorseAd(false)">{{'HORSE_AD_DETAIL.DELETE_MODAL.DELETE_BTN'| translate}}</button>
 
   </modal-content>
-</modal>
+</modal>-->
 
-<modal #makeAppointmentNotLoggedInModal class="delete-modal">
+<!--<modal #makeAppointmentNotLoggedInModal class="delete-modal">
   <modal-content>
 
      <div id="make-app-not-logged" class="myWrapper">
@@ -210,26 +210,26 @@
       <div class="picture picture-delete">
       </div><!-- picture -->
 
-      <div class="form">
+      <!--<div class="form">-->
 
-          <div class="error-head">
+          <!--<div class="error-head">-->
               <!--<img src="../../../../wwwroot/assets/images/error-head.png" alt="Error Head">-->
-          </div><!-- error head -->
+          <!--</div>--><!-- error head -->
 
-          <h3>{{'HORSE_AD_DETAIL.MAKE_APPOINTMENT' | translate}}</h3>
+          <!--<h3>{{'HORSE_AD_DETAIL.MAKE_APPOINTMENT' | translate}}</h3>
           <p>{{'HORSE_AD_DETAIL.APP_NOT_LOGGED_IN_MODAL.MUST_BE_LOGGEDIN' | translate}}</p>
           <a class="login-btn-mka-modal" [routerLink]="['/account/login']">{{'HORSE_AD_DETAIL.APP_NOT_LOGGED_IN_MODAL.LOGIN' | translate}}</a>
           <p>{{'HORSE_AD_DETAIL.APP_NOT_LOGGED_IN_MODAL.DONT_HAVE_ACCOUNT' | translate}}</p>
           <a class="login-btn-mka-modal signup" [routerLink]="['/account/register']">{{'HORSE_AD_DETAIL.APP_NOT_LOGGED_IN_MODAL.SIGNUP' | translate}}</a>
-          <button class="cancel-delete" (click)="hideNotLoggedInAppointmentModal()">{{'HORSE_AD_DETAIL.CANCEL' | translate}}</button>
+          <button class="cancel-delete" (click)="hideNotLoggedInAppointmentModal()">{{'HORSE_AD_DETAIL.CANCEL' | translate}}</button>-->
 
-      </div><!-- form -->
+      <!--</div>--><!-- form -->
 
-    </div><!-- myWrapper -->
-  </modal-content>
-</modal>
+    <!--</div>--><!-- myWrapper -->
+  <!--</modal-content>
+</modal>-->
 
-<modal #makeAppointmentModal class="make-app">
+<!--<modal #makeAppointmentModal class="make-app">
 
   <modal-content>
       <h3>{{'HORSE_AD_DETAIL.MAKE_APPOINTMENT' | translate}}</h3>
@@ -243,4 +243,4 @@
       <button class="save action" (click)="makeAppointment()" [disabled]="dateChosedIsPast">{{'HORSE_AD_DETAIL.CONFIRM' | translate}}</button>
       <button class="cancel action" (click)="hideAppointmentModal()">{{'HORSE_AD_DETAIL.CANCEL' | translate}}</button>
   </modal-content>
-</modal>
+</modal>-->

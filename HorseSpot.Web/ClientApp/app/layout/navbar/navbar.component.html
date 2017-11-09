@@ -1,81 +1,166 @@
 <nav #navbarElement class="navbar nav-shadow" id="main-nav">
 
-       <div class="social-bar-lang">
-          <div class="container">
+  <div class="social-bar-lang">
+    <div class="container">
 
-              <ul class="lang-dropdown">
-                <li class="lang-dropdown-li dropdown-item" dropdown>                 
-                  <a *ngIf="currentLang" id="dropdown-link-button" (click)="isLangDropdownCollapsed = !isLangDropdownCollapsed" dropdownToggle>
-                    <img src="{{currentLang.imgUrl}}" /> {{currentLang.displayText}} <fa name="angle-down"></fa>
-                  </a>
-                  <ul id="lang-dropdown1" *dropdownMenu [collapse]="isLangDropdownCollapsed" role="menu" aria-labelledby="dropdown-link-button" class="language-drop dropdown-menu">
-                      <li *ngFor="let lang of languages">
-                        <img src="{{lang.imgUrl}}"/>
-                        <a class="dropdown-item" (click)="changeLanguage(lang.value)">
-                          {{lang.displayText}}
-                        </a>
-                      </li>
-                  </ul>
-                </li>
-              </ul>
+      <ul class="lang-dropdown">
+        <li class="lang-dropdown-li dropdown-item">
+          <a *ngIf="currentLang" id="dropdown-link-button" (click)="isLangDropdownCollapsed = !isLangDropdownCollapsed">
+            <img src="{{currentLang.imgUrl}}" /> {{currentLang.displayText}} <fa name="angle-down"></fa>
+          </a>
 
-              <ul class="main-links">
-                  <li><a [routerLink]="['/home']"><img src="../../../../wwwroot/assets/images/home_icon.png" alt="Home Icon"> {{ 'NAVBAR.HOME' | translate }}</a></li>
-                  <li><a [routerLink]="['/advertise']"><img src="../../../../wwwroot/assets/images/adv_icon.png" alt="Home Icon"> {{ 'NAVBAR.ADVERTISE' | translate }}</a></li>
-                  <li><a [routerLink]="['/contact']"><img src="../../../../wwwroot/assets/images/contact_icon.png" alt="Home Icon"> {{ 'NAVBAR.CONTACT' | translate }}</a></li>
-                  <li><a [routerLink]="['/hire-us']"><img src="../../../../wwwroot/assets/images/hire-us.png" alt="Home Icon"> {{ 'NAVBAR.HIRE_US' | translate }}</a></li>
-              </ul>
+          <div *ngIf="!isLangDropdownCollapsed" class="notif-wrapper">
+            <div class="popover-arrow"></div>
+            <a *ngFor="let lang of languages" (click)="changeLanguage(lang.value)"><img src="{{lang.imgUrl}}" /> {{lang.displayText}}</a>
+          </div>
+        </li>
+      </ul>
 
-              <ul class="social-links">
-                <li><a href="https://www.facebook.com/horsespotcom/" target="_blank"><img src="../../../../wwwroot/assets/images/facebook_share.png" alt="Facebook Share"></a></li>
-                <li><a href="https://www.instagram.com/horsespotcom" target="_blank"><img src="../../../../wwwroot/assets/images/ig_share.png" alt="Instagram Share"></a></li>
-                <li><a href="https://twitter.com/horsespotcom" target="_blank"><img src="../../../../wwwroot/assets/images/tw_share.png" alt="Twitter Share"></a></li>
-                <li><a href="https://www.youtube.com/channel/UC-K5relSxxR0yBu-OOi9XQg" target="_blank"><img src="../../../../wwwroot/assets/images/yt_share.png" alt="YouTube Share"></a></li>
-              </ul>
+      <ul class="main-links">
+        <li><a [routerLink]="['/home']"><img src="../../../../wwwroot/assets/images/home_icon.png" alt="Home Icon"> {{ 'NAVBAR.HOME' | translate }}</a></li>
+        <li><a [routerLink]="['/advertise']"><img src="../../../../wwwroot/assets/images/adv_icon.png" alt="Home Icon"> {{ 'NAVBAR.ADVERTISE' | translate }}</a></li>
+        <li><a [routerLink]="['/contact']"><img src="../../../../wwwroot/assets/images/contact_icon.png" alt="Home Icon"> {{ 'NAVBAR.CONTACT' | translate }}</a></li>
+        <li><a [routerLink]="['/hire-us']"><img src="../../../../wwwroot/assets/images/hire-us.png" alt="Home Icon"> {{ 'NAVBAR.HIRE_US' | translate }}</a></li>
+      </ul>
 
-          </div><!-- container -->
-      </div><!-- social-bar-lang -->
+      <ul class="social-links">
+        <li><a href="https://www.facebook.com/horsespotcom/" target="_blank"><img src="../../../../wwwroot/assets/images/facebook_share.png" alt="Facebook Share"></a></li>
+        <li><a href="https://www.instagram.com/horsespotcom" target="_blank"><img src="../../../../wwwroot/assets/images/ig_share.png" alt="Instagram Share"></a></li>
+        <li><a href="https://twitter.com/horsespotcom" target="_blank"><img src="../../../../wwwroot/assets/images/tw_share.png" alt="Twitter Share"></a></li>
+        <li><a href="https://www.youtube.com/channel/UC-K5relSxxR0yBu-OOi9XQg" target="_blank"><img src="../../../../wwwroot/assets/images/yt_share.png" alt="YouTube Share"></a></li>
+      </ul>
 
-      <div class="container">
-
-        <div class="navbar-header">
-
-          <button type="button" class="navbar-toggle collapsed" (click)="burgerIconClick()">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" [routerLink]="['/home']"><img src="../../../../wwwroot/assets/images/logo_2.png" class="logo-img" alt="Horse Spot"></a>
-
-        </div><!-- navbar-header -->
-
-        <div id="navbar" class="collapse navbar-collapse" [collapse]="isBurgerMenuCollapsed">
-          <div id="userPart" class="slide-from-right not-logged">
-            <!-- Right part when logged in -->
-            <ul *ngIf="_accountService.isLoggedIn()" class="user-logged-list">              
-                  <navbar-user-part (menuItemClicked)="toggle()" (notifNumber)="setNotifNumber($event)" [userId]="_accountService.getUserId()" [userName]="_accountService.getName()"></navbar-user-part>
-            </ul>
-            <!-- Right part when not logged in -->
-            <ul *ngIf="!_accountService.isLoggedIn()" class="login-list">
-                <button type="button" class="signup-btn my-btn" (click)="signUpModal.open()">{{'NAVBAR.SIGNUP' | translate}}!</button>
-                <button type="button" class="login-btn my-btn" (click)="loginModal.open()">{{'NAVBAR.LOGIN' | translate}}</button>
-            </ul>
-          </div><!-- slide-from-right -->
-
-          <ul class="nav navbar-nav">
-           <li><a (click)="burgerMenuItemClick()" [routerLink]="['/horses-for-sale/showjumping/1']">{{'NAVBAR.HORSES_FOR_SALE.SHOWJUMPING' | translate}}</a></li>
-           <li><a (click)="burgerMenuItemClick()" [routerLink]="['/horses-for-sale/dressage/1']">{{'NAVBAR.HORSES_FOR_SALE.DRESSAGE' | translate}}</a></li>
-           <li><a (click)="burgerMenuItemClick()" [routerLink]="['/horses-for-sale/eventing/1']">{{'NAVBAR.HORSES_FOR_SALE.EVENTING' | translate}}</a></li>
-           <li><a (click)="burgerMenuItemClick()" [routerLink]="['/horses-for-sale/endurance/1']">{{'NAVBAR.HORSES_FOR_SALE.ENDURANCE' | translate}}</a></li>
-           <li><a (click)="burgerMenuItemClick()" [routerLink]="['/horses-for-sale/driving/1']">{{'NAVBAR.HORSES_FOR_SALE.DRIVING' | translate}}</a></li>
-           <li><a (click)="burgerMenuItemClick()" [routerLink]="['/horses-for-sale/foals/1']">{{'NAVBAR.HORSES_FOR_SALE.FOALS' | translate}}</a></li>
-           <li><a (click)="burgerMenuItemClick()" [routerLink]="['/horses-for-sale/leisure/1']">{{'NAVBAR.HORSES_FOR_SALE.LEISURE' | translate}}</a></li>
-          </ul>
-        </div><!-- nav-collapse -->
-      
     </div><!-- container -->
+  </div><!-- social-bar-lang -->
+
+  <div class="container">
+
+    <div class="navbar-header">
+
+      <button type="button" class="navbar-toggle collapsed" (click)="burgerIconClick()">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" [routerLink]="['/home']"><img src="../../../../wwwroot/assets/images/logo_2.png" class="logo-img" alt="Horse Spot"></a>
+
+    </div><!-- navbar-header -->
+
+    <div id="navbar" class="collapse navbar-collapse" [collapse]="isBurgerMenuCollapsed">
+      <div id="userPart" class="slide-from-right not-logged">
+        <!-- Right part when logged in -->
+        <ul *ngIf="_accountService.isLoggedIn()" class="user-logged-list">
+          <navbar-user-part (menuItemClicked)="toggle()" (notifNumber)="setNotifNumber($event)" [userId]="_accountService.getUserId()" [userName]="_accountService.getName()"></navbar-user-part>
+        </ul>
+        <!-- Right part when not logged in -->
+        <ul *ngIf="!_accountService.isLoggedIn()" class="login-list">
+          <button type="button" class="signup-btn my-btn" (click)="openSignUpModal(signUpModalTemplate)">{{'NAVBAR.SIGNUP' | translate}}!</button>
+          <button type="button" class="login-btn my-btn" (click)="loginModal.show()">{{'NAVBAR.LOGIN' | translate}}</button>
+        </ul>
+      </div><!-- slide-from-right -->
+
+      <ul class="nav navbar-nav">
+        <li><a (click)="burgerMenuItemClick()" [routerLink]="['/horses-for-sale/showjumping/1']">{{'NAVBAR.HORSES_FOR_SALE.SHOWJUMPING' | translate}}</a></li>
+        <li><a (click)="burgerMenuItemClick()" [routerLink]="['/horses-for-sale/dressage/1']">{{'NAVBAR.HORSES_FOR_SALE.DRESSAGE' | translate}}</a></li>
+        <li><a (click)="burgerMenuItemClick()" [routerLink]="['/horses-for-sale/eventing/1']">{{'NAVBAR.HORSES_FOR_SALE.EVENTING' | translate}}</a></li>
+        <li><a (click)="burgerMenuItemClick()" [routerLink]="['/horses-for-sale/endurance/1']">{{'NAVBAR.HORSES_FOR_SALE.ENDURANCE' | translate}}</a></li>
+        <li><a (click)="burgerMenuItemClick()" [routerLink]="['/horses-for-sale/driving/1']">{{'NAVBAR.HORSES_FOR_SALE.DRIVING' | translate}}</a></li>
+        <li><a (click)="burgerMenuItemClick()" [routerLink]="['/horses-for-sale/foals/1']">{{'NAVBAR.HORSES_FOR_SALE.FOALS' | translate}}</a></li>
+        <li><a (click)="burgerMenuItemClick()" [routerLink]="['/horses-for-sale/leisure/1']">{{'NAVBAR.HORSES_FOR_SALE.LEISURE' | translate}}</a></li>
+      </ul>
+    </div><!-- nav-collapse -->
+
+  </div><!-- container -->
 
 </nav>
+
+<ng-template #signUpModalTemplate>
+  <div class="modal-header">
+    <div class="horse-logo">
+      <p *ngIf="isForgotPassword" class="forgot-password-back" (click)="goToForgotPasswordScreen()"><fa name="angle-left"></fa></p>
+      <img src="../../../../wwwroot/assets/images/logo_2.png" alt="Horse Spot Logo">
+    </div><!-- horse-logo -->
+
+    <button type="button" class="close pull-right" aria-label="Close" (click)="signUpModal.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <p *ngIf="errorMessage" class="client-side-validation-error">{{errorMessage}}</p>
+
+    <form #registerForm="ngForm" class="signup-form">
+      <div *ngIf="fullName.errors && fullName.touched" class="client-side-validation-error">
+        <small [hidden]="!fullName.errors.required">
+          {{'REGISTER_PAGE.FULL_NAME_ERROR' | translate}}
+        </small>
+      </div><!-- first-name client-side-validation-error -->
+
+      <div class="form-group">
+        <div class="input-group">
+          <input autocomplete="off" name="fullName" type="text" class="form-control" id="fullName" placeholder="{{'REGISTER_PAGE.FULL_NAME' | translate}}" [(ngModel)]="registerInput.FullName" required #fullName="ngModel">
+        </div><!-- input-group -->
+      </div><!-- form-group -->
+
+      <div *ngIf="email.errors && email.touched" class="client-side-validation-error">
+        <small [hidden]="!email.errors.required">
+          {{'REGISTER_PAGE.EMAIL_ERROR' | translate}}
+        </small>
+        <small [hidden]="!email.errors.pattern">
+          {{'GENERAL.INVALID_EMAIL_FORMAT' | translate}}
+        </small>
+      </div><!-- email client-side-validation-error -->
+
+      <div class="form-group">
+        <div class="input-group">
+          <input autocomplete="off" name="email" type="text" class="form-control" id="email" placeholder="{{'REGISTER_PAGE.EMAIL' | translate}}"
+                 [(ngModel)]="registerInput.Email" required #email="ngModel" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$">
+        </div><!-- input-group -->
+      </div><!-- form-group -->
+
+      <div *ngIf="phoneNumber.errors && phoneNumber.touched" class="client-side-validation-error">
+        <small [hidden]="!phoneNumber.errors.required">
+          {{'REGISTER_PAGE.PHONE_NUMBER_ERROR' | translate}}
+        </small>
+        <small [hidden]="!phoneNumber.errors.pattern">
+          {{'REGISTER_PAGE.PHONE_NUMBER_INVALID_FORMAT' | translate}}
+        </small>
+      </div><!-- phone-number client-side-validation-error -->
+
+      <div class="form-group">
+        <div class="input-group">
+          <input autocomplete="off" name="phone" type="tel" class="form-control" id="phone" placeholder="{{'REGISTER_PAGE.PHONE_NUMBER' | translate}}"
+                 [(ngModel)]="registerInput.PhoneNumber" required #phoneNumber="ngModel"
+                 pattern="^(\+\d{1,3}[- ]?)?\d{10}$">
+        </div><!-- input-group -->
+      </div><!-- form-group -->
+
+      <div *ngIf="password.errors && password.touched" class="client-side-validation-error">
+        <small [hidden]="!password.errors.required">
+          {{'REGISTER_PAGE.PASSWORD_ERROR' | translate}}
+        </small>
+        <small [hidden]="!password.errors.minlength">
+          {{'REGISTER_PAGE.INVALID_PASSWORD_FORMAT' | translate}}
+        </small>
+      </div><!-- password client-side-validation-error -->
+
+      <div class="form-group">
+        <div class="input-group">
+          <input autocomplete="off" name="password" type="password" class="form-control" id="password" placeholder="{{'REGISTER_PAGE.PASSWORD' | translate}}"
+                 [(ngModel)]="registerInput.Password" required #password="ngModel" minlength="6">
+        </div><!-- input-group -->
+      </div><!-- form-group -->
+      <button type="submit" (click)="register()" [disabled]="!registerForm.form.valid">{{'REGISTER_PAGE.SIGN_UP' | translate}}</button>
+    </form>
+
+    <a (click)="authExternal('Facebook')" class="fb connect"><i class="fa fa-facebook-official" aria-hidden="true"></i> {{'FACEBOOK_CONNECT' | translate}}</a>
+    <!-- <a href="#0" class="twitter connect"><i class="fa fa-twitter" aria-hidden="true"></i> Connect with Twitter</a> -->
+  </div>
+
+  <div *ngIf="!isForgotPassword" class="modal-footer">
+    <p>{{'TERMS_AND_CONDITIONS.BY_SIGN_UP' | translate}} <a (click)="conditionsModal.open()">{{'TERMS_AND_CONDITIONS.TERMS_OF_USE' | translate}}</a></p>
+  </div><!-- modal-footer -->
+</ng-template>
 
 

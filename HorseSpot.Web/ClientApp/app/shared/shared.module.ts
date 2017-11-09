@@ -1,36 +1,47 @@
 import { NgModule } from '@angular/core';
 import { Http, Request, RequestOptionsArgs, Response, XHRBackend, RequestOptions, ConnectionBackend, Headers, HttpModule } from '@angular/http';
-import { HttpInterceptor } from './http/customHttp';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ModalModule } from 'ngx-modal';
+import { TranslateModule, TranslateLoader, TranslatePipe } from "@ngx-translate/core";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { Angular2FontawesomeModule } from 'angular2-fontawesome';
-import { BsDropdownModule, CollapseModule, DatepickerModule, TimepickerModule, TypeaheadModule, PaginationModule } from 'ngx-bootstrap';
+import { ModalModule, TypeaheadModule, PaginationModule, BsDropdownModule, CollapseModule } from 'ngx-bootstrap';
+import { FileUploadModule } from 'ng2-file-upload';
+
+//MODULES
+import { TransferHttpModule } from '../../modules/transfer-http/transfer-http.module';
+
+//COMPONENTS
 import { SpinnerComponent } from '../shared/spinner/spinner.component';
 import { HorseListComponent } from './horse-list/horse-list.component';
 import { ErrorComponent } from './error/error.component';
 import { NotificationComponent } from './notifications/notification.component';
-import { DateFormatPipe } from './pipes/dateFormat.pipe';
-import { DateFormatHourPipe } from './pipes/dateFormatHour.pipe';
+
+//SERVICES
 import { SpinnerService } from './spinner/spinner.service';
 import { AuthService } from './auth/auth.service';
 import { NotificationService } from './notifications/notification.service';
-import { FileUploadModule } from 'ng2-file-upload';
+import { StorageService } from './auth/storage.service';
+import { LinkService } from './link.service';
+import { HttpInterceptor } from './http/customHttp';
+
+//PIPES
+import { DateFormatPipe } from './pipes/dateFormat.pipe';
+import { DateFormatHourPipe } from './pipes/dateFormatHour.pipe';
+import { DescriptionFormatPipe } from './pipes/descriptionFormat.pipe';
+
+//GUARDS
 import { LoggedInGuard } from '../shared/guards/loggedInGuard';
 import { AdminGuard } from '../shared/guards/adminGuard';
 import { IsPostOwnerGuard } from '../shared/guards/isPostOwnerGuard';
+
+//DIRECTIVES
 import { ImagePreview } from './utils/image.preview.directive';
 import { EqualValidator } from './utils/equal-validator.directive';
-import { FooterComponent } from '../layout/footer/footer.component';
-import { AccountMenuComponent } from './account-menu/account-menu';
-import { StorageService } from './auth/storage.service';
-import { DescriptionFormatPipe } from './pipes/descriptionFormat.pipe';
-import { LinkService } from './link.service';
-import { TranslateModule, TranslateLoader, TranslatePipe } from "@ngx-translate/core";
-import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 
+//CONSTANTS
 import { ORIGIN_URL } from './constants/baseurl.constants';
 
 export function httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions, router: Router, spinnerService: SpinnerService, storageService: StorageService) {
@@ -54,14 +65,13 @@ export function createTranslateLoader(http: Http, baseHref) {
     ReactiveFormsModule,
     HttpModule,
     Angular2FontawesomeModule,
-    BsDropdownModule.forRoot(),
-    CollapseModule.forRoot(),
-    ModalModule,
+    ModalModule.forRoot(),
     TypeaheadModule.forRoot(),
     PaginationModule.forRoot(),
-    DatepickerModule.forRoot(),
-    TimepickerModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    CollapseModule.forRoot(),
     FileUploadModule,
+    TransferHttpModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -80,8 +90,7 @@ export function createTranslateLoader(http: Http, baseHref) {
     DateFormatHourPipe,
     DescriptionFormatPipe,
     NotificationComponent,
-    ErrorComponent,
-    AccountMenuComponent
+    ErrorComponent
   ],
   providers: [
     NotificationService, AuthService, LoggedInGuard, AdminGuard, IsPostOwnerGuard, SpinnerService, StorageService, TranslateModule,
@@ -92,9 +101,8 @@ export function createTranslateLoader(http: Http, baseHref) {
     //},
   ],
   exports: [CommonModule, FormsModule, ReactiveFormsModule, NotificationComponent, ErrorComponent, SpinnerComponent, EqualValidator, ImagePreview,
-    DateFormatPipe, DateFormatHourPipe, HttpModule, BsDropdownModule, CollapseModule,
-    ModalModule, Angular2FontawesomeModule, DatepickerModule, TimepickerModule, TranslateModule, HorseListComponent, PaginationModule,
-    TypeaheadModule, AccountMenuComponent, FileUploadModule, DescriptionFormatPipe]
+    DateFormatPipe, DateFormatHourPipe, HttpModule, ModalModule, Angular2FontawesomeModule, TranslateModule, HorseListComponent, PaginationModule,
+    TypeaheadModule, FileUploadModule, DescriptionFormatPipe, BsDropdownModule, CollapseModule ]
 })
 
 export class SharedModule { }
