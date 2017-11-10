@@ -47,7 +47,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     notificationRefresh: number;
     hasLocalAccount: boolean;
 
-    private activatedRouteSub$: Subscription;
+    private _activatedRouteSub$: Subscription;
 
     constructor(public _accountService: AccountService,
         public _router: Router,
@@ -61,11 +61,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.activatedRouteSub$ = this._activatedRoute.queryParams.subscribe(params => {
+        this._activatedRouteSub$ = this._activatedRoute.queryParams.subscribe(params => {
             let firstReg: string = params['first_reg'] != undefined ? params['first_reg'] : "";
             let extEmailLocallyReg: string = params['haslocalaccount'] != undefined ? params['haslocalaccount'] : "";
             this.externalToken = params['external_token'] != undefined ? params['external_token'] : "";
-            this.provider = params['provider'] != undefined ? params['provider']: "";
+            this.provider = params['provider'] != undefined ? params['provider'] : "";
 
             if (extEmailLocallyReg.toLocaleLowerCase() === CONFIG._true) {
                 this.loginInput.Email = params['email'];
@@ -87,7 +87,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.activatedRouteSub$.unsubscribe();
+        this._activatedRouteSub$.unsubscribe();
     }
 
     goToForgotPasswordScreen() {

@@ -28,9 +28,12 @@ const routes: Routes = [
       path: 'home', component: HomeComponent,
       data: {
           title: 'Homepage',
-          meta: [{ name: 'description', content: 'This is an example Description Meta tag!' }],
+          meta: [
+              { name: 'description', content: 'This is an example Description Meta tag!' }
+          ],
           links: [
-              { rel: 'canonical', href: 'http://blogs.example.com/blah/nice' },
+              { rel: 'canonical', href: 'http://horse-spot.com/' },
+              { rel: 'canonical', href: 'https://horse-spot.com/' },
               { rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/' }
           ]
       }
@@ -56,11 +59,11 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    // Router options
     useHash: false,
     preloadingStrategy: PreloadAllModules,
     initialNavigation: 'enabled'
   })],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }
