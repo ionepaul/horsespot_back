@@ -8,7 +8,6 @@
           <a *ngIf="currentLang" id="dropdown-link-button" (click)="isLangDropdownCollapsed = !isLangDropdownCollapsed">
             <img src="{{currentLang.imgUrl}}" /> {{currentLang.displayText}} <fa name="angle-down"></fa>
           </a>
-
           <div *ngIf="!isLangDropdownCollapsed" class="notif-wrapper">
             <div class="popover-arrow"></div>
             <a *ngFor="let lang of languages" (click)="changeLanguage(lang.value)"><img src="{{lang.imgUrl}}" /> {{lang.displayText}}</a>
@@ -55,7 +54,7 @@
         </ul>
         <!-- Right part when not logged in -->
         <ul *ngIf="!_accountService.isLoggedIn()" class="login-list">
-          <button type="button" class="signup-btn my-btn" (click)="openSignUpModal(signUpModalTemplate)">{{'NAVBAR.SIGNUP' | translate}}!</button>
+          <button type="button" class="signup-btn my-btn" (click)="signUpModal.show()">{{'NAVBAR.SIGNUP' | translate}}!</button>
           <button type="button" class="login-btn my-btn" (click)="loginModal.show()">{{'NAVBAR.LOGIN' | translate}}</button>
         </ul>
       </div><!-- slide-from-right -->
@@ -75,92 +74,226 @@
 
 </nav>
 
-<ng-template #signUpModalTemplate>
-  <div class="modal-header">
-    <div class="horse-logo">
-      <p *ngIf="isForgotPassword" class="forgot-password-back" (click)="goToForgotPasswordScreen()"><fa name="angle-left"></fa></p>
-      <img src="../../../../wwwroot/assets/images/logo_2.png" alt="Horse Spot Logo">
-    </div><!-- horse-logo -->
+<div class="modal fade navbar-modals" bsModal #signUpModal="bs-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" (onHide)="onSignUpModalClose()">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p (click)="signUpModal.hide()" class="close-modal-mobile"><i class="fa fa-times" aria-hidden="true"></i></p>
 
-    <button type="button" class="close pull-right" aria-label="Close" (click)="signUpModal.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
+        <div class="horse-logo">
+          <p *ngIf="isForgotPassword" class="forgot-password-back" (click)="goToForgotPasswordScreen()"><fa name="angle-left"></fa></p>
+          <img src="../../../../wwwroot/assets/images/logo_2.png" alt="Horse Spot Logo">
+        </div><!-- horse-logo -->
+
+        <button type="button" class="close pull-right" aria-label="Close" (click)="signUpModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+        <p *ngIf="errorMessage" class="client-side-validation-error">{{errorMessage}}</p>
+
+        <form #registerForm="ngForm" class="signup-form">
+          <div *ngIf="fullName.errors && fullName.touched" class="client-side-validation-error">
+            <small [hidden]="!fullName.errors.required">
+              {{'REGISTER_PAGE.FULL_NAME_ERROR' | translate}}
+            </small>
+          </div><!-- first-name client-side-validation-error -->
+
+          <div class="form-group">
+            <div class="input-group">
+              <input autocomplete="off" name="fullName" type="text" class="form-control" id="fullName" placeholder="{{'REGISTER_PAGE.FULL_NAME' | translate}}" [(ngModel)]="registerInput.FullName" required #fullName="ngModel">
+            </div><!-- input-group -->
+          </div><!-- form-group -->
+
+          <div *ngIf="email.errors && email.touched" class="client-side-validation-error">
+            <small [hidden]="!email.errors.required">
+              {{'REGISTER_PAGE.EMAIL_ERROR' | translate}}
+            </small>
+            <small [hidden]="!email.errors.pattern">
+              {{'GENERAL.INVALID_EMAIL_FORMAT' | translate}}
+            </small>
+          </div><!-- email client-side-validation-error -->
+
+          <div class="form-group">
+            <div class="input-group">
+              <input autocomplete="off" name="email" type="text" class="form-control" id="email" placeholder="{{'REGISTER_PAGE.EMAIL' | translate}}"
+                     [(ngModel)]="registerInput.Email" required #email="ngModel" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$">
+            </div><!-- input-group -->
+          </div><!-- form-group -->
+
+          <div *ngIf="phoneNumber.errors && phoneNumber.touched" class="client-side-validation-error">
+            <small [hidden]="!phoneNumber.errors.required">
+              {{'REGISTER_PAGE.PHONE_NUMBER_ERROR' | translate}}
+            </small>
+            <small [hidden]="!phoneNumber.errors.pattern">
+              {{'REGISTER_PAGE.PHONE_NUMBER_INVALID_FORMAT' | translate}}
+            </small>
+          </div><!-- phone-number client-side-validation-error -->
+
+          <div class="form-group">
+            <div class="input-group">
+              <input autocomplete="off" name="phone" type="tel" class="form-control" id="phone" placeholder="{{'REGISTER_PAGE.PHONE_NUMBER' | translate}}"
+                     [(ngModel)]="registerInput.PhoneNumber" required #phoneNumber="ngModel"
+                     pattern="^(\+\d{1,3}[- ]?)?\d{10}$">
+            </div><!-- input-group -->
+          </div><!-- form-group -->
+
+          <div *ngIf="password.errors && password.touched" class="client-side-validation-error">
+            <small [hidden]="!password.errors.required">
+              {{'REGISTER_PAGE.PASSWORD_ERROR' | translate}}
+            </small>
+            <small [hidden]="!password.errors.minlength">
+              {{'REGISTER_PAGE.INVALID_PASSWORD_FORMAT' | translate}}
+            </small>
+          </div><!-- password client-side-validation-error -->
+
+          <div class="form-group">
+            <div class="input-group">
+              <input autocomplete="off" name="password" type="password" class="form-control" id="password" placeholder="{{'REGISTER_PAGE.PASSWORD' | translate}}"
+                     [(ngModel)]="registerInput.Password" required #password="ngModel" minlength="6">
+            </div><!-- input-group -->
+          </div><!-- form-group -->
+          <button type="submit" (click)="register()" [disabled]="!registerForm.form.valid">{{'REGISTER_PAGE.SIGN_UP' | translate}}</button>
+        </form>
+
+        <a (click)="authExternal('Facebook')" class="fb connect"><i class="fa fa-facebook-official" aria-hidden="true"></i> {{'FACEBOOK_CONNECT' | translate}}</a>
+        <!-- <a href="#0" class="twitter connect"><i class="fa fa-twitter" aria-hidden="true"></i> Connect with Twitter</a> -->
+
+      </div>
+
+      <div *ngIf="!isForgotPassword" class="modal-footer">
+        <p>{{'TERMS_AND_CONDITIONS.BY_SIGN_UP' | translate}} <a (click)="conditionsModal.show()">{{'TERMS_AND_CONDITIONS.TERMS_OF_USE' | translate}}</a></p>
+      </div><!-- modal-footer -->
+    </div>
+
   </div>
+</div>
 
-  <div class="modal-body">
-    <p *ngIf="errorMessage" class="client-side-validation-error">{{errorMessage}}</p>
+<div class="modal fade navbar-modals" bsModal #loginModal="bs-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" (onHide)="onLogInModalClose()">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
 
-    <form #registerForm="ngForm" class="signup-form">
-      <div *ngIf="fullName.errors && fullName.touched" class="client-side-validation-error">
-        <small [hidden]="!fullName.errors.required">
-          {{'REGISTER_PAGE.FULL_NAME_ERROR' | translate}}
-        </small>
-      </div><!-- first-name client-side-validation-error -->
+        <p (click)="loginModal.hide()" class="close-modal-mobile"><i class="fa fa-times" aria-hidden="true"></i></p>
 
-      <div class="form-group">
-        <div class="input-group">
-          <input autocomplete="off" name="fullName" type="text" class="form-control" id="fullName" placeholder="{{'REGISTER_PAGE.FULL_NAME' | translate}}" [(ngModel)]="registerInput.FullName" required #fullName="ngModel">
-        </div><!-- input-group -->
-      </div><!-- form-group -->
+        <div class="horse-logo">
+          <p *ngIf="isForgotPassword" class="forgot-password-back" (click)="goToForgotPasswordScreen()"><fa name="angle-left"></fa></p>
+          <img src="../../../../wwwroot/assets/images/logo_2.png" alt="Horse Spot Logo">
+        </div><!-- horse-logo -->
 
-      <div *ngIf="email.errors && email.touched" class="client-side-validation-error">
-        <small [hidden]="!email.errors.required">
-          {{'REGISTER_PAGE.EMAIL_ERROR' | translate}}
-        </small>
-        <small [hidden]="!email.errors.pattern">
-          {{'GENERAL.INVALID_EMAIL_FORMAT' | translate}}
-        </small>
-      </div><!-- email client-side-validation-error -->
+        <p *ngIf="hasLocalAccount" class="client-side-validation-error">{{ 'LOGIN_PAGE.LOCAL_ACCOUNT_ERROR' | translate }}</p>
+        <p *ngIf="errorMessage" class="client-side-validation-error">{{errorMessage}}</p>
 
-      <div class="form-group">
-        <div class="input-group">
-          <input autocomplete="off" name="email" type="text" class="form-control" id="email" placeholder="{{'REGISTER_PAGE.EMAIL' | translate}}"
-                 [(ngModel)]="registerInput.Email" required #email="ngModel" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$">
-        </div><!-- input-group -->
-      </div><!-- form-group -->
+        <div *ngIf="!isForgotPassword">
+          <form #logInForm="ngForm" class="login-form">
+            <div class="form-group">
+              <div class="input-group">
+                <input name="email" type="text" class="form-control" [(ngModel)]="loginInput.Email" id="email" placeholder="{{ 'LOGIN_PAGE.EMAIL' | translate }}">
+              </div><!-- input-group -->
+            </div><!-- form-group -->
 
-      <div *ngIf="phoneNumber.errors && phoneNumber.touched" class="client-side-validation-error">
-        <small [hidden]="!phoneNumber.errors.required">
-          {{'REGISTER_PAGE.PHONE_NUMBER_ERROR' | translate}}
-        </small>
-        <small [hidden]="!phoneNumber.errors.pattern">
-          {{'REGISTER_PAGE.PHONE_NUMBER_INVALID_FORMAT' | translate}}
-        </small>
-      </div><!-- phone-number client-side-validation-error -->
+            <div class="form-group">
+              <div class="input-group">
+                <input name="password" type="password" [(ngModel)]="loginInput.Password" class="form-control" id="password" placeholder="{{ 'LOGIN_PAGE.PASSWORD' | translate }}">
+              </div><!-- input-group -->
+            </div><!-- form-group -->
 
-      <div class="form-group">
-        <div class="input-group">
-          <input autocomplete="off" name="phone" type="tel" class="form-control" id="phone" placeholder="{{'REGISTER_PAGE.PHONE_NUMBER' | translate}}"
-                 [(ngModel)]="registerInput.PhoneNumber" required #phoneNumber="ngModel"
-                 pattern="^(\+\d{1,3}[- ]?)?\d{10}$">
-        </div><!-- input-group -->
-      </div><!-- form-group -->
+            <button type="submit" (click)="login()">{{ 'LOGIN_PAGE.LOGIN' | translate }}</button>
 
-      <div *ngIf="password.errors && password.touched" class="client-side-validation-error">
-        <small [hidden]="!password.errors.required">
-          {{'REGISTER_PAGE.PASSWORD_ERROR' | translate}}
-        </small>
-        <small [hidden]="!password.errors.minlength">
-          {{'REGISTER_PAGE.INVALID_PASSWORD_FORMAT' | translate}}
-        </small>
-      </div><!-- password client-side-validation-error -->
+            <div class="form-group pass-recover">
+              <input type="checkbox"> {{ 'LOGIN_PAGE.KEEP_ME_SIGNED_IN' | translate }}
+              <a style="cursor: pointer;" (click)="goToForgotPasswordScreen()">{{ 'LOGIN_PAGE.FORGOT_PASSWORD' | translate }}</a>
+            </div>
+          </form>
+          <a (click)="authExternal('Facebook')" class="fb connect"><i class="fa fa-facebook-official" aria-hidden="true"></i> {{ 'FACEBOOK_CONNECT' | translate }}</a>
+          <!-- <a href="#0" class="twitter connect"><i class="fa fa-twitter" aria-hidden="true"></i> Connect with Twitter</a> -->
+        </div>
 
-      <div class="form-group">
-        <div class="input-group">
-          <input autocomplete="off" name="password" type="password" class="form-control" id="password" placeholder="{{'REGISTER_PAGE.PASSWORD' | translate}}"
-                 [(ngModel)]="registerInput.Password" required #password="ngModel" minlength="6">
-        </div><!-- input-group -->
-      </div><!-- form-group -->
-      <button type="submit" (click)="register()" [disabled]="!registerForm.form.valid">{{'REGISTER_PAGE.SIGN_UP' | translate}}</button>
-    </form>
+        <div *ngIf="isForgotPassword" class="login-wrapper">
+          <p *ngIf="forgotPasswordErrorMessage" class="client-side-validation-error">{{forgotPasswordErrorMessage}}</p>
 
-    <a (click)="authExternal('Facebook')" class="fb connect"><i class="fa fa-facebook-official" aria-hidden="true"></i> {{'FACEBOOK_CONNECT' | translate}}</a>
-    <!-- <a href="#0" class="twitter connect"><i class="fa fa-twitter" aria-hidden="true"></i> Connect with Twitter</a> -->
+          <form #forgotPasswordForm="ngForm" class="forgotPassForm">
+            <div *ngIf="forgotPassowrdEmail.errors && forgotPassowrdEmail.touched" class="client-side-validation-error">
+              <small [hidden]="!forgotPassowrdEmail.errors.pattern">
+                {{'GENERAL.INVALID_EMAIL_FORMAT' | translate}}
+              </small>
+            </div><!-- email client-side-validation-error -->
+
+            <div class="form-group">
+              <div class="input-group forgot-password-input">
+                <input placeholder="{{ 'LOGIN_PAGE.EMAIL' | translate }}" name="email" type="text" class="form-control" id="email"
+                       [(ngModel)]="forgotPasswordEmail" #forgotPassowrdEmail="ngModel" required pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$">
+              </div><!-- input-group -->
+            </div><!-- form-group -->
+
+            <button class="pass-submit" [disabled]="!forgotPasswordForm.form.valid" type="submit" (click)="getNewPassword()">{{'LOGIN_PAGE.FORGOT_SUBMIT' | translate}}</button>
+          </form>
+        </div><!-- forgot password section -->
+
+        <div *ngIf="!isForgotPassword" class="modal-footer">
+          <p>{{ 'TERMS_AND_CONDITIONS.BY_SIGN_IN' | translate }} <a (click)="conditionsModal.show()">{{ 'TERMS_AND_CONDITIONS.TERMS_OF_USE' | translate }}</a></p>
+        </div><!-- modal-footer -->
+
+      </div>
+    </div>
   </div>
+</div>
 
-  <div *ngIf="!isForgotPassword" class="modal-footer">
-    <p>{{'TERMS_AND_CONDITIONS.BY_SIGN_UP' | translate}} <a (click)="conditionsModal.open()">{{'TERMS_AND_CONDITIONS.TERMS_OF_USE' | translate}}</a></p>
-  </div><!-- modal-footer -->
-</ng-template>
+<div class="modal fade navbar-modals" [config]="{ ignoreBackdropClick: true, keyboard: false }" bsModal #phoneNumberModal="bs-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" (onHide)="onPhoneNumberModalClose()">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
 
+        <div class="horse-logo">
+          <img src="../../../../wwwroot/assets/images/logo_2.png" alt="Horse Spot Logo">
+        </div><!-- horse-logo -->
 
+        <div class="modal-footer">
+          <p>
+            {{ 'PHONE_NUMBER_MODAL.ENTER_PN_TEXT' | translate }} <br />
+            {{'PHONE_NUMBER_MODAL.OR' | translate}} <a (click)="skipPhoneNumberEntering()">{{ 'PHONE_NUMBER_MODAL.SKIP' | translate }}</a>
+          </p>
+        </div><!-- modal-footer -->
+
+        <div *ngIf="phoneNumber.errors" class="client-side-validation-error">
+          <small [hidden]="!phoneNumber.errors.pattern">
+            {{'REGISTER_PAGE.PHONE_NUMBER_INVALID_FORMAT' | translate}}
+          </small>
+        </div><!-- phone-number client-side-validation-error -->
+
+        <form #phoneNumberForm="ngForm" class="login-form">
+          <div class="form-group">
+            <div class="input-group">
+              <input name="phoneNumber" autocomplete="off" type="tel" class="form-control"
+                     id="phoneNumber" [(ngModel)]="externalUserPhoneNumber" #phoneNumber="ngModel"
+                     placeholder="{{'REGISTER_PAGE.PHONE_NUMBER' | translate}}"
+                     required pattern="^(\+\d{1,3}[- ]?)?\d{10}$">
+            </div><!-- input-group -->
+          </div><!-- form-group -->
+
+          <button [disabled]="!phoneNumberForm.form.valid" type="submit" (click)="updateExternalUserPhoneNumber()">{{ 'PHONE_NUMBER_MODAL.CONFIRM' | translate }}</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="conditionsModal" class="modal fade navbar-modals" [config]="{ ignoreBackdropClick: true, keyboard: false }" bsModal #conditionsModal="bs-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" (onHide)="onPhoneNumberModalClose()">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+
+        <div class="horse-logo">
+          <img src="../../../../wwwroot/assets/images/logo_2.png" alt="Horse Spot Logo">
+        </div><!-- horse-logo -->
+        <article>
+          <p>{{ 'TERMS_AND_CONDITIONS.TEXT_1' | translate }}</p>
+          <p>{{ 'TERMS_AND_CONDITIONS.TEXT_2' | translate }}</p>
+          <p>{{ 'TERMS_AND_CONDITIONS.TEXT_3' | translate }} </p>
+        </article>
+        <button class="agreeTerms" (click)="conditionsModal.hide()">{{ 'TERMS_AND_CONDITIONS.AGREE' | translate }}</button>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -154,13 +154,6 @@ export class EditHorseAdComponent implements OnInit, OnDestroy {
     checkForRequired() {
         var ok = true;
 
-        if (this.uploader.queue.length + this.horseAdModel.Images.length > CONFIG.limitFilesUpload) {
-            this.photoLimitError = true;
-            ok = false;
-        } else {
-            this.photoLimitError = false;
-        }
-
         if (this.horseAdModel.Abilities.length == 0) {
             this.horseAbilityNotSelected = true;
             ok = false;

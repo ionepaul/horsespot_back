@@ -21,7 +21,11 @@ export let CONFIG = {
 
     refresh_token_grant_type: "refresh_token",
 
-    limitFilesUpload: 6,
+    mobile_width: 767,
+
+    _true: "true",
+
+    _false: "false",
 
     allImagesSizeLimit: 5242880, //bytes
 
