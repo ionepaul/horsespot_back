@@ -9,6 +9,7 @@ import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { Angular2FontawesomeModule } from 'angular2-fontawesome';
 import { ModalModule, TypeaheadModule, PaginationModule, BsDropdownModule, CollapseModule } from 'ngx-bootstrap';
 import { FileUploadModule } from 'ng2-file-upload';
+import { NouisliderModule } from 'ng2-nouislider';
 
 //MODULES
 import { TransferHttpModule } from '../../modules/transfer-http/transfer-http.module';
@@ -45,64 +46,65 @@ import { EqualValidator } from './utils/equal-validator.directive';
 import { ORIGIN_URL } from './constants/baseurl.constants';
 
 export function httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions, router: Router, spinnerService: SpinnerService, storageService: StorageService) {
-  return new HttpInterceptor(xhrBackend, requestOptions, router, spinnerService, storageService);
+    return new HttpInterceptor(xhrBackend, requestOptions, router, spinnerService, storageService);
 }
 
 export function createTranslateLoader(http: Http, baseHref) {
-  // Temporary Azure hack
-  if (baseHref === null && typeof window !== 'undefined') {
-    baseHref = window.location.origin;
-  }
-  // i18n files are in `wwwroot/assets/`
-  return new TranslateHttpLoader(http, `${baseHref}/assets/internationalization/`, '.json');
+    // Temporary Azure hack
+    if (baseHref === null && typeof window !== 'undefined') {
+        baseHref = window.location.origin;
+    }
+    // i18n files are in `wwwroot/assets/`
+    return new TranslateHttpLoader(http, `${baseHref}/assets/internationalization/`, '.json');
 }
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpModule,
-    Angular2FontawesomeModule,
-    ModalModule.forRoot(),
-    TypeaheadModule.forRoot(),
-    PaginationModule.forRoot(),
-    BsDropdownModule.forRoot(),
-    CollapseModule.forRoot(),
-    FileUploadModule,
-    TransferHttpModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (createTranslateLoader),
-        deps: [Http, [ORIGIN_URL]]
-      }
-    })
-  ],
-  declarations: [
-    SpinnerComponent,
-    ImagePreview,
-    EqualValidator,
-    HorseListComponent,
-    ErrorComponent,
-    DateFormatPipe,
-    DateFormatHourPipe,
-    DescriptionFormatPipe,
-    NotificationComponent,
-    ErrorComponent
-  ],
-  providers: [
-    NotificationService, AuthService, LoggedInGuard, AdminGuard, IsPostOwnerGuard, SpinnerService, StorageService, TranslateModule,
-    LinkService
-    //{
-    //  provide: Http, useFactory: httpFactory,
-    //  deps: [XHRBackend, RequestOptions, Router, SpinnerService, StorageService]
-    //},
-  ],
-  exports: [CommonModule, FormsModule, ReactiveFormsModule, NotificationComponent, ErrorComponent, SpinnerComponent, EqualValidator, ImagePreview,
-    DateFormatPipe, DateFormatHourPipe, HttpModule, ModalModule, Angular2FontawesomeModule, TranslateModule, HorseListComponent, PaginationModule,
-    TypeaheadModule, FileUploadModule, DescriptionFormatPipe, BsDropdownModule, CollapseModule ]
+    imports: [
+        CommonModule,
+        RouterModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpModule,
+        Angular2FontawesomeModule,
+        ModalModule.forRoot(),
+        TypeaheadModule.forRoot(),
+        PaginationModule.forRoot(),
+        BsDropdownModule.forRoot(),
+        CollapseModule.forRoot(),
+        FileUploadModule,
+        TransferHttpModule,
+        NouisliderModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (createTranslateLoader),
+                deps: [Http, [ORIGIN_URL]]
+            }
+        })
+    ],
+    declarations: [
+        SpinnerComponent,
+        ImagePreview,
+        EqualValidator,
+        HorseListComponent,
+        ErrorComponent,
+        DateFormatPipe,
+        DateFormatHourPipe,
+        DescriptionFormatPipe,
+        NotificationComponent,
+        ErrorComponent
+    ],
+    providers: [
+        NotificationService, AuthService, LoggedInGuard, AdminGuard, IsPostOwnerGuard, SpinnerService, StorageService, TranslateModule,
+        LinkService
+        //{
+        //  provide: Http, useFactory: httpFactory,
+        //  deps: [XHRBackend, RequestOptions, Router, SpinnerService, StorageService]
+        //},
+    ],
+    exports: [CommonModule, FormsModule, ReactiveFormsModule, NotificationComponent, ErrorComponent, SpinnerComponent, EqualValidator, ImagePreview,
+        DateFormatPipe, DateFormatHourPipe, HttpModule, ModalModule, Angular2FontawesomeModule, TranslateModule, HorseListComponent, PaginationModule,
+        TypeaheadModule, FileUploadModule, DescriptionFormatPipe, BsDropdownModule, CollapseModule, NouisliderModule]
 })
 
 export class SharedModule { }

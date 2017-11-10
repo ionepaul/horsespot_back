@@ -47,7 +47,21 @@ const routes: Routes = [
   //{ path: 'account/wishlist/:page', component: UserFavoritesComponent, canActivate: [ LoggedInGuard ],resolve: { model: UserFavoritesResolver } },
   //{ path: 'horses/add', component: AddHorseAdComponent, canActivate: [ LoggedInGuard ] },
   //{ path: 'horses/edit/:id', component: EditHorseAdComponent, canActivate: [ LoggedInGuard, IsPostOwnerGuard ] },
-  //{ path: 'horses-for-sale/showjumping/:page', component: HorseListCategoriesComponent, resolve: { model: HorseListCategoriesResolver } },
+  {
+      path: 'horses-for-sale/showjumping/:page', component: HorseListCategoriesComponent,
+      data: {
+          title: 'Homepage',
+          meta: [
+              { name: 'description', content: 'This is an example Description Meta tag!' }
+          ],
+          links: [
+              { rel: 'canonical', href: 'http://horse-spot.com/' },
+              { rel: 'canonical', href: 'https://horse-spot.com/' },
+              { rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/' }
+          ]
+      },
+      resolve: { model: HorseListCategoriesResolver }
+  },
   //{ path: 'horses-for-sale/dressage/:page', component: HorseListCategoriesComponent, resolve: { model: HorseListCategoriesResolver } },
   //{ path: 'horses-for-sale/eventing/:page', component: HorseListCategoriesComponent, resolve: { model: HorseListCategoriesResolver } },
   //{ path: 'horses-for-sale/endurance/:page', component: HorseListCategoriesComponent, resolve: { model: HorseListCategoriesResolver } },

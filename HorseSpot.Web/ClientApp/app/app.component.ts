@@ -24,9 +24,10 @@ import { LinkService } from './shared/link.service';
         <horse-spot-footer></horse-spot-footer>
     `,
     styleUrls: [
-      '../../wwwroot/css/bootstrap.min.css',
-      '../../wwwroot/css/font-awesome.min.css',
-      '../../wwwroot/css/styles.css'
+        '../../wwwroot/css/bootstrap.min.css',
+        '../../wwwroot/css/font-awesome.min.css',
+        '../../wwwroot/css/styles.css',
+        '../../wwwroot/css/nouislider.min.css'
     ],
     encapsulation: ViewEncapsulation.None
 })
@@ -38,17 +39,17 @@ export class AppComponent implements OnInit, OnDestroy {
 
     private routerSub$: Subscription;
 
-    constructor(public _accountService: AccountService, 
-                //public _appointmentsService: AppointmentsService,
-                public _router: Router,
-                private _activatedRoute: ActivatedRoute,
-                public _notificationService: NotificationService,
-                public _authService: AuthService,
-                public _translateService: TranslateService,
-                private title: Title,
-                private meta: Meta,
-                private linkService: LinkService,
-                @Inject(PLATFORM_ID) private platformId: Object) { }
+    constructor(public _accountService: AccountService,
+        //public _appointmentsService: AppointmentsService,
+        public _router: Router,
+        private _activatedRoute: ActivatedRoute,
+        public _notificationService: NotificationService,
+        public _authService: AuthService,
+        public _translateService: TranslateService,
+        private title: Title,
+        private meta: Meta,
+        private linkService: LinkService,
+        @Inject(PLATFORM_ID) private platformId: Object) { }
 
     ngOnInit() {
         this._changeTitleOnNavigation();
@@ -65,13 +66,13 @@ export class AppComponent implements OnInit, OnDestroy {
         //     this._appointmentsService.webSocketConnect(userId);        
         //}
 
-        if (isPlatformBrowser(this.platformId)) { 
+        if (isPlatformBrowser(this.platformId)) {
             let browserLang = this._translateService.getBrowserLang();
             this._translateService.use(browserLang.match(/en/) ? browserLang : 'en');
 
             this._router.events.subscribe((event) => {
-                setTimeout(function() {              
-                    window.scrollTo(0, 1);                    
+                setTimeout(function() {
+                    window.scrollTo(0, 1);
                 }, 0);
             });
         }
