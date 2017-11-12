@@ -42,7 +42,7 @@ export class HorseListCategoriesComponent implements OnInit, OnDestroy {
   pageNumber: number = 1;
   errorMessage: string;
   recommendedRiders: RecommendedRiderModel[];
-  countries: string[];
+  priceRanges: PriceRangeModel[];
   searchModel: SearchModel = new SearchModel();
   typeaheadNoResults: boolean;
   collapsed: boolean = false;
@@ -132,6 +132,12 @@ export class HorseListCategoriesComponent implements OnInit, OnDestroy {
       error => this.errorMessage = error);
   }
 
+  getPriceRanges() {
+    this._horseAdService.getAllPriceRanges()
+      .subscribe(res => this.priceRanges = res,
+      error => this.errorMessage = error);
+  }
+
   isCheckedRecommendedRider(value: RecommendedRiderModel) {
     return this.searchModel.SuitableFor.findIndex(y => value.Id == y) > -1;
   }
@@ -158,5 +164,24 @@ export class HorseListCategoriesComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this._routerSub$.unsubscribe();
+  }
+
+  ceva() {
+    let rangesToSearchAfter: number[] = [];
+
+    this.priceRanges.forEach(range => {
+      if (range.Id == 6) {
+        let value = parseInt(range.PriceRangeValue.replace(",", "").replace("+", ""));
+        if (value <= this.searchModel.PriceModel.MaxPrice || value <= this.searchModel.PriceModel.MinPrice) {
+          rangesToSearchAfter.push(range.Id);
+        }
+      }
+
+      let values = range.PriceRangeValue.trim().split('-');
+
+      if (parseInt(values[0].replace(",", "")) >= this.searchModel.PriceModel.MinPrice || parseInt(values[1].replace(",", "")) <= this.searchModel.PriceModel.MaxPrice) {
+        rangesToSearchAfter.push(range.Id);
+      }
+    })
   }
 }

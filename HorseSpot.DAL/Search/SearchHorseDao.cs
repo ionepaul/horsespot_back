@@ -7,6 +7,8 @@ using HorseSpot.DAL.Entities;
 using HorseSpot.DAL.Interfaces;
 using HorseSpot.DAL.Models;
 using LinqKit;
+using HorseSpot.Infrastructure.Constants;
+using System.Data.Entity.SqlServer;
 
 namespace HorseSpot.DAL.Search
 {
@@ -19,6 +21,8 @@ namespace HorseSpot.DAL.Search
         private int _maxAge;
         private int _minHeight;
         private int _maxHeight;
+        private decimal _minPrice;
+        private decimal _maxPrice;
         private string _breed;
         private int _horseAbilityId;
         private bool _haveXRays;
@@ -51,8 +55,10 @@ namespace HorseSpot.DAL.Search
             _haveVideo = searchModel.ToHaveVideo;
             _afterFather = searchModel.AfterFatherName;
             _country = searchModel.Country;
-            _sortAfter = searchModel.SortAfter;
+            _sortAfter = searchModel.SortAfterString;
             _sortDirection = searchModel.SortDirection;
+            _minPrice = searchModel.MinPrice == null ? 0M : searchModel.MinPrice.Value;
+            _maxPrice = searchModel.MaxPrice == null ? 0M : searchModel.MaxPrice.Value;
         }
 
         #endregion
@@ -188,9 +194,9 @@ namespace HorseSpot.DAL.Search
         {
             var priceRangeSearch = PredicateBuilder.True<HorseAd>();
 
-            if (_priceRangeId != 0)
+            if (_minPrice != 0M && _maxPrice != 0M)
             {
-                priceRangeSearch = priceRangeSearch.And(ad => ad.PriceRange.Id == _priceRangeId);
+                priceRangeSearch = priceRangeSearch.And(ad => ad.Price >= _minPrice && ad.Price <= _maxPrice);
             }
 
             return priceRangeSearch.Expand();

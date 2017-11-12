@@ -18,9 +18,9 @@ export class SearchModel {
   GenderId: number;
 
   constructor() {
-    this.AgeModel = new BetweenAge(CONFIG.defaultAge.min, CONFIG.defaultAge.max);
-    this.HeightModel = new BetweenHeight(CONFIG.defaultHeight.min, CONFIG.defaultHeight.max);
-    this.PriceModel = new BetweenPrice(CONFIG.defaultPrice.min, CONFIG.defaultPrice.max);
+    this.AgeModel = new BetweenAge(0, 0);
+    this.HeightModel = new BetweenHeight(0, 0);
+    this.PriceModel = new BetweenPrice(0, 0);
     this.PriceRangeId = 0;
     this.GenderId = 0;
     this.SuitableFor = new Array<number>();
@@ -59,11 +59,11 @@ export class BetweenPrice {
 }
 
 export class SortModel {
-  SortAfter: string;
+  SortAfter: number;
   SortDirection: number;
 
   constructor() {
-    this.SortAfter = "Date Posted";
+    this.SortAfter = 0;
     this.SortDirection = 1;
   }
 }

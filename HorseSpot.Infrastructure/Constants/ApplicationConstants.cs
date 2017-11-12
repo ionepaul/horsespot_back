@@ -12,15 +12,11 @@ namespace HorseSpot.Infrastructure.Constants
         public static string DefaultProfilePhoto = ConfigurationManager.AppSettings["DefaultProfilePhotoName"];
         public const string ADMIN = "Admin";
 
-        public const string SortDatePosted = "DatePosted";
-        public const string SortAge = "Age";
-        public const string SortHeight = "Height";
-        public const string SortPrice = "Price";
-        public const string SortViews = "Views";
-
         public const string LatestDictionaryShowJumpingKey = "_showJumping";
         public const string LatestDictionaryDressageKey = "_dressage";
         public const string LatestDictionaryEventingKey = "_eventing";
         public const string LatestDictionaryEnduranceKey = "_endurance";
+
+        public const string MAX_PRICERANGE_VALUE = "40,000+";
     }
 }

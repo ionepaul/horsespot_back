@@ -35,6 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Enums\AppointmentStatus.cs" />
+    <Compile Include="Enums\SortAfterEnum.cs" />
     <Compile Include="Enums\SupportedImageExtensionEnum.cs" />
     <Compile Include="Models\ExternalLoginViewModel.cs" />
     <Compile Include="Models\AddressDTO.cs" />

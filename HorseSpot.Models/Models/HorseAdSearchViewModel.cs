@@ -8,6 +8,7 @@ namespace HorseSpot.Models.Models
         public string Gender { get; set; }
         public BetweenAge AgeModel { get; set; }
         public BetweenHeight HeightModel { get; set; }
+        public BetweenPrice PriceModel { get; set; }
         public string Breed { get; set; }
         public int AbilityId { get; set; }
         public bool ToHaveXRays { get; set; }
@@ -57,14 +58,26 @@ namespace HorseSpot.Models.Models
         }
     }
 
+    public class BetweenPrice
+    {
+        public decimal? MinPrice { get; set; }
+        public decimal? MaxPrice { get; set; }
+
+        public BetweenPrice()
+        {
+            MinPrice = 0M;
+            MaxPrice = 0M;
+        }
+    }
+
     public class SortModel
     {
-        public string SortAfter { get; set; }
+        public int SortAfter { get; set; }
         public int SortDirection { get; set; }
 
         public SortModel()
         {
-            SortAfter = "DatePosted";
+            SortAfter = 0;
             SortDirection = 1;
         }
     }

@@ -140,7 +140,9 @@ namespace HorseSpot.BLL.Converters
                 ToHaveXRays = searchModel.ToHaveXRays,
                 Country = searchModel.Country,
                 SortAfter = searchModel.SortModel.SortAfter,
-                SortDirection = searchModel.SortModel.SortDirection
+                SortDirection = searchModel.SortModel.SortDirection,
+                MinPrice = searchModel.PriceModel.MinPrice,
+                MaxPrice = searchModel.PriceModel.MaxPrice
             };
         }
 
