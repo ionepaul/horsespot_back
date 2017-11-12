@@ -275,7 +275,7 @@
     "X_RAYS_QUEST": "recherchez-vous un cheval avec des radiographies ?",
     "COMP_EXP_QUEST": "recherchez-vous un cheval avec de l'expérience en compétition ?",
     "SUITABLE_FOR": "convient à",
-    "SEARCH_BTN": "recherche",
+    "SEARCH_BTN": "Chercher",
     "NO_HORSES_FOUND_MSG": "Aucun cheval ne correspond à vos recherches ."
   },
    "SPINNER_LOADING":"en charge...",

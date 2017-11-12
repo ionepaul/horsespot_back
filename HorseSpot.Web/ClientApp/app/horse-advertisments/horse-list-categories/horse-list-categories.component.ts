@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy, trigger, state, transition, style, animate } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
@@ -19,6 +19,18 @@ import { RecommendedRiderModel } from '../models/recommendedRiderModel';
 
 @Component({
   templateUrl: "./horse-list-categories.component.html",
+  animations: [
+    trigger('searchForm', [
+      state('in', style({ display: 'block', height: '*', opacity: 1 })),
+      transition('* => in', [
+        animate('300ms ease-in')
+      ]),
+      state('out', style({ display: 'none', height: '0px', opacity: 0 })),
+      transition('in => out', [
+        animate('300ms ease-out')
+      ]),
+    ])
+  ]
 })
 
 export class HorseListCategoriesComponent implements OnInit, OnDestroy {
@@ -30,12 +42,13 @@ export class HorseListCategoriesComponent implements OnInit, OnDestroy {
   recommendedRiders: RecommendedRiderModel[];
   countries: string[];
   searchModel: SearchModel = new SearchModel();
-  typeaheadNoResults: boolean;  
-  hideQuickSearchPanel: boolean = false;
-  showHideSearchBar: boolean = false;
+  typeaheadNoResults: boolean;
+  collapsed: boolean = false;
   ageRange: number[] = [4, 13];
   heightRange: number[] = [160, 178];
   priceRange: number[] = [10000, 30000];
+  isMobile: boolean;
+  searchFormState: string = "in";
 
   private routerSub$: Subscription;
 
@@ -54,18 +67,21 @@ export class HorseListCategoriesComponent implements OnInit, OnDestroy {
       }
     });
 
-    if (isPlatformBrowser(this.platformId)) {
-      this.hideQuickSearchPanel = window.screen.width <= CONFIG.mobile_width;
-    }
-
     this.searchModel = this._horseAdService.getSearchModel();
   }
 
   ngOnInit() {
+    this.isMobile = window.screen.width <= CONFIG.mobile_width;
+    this.searchFormState = this.isMobile ? "out" : "in";
+
     this.getCountries();
     this.getRecommendedRiders();
     this.totalNumber = this._route.snapshot.data['model'].TotalCount;
     this.categoryHorseList = this._route.snapshot.data['model'].HorseAdList;
+  }
+
+  toggleSearchOnMobile() {
+    this.searchFormState = this.searchFormState == 'in' ? 'out' : 'in';
   }
 
   search() {
@@ -127,22 +143,6 @@ export class HorseListCategoriesComponent implements OnInit, OnDestroy {
   pageChanged(event: any) {
     this.pageNumber = event.page;
     this._router.navigate(['/horses-for-sale/' + this.categoryName, event.page]);
-  }
-
-  showSearchPanel() {
-    this.hideQuickSearchPanel = false;
-    this.showHideSearchBar = true;
-    if (isPlatformBrowser(this.platformId)) {
-      window.scrollTo(0, 0);
-    }
-  }
-
-  hideSearchPanel() {
-    this.hideQuickSearchPanel = true;
-    this.showHideSearchBar = false;
-    if (isPlatformBrowser(this.platformId)) {
-      window.scrollTo(0, 0);
-    }
   }
 
   changeTypeaheadNoResults(e: boolean): void {
