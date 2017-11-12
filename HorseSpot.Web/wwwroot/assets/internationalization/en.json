@@ -252,9 +252,9 @@
         "AVAILABLE": "available",
         "GENDER": "Gender",
         "OPTION_SELECT":"Select your option",
-        "PRICE_RANGE": "Price Range",
+        "PRICE": "Price",
         "COUNTRY":"Country",
-        "MIN_AGE":"Minimum Age",
+        "AGE":"Age",
         "MAX_AGE":"Maximum Age",
         "SORT_BY": {
             "TITLE":"Sort by",
@@ -269,13 +269,13 @@
             "ASCENDING":"Descending",
             "DESCENDING":"Ascending"
         },
-        "MAX_HEIGHT": "Maximum Height (cm)",
+        "HEIGHT": "Height",
         "MIN_HEIGHT": "Minimum Height (cm)",
         "BREED": "Breed",
         "FATHER_NAME":"Father's Name",
         "X_RAYS_QUEST":"Are you looking for a horse that has XRays?",
         "COMP_EXP_QUEST":"Are you looking for a horse with competitional experience?",
-        "SUITABLE_FOR":"I am looking for a horse suitable for:",
+        "SUITABLE_FOR":"Suitable For",
         "SEARCH_BTN":"Search",
         "NO_HORSES_FOUND_MSG":"Unfortunately no horses that match your search criteria were found."
     },

@@ -252,9 +252,9 @@
         "AVAILABLE": "Disponibil",
         "GENDER": "Gen",
         "OPTION_SELECT":"Selectează opțiunea",
-        "PRICE_RANGE": "Prețul dorit",
+        "PRICE": "Prețul",
         "COUNTRY":"Țara",
-        "MIN_AGE":"Vârsta minimă",
+        "AGE":"Vârsta",
         "MAX_AGE":" Vârsta maximă",
         "SORT_BY": {
             "TITLE":"Sortează după",
@@ -269,13 +269,13 @@
             "ASCENDING":"Descrescătoare",
             "DESCENDING":"Crescătoare"
         },
-        "MAX_HEIGHT": "Înălțimea maximă (cm)",
+        "HEIGHT": "Înălțimea",
         "MIN_HEIGHT": " Înălțimea minimă (cm)",
         "BREED": "Rasa",
         "FATHER_NAME":"Numele tatălui",
         "X_RAYS_QUEST":"Cauți un cal care să aibă raze X?",
         "COMP_EXP_QUEST":"Cauți un cal cu experiență competițională?",
-        "SUITABLE_FOR":"Caut un cal potrivit pentru:",
+        "SUITABLE_FOR":"Potrivit Pentru",
         "SEARCH_BTN":"Caută",
         "NO_HORSES_FOUND_MSG":"Din păcate nu am găsit niciun cal care să se potrivească criteriilor cerute. /Unfortunately no horses that match your search criteria were found."
     },

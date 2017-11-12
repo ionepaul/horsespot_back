@@ -1,14 +1,19 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Meta, Title } from '@angular/platform-browser';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+
+//UTILS
 import { UtilDictionaries } from '../shared/utils/util-dictionaries';
+
+//MODELS
 import { PriceRangeModel } from '../horse-advertisments/models/priceRangeModel';
 import { CountryModel } from '../horse-advertisments/models/countryModel';
 import { SearchModel } from '../horse-advertisments/models/searchModel';
-import { HorseAdsService } from '../horse-advertisments/horse-ads.service';
 import { LatestHorsesModel } from '../horse-advertisments/models/latestHorses.model';
+
+//SERVICES
+import { HorseAdsService } from '../horse-advertisments/horse-ads.service';
 
 @Component({
   templateUrl: './home.component.html'
@@ -28,8 +33,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private _router: Router,
     private _horseAdService: HorseAdsService,
-    @Inject(PLATFORM_ID) private platformId: Object,
-    private _metaData: Meta, pageTitle: Title) {
+    @Inject(PLATFORM_ID) private platformId: Object) {
 
     this._horseAdService.resetSearchModel();
     this.searchModel = this._horseAdService.getSearchModel();

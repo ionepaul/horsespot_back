@@ -2753,6 +2753,7 @@ ul.pagination {
   display: flex;
   -ms-flex-pack: center;
   justify-content: center;
+  margin: 0px 0 40px 0;
 }
 
 .pagination > li {
@@ -2773,10 +2774,16 @@ ul.pagination {
   background-color: #ba3326;
   color: #fff !important;
   border-color: #ba3326 !important;
+  /*border-radius: 100%;*/
+}
+
+.pagination > li > a, .pagination > li > span {
+  border: none;
+  border-radius: 100% !important;
 }
 
 .pagination a {
-  color: #464646 !important;
+  color: #95989A !important;
   display: inline-block;
   transition: ease-in-out 0.3s;
 }
@@ -2786,7 +2793,14 @@ ul.pagination {
     background-color: #ba3326 !important;
     border-color: #ba3326 !important;
     color: #fff !important;
+    /*border-radius: 100%;*/
   }
+
+.pagination-sm > li > a, .pagination-sm > li > span {
+  padding: 5px 12px !important;
+  font-size: 14px !important;
+  line-height: 1.5;
+}
 
 /* FORM - quick and advanced */
 .horses-form form {
@@ -2932,6 +2946,7 @@ ul.pagination {
 
     .horses-form form .range-inputs-container .input-range-col {
       margin-top: 20px;
+      text-transform: uppercase;
     }
 
     .horses-form form .range-inputs-container .search-col button {
@@ -6485,7 +6500,7 @@ aside.col-sm-4 {
     display: block;
   }
 
-    .horses-form form .range-inputs-container .ui-slider {
+    .horses-form form .range-inputs-container nouislider {
       width: auto !important;
     }
 

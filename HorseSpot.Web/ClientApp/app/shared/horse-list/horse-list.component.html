@@ -7,8 +7,8 @@
                             <div class="info">
                             <div class="title">
                                 <h2 (click)="getHorseDetails(horseModel.Id, horseModel.Title, horseModel.Gender)">{{horseModel.Title}}</h2>
-                                <p *ngIf="horseModel.Price != 0"><i class="price"></i>{{horseModel.Price}} &euro;</p>
-                                <p *ngIf="horseModel.Price == 0"><i class="price"></i>{{horseModel.PriceRange}} &euro; </p>
+                                <p *ngIf="horseModel.Price != ''"><i class="price"></i>{{horseModel.Price}} &euro;</p>
+                                <p *ngIf="horseModel.Price == ''"><i class="price"></i>{{horseModel.PriceRange}} &euro; </p>
                             </div>
 
                             <div class="desc">

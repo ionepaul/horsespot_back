@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FBPageComponent } from 'ngx-facebook';
 
 //MODULES
 import { SharedModule } from './shared/shared.module';
@@ -13,20 +14,21 @@ import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        HomeComponent,
-        ContactComponent
-    ],
-    imports: [
-        AppRoutingModule,
-        SharedModule,
-        LayoutModule,
-        AccountModule,
-        HorseAdsModule
-    ],
-    providers: [],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    ContactComponent,
+    FBPageComponent
+  ],
+  imports: [
+    AppRoutingModule,
+    SharedModule,
+    LayoutModule,
+    AccountModule,
+    HorseAdsModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
 
 export class AppModuleShared { }

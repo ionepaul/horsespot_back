@@ -5,24 +5,11 @@
     <form>
       <div class="suitable-for">
         <div class="form-group">
-          <h4>Suitable For</h4>
-          <div class="checkbox">
-            <label><input type="checkbox" value="" class="regular-checkbox">Children</label>
-          </div>
-          <div class="checkbox">
-            <label><input type="checkbox" value="" class="regular-checkbox">Junior</label>
-          </div>
-          <div class="checkbox">
-            <label><input type="checkbox" value="" class="regular-checkbox">Young rider</label>
-          </div>
-          <div class="checkbox">
-            <label><input type="checkbox" value="" class="regular-checkbox">Amateur</label>
-          </div>
-          <div class="checkbox">
-            <label><input type="checkbox" value="" class="regular-checkbox">Beginner</label>
-          </div>
-          <div class="checkbox">
-            <label><input type="checkbox" value="" class="regular-checkbox">Experienced Rider</label>
+          <h4>{{'CATEGORIES_SEARCH.SUITABLE_FOR' | translate}}</h4>
+          <div *ngFor="let x of recommendedRiders" class="checkbox">
+            <label>
+              <input class="regular-checkbox" type="checkbox" id="{{x.Rider}}" [checked]="isCheckedRecommendedRider(x)" name="recommendedRider" value="{{x}}" (change)="addHorseRecommendedRider(x)"> {{x.Rider}}
+            </label>
           </div>
         </div>
       </div>
@@ -30,64 +17,67 @@
       <div class="details-inputs cf">
         <div class="form-group">
           <img src="../../../../wwwroot/assets/images/female_form.png" alt="Gender Icon">
-          <select class="form-control">
-            <option value="" disabled selected hidden>Gender</option>
-            <option>Test 2</option>
-            <option>Test 3</option>
-            <option>Test 4</option>
+          <select class="form-control" name="gender" [(ngModel)]="searchModel.GenderId">
+            <option [ngValue]="0">{{ 'HOME_PAGE.GENDERS.GENDER' | translate }}</option>
+            <option [ngValue]="1">{{ 'HOME_PAGE.GENDERS.GELDING' | translate }}</option>
+            <option [ngValue]="2">{{ 'HOME_PAGE.GENDERS.MARE' | translate }}</option>
+            <option [ngValue]="3">{{ 'HOME_PAGE.GENDERS.STALLION' | translate }}</option>
           </select>
         </div>
         <div class="form-group">
           <img src="../../../../wwwroot/assets/images/pin_form.png" alt="Location Icon">
-          <input placeholder="Country" type="text" class="form-control">
+          <input [(ngModel)]="searchModel.Country"
+                        autocomplete="off"
+                        name="typeahead"
+                        [typeahead]="countries"
+                        [typeaheadOptionsLimit]="7"
+                        (typeaheadNoResults)="changeTypeaheadNoResults($event)"
+                        [typeaheadMinLength]="0"
+                        placeholder="{{ 'HOME_PAGE.COUNTRY' | translate }}"
+                        class="form-control" />
         </div>
         <div class="form-group">
           <img src="../../../../wwwroot/assets/images/breed_form.png" alt="Breed Icon">
-          <input placeholder="Breed" type="text" class="form-control">
+          <input placeholder="{{'CATEGORIES_SEARCH.BREED' | translate}}" name="breed" id="breed" [(ngModel)]="searchModel.Breed" type="text" class="form-control">
         </div>
         <div class="form-group">
           <img src="../../../../wwwroot/assets/images/father_form.png" alt="Search Icon">
-          <input placeholder="Father's name" type="text" class="form-control">
+          <input placeholder="{{'CATEGORIES_SEARCH.FATHER_NAME' | translate}}" name="fatherName" [(ngModel)]="searchModel.AfterFatherName" type="text" class="form-control">
         </div>
         <div class="form-group">
           <img src="../../../../wwwroot/assets/images/sortby_form.png" alt="Sort Icon">
-          <select class="form-control">
-            <option value="" disabled selected hidden>Sort by</option>
-            <option>Test 2</option>
-            <option>Test 3</option>
-            <option>Test 4</option>
+          <select class="form-control" name="sortBy" [(ngModel)]="searchModel.SortModel.SortAfter">
+            <option [ngValue]="DatePosted">{{'CATEGORIES_SEARCH.SORT_BY.OPTION_DATE' | translate}}</option>
+            <option [ngValue]="Views">{{'CATEGORIES_SEARCH.SORT_BY.OPTION_VIEWS' | translate}}</option>
+            <option [ngValue]="Price">{{'CATEGORIES_SEARCH.SORT_BY.OPTION_PRICE' | translate}}</option>
+            <option [ngValue]="Age">{{'CATEGORIES_SEARCH.SORT_BY.OPTION_AGE' | translate}}</option>
+            <option [ngValue]="Height">{{'CATEGORIES_SEARCH.SORT_BY.OPTION_HEIGHT' | translate}}</option>
           </select>
         </div>
         <div class="form-group">
           <img src="../../../../wwwroot/assets/images/sortoder_form.png" alt="Sort Order Icon">
-          <select class="form-control">
-            <option value="" disabled selected hidden>Sort order</option>
-            <option>Test 2</option>
-            <option>Test 3</option>
-            <option>Test 4</option>
+          <select class="form-control" name="sortDirection" [(ngModel)]="searchModel.SortModel.SortDirection">
+            <option [ngValue]="0">{{'CATEGORIES_SEARCH.SORT_ORDER.DESCENDING' | translate}}</option>
+            <option [ngValue]="1">{{'CATEGORIES_SEARCH.SORT_ORDER.ASCENDING' | translate}}</option>
           </select>
         </div>
       </div>
 
       <div class="range-inputs-container">
         <div class="input-range-col">
-          <p>AGE <span>{{ageRange[0] + ' - ' + ageRange[1]}}</span></p>
-          <nouislider name="ageRange" style="width:200px" [connect]="true" [min]="0" [max]="15" [(ngModel)]="ageRange"></nouislider>
-
-        <!--  <p-slider [(ngModel)]="ageRange" [style]="{'width':'200px'}" [range]="true" name="ageRange" [min]="0" [max]="35"></p-slider>-->
+          <p>{{'CATEGORIES_SEARCH.AGE' | translate}} <span>{{ageRange[0]}} - {{ageRange[1]}}</span></p>
+          <nouislider name="ageRange" style="width:200px" [connect]="true" [min]="0" [max]="25" [step]="1" [(ngModel)]="ageRange"></nouislider>
         </div>
         <div class="input-range-col">
-          <p>PRICE (&euro;) <span>{{price[0] + ' - ' + price[1]}}</span></p>
-          <nouislider name="price" style="width:300px" [connect]="true" [min]="0" [max]="15" [(ngModel)]="price"></nouislider>
-      <!--    <p-slider [(ngModel)]="price" [style]="{'width':'300px'}" [range]="true" name="price" [min]="0" [max]="3.000"></p-slider>-->
+          <p>{{'CATEGORIES_SEARCH.PRICE' | translate}} (&euro;) <span>{{priceRange[0] | number }} - {{priceRange[1] | number}}</span></p>
+          <nouislider name="priceRange" style="width:300px" [connect]="true" [min]="0" [max]="100000" [step]="1"  [(ngModel)]="priceRange"></nouislider>
         </div>
         <div class="input-range-col">
-          <p>HEIGHT (CM) <span>{{heightRange[0] + ' - ' + heightRange[1]}}</span></p>
-          <nouislider name="heightRange" style="width:250px" [connect]="true" [min]="0" [max]="15" [(ngModel)]="heightRange"></nouislider>
-        <!--  <p-slider [(ngModel)]="heightRange" [style]="{'width':'250px'}" [range]="true" name="heightRange" [min]="0" [max]="199"></p-slider>-->
+          <p>{{'CATEGORIES_SEARCH.HEIGHT' | translate}} (CM) <span>{{heightRange[0] + ' - ' + heightRange[1]}}</span></p>
+          <nouislider name="heightRange" style="width:250px" [connect]="true" [min]="90" [max]="200" [step]="1" [(ngModel)]="heightRange"></nouislider>
         </div>
         <div class="input-range-col search-col">
-          <button>search</button>
+          <button (click)="search()">{{'CATEGORIES_SEARCH.SEARCH_BTN' | translate}}</button>
         </div>
       </div>
     </form>
@@ -108,7 +98,7 @@
   <horse-list [horses]="categoryHorseList" [threeOnRow]="true"></horse-list>
 </div>
 
-<pagination *ngIf="categoryHorseList.length != 0" [itemsPerPage]="8" [totalItems]="totalNumber" [(ngModel)]="pageNumber" [maxSize]="8"
+<pagination *ngIf="categoryHorseList.length != 0" [itemsPerPage]="16" [totalItems]="totalNumber" [(ngModel)]="pageNumber" [maxSize]="8"
             class="pagination-sm" [boundaryLinks]="true" [rotate]="false" (pageChanged)="pageChanged($event)"
             previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
 </pagination>

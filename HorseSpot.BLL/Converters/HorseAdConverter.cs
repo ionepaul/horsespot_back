@@ -4,12 +4,13 @@ using System.Linq;
 using HorseSpot.DAL.Entities;
 using HorseSpot.DAL.Models;
 using HorseSpot.Models.Models;
+using System.Globalization;
 
 namespace HorseSpot.BLL.Converters
 {
     public class HorseAdConverter
     {
-
+        private static CultureInfo _cultureInfo = new CultureInfo("en-US");
         #region Public Methods
 
         public static HorseAd FromHorseAdDTOToHorseAd(HorseAdDTO horseAdDTO, string userId)
@@ -124,7 +125,7 @@ namespace HorseSpot.BLL.Converters
                 Breed = horseAd.Breed,
                 HorseName = horseAd.HorseName,
                 PriceRange = horseAd.PriceRange.PriceRangeValue,
-                Price = horseAd.Price.ToString(),
+                Price = horseAd.Price != 0M ? horseAd.Price.ToString("##,#", _cultureInfo) : "",
                 IsValidated = horseAd.IsValidated,
                 UserId = horseAd.UserId,
                 CountFavoritesFor = horseAd.FavoriteFor?.Count ?? 0,

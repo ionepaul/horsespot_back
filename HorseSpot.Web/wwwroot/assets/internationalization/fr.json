@@ -245,39 +245,39 @@
        "EDIT_SUCCESS_NOTIF": "l'information éditée a été sauvegardée .",
        "DELETE_IMAGE_SUCCESS_NOTIF": "l'image sélectionnée a été effacée ."
    },
-   "CATEGORIES_SEARCH": {
-       "QUICK_SEARCH": "Recherche rapide ",
-       "ADVANCE_SEARCH": "Recherche avancée ",
-       "AVAILABLE": "disponible ",
-       "GENDER": "sexe",
-       "OPTION_SELECT":"Choisissez votre option ",
-       "PRICE_RANGE": "Budget",
-       "COUNTRY":"Pays",
-       "MIN_AGE":"Age minimale ",
-       "MAX_AGE":"Age maximale ",
-       "SORT_BY": {
-           "TITLE":"Sort by",
-           "OPTION_DATE":"Postée a la date",
-           "OPTION_VIEWS":"vues",
-           "OPTION_PRICE":"Prix",
-           "OPTION_AGE":"Age",
-           "OPTION_HEIGHT":"taille"
-       },
-       "SORT_ORDER": {
-           "TITLE":"Ordre de tri",
-           "ASCENDING":"Descendant",
-           "DESCENDING":"Ascendant"
-       },
-       "MAX_HEIGHT": "Taille maximale (cm)",
-       "MIN_HEIGHT": "Taille minimale (cm)",
-       "BREED": "race",
-       "FATHER_NAME":"Nom du père ",
-       "X_RAYS_QUEST":"recherchez-vous un cheval avec des radiographies ?",
-       "COMP_EXP_QUEST":"recherchez-vous un cheval avec de l'expérience en compétition ?",
-       "SUITABLE_FOR":"Je recherche un cheval fillable pour:",
-       "SEARCH_BTN":"recherche",
-       "NO_HORSES_FOUND_MSG":"Aucun cheval ne correspond à vos recherches ."
-   },
+  "CATEGORIES_SEARCH": {
+    "QUICK_SEARCH": "Recherche rapide ",
+    "ADVANCE_SEARCH": "Recherche avancée ",
+    "AVAILABLE": "disponible ",
+    "GENDER": "Sexe",
+    "OPTION_SELECT": "Choisissez votre option ",
+    "PRICE": "Budget",
+    "COUNTRY": "Pays",
+    "AGE": "Age",
+    "MAX_AGE": "Age maximale",
+    "SORT_BY": {
+      "TITLE": "Sort by",
+      "OPTION_DATE": "Postée a la date",
+      "OPTION_VIEWS": "vues",
+      "OPTION_PRICE": "Prix",
+      "OPTION_AGE": "Age",
+      "OPTION_HEIGHT": "taille"
+    },
+    "SORT_ORDER": {
+      "TITLE": "Ordre de tri",
+      "ASCENDING": "Descendant",
+      "DESCENDING": "Ascendant"
+    },
+    "HEIGHT": "Taille",
+    "MIN_HEIGHT": "Taille minimale (cm)",
+    "BREED": "Race",
+    "FATHER_NAME": "Nom du père ",
+    "X_RAYS_QUEST": "recherchez-vous un cheval avec des radiographies ?",
+    "COMP_EXP_QUEST": "recherchez-vous un cheval avec de l'expérience en compétition ?",
+    "SUITABLE_FOR": "convient à",
+    "SEARCH_BTN": "recherche",
+    "NO_HORSES_FOUND_MSG": "Aucun cheval ne correspond à vos recherches ."
+  },
    "SPINNER_LOADING":"en charge...",
    "HORSE_LIST_VIEW_MORE": "Voir plus",
    "HORSE_LIST_UNVALIDATED": "invalide",
