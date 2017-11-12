@@ -87,7 +87,9 @@
     "karma-remap-coverage": "^0.1.4",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.3",
+    "ng2-nouislider": "^1.7.4",
     "ngx-modal": "0.0.29",
+    "nouislider": "^10.1.0",
     "tslint": "^5.7.0",
     "webpack-bundle-analyzer": "^2.9.0"
   }

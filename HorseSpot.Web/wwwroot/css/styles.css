@@ -2793,6 +2793,7 @@ ul.pagination {
   border: 1px solid #e4e4e4;
   border-radius: 5px;
   padding: 50px 10px;
+  margin-bottom: 30px;
 }
 
   .horses-form form h4,
@@ -2876,30 +2877,53 @@ ul.pagination {
 
     .horses-form form .range-inputs-container p {
       color: #767676;
+      font-weight: 500;
     }
 
     .horses-form form .range-inputs-container span {
       float: right;
     }
 
+    .horses-form form .range-inputs-container .noUi-horizontal {
+      height: 8px !important;
+    }
+
     .horses-form form .range-inputs-container .noUi-base .noUi-connect {
       background: #ba3326;
     }
 
-    .horses-form form .range-inputs-container .noUi-base .noUi-origin .noUi-handle .noUi-handle-upper {
+    .horses-form form .range-inputs-container .noUi-base .noUi-origin .noUi-handle {
       background: #ba3326;
       border-radius: 100%;
       width: 13px !important;
       height: 13px !important;
+      border: none;
+      top: -3px;
+      box-shadow: none;
+      cursor: pointer;
     }
 
-    .horses-form form .range-inputs-container .ui-slider-horizontal .ui-slider-handle {
-      top: -3px !important;
-    }
+      .horses-form form .range-inputs-container .noUi-base .noUi-origin .noUi-handle:focus {
+        outline: none;
+      }
+
+      .horses-form form .range-inputs-container .noUi-base .noUi-origin .noUi-handle::after,
+      .horses-form form .range-inputs-container .noUi-base .noUi-origin .noUi-handle::before {
+        content: none;
+      }
+
+      .horses-form form .range-inputs-container .noUi-base .noUi-origin .noUi-handle.noUi-handle-lower {
+        left: -1px !important;
+      }
+
+      .horses-form form .range-inputs-container .noUi-base .noUi-origin .noUi-handle.noUi-handle-upper {
+        left: -12px !important;
+      }
 
     .horses-form form .range-inputs-container .noUi-target {
       background: #C7C7C7;
       box-shadow: none;
+      border: none;
     }
 
     .horses-form form .range-inputs-container .search-col {

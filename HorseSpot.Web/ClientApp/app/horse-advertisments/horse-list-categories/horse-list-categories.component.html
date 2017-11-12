@@ -71,17 +71,19 @@
 
       <div class="range-inputs-container">
         <div class="input-range-col">
-          <p>AGE: <span>{{ageRange[0] + ' - ' + ageRange[1]}}</span></p>
-          <nouislider name="ageRange" [connect]="true" [min]="0" [max]="15" [(ngModel)]="ageRange"></nouislider>
+          <p>AGE <span>{{ageRange[0] + ' - ' + ageRange[1]}}</span></p>
+          <nouislider name="ageRange" style="width:200px" [connect]="true" [min]="0" [max]="15" [(ngModel)]="ageRange"></nouislider>
 
         <!--  <p-slider [(ngModel)]="ageRange" [style]="{'width':'200px'}" [range]="true" name="ageRange" [min]="0" [max]="35"></p-slider>-->
         </div>
         <div class="input-range-col">
           <p>PRICE (&euro;) <span>{{price[0] + ' - ' + price[1]}}</span></p>
+          <nouislider name="price" style="width:300px" [connect]="true" [min]="0" [max]="15" [(ngModel)]="price"></nouislider>
       <!--    <p-slider [(ngModel)]="price" [style]="{'width':'300px'}" [range]="true" name="price" [min]="0" [max]="3.000"></p-slider>-->
         </div>
         <div class="input-range-col">
-          <p>HEIGHT (CM): <span>{{heightRange[0] + ' - ' + heightRange[1]}}</span></p>
+          <p>HEIGHT (CM) <span>{{heightRange[0] + ' - ' + heightRange[1]}}</span></p>
+          <nouislider name="heightRange" style="width:250px" [connect]="true" [min]="0" [max]="15" [(ngModel)]="heightRange"></nouislider>
         <!--  <p-slider [(ngModel)]="heightRange" [style]="{'width':'250px'}" [range]="true" name="heightRange" [min]="0" [max]="199"></p-slider>-->
         </div>
         <div class="input-range-col search-col">
