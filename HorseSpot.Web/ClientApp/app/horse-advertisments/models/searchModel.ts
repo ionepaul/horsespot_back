@@ -1,8 +1,11 @@
+import { CONFIG } from '../../config';
+
 export class SearchModel {
   PageNumber: number;
   Gender: string;
   AgeModel: BetweenAge;
   HeightModel: BetweenHeight;
+  PriceModel: BetweenPrice;
   Breed: string;
   AbilityId: number;
   ToHaveXRays: boolean;
@@ -15,8 +18,9 @@ export class SearchModel {
   GenderId: number;
 
   constructor() {
-    this.AgeModel = new BetweenAge(0, 30);
-    this.HeightModel = new BetweenHeight(0, 200);
+    this.AgeModel = new BetweenAge(CONFIG.defaultAge.min, CONFIG.defaultAge.max);
+    this.HeightModel = new BetweenHeight(CONFIG.defaultHeight.min, CONFIG.defaultHeight.max);
+    this.PriceModel = new BetweenPrice(CONFIG.defaultPrice.min, CONFIG.defaultPrice.max);
     this.PriceRangeId = 0;
     this.GenderId = 0;
     this.SuitableFor = new Array<number>();
@@ -41,6 +45,16 @@ export class BetweenHeight {
   constructor(minHeight: number, maxHeight: number) {
     this.MinHeight = minHeight;
     this.MaxHeight = maxHeight;
+  }
+}
+
+export class BetweenPrice {
+  MinPrice: number;
+  MaxPrice: number;
+
+  constructor(minPrice: number, maxPrice: number) {
+    this.MinPrice = minPrice;
+    this.MaxPrice = maxPrice;
   }
 }
 

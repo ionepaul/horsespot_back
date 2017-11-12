@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 //UTILS
 import { UtilDictionaries } from '../shared/utils/util-dictionaries';
@@ -30,6 +32,8 @@ export class HomeComponent implements OnInit {
   typeaheadNoResults: boolean;
   utilDictionaries: UtilDictionaries = new UtilDictionaries();
   latestHorses: LatestHorsesModel = <LatestHorsesModel>{};
+  selectedCountry: string;
+  countryData: Observable<any[]>;
 
   constructor(private _router: Router,
     private _horseAdService: HorseAdsService,
@@ -42,9 +46,12 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.countryData = Observable.create((observer: any) => {
+      observer.next(this.selectedCountry);
+    }).mergeMap((name: string) => this.getCountries(name));
+
     this.getLatestHorses();
     this.getPriceRanges();
-    this.getCountries();
   }
 
   getPriceRanges() {
@@ -53,10 +60,8 @@ export class HomeComponent implements OnInit {
       error => this.errorMessage = error);
   }
 
-  getCountries() {
-    this._horseAdService.getAllCountries()
-      .subscribe(res => this.countries = res,
-      error => this.errorMessage = error);
+  getCountries(name: string) {
+    return this._horseAdService.getAllCountries(name);
   }
 
   changeTypeaheadNoResults(e: boolean): void {
@@ -64,6 +69,7 @@ export class HomeComponent implements OnInit {
   }
 
   search() {
+    this.searchModel.Country = this.selectedCountry;
     this._horseAdService.setSearchModel(this.searchModel);
     this._router.navigate(['/horses-for-sale/' + this.utilDictionaries.getUrlByCategoryId(this.categoryId) + '/1']);
   }

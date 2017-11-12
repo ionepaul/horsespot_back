@@ -32,13 +32,15 @@
           </div>
           <div class="form-group">
             <img src="../../../../wwwroot/assets/images/pin_form.png" alt="Location Icon">
-            <input [(ngModel)]="searchModel.Country"
+            <input [(ngModel)]="selectedCountry"
                    autocomplete="off"
-                   name="typeahead"
-                   [typeahead]="countries"
+                   name="countries"
+                   [typeahead]="countryData"
                    [typeaheadOptionsLimit]="7"
                    (typeaheadNoResults)="changeTypeaheadNoResults($event)"
-                   [typeaheadMinLength]="0"
+                   [typeaheadMinLength]="2"
+                   [typeaheadWaitMs]="300"
+                   typeaheadOptionField="name"
                    placeholder="{{ 'HOME_PAGE.COUNTRY' | translate }}"
                    class="form-control" />
           </div>

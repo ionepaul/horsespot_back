@@ -8,6 +8,8 @@ export let CONFIG = {
     imagesUrl: 'http://localhost/horsespotservices',
     
     authUrl: 'http://localhost/horsespotservices/token',
+
+    restCountriesUrl: 'https://restcountries.eu/rest/v2/name/',
     
     webSocketUrl: 'ws://localhost/horsespotservices' + '/api/appointment?userId=',
 
@@ -36,7 +38,11 @@ export let CONFIG = {
     languages: [ { value: "en", displayText: "English", imgUrl: "../../assets/images/english.png" }, 
                  { value: "de", displayText: "Deutsch", imgUrl: "../../assets/images/germany.png" },
                  { value: "fr", displayText: "French", imgUrl: "../../assets/images/france.png" },
-                 { value: "ro", displayText: "Romanian", imgUrl: "../../assets/images/romania.png" }]
+                 { value: "ro", displayText: "Romanian", imgUrl: "../../assets/images/romania.png" }],
+
+    defaultAge: { min: 4, max: 13 },
+    defaultPrice: { min: 10000, max: 30000 },
+    defaultHeight: { min: 160, max: 178 } 
 }
  
 export * from './config';

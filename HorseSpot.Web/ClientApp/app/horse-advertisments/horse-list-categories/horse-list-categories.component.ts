@@ -5,13 +5,15 @@ import { isPlatformBrowser } from '@angular/common';
 import { DOCUMENT } from '@angular/platform-browser';
 import { Subscription } from 'rxjs/Subscription';
 import { CONFIG } from '../../config';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 //SERVICES
 import { HorseAdsService } from '../horse-ads.service';
 
 //MODELS
 import { HorseAdListModel } from '../models/horseAdListModel';
-import { SearchModel, BetweenAge, BetweenHeight } from '../models/searchModel';
+import { SearchModel, BetweenAge, BetweenHeight, BetweenPrice } from '../models/searchModel';
 import { PriceRangeModel } from '../models/priceRangeModel';
 import { CountryModel } from '../models/countryModel';
 import { GenderModel } from '../models/genderModel';
@@ -44,13 +46,15 @@ export class HorseListCategoriesComponent implements OnInit, OnDestroy {
   searchModel: SearchModel = new SearchModel();
   typeaheadNoResults: boolean;
   collapsed: boolean = false;
-  ageRange: number[] = [4, 13];
-  heightRange: number[] = [160, 178];
-  priceRange: number[] = [10000, 30000];
+  ageRange: number[] = [CONFIG.defaultAge.min, CONFIG.defaultAge.max];
+  heightRange: number[] = [CONFIG.defaultHeight.min, CONFIG.defaultHeight.max];
+  priceRange: number[] = [CONFIG.defaultPrice.min, CONFIG.defaultPrice.max];
   isMobile: boolean;
   searchFormState: string = "in";
+  selectedCountry: string;
+  countryData: Observable<any[]>;
 
-  private routerSub$: Subscription;
+  private _routerSub$: Subscription;
 
   constructor(private _route: ActivatedRoute,
     private _router: Router,
@@ -58,7 +62,7 @@ export class HorseListCategoriesComponent implements OnInit, OnDestroy {
     @Inject(DOCUMENT) private document,
     @Inject(PLATFORM_ID) private platformId: Object) {
 
-    this.routerSub$ = this._router.events.subscribe((event) => {
+    this._routerSub$ = this._router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.categoryName = _route.snapshot.url[1].path;
         this.pageNumber = parseInt(_route.snapshot.url[2].path);
@@ -71,10 +75,13 @@ export class HorseListCategoriesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.countryData = Observable.create((observer: any) => {
+      observer.next(this.selectedCountry);
+    }).mergeMap((name: string) => this.getCountries(name));
+
     this.isMobile = window.screen.width <= CONFIG.mobile_width;
     this.searchFormState = this.isMobile ? "out" : "in";
 
-    this.getCountries();
     this.getRecommendedRiders();
     this.totalNumber = this._route.snapshot.data['model'].TotalCount;
     this.categoryHorseList = this._route.snapshot.data['model'].HorseAdList;
@@ -87,6 +94,8 @@ export class HorseListCategoriesComponent implements OnInit, OnDestroy {
   search() {
     this.searchModel.AgeModel = new BetweenAge(this.ageRange[0], this.ageRange[1]);
     this.searchModel.HeightModel = new BetweenHeight(this.heightRange[0], this.heightRange[1]);
+    this.searchModel.PriceModel = new BetweenPrice(this.priceRange[0], this.priceRange[1]);
+    this.searchModel.Country = this.selectedCountry;
 
     this._horseAdService.setSearchModel(this.searchModel);
 
@@ -113,10 +122,8 @@ export class HorseListCategoriesComponent implements OnInit, OnDestroy {
     this.search();
   }
 
-  getCountries() {
-    this._horseAdService.getAllCountries()
-      .subscribe(res => this.countries = res,
-      error => this.errorMessage = error);
+  getCountries(name: string): Observable<any[]> {
+    return this._horseAdService.getAllCountries(name);
   }
 
   getRecommendedRiders() {
@@ -150,6 +157,6 @@ export class HorseListCategoriesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.routerSub$.unsubscribe();
+    this._routerSub$.unsubscribe();
   }
 }
