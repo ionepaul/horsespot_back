@@ -12,6 +12,7 @@ export class SearchModel {
   ToHaveCompetionalExperience: boolean;
   SuitableFor: Array<number>;
   PriceRangeId: number;
+  PriceRangeIds: number[];
   AfterFatherName: string;
   Country: string;
   SortModel: SortModel;

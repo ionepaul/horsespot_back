@@ -42,7 +42,8 @@ export let CONFIG = {
 
     defaultAge: { min: 4, max: 13 },
     defaultPrice: { min: 10000, max: 30000 },
-    defaultHeight: { min: 160, max: 178 } 
+    defaultHeight: { min: 160, max: 178 },
+    dbMaxPriceRangeValue: "40,000+";
 }
  
 export * from './config';
