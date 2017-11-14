@@ -14,6 +14,7 @@ namespace HorseSpot.Models.Models
         public bool ToHaveXRays { get; set; }
         public bool ToHaveCompetionalExperience { get; set; }
         public List<int> SuitableFor { get; set; }
+        public List<int> PriceRangeIds { get; set; }
         public int PriceRangeId { get; set; }
         public bool ToHaveVideo { get; set; }
         public string AfterFatherName { get; set; }

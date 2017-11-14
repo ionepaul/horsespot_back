@@ -135,6 +135,7 @@ namespace HorseSpot.BLL.Converters
                 Breed = searchModel.Breed,
                 Gender = searchModel.Gender,
                 PriceRangeId = searchModel.PriceRangeId,
+                RangeSearchList = searchModel.PriceRangeIds,
                 ToHaveCompetionalExperience = searchModel.ToHaveCompetionalExperience,
                 ToHaveVideo = searchModel.ToHaveVideo,
                 ToHaveXRays = searchModel.ToHaveXRays,

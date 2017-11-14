@@ -28,6 +28,7 @@ namespace HorseSpot.DAL.Search
         private bool _haveXRays;
         private bool _haveCompetitionalExperience;
         private List<int> _recommendedRider;
+        private List<int> _rangeSearchIds;
         private int _priceRangeId;
         private bool _haveVideo;
         private string _afterFather;
@@ -51,6 +52,7 @@ namespace HorseSpot.DAL.Search
             _haveXRays = searchModel.ToHaveXRays;
             _haveCompetitionalExperience = searchModel.ToHaveCompetionalExperience;
             _recommendedRider = searchModel.SuitableFor;
+            _rangeSearchIds = searchModel.RangeSearchList;
             _priceRangeId = searchModel.PriceRangeId;
             _haveVideo = searchModel.ToHaveVideo;
             _afterFather = searchModel.AfterFatherName;
@@ -190,6 +192,20 @@ namespace HorseSpot.DAL.Search
             return riderSearch.Expand();
         }
 
+        private Expression<Func<HorseAd, bool>> PriceRangeIdsSearch()
+        {
+            var multiplePriceRangeSearch = PredicateBuilder.False<HorseAd>();
+
+            foreach (var priceRangeId in _rangeSearchIds)
+            {
+                Expression<Func<HorseAd, bool>> priceRangeHelper = ad => ad.PriceRangeId == priceRangeId;
+
+                multiplePriceRangeSearch = multiplePriceRangeSearch.Or(priceRangeHelper.Expand());
+            }
+
+            return multiplePriceRangeSearch.Expand();
+        }
+
         private Expression<Func<HorseAd, bool>> PriceRangeSearch()
         {
             var priceRangeSearch = PredicateBuilder.True<HorseAd>();
@@ -257,6 +273,12 @@ namespace HorseSpot.DAL.Search
             if (_recommendedRider != null && _recommendedRider.Count != 0)
             {
                 predicate = predicate.And(RecommendedRiderSearch());
+            }
+
+            //Multiple PriceRange Search
+            if (_rangeSearchIds != null && _rangeSearchIds.Count != 0)
+            {
+                predicate = predicate.And(PriceRangeIdsSearch());
             }
 
             //Ability
