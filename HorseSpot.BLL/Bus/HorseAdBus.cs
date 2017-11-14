@@ -14,6 +14,8 @@ using HorseSpot.Infrastructure.MailService;
 using HorseSpot.Infrastructure.Resources;
 using HorseSpot.Infrastructure.Validators;
 using HorseSpot.Models.Models;
+using HorseSpot.Models.Enums;
+using System;
 
 namespace HorseSpot.BLL.Bus
 {
@@ -179,11 +181,25 @@ namespace HorseSpot.BLL.Bus
         { 
             SearchModelDao searchModelDao = UtilConverter.FromSearchModelToSearchModelDao(searchViewModel);
 
-            if (searchModelDao.SortAfter != ApplicationConstants.SortAge && searchModelDao.SortAfter != ApplicationConstants.SortDatePosted 
-                && searchModelDao.SortAfter != ApplicationConstants.SortHeight && searchModelDao.SortAfter != ApplicationConstants.SortPrice 
-                && searchModelDao.SortAfter != ApplicationConstants.SortViews)
+            var sortAfterValues = Enum.GetValues(typeof(SortAfterEnum));
+
+            switch (searchModelDao.SortAfter)
             {
-                searchModelDao.SortAfter = ApplicationConstants.SortDatePosted;
+                case (int)SortAfterEnum.Age:
+                    searchModelDao.SortAfterString = SortAfterEnum.Age.ToString();
+                    break;
+                case (int)SortAfterEnum.Height:
+                    searchModelDao.SortAfterString = SortAfterEnum.Height.ToString();
+                    break;
+                case (int)SortAfterEnum.Price:
+                    searchModelDao.SortAfterString = SortAfterEnum.Price.ToString();
+                    break;
+                case (int)SortAfterEnum.Views:
+                    searchModelDao.SortAfterString = SortAfterEnum.Views.ToString();
+                    break;
+                default:
+                    searchModelDao.SortAfterString = SortAfterEnum.DatePosted.ToString();
+                    break;
             }
 
             if (searchModelDao.SortDirection != 1 && searchModelDao.SortDirection != 0)
