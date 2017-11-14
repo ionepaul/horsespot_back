@@ -1,9 +1,9 @@
 @Html.Raw(ViewData["SpaHtml"])
 
-<script src="https://connect.facebook.net/en_US/sdk.js"></script>
 <script src="~/dist/vendor.js" asp-append-version="true"></script>
 
 @section scripts {
+  <script type="text/javascript" src="//connect.facebook.net/en_US/sdk.js#xfbml=1&amp;version=v2.9"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 

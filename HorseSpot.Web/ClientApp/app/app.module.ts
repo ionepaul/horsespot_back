@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { FBPageComponent } from 'ngx-facebook';
 
 //MODULES
 import { SharedModule } from './shared/shared.module';
@@ -17,8 +16,7 @@ import { ContactComponent } from './contact/contact.component';
   declarations: [
     AppComponent,
     HomeComponent,
-    ContactComponent,
-    FBPageComponent
+    ContactComponent
   ],
   imports: [
     AppRoutingModule,
