@@ -33,7 +33,7 @@ import { LinkService } from './shared/link.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-    private endPageTitle: string = 'Angular Universal and ASP.NET Core Starter';
+    private endPageTitle: string = 'Horse Spot';
     // If no Title is provided, we'll use a default one before the dash(-)
     private defaultPageTitle: string = 'My App';
 
@@ -101,7 +101,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private _setMetaAndLinks(event) {
         const title = event['title']
             ? `${event['title']} - ${this.endPageTitle}`
-            : `${this.defaultPageTitle} - ${this.endPageTitle}`;
+            : `${this.defaultPageTitle} | ${this.endPageTitle}`;
 
         this.title.setTitle(title);
 

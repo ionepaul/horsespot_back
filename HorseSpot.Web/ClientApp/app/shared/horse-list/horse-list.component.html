@@ -1,33 +1,33 @@
-                <div class="row category-row">
-                    <div [ngClass]="{'col-sm-4': threeOnRow, 'col-sm-6': '!threeOnRow'}" *ngFor="let horseModel of horses">
-                        <article class="horse-card-article">
-                            <div class="featured-img">
-                                <img (click)="getHorseDetails(horseModel.Id, horseModel.Title, horseModel.Gender)" src="{{horseImageUrl}}{{horseModel.ImageId}}" alt="{{horseModel.Title}} - {{horseModel.Gender}} for sale">
-                            </div><!-- featured-img -->
-                            <div class="info">
-                            <div class="title">
-                                <h2 (click)="getHorseDetails(horseModel.Id, horseModel.Title, horseModel.Gender)">{{horseModel.Title}}</h2>
-                                <p *ngIf="horseModel.Price != ''"><i class="price"></i>{{horseModel.Price}} &euro;</p>
-                                <p *ngIf="horseModel.Price == ''"><i class="price"></i>{{horseModel.PriceRange}} &euro; </p>
-                            </div>
+<div class="row category-row">
+  <div [ngClass]="{'col-sm-4': threeOnRow, 'col-sm-6': '!threeOnRow'}" *ngFor="let horseModel of horses">
+    <article class="horse-card-article">
+      <div class="featured-img">
+        <img (click)="getHorseDetails(horseModel.Id, horseModel.Title, horseModel.Gender)" src="{{horseImageUrl}}{{horseModel.ImageId}}" alt="{{horseModel.Title}} - {{horseModel.Gender}} for sale">
+      </div><!-- featured-img -->
+      <div class="info">
+        <div class="title">
+          <h2 (click)="getHorseDetails(horseModel.Id, horseModel.Title, horseModel.Gender)">{{horseModel.Title}}</h2>
+          <p *ngIf="horseModel.Price != ''"><i class="price"></i>{{horseModel.Price}} &euro;</p>
+          <p *ngIf="horseModel.Price == ''"><i class="price"></i>{{horseModel.PriceRange}} &euro; </p>
+        </div>
 
-                            <div class="desc">
-                                <p (click)="getHorseDetails(horseModel.Id, horseModel.Title, horseModel.Gender)">{{horseModel.Description | descriptionFormat}}</p>
-                            </div>
+        <div class="desc">
+          <p (click)="getHorseDetails(horseModel.Id, horseModel.Title, horseModel.Gender)">{{horseModel.Description | descriptionFormat}}</p>
+        </div>
 
-                            <div class="breed">
-                                <ul>
-                                    <li><img src="../../../../wwwroot/assets/images/breed_1.png" alt="Gender">{{horseModel.Gender}}</li>
-                                    <li><img src="../../../../wwwroot/assets/images/breed_2.png" alt="Country">{{horseModel.Country}}</li>
-                                </ul>
-                            </div>
+        <div class="breed">
+          <ul>
+            <li><img src="../../../../wwwroot/assets/images/breed_1.png" alt="Horse gender">{{horseModel.Gender}}</li>
+            <li><img src="../../../../wwwroot/assets/images/breed_2.png" alt="Horse location">{{horseModel.Country}}</li>
+          </ul>
+        </div>
 
-                            <div class="details">
-                                <p class="date">{{horseModel.DatePosted | dateFormatPipe}}</p>
-                                <p class="views"><img src="../../../../wwwroot/assets/images/eye.png" alt="Views"> {{horseModel.Views}}</p>
-                                <p class="views"><img src="../../../../wwwroot/assets/images/heart.png" alt="Favorite For"> {{horseModel.CountFavoritesFor}}</p>
-                            </div><!-- details -->
-                            </div>
-                        </article>
-                    </div><!-- col-sm-6 -->
-                </div>
+        <div class="details">
+          <p class="date">{{horseModel.DatePosted | dateFormatPipe}}</p>
+          <p class="views"><img src="../../../../wwwroot/assets/images/eye.png" alt="Horse views"> {{horseModel.Views}}</p>
+          <p class="views"><img src="../../../../wwwroot/assets/images/heart.png" alt="Horse liked by"> {{horseModel.CountFavoritesFor}}</p>
+        </div><!-- details -->
+      </div>
+    </article>
+  </div><!-- col-sm-6 -->
+</div>

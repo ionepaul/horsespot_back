@@ -6,14 +6,14 @@ export let CONFIG = {
     },
 
     imagesUrl: 'http://localhost/horsespotservices',
-    
+
     authUrl: 'http://localhost/horsespotservices/token',
 
     restCountriesUrl: 'https://restcountries.eu/rest/v2/name/',
-    
+
     webSocketUrl: 'ws://localhost/horsespotservices' + '/api/appointment?userId=',
 
-    accepted_file_extension: [ '.JPEG', '.JPG', '.PNG', '.BMP', '.TIFF'],
+    accepted_file_extension: ['.JPEG', '.JPG', '.PNG', '.BMP', '.TIFF'],
 
     adminRole: "Admin",
 
@@ -32,18 +32,20 @@ export let CONFIG = {
     allImagesSizeLimit: 5242880, //bytes
 
     horseSpot_contact_email: "contact@horse-spot.com",
-    
-    genders: [ "Gelding", "Mare", "Stallion" ],
 
-    languages: [ { value: "en", displayText: "English", imgUrl: "../../assets/images/english.png" }, 
-                 { value: "de", displayText: "Deutsch", imgUrl: "../../assets/images/germany.png" },
-                 { value: "fr", displayText: "French", imgUrl: "../../assets/images/france.png" },
-                 { value: "ro", displayText: "Romanian", imgUrl: "../../assets/images/romania.png" }],
+    genders: ["Gelding", "Mare", "Stallion"],
+
+    gender: "Gender",
+
+    languages: [{ value: "en", displayText: "English", imgUrl: "../../assets/images/english.png" },
+    { value: "de", displayText: "Deutsch", imgUrl: "../../assets/images/germany.png" },
+    { value: "fr", displayText: "French", imgUrl: "../../assets/images/france.png" },
+    { value: "ro", displayText: "Romanian", imgUrl: "../../assets/images/romania.png" }],
 
     defaultAge: { min: 4, max: 13 },
     defaultPrice: { min: 10000, max: 30000 },
     defaultHeight: { min: 160, max: 178 },
     dbMaxPriceRangeValue: "40,000+";
 }
- 
+
 export * from './config';

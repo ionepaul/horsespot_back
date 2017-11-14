@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
+import { CONFIG } from '../config';
 import 'rxjs/add/observable/of';
 
 //UTILS
@@ -41,8 +42,8 @@ export class HomeComponent implements OnInit {
 
     this._horseAdService.resetSearchModel();
     this.searchModel = this._horseAdService.getSearchModel();
-    this.searchModel.Gender = "Gender";
-    this.priceRangeId = this.searchModel.PriceRangeId
+    this.searchModel.Gender = CONFIG.gender;
+    this.priceRangeId = this.searchModel.PriceRangeId;
   }
 
   ngOnInit() {
