@@ -195,24 +195,40 @@ namespace HorseSpot.DAL.Search
         private Expression<Func<HorseAd, bool>> PriceRangeIdsSearch()
         {
             var multiplePriceRangeSearch = PredicateBuilder.False<HorseAd>();
+            var pricePredicate = PredicateBuilder.True<HorseAd>();
 
-            foreach (var priceRangeId in _rangeSearchIds)
+            if (_minPrice != 0M && _maxPrice != 0M && _maxPrice != ApplicationConstants.UI_MAX_PRICE)
             {
-                Expression<Func<HorseAd, bool>> priceRangeHelper = ad => ad.PriceRangeId == priceRangeId;
-
-                multiplePriceRangeSearch = multiplePriceRangeSearch.Or(priceRangeHelper.Expand());
+                pricePredicate = pricePredicate.And(ad => ad.Price != 0M && ad.Price >= _minPrice && ad.Price <= _maxPrice);
             }
 
-            return multiplePriceRangeSearch.Expand();
+            if (_minPrice != 0M && _maxPrice != 0M && _maxPrice == ApplicationConstants.UI_MAX_PRICE)
+            {
+                pricePredicate = pricePredicate.And(ad => ad.Price != 0M && ad.Price >= _minPrice);
+            }
+
+            if (_rangeSearchIds != null && _rangeSearchIds.Count != 0)
+            {
+                foreach (var priceRangeId in _rangeSearchIds)
+                {
+                    Expression<Func<HorseAd, bool>> priceRangeHelper = ad => ad.Price == 0M && ad.PriceRangeId == priceRangeId;
+
+                    multiplePriceRangeSearch = multiplePriceRangeSearch.Or(priceRangeHelper.Expand());
+                }
+
+                return multiplePriceRangeSearch.Or(pricePredicate.Expand());
+            }
+
+            return pricePredicate.Expand();
         }
 
         private Expression<Func<HorseAd, bool>> PriceRangeSearch()
         {
             var priceRangeSearch = PredicateBuilder.True<HorseAd>();
 
-            if (_minPrice != 0M && _maxPrice != 0M)
+            if (_priceRangeId != 0)
             {
-                priceRangeSearch = priceRangeSearch.And(ad => ad.Price >= _minPrice && ad.Price <= _maxPrice);
+                priceRangeSearch = priceRangeSearch.And(ad => ad.PriceRangeId == _priceRangeId);
             }
 
             return priceRangeSearch.Expand();
@@ -276,10 +292,7 @@ namespace HorseSpot.DAL.Search
             }
 
             //Multiple PriceRange Search
-            if (_rangeSearchIds != null && _rangeSearchIds.Count != 0)
-            {
-                predicate = predicate.And(PriceRangeIdsSearch());
-            }
+            predicate = predicate.And(PriceRangeIdsSearch());
 
             //Ability
             if (_horseAbilityId != 0)

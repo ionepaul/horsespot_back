@@ -17,6 +17,6 @@ namespace HorseSpot.Infrastructure.Constants
         public const string LatestDictionaryEventingKey = "_eventing";
         public const string LatestDictionaryEnduranceKey = "_endurance";
 
-        public const string MAX_PRICERANGE_VALUE = "40,000+";
+        public const int UI_MAX_PRICE = 100000;
     }
 }
