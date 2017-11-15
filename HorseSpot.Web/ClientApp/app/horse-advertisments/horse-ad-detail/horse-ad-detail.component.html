@@ -19,11 +19,17 @@
       <li>{{horseAdModel.PriceRange.PriceRangeValue}} &euro;</li>
     </ul>
 
-    <!--<p-galleria [images]="galleriImages" [showCaption]="false"></p-galleria>-->
-
     <div class="row">
 
       <div class="col-sm-8">
+
+        <div class="carousel">
+          <carousel>
+            <slide *ngFor="let image of horseAdModel.Images">
+              <img src="{{imagesUrl}}{{image}}">
+            </slide>
+          </carousel>
+        </div><!--carousel -->
 
         <div id="overview" class="block">
           <div class="title-wrap">
@@ -32,28 +38,28 @@
           <p>{{horseAdModel.Description}}</p>
           <ul class="cf">
             <li>
-            <!--  <img src="../../../../wwwroot/assets/images/gender.png" alt="Heart">-->
+              <img src="../../../../wwwroot/assets/images/gender.png" alt="Horse gender icon">
               <span>{{'HORSE_AD_DETAIL.GENDER' | translate}}</span>
               <span>{{horseAdModel.Gender}}</span>
             </li>
             <li>
-            <!--  <img src="../../../../wwwroot/assets/images/breed.png" alt="Heart">-->
+              <img src="../../../../wwwroot/assets/images/breed.png" alt="Horse breed icon">
               <span>{{'HORSE_AD_DETAIL.BREED' | translate}}</span>
               <span>{{horseAdModel.Breed}}</span>
             </li>
             <li>
-              <!--<img src="../../../../wwwroot/assets/images/height.png" alt="Heart">-->
+              <img src="../../../../wwwroot/assets/images/height.png" alt="Horse height icon">
               <span>{{'HORSE_AD_DETAIL.HEIGHT' | translate}}</span>
               <span>{{horseAdModel.HeightInCm}} cm</span>
             </li>
             <li>
-              <!--<img src="../../../../wwwroot/assets/images/rays.png" alt="Heart">-->
+              <img src="../../../../wwwroot/assets/images/rays.png" alt="Horse x-rays icon">
               <span>{{'HORSE_AD_DETAIL.XRAYS' | translate}}</span>
               <span *ngIf="horseAdModel.HaveXRays">{{'HORSE_AD_DETAIL.YES' | translate}}</span>
               <span *ngIf="!horseAdModel.HaveXRays">{{'HORSE_AD_DETAIL.NO' | translate}}</span>
             </li>
             <li>
-              <!--<img src="../../../../wwwroot/assets/images/exp.png" alt="Heart">-->
+              <img src="../../../../wwwroot/assets/images/exp.png" alt="Horse competitional experience icon">
               <span>{{'HORSE_AD_DETAIL.COMP_EXP' | translate}}</span>
               <span *ngIf="horseAdModel.HaveCompetionalExperience">{{'HORSE_AD_DETAIL.YES' | translate}}</span>
               <span *ngIf="!horseAdModel.HaveCompetionalExperience">{{'HORSE_AD_DETAIL.NO' | translate}}</span>
@@ -66,7 +72,7 @@
             <h4>{{'NAVBAR.CONTACT' | translate}} &amp; {{'HORSE_AD_DETAIL.LOCATION' | translate}}</h4>
           </div>
           <div class="user-info">
-              <img #userImage src="">
+              <img #userImage src="" alt="Owner profile picture">
               <p class="name"><span>{{userModel.FirstName}}</span></p>
               <p class="tel"><a href="tel:{{userModel.PhoneNumber}}"><i class="fa fa-mobile" aria-hidden="true"></i> {{userModel.PhoneNumber}}</a></p>
               <p class="mail"><a href="mailto:{{userModel.Email}}"><i class="fa fa-envelope" aria-hidden="true"></i> {{userModel.Email}}</a></p>
@@ -91,7 +97,7 @@
            <iframe #horseVideoFrame id="horseVideoFrame" class="embed-responsive-item" src=""></iframe>
         </div><!-- video -->
 
-        <div *ngIf="showPedigree" id="pedigree" class="pedigree" class="block"> 
+        <div *ngIf="showPedigree" id="pedigree" class="pedigree block"> 
             <div class="title-wrap">
               <h4>{{'HORSE_AD_DETAIL.PEDIGREE' | translate}}</h4>
             </div>
@@ -122,23 +128,18 @@
                   <li><div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a></div></li>
               </ul>
               <ul>
-                <!--<li><img alt="Views" src="../../../../wwwroot/assets/images/eye.png"> {{horseAdModel.Views}}</li>-->
-         <!--       <li><img alt="Favorite For" src="../../../../wwwroot/assets/images/heart.png"> {{horseAdModel.CountFavoritesFor}}</li>-->
+                <li><img src="../../../../wwwroot/assets/images/eye.png" alt="Horse views" > {{horseAdModel.Views}}</li>
+                <li><img src="../../../../wwwroot/assets/images/heart.png" alt="Horse likes"> {{horseAdModel.CountFavoritesFor}}</li>
               </ul>
             </div><!-- lists -->
-            <!--<img src="../../../../wwwroot/assets/images/add_1.png" alt="Add">-->
+
+            <!-- Will be replaced with google ad sense advertisment -->
+            <img src="../../../../wwwroot/assets/images/add_1.png" alt="Add">-->
           </div><!-- add -->
 
       </div><!-- col-sm-8 -->
 
-      <aside class="col-sm-4">
-        <div class="fb-page" data-href="https://www.facebook.com/horsespotcom/" data-tabs="timeline" data-height="70" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/horsespotcom/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/horsespotcom/">HorseSpot</a></blockquote></div>
-        <p class="adds">{{'ADVERTISMENTS' | translate}}</p> 
-        <!--<img src="../../../../wwwroot/assets/images/banner-1.png" alt="Banner">
-        <img src="../../../../wwwroot/assets/images/banner-2.jpg" alt="Banner">
-        <img src="../../../../wwwroot/assets/images/banner-3.png" alt="Banner">
-        <img src="../../../../wwwroot/assets/images/banner-4.jpg" alt="Banner">-->
-      </aside><!-- col-sm-4 -->
+      <right-side-advertisments></right-side-advertisments>
 
     </div><!-- row -->
 </div>

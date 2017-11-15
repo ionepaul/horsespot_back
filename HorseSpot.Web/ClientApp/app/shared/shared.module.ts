@@ -7,7 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule, TranslateLoader, TranslatePipe } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { Angular2FontawesomeModule } from 'angular2-fontawesome';
-import { ModalModule, TypeaheadModule, PaginationModule, BsDropdownModule, CollapseModule } from 'ngx-bootstrap';
+import { ModalModule, TypeaheadModule, PaginationModule, BsDropdownModule, CollapseModule, CarouselModule } from 'ngx-bootstrap';
 import { FileUploadModule } from 'ng2-file-upload';
 import { NouisliderModule } from 'ng2-nouislider';
 import { FBPageComponent } from 'ngx-facebook';
@@ -73,6 +73,7 @@ export function createTranslateLoader(http: Http, baseHref) {
     PaginationModule.forRoot(),
     BsDropdownModule.forRoot(),
     CollapseModule.forRoot(),
+    CarouselModule.forRoot(),
     FileUploadModule,
     TransferHttpModule,
     NouisliderModule,
@@ -107,8 +108,9 @@ export function createTranslateLoader(http: Http, baseHref) {
     //},
   ],
   exports: [CommonModule, FormsModule, ReactiveFormsModule, NotificationComponent, ErrorComponent, SpinnerComponent, EqualValidator, ImagePreview,
-    DateFormatPipe, DateFormatHourPipe, HttpModule, ModalModule, Angular2FontawesomeModule, TranslateModule, HorseListComponent, PaginationModule,
-    TypeaheadModule, FileUploadModule, DescriptionFormatPipe, BsDropdownModule, CollapseModule, NouisliderModule, RightSideAdvertismentsComponent, FBPageComponent ]
+      DateFormatPipe, DateFormatHourPipe, HttpModule, ModalModule, Angular2FontawesomeModule, TranslateModule, HorseListComponent, PaginationModule,
+      TypeaheadModule, FileUploadModule, DescriptionFormatPipe, BsDropdownModule, CollapseModule, NouisliderModule, RightSideAdvertismentsComponent, FBPageComponent,
+      CarouselModule]
 })
 
 export class SharedModule { }

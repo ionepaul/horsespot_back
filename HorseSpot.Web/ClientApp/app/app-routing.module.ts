@@ -189,7 +189,8 @@ const routes: Routes = [
           ]
       },
       resolve: { model: HorseListCategoriesResolver }
-  }, 
+  },
+  { path: 'horses-for-sale/:id/:category/:title', component: HorseAdDetailComponent }
 
 
   //{ path: 'contact', component: ContactComponent },
@@ -201,11 +202,7 @@ const routes: Routes = [
   //{ path: 'account/wishlist/:page', component: UserFavoritesComponent, canActivate: [ LoggedInGuard ],resolve: { model: UserFavoritesResolver } },
   //{ path: 'horses/add', component: AddHorseAdComponent, canActivate: [ LoggedInGuard ] },
   //{ path: 'horses/edit/:id', component: EditHorseAdComponent, canActivate: [ LoggedInGuard, IsPostOwnerGuard ] },
-
-
-  
   //{ path: 'horses/unvalidated/:page', component: HorseListUnvalidatedComponent, canActivate: [ LoggedInGuard, AdminGuard ], resolve: { model: UnvalidatedHorseListResolver } },
-  //{ path: 'horses-for-sale/:id/:category/:title', component: HorseAdDetailComponent }
 ];
 
 @NgModule({
