@@ -7,6 +7,8 @@ export let CONFIG = {
 
     imagesUrl: 'http://localhost/horsespotservices',
 
+    horseAdsImagesUrl: 'http://localhost/horsespotservices/Images/HorseAdsImg/',
+
     authUrl: 'http://localhost/horsespotservices/token',
 
     restCountriesUrl: 'https://restcountries.eu/rest/v2/name/',

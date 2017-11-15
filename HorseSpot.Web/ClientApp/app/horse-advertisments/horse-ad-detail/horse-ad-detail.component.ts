@@ -6,6 +6,8 @@ import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { DOCUMENT } from '@angular/platform-browser';
 import { CONFIG } from '../../config';
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { Meta, Title } from '@angular/platform-browser';
 
 //SERVICES
 import { AccountService } from '../../account/account.service';
@@ -26,22 +28,22 @@ import { PedigreeModel } from '../models/pedigree';
 import { AppointmentStatus } from '../../shared/constants/appointment.status';
 
 declare var google: any;
+declare var window: any;
 
 @Component({
     templateUrl: './horse-ad-detail.component.html'
 })
 
 export class HorseAdDetailComponent implements OnInit, OnDestroy {
-    //@ViewChild('sendEmailModal') public sendEmailModal: Modal;
-    //@ViewChild('deleteModal') public deleteModal: Modal;
-
-    @ViewChild('video') public video: ElementRef;
-    @ViewChild('horseVideoFrame') public horseVideoFrame: ElementRef;
-    @ViewChild('map') public map: ElementRef;
-    @ViewChild('userImage') public userImage: ElementRef;
+    @ViewChild(ModalDirective) public sendEmailModal: ModalDirective;
+    @ViewChild(ModalDirective) public deleteModal: ModalDirective;
+    @ViewChild(ElementRef) public video: ElementRef;
+    @ViewChild(ElementRef) public horseVideoFrame: ElementRef;
+    @ViewChild(ElementRef) public map: ElementRef;
+    @ViewChild(ElementRef) public userImage: ElementRef;
 
     googleMapError: boolean = false;
-    imagesUrl: string = CONFIG.imagesUrl + '/Images/HorseAdsImg/';
+    imagesUrl: string = CONFIG.horseAdsImagesUrl;
     horseAdModel: HorseAdModel = <HorseAdModel>{};
     horseAddress: AddressModel = <AddressModel>{};
     pedigree: PedigreeModel = <PedigreeModel>{};
@@ -58,7 +60,8 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
 
     private _routeSub$: Subscription;
 
-    constructor(private _route: ActivatedRoute,
+    constructor(public location: Location,
+        private _route: ActivatedRoute,
         private _router: Router,
         private _horseAdService: HorseAdsService,
         private _accountService: AccountService,
@@ -66,7 +69,9 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
         private _notificationService: NotificationService,
         @Inject(DOCUMENT) private document,
         @Inject(PLATFORM_ID) private platformId: Object,
-        private _location: Location) { }
+        private _metaData: Meta,
+        private _title: Title)
+    { }
 
     ngOnInit() {
         this.horseAdModel.PriceRange = <PriceRangeModel>{};
@@ -83,16 +88,15 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
                 let id = params['id'];
                 this.getHorseAd(id);
             });
-    }
 
-    ngOnDestroy() {
-        this._routeSub$.unsubscribe();
+        window.FB.XFBML.parse();
     }
 
     getHorseAd(id: number) {
         this._horseAdService.getHorseAdDetails(id)
             .subscribe(res => {
                 this.horseAdModel = res;
+                this.initializeMetadata();
                 this.horseAddress = res.Address;
                 this.pedigree = res.Pedigree;
                 this.priceRange = res.PriceRange;
@@ -103,6 +107,21 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
                 this.setHorseAdOwnerDetails();
             },
             error => this.errorMessage = error);
+    }
+
+    initializeMetadata() {
+        this._title.setTitle(this.horseAdModel.Title + ' | Horse Spot');
+
+        this._metaData.addTags([
+            { name: 'description', content: this.horseAdModel.Description },
+            { property: 'og:title', content: this.horseAdModel.Title + ' | Horse Spot' },
+            { property: 'og:description', content: this.horseAdModel.Description },
+            { property: 'og:image', content: CONFIG.imagesUrl + this.horseAdModel.Images[0] },
+            { name: 'twitter:card', content: "summary_large_image" },
+            { name: 'twitter:title', content: this.horseAdModel.Title + ' | Horse Spot' },
+            { name: 'twitter:description', content: this.horseAdModel.Description },
+            { name: 'twitter:image', content: CONFIG.imagesUrl + this.horseAdModel.Images[0] }
+        ]);
     }
 
     validateHorseAd(id: number) {
@@ -191,43 +210,34 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
     }
 
     goBack(): void {
-        this._location.back();
+        this.location.back();
     }
 
-    //sendEmailToUser() { 
-    //    this.emailModel.Receiver = this.userModel.Email;
-    //    this.emailModel.ReceiverFirstName = this.userModel.FirstName
-    //    this.emailModel.HorseAdTitle = this.horseAdModel.Title;
+    sendEmailToUser() {
+        this.emailModel.Receiver = this.userModel.Email;
+        this.emailModel.ReceiverFirstName = this.userModel.FirstName
+        this.emailModel.HorseAdTitle = this.horseAdModel.Title;
 
-    //    this._horseAdService.sendEmail(this.emailModel)
-    //                        .subscribe(res => { this.sendEmailModal.close(); 
-    //                                            this.showNotification(this._notificationService.sendEmailSuccesText()); }, 
-    //                                   error => this.errorMessage = error);
-    //}
+        this._horseAdService.sendEmail(this.emailModel)
+            .subscribe(res => {
+                this.sendEmailModal.hide();
+                this.showNotification(this._notificationService.sendEmailSuccesText());
+            },
+            error => this.errorMessage = error);
+    }
 
-    //showSendEmailModal():void {
-    //    if (this._accountService.isLoggedIn()) {
-    //        let currentUserId = localStorage.getItem('id');
-    //        this._accountService.getUserDetails(currentUserId)
-    //                        .subscribe(res => { this.emailModel.Sender = res.Email; 
-    //                                            this.emailModel.SenderName = res.FirstName + " " + res.LastName; },
-    //                                   error => this.errorMessage = error);
-    //    }
+    showSendEmailModal(): void {
+        if (this.currentUserId) {
+            this._accountService.getUserDetails(this.currentUserId)
+                .subscribe(res => {
+                    this.emailModel.Sender = res.Email;
+                    this.emailModel.SenderName = res.FirstName + " " + res.LastName;
+                },
+                error => this.errorMessage = error);
+        }
 
-    //    this.sendEmailModal.open();
-    //}
-
-    //hideSendEmailModal():void {
-    //    this.sendEmailModal.close();
-    //}
-
-    //showDeleteModal() {
-    //    this.deleteModal.open();
-    //}
-
-    //hideDeleteModal() {
-    //    this.deleteModal.close();
-    //}
+        this.sendEmailModal.show();
+    }
 
     redirectToEdit() {
         this._router.navigate(['/horses/edit/', this.horseAdModel.Id]);
@@ -241,6 +251,7 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
         this._horseAdService.deleteHorseAd(this.horseAdModel.Id, isSold)
             .subscribe(res => {
                 this.showNotification(this._notificationService.deleteHorseSuccessText());
+                this.deleteModal.hide();
                 this._router.navigate(['/account/profile/', this.currentUserId]);
             },
             error => this.errorMessage = error);
@@ -257,6 +268,18 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
                 (<HTMLScriptElement>this.document.querySelector('#' + anchor)).scrollIntoView({ behavior: 'smooth' });
             }
         }, 0);
+    }
+
+    ngOnDestroy() {
+        this._routeSub$.unsubscribe();
+        this._metaData.removeTag("name='description'");
+        this._metaData.removeTag("property='og:title'");
+        this._metaData.removeTag("property='og:description'");
+        this._metaData.removeTag("property='og:image'");
+        this._metaData.removeTag("name='twitter:card'");
+        this._metaData.removeTag("name='twitter:description'");
+        this._metaData.removeTag("name='twitter:card'");
+        this._metaData.removeTag("name='twitter:image'");
     }
 
     //dateChanged() {

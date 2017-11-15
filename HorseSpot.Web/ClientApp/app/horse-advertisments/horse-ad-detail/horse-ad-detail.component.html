@@ -1,111 +1,113 @@
 <div id="top" class="container horses-details">
-    
-    <p class="back"><a (click)="goBack()"><fa name="angle-left"></fa> {{'HORSE_AD_DETAIL.BACK' | translate }}</a></p>
-    <ul class="general-links">
-      <li>{{horseAdModel.Title}}</li>
-      <li (click)="scrollInto('overview')">{{'HORSE_AD_DETAIL.OVERVIEW' | translate}}</li>
-      <li (click)="scrollInto('contact')">{{'NAVBAR.CONTACT' | translate}} &amp; {{'HORSE_AD_DETAIL.LOCATION' | translate}}</li>
-      <li *ngIf="horseAdModel.VideoLink" (click)="scrollInto('video')">{{'HORSE_AD_DETAIL.VIDEO' | translate}}</li>
-      <li *ngIf="pedigree" (click)="scrollInto('pedigree')">{{'HORSE_AD_DETAIL.PEDIGREE' | translate}}</li>
-    </ul>
 
-    <ul class="favorite">
-      <li class="round-button" *ngIf="currentUserId == horseAdModel.UserId"><a (click)="showDeleteModal()">{{'HORSE_AD_DETAIL.SOLD_BTN' | translate}}</a></li>
-      <li class="round-button" *ngIf="currentUserId == horseAdModel.UserId"><a (click)="redirectToEdit()">{{'HORSE_AD_DETAIL.EDIT_BTN' | translate}}</a></li>
-      <li class="heart"><a *ngIf="!isFavorite && currentUserId != undefined" title="{{'HORSE_AD_DETAIL.SAVE_WISHLIST' | translate}}" (click)="addHorseAdToFavorites(horseAdModel.Id)"><fa name="heart-o"></fa></a>
-          <a *ngIf="isFavorite && currentUserId" title="{{'HORSE_AD_DETAIL.REM_WISHLIST' | translate}}" (click)="addHorseAdToFavorites(horseAdModel.Id)"><fa name="heart"></fa></a>
-      </li>
-      <li><div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a></div></li>
-      <li>{{horseAdModel.PriceRange.PriceRangeValue}} &euro;</li>
-    </ul>
+  <p class="back"><a (click)="goBack()"><fa name="angle-left"></fa> {{'HORSE_AD_DETAIL.BACK' | translate }}</a></p>
+  <ul class="general-links">
+    <li>{{horseAdModel.Title}}</li>
+    <li (click)="scrollInto('overview')">{{'HORSE_AD_DETAIL.OVERVIEW' | translate}}</li>
+    <li (click)="scrollInto('contact')">{{'NAVBAR.CONTACT' | translate}} &amp; {{'HORSE_AD_DETAIL.LOCATION' | translate}}</li>
+    <li *ngIf="horseAdModel.VideoLink" (click)="scrollInto('video')">{{'HORSE_AD_DETAIL.VIDEO' | translate}}</li>
+    <li *ngIf="pedigree" (click)="scrollInto('pedigree')">{{'HORSE_AD_DETAIL.PEDIGREE' | translate}}</li>
+  </ul>
 
-    <div class="row">
+  <ul class="favorite">
+    <li class="round-button" *ngIf="currentUserId == horseAdModel.UserId"><a (click)="deleteModal.show()">{{'HORSE_AD_DETAIL.SOLD_BTN' | translate}}</a></li>
+    <li class="round-button" *ngIf="currentUserId == horseAdModel.UserId"><a (click)="redirectToEdit()">{{'HORSE_AD_DETAIL.EDIT_BTN' | translate}}</a></li>
+    <li class="heart">
+      <a *ngIf="!isFavorite && currentUserId != undefined" title="{{'HORSE_AD_DETAIL.SAVE_WISHLIST' | translate}}" (click)="addHorseAdToFavorites(horseAdModel.Id)"><fa name="heart-o"></fa></a>
+      <a *ngIf="isFavorite && currentUserId" title="{{'HORSE_AD_DETAIL.REM_WISHLIST' | translate}}" (click)="addHorseAdToFavorites(horseAdModel.Id)"><fa name="heart"></fa></a>
+    </li>
+    <li><fb-share href="location.href"></fb-share></li>
+    <li>{{horseAdModel.PriceRange.PriceRangeValue}} &euro;</li>
+  </ul>
 
-      <div class="col-sm-8">
+  <div class="row">
 
-        <div class="carousel">
-          <carousel>
-            <slide *ngFor="let image of horseAdModel.Images">
-              <img src="{{imagesUrl}}{{image}}">
-            </slide>
-          </carousel>
-        </div><!--carousel -->
+    <div class="col-sm-8">
+      <div class="carousel">
+        <carousel>
+          <slide *ngFor="let image of horseAdModel.Images">
+            <img src="{{imagesUrl}}{{image}}">
+          </slide>
+        </carousel>
+      </div><!--carousel -->
 
-        <div id="overview" class="block">
-          <div class="title-wrap">
-            <h4>{{'HORSE_AD_DETAIL.OVERVIEW' | translate}}</h4>
-          </div>
-          <p>{{horseAdModel.Description}}</p>
-          <ul class="cf">
-            <li>
-              <img src="../../../../wwwroot/assets/images/gender.png" alt="Horse gender icon">
-              <span>{{'HORSE_AD_DETAIL.GENDER' | translate}}</span>
-              <span>{{horseAdModel.Gender}}</span>
-            </li>
-            <li>
-              <img src="../../../../wwwroot/assets/images/breed.png" alt="Horse breed icon">
-              <span>{{'HORSE_AD_DETAIL.BREED' | translate}}</span>
-              <span>{{horseAdModel.Breed}}</span>
-            </li>
-            <li>
-              <img src="../../../../wwwroot/assets/images/height.png" alt="Horse height icon">
-              <span>{{'HORSE_AD_DETAIL.HEIGHT' | translate}}</span>
-              <span>{{horseAdModel.HeightInCm}} cm</span>
-            </li>
-            <li>
-              <img src="../../../../wwwroot/assets/images/rays.png" alt="Horse x-rays icon">
-              <span>{{'HORSE_AD_DETAIL.XRAYS' | translate}}</span>
-              <span *ngIf="horseAdModel.HaveXRays">{{'HORSE_AD_DETAIL.YES' | translate}}</span>
-              <span *ngIf="!horseAdModel.HaveXRays">{{'HORSE_AD_DETAIL.NO' | translate}}</span>
-            </li>
-            <li>
-              <img src="../../../../wwwroot/assets/images/exp.png" alt="Horse competitional experience icon">
-              <span>{{'HORSE_AD_DETAIL.COMP_EXP' | translate}}</span>
-              <span *ngIf="horseAdModel.HaveCompetionalExperience">{{'HORSE_AD_DETAIL.YES' | translate}}</span>
-              <span *ngIf="!horseAdModel.HaveCompetionalExperience">{{'HORSE_AD_DETAIL.NO' | translate}}</span>
-            </li>
+      <div id="overview" class="block">
+        <div class="title-wrap">
+          <h4>{{'HORSE_AD_DETAIL.OVERVIEW' | translate}}</h4>
+        </div>
+        <p>{{horseAdModel.Description}}</p>
+        <ul class="cf">
+          <li>
+            <img src="../../../../wwwroot/assets/images/gender.png" alt="Horse gender icon">
+            <span>{{'HORSE_AD_DETAIL.GENDER' | translate}}</span>
+            <span>{{horseAdModel.Gender}}</span>
+          </li>
+          <li>
+            <img src="../../../../wwwroot/assets/images/breed.png" alt="Horse breed icon">
+            <span>{{'HORSE_AD_DETAIL.BREED' | translate}}</span>
+            <span>{{horseAdModel.Breed}}</span>
+          </li>
+          <li>
+            <img src="../../../../wwwroot/assets/images/height.png" alt="Horse height icon">
+            <span>{{'HORSE_AD_DETAIL.HEIGHT' | translate}}</span>
+            <span>{{horseAdModel.HeightInCm}} cm</span>
+          </li>
+          <li>
+            <img src="../../../../wwwroot/assets/images/rays.png" alt="Horse x-rays icon">
+            <span>{{'HORSE_AD_DETAIL.XRAYS' | translate}}</span>
+            <span *ngIf="horseAdModel.HaveXRays">{{'HORSE_AD_DETAIL.YES' | translate}}</span>
+            <span *ngIf="!horseAdModel.HaveXRays">{{'HORSE_AD_DETAIL.NO' | translate}}</span>
+          </li>
+          <li>
+            <img src="../../../../wwwroot/assets/images/exp.png" alt="Horse competitional experience icon">
+            <span>{{'HORSE_AD_DETAIL.COMP_EXP' | translate}}</span>
+            <span *ngIf="horseAdModel.HaveCompetionalExperience">{{'HORSE_AD_DETAIL.YES' | translate}}</span>
+            <span *ngIf="!horseAdModel.HaveCompetionalExperience">{{'HORSE_AD_DETAIL.NO' | translate}}</span>
+          </li>
+        </ul>
+      </div><!-- overview -->
+
+      <div id="contact" class="block">
+        <div class="title-wrap">
+          <h4>{{'NAVBAR.CONTACT' | translate}} &amp; {{'HORSE_AD_DETAIL.LOCATION' | translate}}</h4>
+        </div>
+        <div class="user-info">
+          <img #userImage src="" alt="Owner profile picture">
+          <p class="name"><span>{{userModel.FirstName}}</span></p>
+          <p class="tel"><a href="tel:{{userModel.PhoneNumber}}"><i class="fa fa-mobile" aria-hidden="true"></i> {{userModel.PhoneNumber}}</a></p>
+          <p class="mail"><a href="mailto:{{userModel.Email}}"><i class="fa fa-envelope" aria-hidden="true"></i> {{userModel.Email}}</a></p>
+
+          <ul class="send-email">
+            <li><a (click)="showSendEmailModal()">{{'HORSE_AD_DETAIL.SEND_EMAIL' | translate}}</a></li>
+            <li><a (click)="viewProfile()">{{'HORSE_AD_DETAIL.VIEW_PROFILE' | translate}}</a></li>
           </ul>
-        </div><!-- overview -->
+        </div><!-- user-info -->
 
-        <div id="contact" class="block">
-          <div class="title-wrap">
-            <h4>{{'NAVBAR.CONTACT' | translate}} &amp; {{'HORSE_AD_DETAIL.LOCATION' | translate}}</h4>
-          </div>
-          <div class="user-info">
-              <img #userImage src="" alt="Owner profile picture">
-              <p class="name"><span>{{userModel.FirstName}}</span></p>
-              <p class="tel"><a href="tel:{{userModel.PhoneNumber}}"><i class="fa fa-mobile" aria-hidden="true"></i> {{userModel.PhoneNumber}}</a></p>
-              <p class="mail"><a href="mailto:{{userModel.Email}}"><i class="fa fa-envelope" aria-hidden="true"></i> {{userModel.Email}}</a></p>
+        <p class="location-pin">
+          <i class="fa fa-map-marker"></i> {{horseAdModel.Address.Country}}, {{horseAdModel.Address.City}}, {{horseAdModel.Address.Street}}
+        </p>
+        <div #googleMap id="googleMap" class="map">
+          <div #map id="map" style="width:100%; height:380px;"></div>
+        </div><!-- map -->
+      </div><!-- contact -->
 
-              <ul class="send-email">
-                <li><a (click)="showSendEmailModal()">{{'HORSE_AD_DETAIL.SEND_EMAIL' | translate}}</a></li>
-                <li><a (click)="viewProfile()">{{'HORSE_AD_DETAIL.VIEW_PROFILE' | translate}}</a></li>
-              </ul>
-          </div><!-- user-info -->
+      <div #video id="video" class="block">
+        <div class="title-wrap">
+          <h4 id="videoTitle">{{'HORSE_AD_DETAIL.VIDEO' | translate}}</h4>
+        </div>
+        <iframe #horseVideoFrame id="horseVideoFrame" class="embed-responsive-item" src=""></iframe>
+      </div><!-- video -->
 
-          <p class="location-pin"><i class="fa fa-map-marker"></i> {{horseAdModel.Address.Country}}, {{horseAdModel.Address.City}}, {{horseAdModel.Address.Street}}
-          </p>
-          <div #googleMap id="googleMap" class="map">
-              <div #map id="map" style="width:100%; height:380px;"></div>
-          </div><!-- map -->
-        </div><!-- contact -->
-
-        <div #video id="video" class="block">
-            <div class="title-wrap">
-              <h4 id="videoTitle">{{'HORSE_AD_DETAIL.VIDEO' | translate}}</h4>
-            </div>
-           <iframe #horseVideoFrame id="horseVideoFrame" class="embed-responsive-item" src=""></iframe>
-        </div><!-- video -->
-
-        <div *ngIf="showPedigree" id="pedigree" class="pedigree block"> 
-            <div class="title-wrap">
-              <h4>{{'HORSE_AD_DETAIL.PEDIGREE' | translate}}</h4>
-            </div>
-            <div class="scroll-pedigree-table">
-              <table class="pedigree">
-              <tbody><tr><td rowspan="7" ><input type="text" name="father" disabled [(ngModel)]="pedigree.Father"></td></tr>
+      <div *ngIf="showPedigree" id="pedigree" class="pedigree block">
+        <div class="title-wrap">
+          <h4>{{'HORSE_AD_DETAIL.PEDIGREE' | translate}}</h4>
+        </div>
+        <div class="scroll-pedigree-table">
+          <table class="pedigree">
+            <tbody>
+              <tr><td rowspan="7"><input type="text" name="father" disabled [(ngModel)]="pedigree.Father"></td></tr>
               <tr><td rowspan="3"><input type="text" name="father father" disabled [(ngModel)]="pedigree.Father_Father"></td></tr>
-              <tr><td><input type="text" name="father father father"  disabled [(ngModel)]="pedigree.Father_Father_Father"></td></tr>
+              <tr><td><input type="text" name="father father father" disabled [(ngModel)]="pedigree.Father_Father_Father"></td></tr>
               <tr><td><input type="text" name="father father mother" disabled [(ngModel)]="pedigree.Father_Father_Mother"></td></tr>
               <tr><td rowspan="3"><input type="text" name="father mother" disabled [(ngModel)]="pedigree.Father_Mother"></td></tr>
               <tr><td><input type="text" name="father mother father" disabled [(ngModel)]="pedigree.Father_Mother_Father"></td></tr>
@@ -117,131 +119,97 @@
               <tr><td rowspan="3"><input type="text" name="mother mother" disabled [(ngModel)]="pedigree.Mother_Mother"></td></tr>
               <tr><td><input type="text" name="mother mother father" disabled [(ngModel)]="pedigree.Mother_Mother_Father"></td></tr>
               <tr><td><input type="text" name="mother mother mother" disabled [(ngModel)]="pedigree.Mother_Mother_Mother"></td></tr>
-              </tbody>
-              </table>
-            </div><!--scroll-pedigree-table -->
-          </div><!-- pedigree -->
+            </tbody>
+          </table>
+        </div><!--scroll-pedigree-table -->
+      </div><!-- pedigree -->
 
-          <div class="add">
-            <div class="lists">
-              <ul>
-                  <li><div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a></div></li>
-              </ul>
-              <ul>
-                <li><img src="../../../../wwwroot/assets/images/eye.png" alt="Horse views" > {{horseAdModel.Views}}</li>
-                <li><img src="../../../../wwwroot/assets/images/heart.png" alt="Horse likes"> {{horseAdModel.CountFavoritesFor}}</li>
-              </ul>
-            </div><!-- lists -->
+      <div class="add">
+        <div class="lists">
+          <ul>
+            <li><fb-share href="location.href"></fb-share></li>
+          </ul>
+          <ul>
+            <li><img src="../../../../wwwroot/assets/images/eye.png" alt="Horse views"> {{horseAdModel.Views}}</li>
+            <li><img src="../../../../wwwroot/assets/images/heart.png" alt="Horse likes"> {{horseAdModel.CountFavoritesFor}}</li>
+          </ul>
+        </div><!-- lists -->
+        <!-- Will be replaced with google ad sense advertisment -->
+        <img src="../../../../wwwroot/assets/images/add_1.png" alt="Add">-->
+      </div><!-- add -->
 
-            <!-- Will be replaced with google ad sense advertisment -->
-            <img src="../../../../wwwroot/assets/images/add_1.png" alt="Add">-->
-          </div><!-- add -->
+    </div><!-- col-sm-8 -->
 
-      </div><!-- col-sm-8 -->
+    <right-side-advertisments></right-side-advertisments>
 
-      <right-side-advertisments></right-side-advertisments>
-
-    </div><!-- row -->
+  </div><!-- row -->
 </div>
 
 <!-- Send Email Modal -->
-<!--<modal #sendEmailModal class="navbar-modals send-email">
-  <modal-content>
-    <p (click)="sendEmailModal.close()" class="close-modal-mobile"><i class="fa fa-times" aria-hidden="true"></i></p>
-    <div class="horse-logo">-->
-          <!--<img src="../../../../wwwroot/assets/images/logo_2.png" alt="Horse Spot Logo">-->
-    <!--</div>--><!-- horse-logo -->
+<div class="modal fade navbar-modals send-email" bsModal #sendEmailModal="bs-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p (click)="sendEmailModal.hide()" class="close-modal-mobile"><i class="fa fa-times" aria-hidden="true"></i></p>
 
-      <!--<div class="form">
+        <div class="horse-logo">
+          <img src="../../../../wwwroot/assets/images/logo_2.png" alt="Horse Spot logo">
+        </div><
+
+        <div class="form">
           <section *ngIf="errorMessage" class="client-side-validation-error">{{errorMessage}}</section>
-            <form #sendEmailForm="ngForm">-->
-            <!--Email input + client side validation-->
-              <!--<div *ngIf="email.errors && email.touched" class="client-side-validation-error">
-                <small [hidden]="!email.errors.required">
-                  {{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.EMAIL_ERROR' | translate}}
-                </small>
-                <small [hidden]="!email.errors.pattern">
-                  {{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.EMAIL_INVALID' | translate}}
-                </small>
-              </div>  
-              <input type="text" [(ngModel)]="emailModel.Sender" required pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" #email="ngModel" 
-                    class="form-control" name="senderEmail" placeholder="{{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.EMAIL_PLACEHOLDER' | translate}}">
-     
-              <div *ngIf="senderName.errors && senderName.touched" class="client-side-validation-error">
-                  <small [hidden]="!senderName.errors.required">
-                    {{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.NAME_ERROR' | translate}}
-                  </small>
-              </div>
-              <input type="text" required #senderName="ngModel" [(ngModel)]="emailModel.SenderName" class="form-control" name="senderName" placeholder="{{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.NAME_PLACEHOLDER' | translate}}">
+          <form #sendEmailForm="ngForm">
+            <div *ngIf="email.errors && email.touched" class="client-side-validation-error">
+              <small [hidden]="!email.errors.required">
+                {{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.EMAIL_ERROR' | translate}}
+              </small>
+              <small [hidden]="!email.errors.pattern">
+                {{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.EMAIL_INVALID' | translate}}
+              </small>
+            </div>
+            <input type="text" [(ngModel)]="emailModel.Sender" required pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" #email="ngModel"
+                   class="form-control" name="senderEmail" placeholder="{{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.EMAIL_PLACEHOLDER' | translate}}">
 
-              <div *ngIf="message.errors && message.touched" class="client-side-validation-error">
-                <small [hidden]="!message.errors.required">
-                  {{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.MSG_ERROR' | translate}}
-                </small>
-              </div>
-              <textarea name="message" required #message="ngModel" [(ngModel)]="emailModel.Message" rows="4" cols="50" placeholder="{{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.MSG_PLACEHOLDER' | translate}}"></textarea>
-            </form>
-            <button class="save" (click)="sendEmailToUser()" [disabled]="!sendEmailForm.form.valid">{{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.SEND_BTN' | translate}}</button>
-      </div>--><!-- form -->
-  <!--</modal-content>
-</modal>-->
+            <div *ngIf="senderName.errors && senderName.touched" class="client-side-validation-error">
+              <small [hidden]="!senderName.errors.required">
+                {{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.NAME_ERROR' | translate}}
+              </small>
+            </div>
+            <input type="text" required #senderName="ngModel" [(ngModel)]="emailModel.SenderName" class="form-control" name="senderName" placeholder="{{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.NAME_PLACEHOLDER' | translate}}">
+
+            <div *ngIf="message.errors && message.touched" class="client-side-validation-error">
+              <small [hidden]="!message.errors.required">
+                {{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.MSG_ERROR' | translate}}
+              </small>
+            </div>
+            <textarea name="message" required #message="ngModel" [(ngModel)]="emailModel.Message" rows="4" cols="50" placeholder="{{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.MSG_PLACEHOLDER' | translate}}"></textarea>
+          </form>
+          <button class="save" (click)="sendEmailToUser()" [disabled]="!sendEmailForm.form.valid">{{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.SEND_BTN' | translate}}</button>
+        </div><!-- form -->
+      </div>
+    </div>
+  </div>
+</div>
 <!-- End Send Email Modal -->
 
 <!-- Delete Modal -->
-<!--<modal #deleteModal class="navbar-modals delete-modal">
-  <modal-content>
-      <p (click)="deleteModal.close()" class="close-modal-mobile"><i class="fa fa-times" aria-hidden="true"></i></p>
-      <div class="horse-logo">-->
-          <!--<img src="../../../../wwwroot/assets/images/logo_2.png" alt="Horse Spot Logo">-->
-      <!--</div>--><!-- horse-logo -->
-      <!--<p>{{ 'HORSE_AD_DETAIL.MARK_AS_SOLD' | translate }}</p>
-      <br />
-      <p class="just-delete">{{ 'HORSE_AD_DETAIL.JUST_DELETE' | translate }}</p>
-      <button class="delete" (click)="deleteHorseAd(true)">{{'HORSE_AD_DETAIL.MARK_AS_SOLD_BTN' | translate}}</button>
-      <button class="cancel-delete" (click)="deleteHorseAd(false)">{{'HORSE_AD_DETAIL.DELETE_MODAL.DELETE_BTN'| translate}}</button>
+<div class="modal fade navbar-modals send-email" bsModal #deleteModal="bs-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p (click)="deleteModal.hide()" class="close-modal-mobile"><i class="fa fa-times" aria-hidden="true"></i></p>
 
-  </modal-content>
-</modal>-->
+        <div class="horse-logo">
+          <img src="../../../../wwwroot/assets/images/logo_2.png" alt="Horse Spot logo">
+        </div>
 
-<!--<modal #makeAppointmentNotLoggedInModal class="delete-modal">
-  <modal-content>
-
-     <div id="make-app-not-logged" class="myWrapper">
-
-      <div class="picture picture-delete">
-      </div><!-- picture -->
-
-      <!--<div class="form">-->
-
-          <!--<div class="error-head">-->
-              <!--<img src="../../../../wwwroot/assets/images/error-head.png" alt="Error Head">-->
-          <!--</div>--><!-- error head -->
-
-          <!--<h3>{{'HORSE_AD_DETAIL.MAKE_APPOINTMENT' | translate}}</h3>
-          <p>{{'HORSE_AD_DETAIL.APP_NOT_LOGGED_IN_MODAL.MUST_BE_LOGGEDIN' | translate}}</p>
-          <a class="login-btn-mka-modal" [routerLink]="['/account/login']">{{'HORSE_AD_DETAIL.APP_NOT_LOGGED_IN_MODAL.LOGIN' | translate}}</a>
-          <p>{{'HORSE_AD_DETAIL.APP_NOT_LOGGED_IN_MODAL.DONT_HAVE_ACCOUNT' | translate}}</p>
-          <a class="login-btn-mka-modal signup" [routerLink]="['/account/register']">{{'HORSE_AD_DETAIL.APP_NOT_LOGGED_IN_MODAL.SIGNUP' | translate}}</a>
-          <button class="cancel-delete" (click)="hideNotLoggedInAppointmentModal()">{{'HORSE_AD_DETAIL.CANCEL' | translate}}</button>-->
-
-      <!--</div>--><!-- form -->
-
-    <!--</div>--><!-- myWrapper -->
-  <!--</modal-content>
-</modal>-->
-
-<!--<modal #makeAppointmentModal class="make-app">
-
-  <modal-content>
-      <h3>{{'HORSE_AD_DETAIL.MAKE_APPOINTMENT' | translate}}</h3>
-      <p>{{'HORSE_AD_DETAIL.NOTE' | translate}} {{horseAddress.Country}} {{'HORSE_AD_DETAIL.TIMEZONE' | translate}}</p>
-      <p *ngIf="dateChosedIsPast" class="client-side-validation-error">{{'HORSE_AD_DETAIL.APPOINTMENT_DATE' | translate}}</p>
-      <label>{{'HORSE_AD_DETAIL.CHOOSE_DATE' | translate}}</label>
-      <datepicker [(ngModel)]="appointmentDate" [showWeeks]="true" (ngModelChange)="dateChanged()"></datepicker>
-      <label>{{'HORSE_AD_DETAIL.CHOOSE_TIME' | translate}}</label>
-      <timepicker [(ngModel)]="appointmentDate" [showMeridian]="false" (ngModelChange)="dateChanged()"></timepicker>
-
-      <button class="save action" (click)="makeAppointment()" [disabled]="dateChosedIsPast">{{'HORSE_AD_DETAIL.CONFIRM' | translate}}</button>
-      <button class="cancel action" (click)="hideAppointmentModal()">{{'HORSE_AD_DETAIL.CANCEL' | translate}}</button>
-  </modal-content>
-</modal>-->
+        <p>{{ 'HORSE_AD_DETAIL.MARK_AS_SOLD' | translate }}</p>
+        <br />
+        <p class="just-delete">{{ 'HORSE_AD_DETAIL.JUST_DELETE' | translate }}</p>
+        <button class="delete" (click)="deleteHorseAd(true)">{{'HORSE_AD_DETAIL.MARK_AS_SOLD_BTN' | translate}}</button>
+        <button class="cancel-delete" (click)="deleteHorseAd(false)">{{'HORSE_AD_DETAIL.DELETE_MODAL.DELETE_BTN'| translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Delete Modal -->
