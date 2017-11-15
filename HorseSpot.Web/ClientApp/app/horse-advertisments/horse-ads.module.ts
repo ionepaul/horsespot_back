@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { FBShareComponent } from 'ngx-facebook';
 
 //MODULES
 import { SharedModule } from '../shared/shared.module';
@@ -34,8 +33,7 @@ import { IsPostOwnerGuard } from '../shared/guards/isPostOwnerGuard';
         HorseListCategoriesComponent,
         HorseListUnvalidatedComponent,
         HorseAdDetailComponent,
-        EditHorseAdComponent,
-        FBShareComponent
+        EditHorseAdComponent
     ],
     providers: [ HorseAdsService, HorseListCategoriesResolver, UnvalidatedHorseListResolver ]
 })

@@ -23,12 +23,12 @@ import { CONFIG } from '../../config';
     templateUrl: './navbar.component.html'
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-    @ViewChild(ModalDirective) public phoneNumberModal: ModalDirective;
-    @ViewChild(ModalDirective) public signUpModal: ModalDirective;
-    @ViewChild(ModalDirective) public loginModal: ModalDirective;
-    @ViewChild(NgForm) public registerForm: NgForm;
-    @ViewChild(NgForm) public logInForm: NgForm;
-    @ViewChild(NgForm) public phoneNumberForm: NgForm;
+    @ViewChild('phoneNumberModal') public phoneNumberModal: ModalDirective;
+    @ViewChild('signUpModal') public signUpModal: ModalDirective;
+    @ViewChild('loginModal') public loginModal: ModalDirective;
+    @ViewChild('registerForm') public registerForm: NgForm;
+    @ViewChild('logInForm') public logInForm: NgForm;
+    @ViewChild('phoneNumberForm') public phoneNumberForm: NgForm;
     isBurgerMenuCollapsed: boolean = true;
     isLangDropdownCollapsed: boolean = true;
     notificationsNumber: number = 0;
@@ -184,7 +184,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     login(): void {
         this._accountService.loginService(this.loginInput)
             .subscribe(response => {
-                this.loginModal.show();
+                this.loginModal.hide();
             },
             error => this.errorMessage = error)
     }

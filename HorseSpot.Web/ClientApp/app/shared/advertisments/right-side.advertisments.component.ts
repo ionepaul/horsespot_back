@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 declare var window: any;
 
@@ -9,7 +11,11 @@ declare var window: any;
 
 export class RightSideAdvertismentsComponent implements OnInit {
 
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
+
   ngOnInit() {
-    window.FB.XFBML.parse();
+    if (isPlatformBrowser(this.platformId)) {
+      window.FB.XFBML.parse();
+    }
   }
 }

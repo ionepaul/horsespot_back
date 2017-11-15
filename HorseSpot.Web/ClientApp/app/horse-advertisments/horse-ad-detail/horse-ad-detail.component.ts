@@ -35,12 +35,12 @@ declare var window: any;
 })
 
 export class HorseAdDetailComponent implements OnInit, OnDestroy {
-    @ViewChild(ModalDirective) public sendEmailModal: ModalDirective;
-    @ViewChild(ModalDirective) public deleteModal: ModalDirective;
-    @ViewChild(ElementRef) public video: ElementRef;
-    @ViewChild(ElementRef) public horseVideoFrame: ElementRef;
-    @ViewChild(ElementRef) public map: ElementRef;
-    @ViewChild(ElementRef) public userImage: ElementRef;
+    @ViewChild('sendEmailModal') public sendEmailModal: ModalDirective;
+    @ViewChild('deleteModal') public deleteModal: ModalDirective;
+    @ViewChild('video') public video: ElementRef;
+    @ViewChild('horseVideoFrame') public horseVideoFrame: ElementRef;
+    @ViewChild('map') public map: ElementRef;
+    @ViewChild('userImage') public userImage: ElementRef;
 
     googleMapError: boolean = false;
     imagesUrl: string = CONFIG.horseAdsImagesUrl;

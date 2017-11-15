@@ -262,8 +262,7 @@ export class HorseAdsService {
   }
 
   getHorseAdDetails(horseAdId: number): Observable<HorseAdModel> {
-    return this._http.get(`${this._getHorseAdDetails + horseAdId}`)
-      .map((res: Response) => res.json() as HorseAdModel)
+    return this.transferHttp.get(`${this._getHorseAdDetails + horseAdId}`)
       .catch(this.handleError);
   }
 

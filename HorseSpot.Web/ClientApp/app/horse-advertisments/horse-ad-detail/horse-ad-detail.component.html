@@ -26,7 +26,7 @@
       <div class="carousel">
         <carousel>
           <slide *ngFor="let image of horseAdModel.Images">
-            <img src="{{imagesUrl}}{{image}}">
+            <img src="{{imagesUrl}}{{image.ImageName}}">
           </slide>
         </carousel>
       </div><!--carousel -->
@@ -135,7 +135,7 @@
           </ul>
         </div><!-- lists -->
         <!-- Will be replaced with google ad sense advertisment -->
-        <img src="../../../../wwwroot/assets/images/add_1.png" alt="Add">-->
+        <img src="../../../../wwwroot/assets/images/add_1.png" alt="Add" />
       </div><!-- add -->
 
     </div><!-- col-sm-8 -->
@@ -154,7 +154,7 @@
 
         <div class="horse-logo">
           <img src="../../../../wwwroot/assets/images/logo_2.png" alt="Horse Spot logo">
-        </div><
+        </div>
 
         <div class="form">
           <section *ngIf="errorMessage" class="client-side-validation-error">{{errorMessage}}</section>

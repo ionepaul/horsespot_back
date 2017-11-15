@@ -10,7 +10,7 @@ import { Angular2FontawesomeModule } from 'angular2-fontawesome';
 import { ModalModule, TypeaheadModule, PaginationModule, BsDropdownModule, CollapseModule, CarouselModule } from 'ngx-bootstrap';
 import { FileUploadModule } from 'ng2-file-upload';
 import { NouisliderModule } from 'ng2-nouislider';
-import { FBPageComponent } from 'ngx-facebook';
+import { FacebookModule } from 'ngx-facebook';
 
 //MODULES
 import { TransferHttpModule } from '../../modules/transfer-http/transfer-http.module';
@@ -73,10 +73,11 @@ export function createTranslateLoader(http: Http, baseHref) {
     PaginationModule.forRoot(),
     BsDropdownModule.forRoot(),
     CollapseModule.forRoot(),
-    CarouselModule.forRoot(),
     FileUploadModule,
     TransferHttpModule,
     NouisliderModule,
+    FacebookModule.forRoot(),
+    CarouselModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -96,8 +97,7 @@ export function createTranslateLoader(http: Http, baseHref) {
     DescriptionFormatPipe,
     NotificationComponent,
     ErrorComponent,
-    RightSideAdvertismentsComponent,
-    FBPageComponent
+    RightSideAdvertismentsComponent
   ],
   providers: [
     NotificationService, AuthService, LoggedInGuard, AdminGuard, IsPostOwnerGuard, SpinnerService, StorageService, TranslateModule,
@@ -108,9 +108,8 @@ export function createTranslateLoader(http: Http, baseHref) {
     //},
   ],
   exports: [CommonModule, FormsModule, ReactiveFormsModule, NotificationComponent, ErrorComponent, SpinnerComponent, EqualValidator, ImagePreview,
-      DateFormatPipe, DateFormatHourPipe, HttpModule, ModalModule, Angular2FontawesomeModule, TranslateModule, HorseListComponent, PaginationModule,
-      TypeaheadModule, FileUploadModule, DescriptionFormatPipe, BsDropdownModule, CollapseModule, NouisliderModule, RightSideAdvertismentsComponent, FBPageComponent,
-      CarouselModule]
+    DateFormatPipe, DateFormatHourPipe, HttpModule, ModalModule, Angular2FontawesomeModule, TranslateModule, HorseListComponent, PaginationModule,
+    TypeaheadModule, FileUploadModule, DescriptionFormatPipe, BsDropdownModule, CollapseModule, NouisliderModule, RightSideAdvertismentsComponent, FacebookModule, CarouselModule ]
 })
 
 export class SharedModule { }
