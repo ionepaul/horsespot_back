@@ -5,6 +5,8 @@ import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Subscription } from 'rxjs/Subscription';
 import { Meta, Title, DOCUMENT, MetaDefinition } from '@angular/platform-browser';
+import { FacebookService, InitParams } from 'ngx-facebook';
+import { CONFIG } from './config';
 
 //SERVICES
 import { NotificationService } from './shared/notifications/notification.service';
@@ -46,9 +48,10 @@ export class AppComponent implements OnInit, OnDestroy {
     public _notificationService: NotificationService,
     public _authService: AuthService,
     public _translateService: TranslateService,
-    private title: Title,
-    private meta: Meta,
-    private linkService: LinkService,
+    private _title: Title,
+    private _meta: Meta,
+    private _linkService: LinkService,
+    private _facebookService: FacebookService,
     @Inject(PLATFORM_ID) private platformId: Object) { }
 
   ngOnInit() {
@@ -65,6 +68,14 @@ export class AppComponent implements OnInit, OnDestroy {
     //if (userId != null) {
     //     this._appointmentsService.webSocketConnect(userId);        
     //}
+
+    let fbInitParams: InitParams = {
+        appId: CONFIG.fbAppId,
+        xfbml: true,
+        version: CONFIG.fbSdkVersion
+    };
+
+    this._facebookService.init(fbInitParams);
 
     if (isPlatformBrowser(this.platformId)) {
       this.isBrowser = true;
@@ -104,17 +115,17 @@ export class AppComponent implements OnInit, OnDestroy {
       ? `${event['title']} | ${this.endPageTitle}`
       : `${this.defaultPageTitle} | ${this.endPageTitle}`;
 
-    this.title.setTitle(title);
+    this._title.setTitle(title);
 
     const metaData = event['meta'] || [];
     const linksData = event['links'] || [];
 
     for (let i = 0; i < metaData.length; i++) {
-      this.meta.updateTag(metaData[i]);
+      this._meta.updateTag(metaData[i]);
     }
 
     for (let i = 0; i < linksData.length; i++) {
-      this.linkService.addTag(linksData[i]);
+      this._linkService.addTag(linksData[i]);
     }
   }
 }

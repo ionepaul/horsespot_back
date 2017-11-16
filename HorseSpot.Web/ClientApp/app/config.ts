@@ -47,7 +47,11 @@ export let CONFIG = {
     defaultAge: { min: 4, max: 13 },
     defaultPrice: { min: 10000, max: 30000 },
     defaultHeight: { min: 160, max: 178 },
-    dbMaxPriceRangeValue: "40,000 +"
+
+    dbMaxPriceRangeValue: "40,000 +",
+
+    fbAppId: '275509216289907',
+    fbSdkVersion: 'v2.8'
 }
 
 export * from './config';
