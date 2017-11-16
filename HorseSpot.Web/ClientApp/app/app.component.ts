@@ -39,7 +39,8 @@ export class AppComponent implements OnInit, OnDestroy {
     // If no Title is provided, we'll use a default one before the dash(-)
     private defaultPageTitle: string = 'Horses For Sale';
 
-    private routerSub$: Subscription;
+    private _routerSub$: Subscription;
+    private _activatedRouteSub$: Subscription;
 
     constructor(public _accountService: AccountService,
         //public _appointmentsService: AppointmentsService,
@@ -56,9 +57,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this._changeTitleOnNavigation();
-
-        this._translateService.setDefaultLang('en');
-        this._translateService.use('en');
 
         if (this._authService.isRefreshTokenExpired()) {
             this._authService.removeUserStoredInfo();
@@ -79,16 +77,25 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.routerSub$.unsubscribe();
+        this._routerSub$.unsubscribe();
     }
 
     private _changeTitleOnNavigation() {
 
-        this.routerSub$ = this._router.events
+        this._routerSub$ = this._router.events
             .filter(event => event instanceof NavigationEnd)
             .map(() => this._activatedRoute)
             .map(route => {
+
+                this._activatedRouteSub$ = this._activatedRoute.queryParams.subscribe(params => {
+                    let lang = params['lang'] != undefined ? params['lang'] : 'en';
+                    this._translateService.setDefaultLang(lang);
+                    this._translateService.use(lang);
+                });
+
                 while (route.firstChild) route = route.firstChild;
+
+                this._activatedRouteSub$.unsubscribe();
                 return route;
             })
             .filter(route => route.outlet === 'primary')
