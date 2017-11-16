@@ -7,6 +7,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 
+import { HttpWrapper } from '../shared/http/http.wrapper';
 import { AuthService } from '../shared/auth/auth.service';
 import { AppointmentsService } from './appointments/appointments.service';
 
@@ -38,7 +39,8 @@ export class AccountService {
     private _isAdminUrl: string = CONFIG.baseUrls.apiUrl + 'account/isAdmin/';
     private _getUserFullProfileUrl: string = CONFIG.baseUrls.apiUrl + 'account/fullProfile/';
 
-    constructor(private _http : Http, 
+    constructor(private _httpWrapper: HttpWrapper,
+                private _http: Http,
                 private _authService: AuthService, 
                 private _router: Router,
                 private _appointmentsService: AppointmentsService) { }
@@ -58,7 +60,7 @@ export class AccountService {
     registerService(model: RegisterModel) {
         let body = JSON.stringify(model);
        
-        return this._http
+        return this._httpWrapper
                    .post(this._registerUrl, body)
                    .map((res: Response) => res.json())
                    .catch(this.handleError);
@@ -83,7 +85,7 @@ export class AccountService {
     }
 
     getUserDetails(userId: string): Observable<UserModel> {
-        return this._http
+        return this._httpWrapper
                    .get(`${this._detailsUrl + userId}`)
                    .map((res: Response) => res.json() as UserModel)
                    .catch(this.handleError);
@@ -92,7 +94,7 @@ export class AccountService {
     editUserDetails(userId: string, model: UserModel) {
         let body = JSON.stringify(model);
         
-        return this._http
+        return this._httpWrapper
                    .post(`${this._editProfileUrl + userId}`, body)
                    .map((res: Response) => res.json() as UserModel)
                    .do(data => this._authService.storeItem('user_name', data.FirstName))
@@ -100,7 +102,7 @@ export class AccountService {
                     if (error && error.status === 401 && this._authService.isTokenExpired()) {
                             return this._authService.refreshToken().merge((data) => {
                                 this._authService.storeUserAccessInfo(data);
-                                return this._http.post(`${this._editProfileUrl + userId}`, body)
+                                return this._httpWrapper.post(`${this._editProfileUrl + userId}`, body)
                                                  .map((res: Response) => res.json() as UserModel)
                                                  .do(data => this._authService.storeItem('user_name', data.FirstName))
                                                  .catch(this.handleError);
@@ -117,14 +119,14 @@ export class AccountService {
     changePassword(userId: string, model: ChangePasswordModel) {
         let body = JSON.stringify(model);
 
-        return this._http
+        return this._httpWrapper
                    .post(`${this._changePasswordUrl + userId}`, body)
                    .map((res: Response) => res)
                    .catch(error => { 
                     if (error && error.status === 401 && this._authService.isTokenExpired()) {
                             return this._authService.refreshToken().merge((data) => {
                                 this._authService.storeUserAccessInfo(data);
-                                return this._http.post(`${this._changePasswordUrl + userId}`, body)
+                                return this._httpWrapper.post(`${this._changePasswordUrl + userId}`, body)
                                                  .map((res: Response) => res)
                                                  .catch(this.handleError);
                             })
@@ -138,19 +140,19 @@ export class AccountService {
     }
 
     getUserHorsePosts(pageNumber: number, userId: string): Observable<GetHorseAdListResultsModel> {        
-        return this._http.get(this._getUserHorsePostsUrl + pageNumber + "?userId=" + userId)
+        return this._httpWrapper.get(this._getUserHorsePostsUrl + pageNumber + "?userId=" + userId)
                   .map((res: Response) => res.json() as GetHorseAdListResultsModel)
                   .catch(this.handleError);
     } 
     
     getUserFavoritesPosts(pageNumber: number): Observable<GetHorseAdListResultsModel> {       
-        return this._http.get(this._getUserFavoritesPostsUrl  + pageNumber)
+        return this._httpWrapper.get(this._getUserFavoritesPostsUrl  + pageNumber)
                   .map((res: Response) => res.json() as GetHorseAdListResultsModel)
                   .catch(error => { 
                     if (error && error.status === 401 && this._authService.isTokenExpired()) {
                             return this._authService.refreshToken().merge((data) => {
                                 this._authService.storeUserAccessInfo(data);
-                                return this._http.get(`${this._getUserFavoritesPostsUrl + pageNumber}`)
+                                return this._httpWrapper.get(`${this._getUserFavoritesPostsUrl + pageNumber}`)
                                                  .map((res: Response) => res.json() as GetHorseAdListResultsModel)
                                                  .catch(this.handleError);
                             })
@@ -164,18 +166,18 @@ export class AccountService {
     }
 
     getUserHorseReferences(pageNumber: number, userId: string): Observable<GetHorseAdListResultsModel> {        
-        return this._http.get(this._getUserReferencePostsUrl + pageNumber + "?userId=" + userId)
+        return this._httpWrapper.get(this._getUserReferencePostsUrl + pageNumber + "?userId=" + userId)
                   .map((res: Response) => res.json() as GetHorseAdListResultsModel)
                   .catch(this.handleError);
     } 
 
     forgotPassword(email: string) {
-        return this._http.post(this._forgotPasswordUrl + "?email=" + email, "")
+        return this._httpWrapper.post(this._forgotPasswordUrl + "?email=" + email, "")
                          .catch(this.handleError);
     }
 
     registerToNewsletter(email: string) {
-        return this._http.post(this._newsletterSubscribeUrl + "?email=" + email, "")
+        return this._httpWrapper.post(this._newsletterSubscribeUrl + "?email=" + email, "")
                          .catch(this.handleError);
     }
 
@@ -188,13 +190,13 @@ export class AccountService {
     }
 
     isAdmin(userId: string) {
-        return this._http.get(this._isAdminUrl + userId)
+        return this._httpWrapper.get(this._isAdminUrl + userId)
                          .map(res => res.json())
                          .catch(error => { 
                             if (error && error.status === 401 && this._authService.isTokenExpired()) {
                                 return this._authService.refreshToken().merge((data) => {
                                     this._authService.storeUserAccessInfo(data);
-                                    return this._http.get(this._isAdminUrl + userId)
+                                    return this._httpWrapper.get(this._isAdminUrl + userId)
                                                      .catch(this.handleError);
                                 })
                             } else if (error && error.status === 401) {
@@ -220,7 +222,7 @@ export class AccountService {
     }
 
     getUserFullProfile(userId: string) {
-        return this._http.get(this._getUserFullProfileUrl + userId)
+        return this._httpWrapper.get(this._getUserFullProfileUrl + userId)
                          .map((res: Response) => res.json() as UserFullProfile)
                          .catch(this.handleError);
     }

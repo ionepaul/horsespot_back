@@ -12,7 +12,7 @@ import { StorageService } from '../auth/storage.service';
 
 import { CONFIG } from '../../config';
 
-export class HttpInterceptor extends Http {
+export class HttpWrapper extends Http {
  
     constructor(backend: ConnectionBackend, 
                 defaultOptions: RequestOptions, 

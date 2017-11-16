@@ -11,14 +11,14 @@ import 'rxjs/add/operator/do';
 
 import { LoginModel } from '../../account/models/login.model';
 import { RegisterExternalModel } from '../../account/models/registerExternalModel';
-
+import { HttpWrapper } from '../http/http.wrapper';
 import { CONFIG } from '../../config';
 
 @Injectable()
 export class AuthService {
     private _checkPostOwner = CONFIG.baseUrls.apiUrl + 'horses/ispostowner/';
 
-    constructor(private _http: Http,
+    constructor(private _httpWrapper: HttpWrapper,
                 private _router: Router,
                 @Inject(PLATFORM_ID) private platformId: Object) {  }
 
@@ -38,7 +38,7 @@ export class AuthService {
             headers: headers
         });
 
-        return this._http
+        return this._httpWrapper
                    .post(CONFIG.authUrl, body, requestOptions)
                    .map((res: Response) => res.json())
                    .do(data => this.storeUserAccessInfo(data))
@@ -46,14 +46,14 @@ export class AuthService {
     }
 
     updateExternalUser(provider: string, externalToken: string, phoneNumber: string) {
-        return this._http.post(CONFIG.baseUrls.apiUrl + "account/updateExternalUser?provider=" + provider + "&externalToken=" + externalToken + "&phoneNumber=" + phoneNumber, "")
+        return this._httpWrapper.post(CONFIG.baseUrls.apiUrl + "account/updateExternalUser?provider=" + provider + "&externalToken=" + externalToken + "&phoneNumber=" + phoneNumber, "")
                          .map((res: Response) => res.json())
                          .do(data => this.storeUserAccessInfo(data))
                          .catch(this._handleAuthError);
     }
 
     obtainLocalAccessToken(provider: string, externalToken: string) {
-        return this._http.get(CONFIG.baseUrls.apiUrl + "account/obtainLocalAccessToken?provider=" + provider + "&externalAccessToken=" + externalToken)
+        return this._httpWrapper.get(CONFIG.baseUrls.apiUrl + "account/obtainLocalAccessToken?provider=" + provider + "&externalAccessToken=" + externalToken)
                          .map((res: Response) => res.json())
                          .do(data => this.storeUserAccessInfo(data))
                          .catch(this._handleAuthError);
@@ -73,7 +73,7 @@ export class AuthService {
             headers: headers
         });
 
-        return this._http
+        return this._httpWrapper
                    .post(CONFIG.authUrl, body, requestOptions)
                    .map((res: Response) => res.json())
                    .catch(this._handleAuthError);
@@ -125,13 +125,13 @@ export class AuthService {
     }
 
     checkPostOwner(adId: string) {
-        return this._http.get(this._checkPostOwner + adId)
+        return this._httpWrapper.get(this._checkPostOwner + adId)
                    .map((res) => res.json())
                    .catch(error => { 
                             if (error && error.status === 401 && this.isTokenExpired()) {
                                 return this.refreshToken().merge((data) => {
                                     this.storeUserAccessInfo(data);
-                                    return this._http.get(this._checkPostOwner + adId)
+                                    return this._httpWrapper.get(this._checkPostOwner + adId)
                                                      .catch(this._handleError);
                                 })
                             } else if (error && error.status === 401) {

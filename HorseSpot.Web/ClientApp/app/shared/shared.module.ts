@@ -28,7 +28,7 @@ import { AuthService } from './auth/auth.service';
 import { NotificationService } from './notifications/notification.service';
 import { StorageService } from './auth/storage.service';
 import { LinkService } from './link.service';
-import { HttpInterceptor } from './http/customHttp';
+import { HttpWrapper } from './http/http.wrapper';
 
 //PIPES
 import { DateFormatPipe } from './pipes/dateFormat.pipe';
@@ -48,7 +48,7 @@ import { EqualValidator } from './utils/equal-validator.directive';
 import { ORIGIN_URL } from './constants/baseurl.constants';
 
 export function httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions, router: Router, spinnerService: SpinnerService, storageService: StorageService) {
-  return new HttpInterceptor(xhrBackend, requestOptions, router, spinnerService, storageService);
+    return new HttpWrapper(xhrBackend, requestOptions, router, spinnerService, storageService);
 }
 
 export function createTranslateLoader(http: Http, baseHref) {
@@ -56,6 +56,7 @@ export function createTranslateLoader(http: Http, baseHref) {
   if (baseHref === null && typeof window !== 'undefined') {
     baseHref = window.location.origin;
   }
+
   // i18n files are in `wwwroot/assets/`
   return new TranslateHttpLoader(http, `${baseHref}/assets/internationalization/`, '.json');
 }
@@ -102,10 +103,10 @@ export function createTranslateLoader(http: Http, baseHref) {
   providers: [
     NotificationService, AuthService, LoggedInGuard, AdminGuard, IsPostOwnerGuard, SpinnerService, StorageService, TranslateModule,
     LinkService,
-    //{
-    //  provide: Http, useFactory: httpFactory,
-    //  deps: [XHRBackend, RequestOptions, Router, SpinnerService, StorageService]
-    //},
+    {
+      provide: HttpWrapper, useFactory: httpFactory,
+      deps: [XHRBackend, RequestOptions, Router, SpinnerService, StorageService]
+    },
   ],
   exports: [CommonModule, FormsModule, ReactiveFormsModule, NotificationComponent, ErrorComponent, SpinnerComponent, EqualValidator, ImagePreview,
     DateFormatPipe, DateFormatHourPipe, HttpModule, ModalModule, Angular2FontawesomeModule, TranslateModule, HorseListComponent, PaginationModule,
