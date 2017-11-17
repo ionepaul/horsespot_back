@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Inject, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, Location } from '@angular/common';
 import { Subscription } from 'rxjs/Subscription';
 import { Meta, Title, DOCUMENT, MetaDefinition } from '@angular/platform-browser';
 import { FacebookService, InitParams } from 'ngx-facebook';
@@ -20,7 +20,7 @@ import { LinkService } from './shared/link.service';
     template: `
         <app-notification *ngIf="isBrowser" [refresh]="_notificationService.getRefresh()" [text]="_notificationService.getText()"></app-notification>
         <spinner></spinner>
-        <navbar></navbar>      
+        <navbar [langCode]="lang"></navbar>      
         <router-outlet></router-outlet>
         <horse-spot-footer></horse-spot-footer>
     `,
@@ -34,6 +34,7 @@ import { LinkService } from './shared/link.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
     isBrowser: boolean = false;
+    lang: string;
 
     private endPageTitle: string = 'Horse Spot';
     // If no Title is provided, we'll use a default one before the dash(-)
@@ -52,6 +53,7 @@ export class AppComponent implements OnInit, OnDestroy {
         private _title: Title,
         private _meta: Meta,
         private _linkService: LinkService,
+        private _location: Location,
         private _facebookService: FacebookService,
         @Inject(PLATFORM_ID) private platformId: Object) { }
 
@@ -71,8 +73,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
         if (isPlatformBrowser(this.platformId)) {
             this.isBrowser = true;
-            let browserLang = this._translateService.getBrowserLang();
-            this._translateService.use(browserLang.match(/en/) ? browserLang : 'en');
         }
     }
 
@@ -88,9 +88,18 @@ export class AppComponent implements OnInit, OnDestroy {
             .map(route => {
 
                 this._activatedRouteSub$ = this._activatedRoute.queryParams.subscribe(params => {
-                    let lang = params['lang'] != undefined ? params['lang'] : 'en';
-                    this._translateService.setDefaultLang(lang);
-                    this._translateService.use(lang);
+                    console.log(this._location.path().slice(0, this._location.path().indexOf("?")));
+                    this.lang = 'en';
+
+                    if (params['lang'] != undefined) {
+                        this.lang = params['lang'];
+                        let basePath = this._location.path().slice(0, this._location.path().indexOf('?'));
+
+                        this._location.replaceState(basePath);
+                    }
+
+                    this._translateService.setDefaultLang(this.lang);
+                    this._translateService.use(this.lang);
                 });
 
                 while (route.firstChild) route = route.firstChild;

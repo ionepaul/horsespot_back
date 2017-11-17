@@ -1,4 +1,4 @@
-import { Component, Input, HostListener, ViewChild, ElementRef, OnInit, TemplateRef, OnDestroy } from '@angular/core';
+import { Component, Input, HostListener, ViewChild, ElementRef, OnInit, TemplateRef, OnDestroy, OnChanges } from '@angular/core';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -22,7 +22,9 @@ import { CONFIG } from '../../config';
     selector: 'navbar',
     templateUrl: './navbar.component.html'
 })
-export class NavbarComponent implements OnInit, OnDestroy {
+export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
+    @Input() langCode: string;
+
     @ViewChild('phoneNumberModal') public phoneNumberModal: ModalDirective;
     @ViewChild('signUpModal') public signUpModal: ModalDirective;
     @ViewChild('loginModal') public loginModal: ModalDirective;
@@ -34,7 +36,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     notificationsNumber: number = 0;
     isMobileDevice: boolean;
     languages = CONFIG.languages;
-    currentLang: any = new Object({ imgUrl: "", value: "", displayText: "" });
+    currentLang: any;
     provider: string;
     externalToken: string;
     externalUserPhoneNumber: string;
@@ -61,6 +63,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        console.log(CONFIG.languages);
         this._activatedRouteSub$ = this._activatedRoute.queryParams.subscribe(params => {
             let firstReg: string = params['first_reg'] != undefined ? params['first_reg'] : "";
             let extEmailLocallyReg: string = params['haslocalaccount'] != undefined ? params['haslocalaccount'] : "";
@@ -80,14 +83,23 @@ export class NavbarComponent implements OnInit, OnDestroy {
                 });
             }
         });
-
-        let currentLangIndex = this.languages.findIndex(x => x.value == this._translateService.currentLang);
-        this.currentLang = this.languages[currentLangIndex];
-        this.languages.splice(currentLangIndex, 1);
     }
 
     ngOnDestroy() {
         this._activatedRouteSub$.unsubscribe();
+    }
+
+    ngOnChanges() {
+        let currentLangIndex = this.languages.findIndex(x => x.value == this.langCode);
+        this.currentLang = this.languages[currentLangIndex];
+
+        if (this.currentLang != undefined) {
+            if (this.languages.length != CONFIG.languages.length) {
+                this.languages.push(this.currentLang);
+            }
+
+            this.languages.splice(currentLangIndex, 1);
+        }
     }
 
     goToForgotPasswordScreen() {
