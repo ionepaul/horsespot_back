@@ -46,7 +46,9 @@ const routes: Routes = [
           links: [
               { rel: 'canonical', href: 'http://horse-spot.com/' },
               { rel: 'canonical', href: 'https://horse-spot.com/' },
-              //{ rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/' }
+              { rel: 'alternate', hreflang: 'de', href: 'https://horse-spot.com/home?lang=de' },
+              { rel: 'alternate', hreflang: 'fr', href: 'https://horse-spot.com/home?lang=fr' },
+              { rel: 'alternate', hreflang: 'ro', href: 'https://horse-spot.com/home?lang=ro' },
           ]
       }
   },
@@ -63,9 +65,9 @@ const routes: Routes = [
               { name: 'twitter:description', content: 'Browse through thousands of quality show jumping horses for sale, offered to you by multiple stables, owners, dealers or riders.' },
           ],
           links: [
-              { rel: 'canonical', href: 'http://horse-spot.com/horses-for-sale/showjumping/1' },
-              { rel: 'next', href: 'https://horse-spot.com/horses-for-sale/showjumping/2' },
-              //{ rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/' }
+              { rel: 'alternate', hreflang: 'de', href: 'https://horse-spot.com/horses-for-sale/showjumping/1?lang=de' },
+              { rel: 'alternate', hreflang: 'fr', href: 'https://horse-spot.com/horses-for-sale/showjumping/1?lang=fr' },
+              { rel: 'alternate', hreflang: 'ro', href: 'https://horse-spot.com/horses-for-sale/showjumping/1?lang=ro' }
           ]
       },
       resolve: { model: HorseListCategoriesResolver }
@@ -83,9 +85,9 @@ const routes: Routes = [
               { name: 'twitter:description', content: 'Browse through thousands of quality dressage horses for sale, offered to you by multiple stables, owners, dealers or riders.' },
           ],
           links: [
-              //{ rel: 'canonical', href: 'http://horse-spot.com/horses-for-sale/dressage/1' },
-              //{ rel: 'next', href: 'https://horse-spot.com/horses-for-sale/dressage/2' },
-              //{ rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/' }
+              { rel: 'alternate', hreflang: 'de', href: 'https://horse-spot.com/horses-for-sale/dressage/1?lang=de' },
+              { rel: 'alternate', hreflang: 'fr', href: 'https://horse-spot.com/horses-for-sale/dressage/1?lang=fr' },
+              { rel: 'alternate', hreflang: 'ro', href: 'https://horse-spot.com/horses-for-sale/dressage/1?lang=ro' }
           ]
       },
       resolve: { model: HorseListCategoriesResolver }
@@ -103,9 +105,9 @@ const routes: Routes = [
               { name: 'twitter:description', content: 'Browse through thousands of quality eventing horses for sale, offered to you by multiple stables, owners, dealers or riders.' },
           ],
           links: [
-              //{ rel: 'canonical', href: 'http://horse-spot.com/horses-for-sale/eventing/1' },
-              //{ rel: 'next', href: 'https://horse-spot.com/horses-for-sale/eventing/' },
-              //{ rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/' }
+              { rel: 'alternate', hreflang: 'de', href: 'https://horse-spot.com/horses-for-sale/eventing/1?lang=de' },
+              { rel: 'alternate', hreflang: 'fr', href: 'https://horse-spot.com/horses-for-sale/eventing/1?lang=fr' },
+              { rel: 'alternate', hreflang: 'ro', href: 'https://horse-spot.com/horses-for-sale/eventing/1?lang=ro' }
           ]
       },
       resolve: { model: HorseListCategoriesResolver }
@@ -123,9 +125,9 @@ const routes: Routes = [
               { name: 'twitter:description', content: 'Browse through thousands of quality endurance horses for sale, offered to you by multiple stables, owners, dealers or riders.' },
           ],
           links: [
-              //{ rel: 'canonical', href: 'http://horse-spot.com/horses-for-sale/eventing/1' },
-              //{ rel: 'next', href: 'https://horse-spot.com/horses-for-sale/eventing/' },
-              //{ rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/' }
+              { rel: 'alternate', hreflang: 'de', href: 'https://horse-spot.com/horses-for-sale/endurance/1?lang=de' },
+              { rel: 'alternate', hreflang: 'fr', href: 'https://horse-spot.com/horses-for-sale/endurance/1?lang=fr' },
+              { rel: 'alternate', hreflang: 'ro', href: 'https://horse-spot.com/horses-for-sale/endurance/1?lang=ro' }
           ]
       },
       resolve: { model: HorseListCategoriesResolver }
@@ -143,9 +145,9 @@ const routes: Routes = [
               { name: 'twitter:description', content: 'Browse through thousands of quality driving horses for sale, offered to you by multiple stables, owners, dealers or riders.' },
           ],
           links: [
-              //{ rel: 'canonical', href: 'http://horse-spot.com/horses-for-sale/eventing/1' },
-              //{ rel: 'next', href: 'https://horse-spot.com/horses-for-sale/eventing/' },
-              //{ rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/' }
+              { rel: 'alternate', hreflang: 'de', href: 'https://horse-spot.com/horses-for-sale/driving/1?lang=de' },
+              { rel: 'alternate', hreflang: 'fr', href: 'https://horse-spot.com/horses-for-sale/driving/1?lang=fr' },
+              { rel: 'alternate', hreflang: 'ro', href: 'https://horse-spot.com/horses-for-sale/driving/1?lang=ro' }
           ]
       },
       resolve: { model: HorseListCategoriesResolver }
@@ -163,9 +165,9 @@ const routes: Routes = [
               { name: 'twitter:description', content: 'Browse through thousands of quality foals horses for sale, offered to you by multiple stables, owners, dealers or riders.' },
           ],
           links: [
-              //{ rel: 'canonical', href: 'http://horse-spot.com/horses-for-sale/eventing/1' },
-              //{ rel: 'next', href: 'https://horse-spot.com/horses-for-sale/eventing/' },
-              //{ rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/' }
+              { rel: 'alternate', hreflang: 'de', href: 'https://horse-spot.com/horses-for-sale/foals/1?lang=de' },
+              { rel: 'alternate', hreflang: 'fr', href: 'https://horse-spot.com/horses-for-sale/foals/1?lang=fr' },
+              { rel: 'alternate', hreflang: 'ro', href: 'https://horse-spot.com/horses-for-sale/foals/1?lang=ro' }
           ]
       },
       resolve: { model: HorseListCategoriesResolver }
@@ -183,9 +185,9 @@ const routes: Routes = [
               { name: 'twitter:description', content: 'Browse through thousands of quality leisure horses for sale, offered to you by multiple stables, owners, dealers or riders.' },
           ],
           links: [
-              //{ rel: 'canonical', href: 'http://horse-spot.com/horses-for-sale/eventing/1' },
-              //{ rel: 'next', href: 'https://horse-spot.com/horses-for-sale/eventing/' },
-              //{ rel: 'alternate', hreflang: 'es', href: 'http://es.example.com/' }
+              { rel: 'alternate', hreflang: 'de', href: 'https://horse-spot.com/horses-for-sale/leisure/1?lang=de' },
+              { rel: 'alternate', hreflang: 'fr', href: 'https://horse-spot.com/horses-for-sale/leisure/1?lang=fr' },
+              { rel: 'alternate', hreflang: 'ro', href: 'https://horse-spot.com/horses-for-sale/leisure/1?lang=ro' }
           ]
       },
       resolve: { model: HorseListCategoriesResolver }

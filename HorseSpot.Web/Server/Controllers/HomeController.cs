@@ -29,16 +29,40 @@ namespace HorseSpot.Web.Controllers
     {
       String xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
 
-      xml += "<sitemapindex xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">";
-      xml += "<sitemap>";
-      xml += "<loc>http://localhost:4251/home</loc>";
+      xml += "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">";
+      xml += "<url>";
+      xml += "<loc>https://horse-spot.com/home</loc>";
       xml += "<lastmod>" + DateTime.Now.ToString("yyyy-MM-dd") + "</lastmod>";
-      xml += "</sitemap>";
-      xml += "<sitemap>";
-      xml += "<loc>http://localhost:4251/counter</loc>";
+      xml += "</url>";
+      xml += "<url>";
+      xml += "<loc>https://horse-spot.com/horses-for-sale/showjumping/1</loc>";
       xml += "<lastmod>" + DateTime.Now.ToString("yyyy-MM-dd") + "</lastmod>";
-      xml += "</sitemap>";
-      xml += "</sitemapindex>";
+      xml += "</url>";
+      xml += "<url>";
+      xml += "<loc>https://horse-spot.com/horses-for-sale/dressage/1</loc>";
+      xml += "<lastmod>" + DateTime.Now.ToString("yyyy-MM-dd") + "</lastmod>";
+      xml += "</url>";
+      xml += "<url>";
+      xml += "<loc>https://horse-spot.com/horses-for-sale/eventing/1</loc>";
+      xml += "<lastmod>" + DateTime.Now.ToString("yyyy-MM-dd") + "</lastmod>";
+      xml += "</url>";
+      xml += "<url>";
+      xml += "<loc>https://horse-spot.com/horses-for-sale/endurance/1</loc>";
+      xml += "<lastmod>" + DateTime.Now.ToString("yyyy-MM-dd") + "</lastmod>";
+      xml += "</url>";
+      xml += "<url>";
+      xml += "<loc>https://horse-spot.com/horses-for-sale/driving/1</loc>";
+      xml += "<lastmod>" + DateTime.Now.ToString("yyyy-MM-dd") + "</lastmod>";
+      xml += "</url>";
+      xml += "<url>";
+      xml += "<loc>https://horse-spot.com/horses-for-sale/foals/1</loc>";
+      xml += "<lastmod>" + DateTime.Now.ToString("yyyy-MM-dd") + "</lastmod>";
+      xml += "</url>";
+      xml += "<url>";
+      xml += "<loc>https://horse-spot.com/horses-for-sale/leisure/1</loc>";
+      xml += "<lastmod>" + DateTime.Now.ToString("yyyy-MM-dd") + "</lastmod>";
+      xml += "</url>";
+      xml += "</urlset>";
 
       return Content(xml, "text/xml");
 
