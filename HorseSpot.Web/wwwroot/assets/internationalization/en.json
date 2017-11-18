@@ -95,7 +95,7 @@
         "PASSWORD_NOT_MATCH": "Confirm Password does not match the Password.",
         "PHONE_NUMBER": "Phone Number",
         "PHONE_NUMBER_ERROR": "Please fill in your phone number.",
-        "PHONE_NUMBER_INVALID_FORMAT": "Phone Number should be 0123456789 or +40123456789.",
+        "PHONE_NUMBER_INVALID_FORMAT": "Invalid phone number.",
         "UNSUPPORTED_PROFILE_PIC_EXT": "Unsupported profile picture extension.",
         "UPLOAD_PROFILE_PIC": "Upload your profile picture",
         "SUBSCRIBE_NEWSLETTER":"Subscribe to our newsletter!",

@@ -97,7 +97,7 @@
     "PASSWORD_NOT_MATCH": "Das bestätigte Kennwort passt nicht zu das Kennwort.",
     "PHONE_NUMBER": "Telefonnummer",
     "PHONE_NUMBER_ERROR": "Füllen Sie bitte ihre Telefonnummer aus.",
-    "PHONE_NUMBER_INVALID_FORMAT": "Die Telfonnummer sollte 0123456789 oder +40123456789 sien.",
+    "PHONE_NUMBER_INVALID_FORMAT": "Ungültige Telefonnummer.",
     "UNSUPPORTED_PROFILE_PIC_EXT": " Ununterstützte Profil-Bilderausdehnung.",
     "UPLOAD_PROFILE_PIC": " Laden Sie ihr Profilbild.",
     "SUBSCRIBE_NEWSLETTER": "Abonieren Sie unsere Newsletter.",

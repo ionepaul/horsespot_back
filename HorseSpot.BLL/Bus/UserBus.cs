@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -239,7 +238,7 @@ namespace HorseSpot.BLL.Bus
 
             ValidationHelper.ValidateModelAttributes<UserViewModel>(user);
 
-            Regex phoneNumberRegex = new Regex(@"^(\+\d{1,3}[- ]?)?\d{10}$");
+            Regex phoneNumberRegex = new Regex(@"^(?=.*[0-9])[- +()0-9].*[0-9]+$");
 
             ValidateEmail(user.Email);
 
@@ -258,7 +257,7 @@ namespace HorseSpot.BLL.Bus
                 throw new ValidationException(Resources.InvalidConfirmPasswordFormat);
             }
 
-            if (!phoneNumberRegex.IsMatch(user.PhoneNumber))
+            if (!phoneNumberRegex.IsMatch(user.PhoneNumber) || user.PhoneNumber.Length < 5)
             {
                 throw new ValidationException(Resources.InvalidPhoneNumberFormat);
             }
@@ -274,9 +273,9 @@ namespace HorseSpot.BLL.Bus
             user.FirstName = editProfile.FirstName != null ? editProfile.FirstName : user.FirstName;
             user.LastName = editProfile.LastName != null ? editProfile.LastName : user.LastName;
 
-            Regex phoneNumberRegex = new Regex(@"^(\+\d{1,3}[- ]?)?\d{10}$");
+            Regex phoneNumberRegex = new Regex(@"^(?=.*[0-9])[- +()0-9].*[0-9]+$");
 
-            if (editProfile.PhoneNumber != null && !phoneNumberRegex.IsMatch(editProfile.PhoneNumber))
+            if ((editProfile.PhoneNumber != null && !phoneNumberRegex.IsMatch(editProfile.PhoneNumber)) || editProfile.PhoneNumber.Length < 5)
             {
                 throw new ValidationException(Resources.InvalidPhoneNumberFormat);
             }

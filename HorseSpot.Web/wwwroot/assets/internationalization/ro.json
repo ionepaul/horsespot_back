@@ -95,7 +95,7 @@
         "PASSWORD_NOT_MATCH": "Parola introdusă nu se potrivește.",
         "PHONE_NUMBER": "Număr de telefon",
         "PHONE_NUMBER_ERROR": "Introdu numărul de telefon.",
-        "PHONE_NUMBER_INVALID_FORMAT": "Formatul numărului de telefon trebuie să fie 0123456789 or +40123456789.",
+        "PHONE_NUMBER_INVALID_FORMAT": "Numărul de telefon este invalid.",
         "UNSUPPORTED_PROFILE_PIC_EXT": "Formatul pozei de profil este prea mare.",
         "UPLOAD_PROFILE_PIC": "Încarcă fotografia de profil",
         "SUBSCRIBE_NEWSLETTER":"Abonează-te la newsletter-ul nostru!",
