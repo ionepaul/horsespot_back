@@ -81,15 +81,13 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     private _changeTitleOnNavigation() {
-
         this._routerSub$ = this._router.events
             .filter(event => event instanceof NavigationEnd)
             .map(() => this._activatedRoute)
             .map(route => {
 
                 this._activatedRouteSub$ = this._activatedRoute.queryParams.subscribe(params => {
-                    console.log(this._location.path().slice(0, this._location.path().indexOf("?")));
-                    this.lang = 'en';
+                    this.lang = this._translateService.currentLang != undefined ? this._translateService.currentLang : 'en';
 
                     if (params['lang'] != undefined) {
                         this.lang = params['lang'];

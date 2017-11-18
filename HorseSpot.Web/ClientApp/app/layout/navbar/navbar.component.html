@@ -120,11 +120,11 @@
             </div><!-- input-group -->
           </div><!-- form-group -->
 
-          <div *ngIf="phoneNumber.errors && phoneNumber.touched" class="client-side-validation-error">
-            <small [hidden]="!phoneNumber.errors.required">
+          <div *ngIf="phone.errors && phone.touched" class="client-side-validation-error">
+            <small [hidden]="!phone.errors.required">
               {{'REGISTER_PAGE.PHONE_NUMBER_ERROR' | translate}}
             </small>
-            <small [hidden]="!phoneNumber.errors.pattern">
+            <small [hidden]="!phone.errors.pattern">
               {{'REGISTER_PAGE.PHONE_NUMBER_INVALID_FORMAT' | translate}}
             </small>
           </div><!-- phone-number client-side-validation-error -->
@@ -132,8 +132,8 @@
           <div class="form-group">
             <div class="input-group">
               <input autocomplete="off" name="phone" type="tel" class="form-control" id="phone" placeholder="{{'REGISTER_PAGE.PHONE_NUMBER' | translate}}"
-                     [(ngModel)]="registerInput.PhoneNumber" required #phoneNumber="ngModel"
-                     pattern="^(\+\d{1,3}[- ]?)?\d{10}$">
+                     [(ngModel)]="registerInput.PhoneNumber" required #phone="ngModel"
+                     pattern="^(\+\d{1,3}[- ]?)?\d{10}$" />
             </div><!-- input-group -->
           </div><!-- form-group -->
 
@@ -254,7 +254,7 @@
           </p>
         </div><!-- modal-footer -->
 
-        <div *ngIf="phoneNumber.errors" class="client-side-validation-error">
+        <div *ngIf="phoneNumber.errors && phoneNumber.touched" class="client-side-validation-error">
           <small [hidden]="!phoneNumber.errors.pattern">
             {{'REGISTER_PAGE.PHONE_NUMBER_INVALID_FORMAT' | translate}}
           </small>

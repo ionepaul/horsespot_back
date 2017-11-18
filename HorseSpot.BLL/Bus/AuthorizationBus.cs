@@ -7,6 +7,8 @@ using HorseSpot.DAL.Interfaces;
 using HorseSpot.Infrastructure.Exceptions;
 using HorseSpot.Models.Models;
 using Microsoft.AspNet.Identity;
+using HorseSpot.Infrastructure.MailService;
+using System.Configuration;
 
 namespace HorseSpot.BLL.Bus
 {
@@ -15,6 +17,7 @@ namespace HorseSpot.BLL.Bus
         #region Local Variables
 
         private IUserDao _iUserDao;
+        private IMailerService _iMailerService;
         private IRefreshTokenDao _iRefreshTokenDao;
         private IClientDao _iClientDao;
 
@@ -22,9 +25,10 @@ namespace HorseSpot.BLL.Bus
 
         #region Constructor
 
-        public AuthorizationBus(IUserDao iUserDao, IRefreshTokenDao iRefreshTokenDao, IClientDao iClientDao)
+        public AuthorizationBus(IUserDao iUserDao, IMailerService iMailerService, IRefreshTokenDao iRefreshTokenDao, IClientDao iClientDao)
         {
             _iUserDao = iUserDao;
+            _iMailerService = iMailerService;
             _iRefreshTokenDao = iRefreshTokenDao;
             _iClientDao = iClientDao;
         }
@@ -93,6 +97,7 @@ namespace HorseSpot.BLL.Bus
             };
 
             await _iUserDao.CreateAsync(user);
+            await SendWelcomeEmail(user);
 
             return user;
         }
@@ -100,6 +105,25 @@ namespace HorseSpot.BLL.Bus
         public async Task<IdentityResult> AddLoginAsync(string userId, UserLoginInfo login)
         {
             return await _iUserDao.AddLoginAsync(userId, login);
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private async Task SendWelcomeEmail(UserModel user)
+        {
+            EmailModel emailModel = new EmailModel
+            {
+                Sender = ConfigurationManager.AppSettings["AdminEmail"],
+                Receiver = user.Email,
+                ReceiverFirstName = user.FirstName,
+                ReceiverLastName = user.LastName,
+                EmailSubject = EmailSubjects.WelecomeSubject,
+                EmailTemplatePath = EmailTemplatesPath.WelcomeTemplate
+            };
+
+            await _iMailerService.SendMail(emailModel);
         }
 
         #endregion

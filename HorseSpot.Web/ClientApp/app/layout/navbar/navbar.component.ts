@@ -63,7 +63,6 @@ export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     ngOnInit() {
-        console.log(CONFIG.languages);
         this._activatedRouteSub$ = this._activatedRoute.queryParams.subscribe(params => {
             let firstReg: string = params['first_reg'] != undefined ? params['first_reg'] : "";
             let extEmailLocallyReg: string = params['haslocalaccount'] != undefined ? params['haslocalaccount'] : "";
@@ -78,8 +77,9 @@ export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
                 this.phoneNumberModal.show();
             }
             else if (firstReg.toLocaleLowerCase() === CONFIG._false) {
-                this._accountService.obtainLocalAccessToken(this.provider, this.externalToken).subscribe(res => {
-                    this._router.navigate([this._location.path()]);
+              this._accountService.obtainLocalAccessToken(this.provider, this.externalToken).subscribe(res => {
+                    let basePath = this._location.path().slice(0, this._location.path().indexOf('?'));
+                    this._location.replaceState(basePath);
                 });
             }
         });
@@ -154,7 +154,8 @@ export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
         this._accountService.updateExternalUser(this.provider, this.externalToken, this.externalUserPhoneNumber)
             .subscribe(res => {
                 this.phoneNumberModal.hide();
-                this._router.navigate([this._location.path()]);
+                let basePath = this._location.path().slice(0, this._location.path().indexOf('?'));
+                this._location.replaceState(basePath);
             })
     }
 
@@ -215,7 +216,8 @@ export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
         this._accountService.obtainLocalAccessToken(this.provider, this.externalToken)
             .subscribe(res => {
                 this.phoneNumberModal.hide();
-                this._router.navigate([this._location.path()]);
+                let basePath = this._location.path().slice(0, this._location.path().indexOf('?'));
+                this._location.replaceState(basePath);
             });
     }
 
