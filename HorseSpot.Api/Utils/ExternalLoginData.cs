@@ -1,5 +1,4 @@
 ﻿using System.Security.Claims;
-using HorseSpot.Models.Models;
 using Microsoft.AspNet.Identity;
 
 namespace HorseSpot.Api.Utils

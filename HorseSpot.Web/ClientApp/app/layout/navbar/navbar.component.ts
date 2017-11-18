@@ -74,13 +74,15 @@ export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
                 this.loginModal.show();
                 this.hasLocalAccount = true;
             } else if (firstReg.toLocaleLowerCase() === CONFIG._true) {
+                let basePath = this._location.path().slice(0, this._location.path().indexOf('?'));
+                this._location.replaceState(basePath);
                 this.phoneNumberModal.show();
             }
             else if (firstReg.toLocaleLowerCase() === CONFIG._false) {
               this._accountService.obtainLocalAccessToken(this.provider, this.externalToken).subscribe(res => {
-                    let basePath = this._location.path().slice(0, this._location.path().indexOf('?'));
-                    this._location.replaceState(basePath);
-                });
+                let basePath = this._location.path().slice(0, this._location.path().indexOf('?'));
+                this._location.replaceState(basePath);
+              });
             }
         });
     }
@@ -154,8 +156,6 @@ export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
         this._accountService.updateExternalUser(this.provider, this.externalToken, this.externalUserPhoneNumber)
             .subscribe(res => {
                 this.phoneNumberModal.hide();
-                let basePath = this._location.path().slice(0, this._location.path().indexOf('?'));
-                this._location.replaceState(basePath);
             })
     }
 
@@ -216,8 +216,6 @@ export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
         this._accountService.obtainLocalAccessToken(this.provider, this.externalToken)
             .subscribe(res => {
                 this.phoneNumberModal.hide();
-                let basePath = this._location.path().slice(0, this._location.path().indexOf('?'));
-                this._location.replaceState(basePath);
             });
     }
 
