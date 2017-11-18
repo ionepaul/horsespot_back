@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs/Subscription';
 //SERVICES
 import { NotificationService } from '../../shared/notifications/notification.service';
 import { AccountService } from '../../account/account.service';
+import { SpinnerService } from '../../shared/spinner/spinner.service';
 
 //MODELS
 import { RegisterModel } from '../../account/models/register.model';
@@ -57,6 +58,7 @@ export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
         private _translateService: TranslateService,
         private _notificationService: NotificationService,
         private _location: Location,
+        private _spinnerService: SpinnerService,
         @Inject(PLATFORM_ID) private _platformId: Object) {
         this.notificationRefresh = this._notificationService.getRefresh();
         this.isMobileDevice = isPlatformBrowser(this._platformId) ? window.screen.width <= CONFIG.mobile_width : false;
@@ -74,9 +76,7 @@ export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
                 this.loginModal.show();
                 this.hasLocalAccount = true;
             } else if (firstReg.toLocaleLowerCase() === CONFIG._true) {
-                let basePath = this._location.path().slice(0, this._location.path().indexOf('?'));
-                this._location.replaceState(basePath);
-                this.phoneNumberModal.show();
+              this.handleExternalFirstAuth();
             }
             else if (firstReg.toLocaleLowerCase() === CONFIG._false) {
               this._accountService.obtainLocalAccessToken(this.provider, this.externalToken).subscribe(res => {
@@ -142,6 +142,7 @@ export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     authExternal(provider: string) {
+      this._spinnerService.isLoading = true;
         var redirectUri = isPlatformBrowser(this._platformId) ? window.location : "";
         var externalAuthUrl = CONFIG.baseUrls.apiUrl + "account/ExternalLogin?provider=" + provider
             + "&response_type=token&client_id=" + CONFIG.client_id
@@ -222,5 +223,18 @@ export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
     showNotification() {
         this.notificationRefresh++;
         this._notificationService.setRefreshAndText(this.notificationRefresh, this._notificationService.passwordRecoverySuccessText());
+    }
+
+    handleExternalFirstAuth() {
+      this._spinnerService.isLoading = true;
+      let basePath = this._location.path().slice(0, this._location.path().indexOf('?'));
+      this._location.replaceState(basePath);
+
+      if (isPlatformBrowser(this._platformId)) {
+        setTimeout(() => {
+          this._spinnerService.isLoading = false;
+          this.phoneNumberModal.show();
+        }, 0);
+      }         
     }
 }
