@@ -2177,6 +2177,7 @@ modal.cancel-app textarea {
 
 .add-errors-client-side {
   text-align: center;
+  padding-top: 20px;
 }
 
   .add-errors-client-side p {
@@ -3162,10 +3163,11 @@ ul.pagination {
   list-style: none;
 }
 
+.add-horse-container .back,
 .horses-details .back {
   margin: 0 0 15px;
 }
-
+  .add-horse-container .back a,
   .horses-details .back a {
     padding: 0px 20px;
     font-size: 15px;
@@ -3176,7 +3178,7 @@ ul.pagination {
     transition: all 0.3s;
     display: inline-block;
   }
-
+    .add-horse-container .back a:hover,
     .horses-details .back a:hover,
     .profile-info .go-back:hover {
       text-decoration: none;
@@ -6022,7 +6024,7 @@ aside.col-sm-4 {
 
   /* ADD HORSE */
   .add-horse-container {
-    padding: 20px 0 60px;
+    padding-bottom: 60px;
   }
 
     .add-horse-container h3.section-title {

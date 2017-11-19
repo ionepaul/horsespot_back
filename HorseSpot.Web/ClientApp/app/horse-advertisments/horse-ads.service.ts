@@ -41,7 +41,7 @@ export class HorseAdsService {
   private _deleteHorseAdUrl = CONFIG.baseUrls.apiUrl + 'horses/delete/';
   private _increseViewsUrl = CONFIG.baseUrls.apiUrl + 'horses/views/';
   private _searchUrl = CONFIG.baseUrls.apiUrl + 'horses/search?searchModel=';
-  private _setHorseAdProfilePicUrl = CONFIG.baseUrls.apiUrl + 'horsead/profilepic/';
+  private _setHorseAdProfilePicUrl = CONFIG.baseUrls.apiUrl + 'horses/images/profilepic/';
   private _deletaUnsavedImageUrl = CONFIG.baseUrls.apiUrl + 'horses/images/delete?imageName='
   private _getLatestHorses = CONFIG.baseUrls.apiUrl + 'horses/latest';
 
@@ -57,13 +57,6 @@ export class HorseAdsService {
     return this._http.get(this._priceRangesUrl)
       .map((res: Response) => res.json() as PriceRangeModel[])
       .catch(this.handleError);
-  }
-
-  getAllGenders(): Observable<GenderModel[]> {
-    return new Observable<GenderModel[]>();
-    // return this._http.get(this._gendersUrl)
-    //                  .map((res: Response) => res.json() as GenderModel[])
-    //                  .catch(this.handleError);
   }
 
   getAllCountries(name?: string): Observable<string[]> {
@@ -110,13 +103,13 @@ export class HorseAdsService {
   editHorseAd(model: HorseAdModel, id: number) {
     let body = JSON.stringify(model);
 
-    return this._httpWrapper.put(this._editHorseAdUrl + id, body)
+    return this._httpWrapper.post(this._editHorseAdUrl + id, body)
       .map((res: Response) => res)
       .catch(error => {
         if (error && error.status === 401 && this._authService.isTokenExpired()) {
           return this._authService.refreshToken().merge((data) => {
             this._authService.storeUserAccessInfo(data);
-            return this._httpWrapper.put(this._editHorseAdUrl + id, body)
+            return this._httpWrapper.post(this._editHorseAdUrl + id, body)
               .map((res: Response) => res)
               .catch(this.handleError);
           })
@@ -182,13 +175,13 @@ export class HorseAdsService {
       });
   }
 
-  deleteImage(adId: number, imageId: string) {
-    return this._httpWrapper.delete(this._deleteHorseAdPhotoUrl + adId + '/' + imageId)
+  deleteImage(imageId: number) {
+    return this._httpWrapper.post(this._deleteHorseAdPhotoUrl + imageId, "")
       .catch(error => {
         if (error && error.status === 401 && this._authService.isTokenExpired()) {
           return this._authService.refreshToken().merge((data) => {
             this._authService.storeUserAccessInfo(data);
-            return this._httpWrapper.delete(this._deleteHorseAdPhotoUrl + adId + '/' + imageId)
+            return this._httpWrapper.post(this._deleteHorseAdPhotoUrl + imageId, "")
               .catch(this.handleError);
           })
         } else if (error && error.status === 401) {
@@ -218,13 +211,13 @@ export class HorseAdsService {
       });
   }
 
-  setHorseAdProfilePicture(adId: number, imageId: string) {
-    return this._httpWrapper.put(this._setHorseAdProfilePicUrl + adId + '/' + imageId, "")
+  setHorseAdProfilePicture(imageId: number) {
+    return this._httpWrapper.post(this._setHorseAdProfilePicUrl + imageId, "")
       .catch(error => {
         if (error && error.status === 401 && this._authService.isTokenExpired()) {
           return this._authService.refreshToken().merge((data) => {
             this._authService.storeUserAccessInfo(data);
-            return this._httpWrapper.put(this._setHorseAdProfilePicUrl + adId + '/' + imageId, "")
+            return this._httpWrapper.post(this._setHorseAdProfilePicUrl + imageId, "")
               .catch(this.handleError);
           })
         } else if (error && error.status === 401) {

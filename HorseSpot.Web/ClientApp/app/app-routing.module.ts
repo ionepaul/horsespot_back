@@ -213,7 +213,11 @@ const routes: Routes = [
     },
     canActivate: [LoggedInGuard]
   },
-  { path: 'account/profile/:userId', component: ProfileComponent }
+  { path: 'account/profile/:userId', component: ProfileComponent },
+  {
+    path: 'horses/edit/:id', component: EditHorseAdComponent,
+    canActivate: [LoggedInGuard, IsPostOwnerGuard]
+  },
 
 
   //{ path: 'contact', component: ContactComponent },
@@ -224,7 +228,7 @@ const routes: Routes = [
   //{ path: 'account/sold-horses/:userId/:page', component: UserReferencesComponent, resolve: { model: UserReferencesResolver } },
   //{ path: 'account/wishlist/:page', component: UserFavoritesComponent, canActivate: [ LoggedInGuard ],resolve: { model: UserFavoritesResolver } },
 
-  //{ path: 'horses/edit/:id', component: EditHorseAdComponent, canActivate: [ LoggedInGuard, IsPostOwnerGuard ] },
+  
   //{ path: 'horses/unvalidated/:page', component: HorseListUnvalidatedComponent, canActivate: [ LoggedInGuard, AdminGuard ], resolve: { model: UnvalidatedHorseListResolver } },
 ];
 

@@ -16,7 +16,7 @@
       <a *ngIf="!isFavorite && currentUserId != undefined" title="{{'HORSE_AD_DETAIL.SAVE_WISHLIST' | translate}}" (click)="addHorseAdToFavorites(horseAdModel.Id)"><fa name="heart-o"></fa></a>
       <a *ngIf="isFavorite && currentUserId" title="{{'HORSE_AD_DETAIL.REM_WISHLIST' | translate}}" (click)="addHorseAdToFavorites(horseAdModel.Id)"><fa name="heart"></fa></a>
     </li>
-    <li><fb-share href="location.href"></fb-share></li>
+    <li><fb-share href="{{location.href}}" layout="button"></fb-share></li>
     <li>{{horseAdModel.PriceRange.PriceRangeValue}} &euro;</li>
   </ul>
 
@@ -142,7 +142,7 @@
       <div class="add">
         <div class="lists">
           <ul>
-            <li><fb-share href="location.href"></fb-share></li>
+            <li><fb-share href="{{location.href}}" layout="button"></fb-share></li>
           </ul>
           <ul>
             <li><img src="../../../../wwwroot/assets/images/eye.png" alt="Horse views"> {{horseAdModel.Views}}</li>
