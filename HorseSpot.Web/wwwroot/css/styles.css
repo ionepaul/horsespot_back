@@ -4398,10 +4398,10 @@ aside.col-sm-4 {
     font-size: 15px;
   }
 
-  nav .login-list .signup-btn, nav .login-list .login-btn {
+  /*nav .login-list .signup-btn, nav .login-list .login-btn {
     padding: 5px 20px;
     font-size: 13px;
-  }
+  }*/
 }
 
 @media ( max-width: 1445px ) {
@@ -4656,10 +4656,10 @@ aside.col-sm-4 {
     font-size: 15px;
   }
 
-  nav .login-list .signup-btn, nav .login-list .login-btn {
+  /*nav .login-list .signup-btn, nav .login-list .login-btn {
     padding: 5px 20px;
     font-size: 13px;
-  }
+  }*/
 
   html, body {
     width: 100%;
@@ -4769,19 +4769,10 @@ aside.col-sm-4 {
     top: -32px;
   }
 
-  nav .login-list .signup-btn {
-    margin-right: 5px;
-  }
-
   ul.navbar-nav {
     position: relative;
     right: 0px;
-    top: 5px;
-  }
-
-  ul.login-list {
-    position: absolute;
-    right: 15px;
+    top: 0px;
   }
 
   .appointment-navbar-notif {
@@ -4939,6 +4930,17 @@ aside.col-sm-4 {
 
   ul.navbar-nav {
     right: 16px;
+    top: 5px;
+  }
+
+  nav .login-list .signup-btn, nav .login-list .login-btn {
+    margin-right: 5px;
+    font-size: 12px;
+    padding: 2px 28px;
+  }
+
+  ul.login-list {
+    right: 0;
   }
 
   /* HOME PAGE */
@@ -5177,13 +5179,14 @@ aside.col-sm-4 {
   }
 
 
-  nav .login-list .signup-btn, nav .login-list .login-btn {
+  /*nav .login-list .signup-btn, nav .login-list .login-btn {
     padding: 0px 15px;
     font-size: 12px;
-  }
+  }*/
 
   ul.login-list {
     bottom: 7px;
+    right: 0;
   }
 
   nav.navbar ul.user-logged-list a#dropdown-link-button {
