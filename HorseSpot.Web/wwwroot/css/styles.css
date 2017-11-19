@@ -695,9 +695,10 @@ nav.navbar div.user-bg-part {
   nav.navbar div.user-bg-part .notif-wrapper {
     position: absolute;
     top: 50px;
+    right: 0;
     z-index: 20;
     background: #fff;
-    width: 100%;
+    width: 160px;
     box-shadow: 0 1px 2px rgba(0,0,0,.25), 0 0 1px rgba(0,0,0,.35);
     box-sizing: border-box;
     padding: 10px;
@@ -707,7 +708,10 @@ nav.navbar div.user-bg-part {
     nav.navbar div.user-bg-part .notif-wrapper .popover-arrow {
       position: absolute;
       top: -15px;
-      left: 90px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      display: inline-block;
     }
 
       nav.navbar div.user-bg-part .notif-wrapper .popover-arrow::after {
@@ -715,6 +719,7 @@ nav.navbar div.user-bg-part {
         display: block;
         width: 14px;
         height: 14px;
+        margin: 0 auto;
         background: #fff;
         transform: rotate(45deg) translate(6px,6px);
         box-shadow: -1px -1px 1px -1px rgba(0,0,0,.54);
