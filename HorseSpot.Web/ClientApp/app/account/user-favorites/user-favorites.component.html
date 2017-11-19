@@ -1,15 +1,28 @@
-  <div class="container">
-      <a (click)="back()" class="go-back"><i class="fa fa-angle-left" aria-hidden="true"></i> {{'HORSE_AD_DETAIL.BACK' | translate}}</a>
-  <div class="horse-wrapper">
- <ul class="category-list-title">
-                <li class="category-title">{{'PROFILE.WISH_LIST' | translate}}</li>
-                <!--<li><a [routerLink]="['/account/wishlist/1']">{{ 'HORSE_LIST_VIEW_MORE' | translate }} <i aria-hidden="true" class="fa fa-angle-right"></i></a></li>-->
-            </ul>
- 
+<div class="container">
+  <div class="profile-info">
+    <a (click)="back()" class="go-back"><i class="fa fa-angle-left" aria-hidden="true"></i> {{'HORSE_AD_DETAIL.BACK' | translate}}</a>
+    <div class="user-info-row">
+      <img class="profile-image-user" src="http://via.placeholder.com/350x350">
+      <div class="main-info">
+        <div class="user-profile-details">
+          <p class="name">Test Name</p>
+          <ul class="email">
+            <li><a href="tel:45343434"><i class="fa fa-mobile" aria-hidden="true"></i> 86453453483483</a></li>
+            <li><a href="email:test@gmail.com"><i class="fa fa-envelope" aria-hidden="true"></i> test@gmail.com</a></li>
+          </ul>
+        </div><!-- profile-details -->
+      </div><!-- main-info -->
+    </div><!-- row -->
+  </div>
 
-<horse-list [horses]="userFavoritesPosts" [threeOnRow]="true"></horse-list>
+  <div class="horse-wrapper">
+    <ul class="category-list-title">
+      <li class="category-title category-title-user">{{'PROFILE.HORSES_FOR_SALE' | translate}}</li>
+    </ul>
+
+    <horse-list [horses]="userPosts" [threeOnRow]="true"></horse-list>
   </div>
-  </div>
+</div>
 
 <pagination *ngIf="userFavoritesPosts.length != 0" [itemsPerPage]="16" [totalItems]="totalNumber" [(ngModel)]="pageNumber" [maxSize]="8" 
             class="pagination-sm" [boundaryLinks]="true" [rotate]="false" (pageChanged)="pageChanged($event)"

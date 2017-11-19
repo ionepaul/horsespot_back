@@ -368,8 +368,8 @@ div.social-bar-lang {
         }
 
         div.social-bar-lang ul.lang-dropdown li .language-drop a:hover {
-          background: #ba3326;
-          color: #fff;
+          background: transparent;
+          color: #363636;
         }
 
     div.social-bar-lang ul.language-drop li {
@@ -421,7 +421,9 @@ div.social-bar-lang ul#lang-dropdown1 {
   width: auto;
   min-width: auto;
   border: 0;
-  border-radius: 0;
+  border-radius: 3px;
+  box-shadow: none;
+  box-shadow: 0 1px 2px rgba(0,0,0,.25), 0 0 1px rgba(0,0,0,.35);
 }
 
 
@@ -1483,6 +1485,13 @@ div.social-links {
     border-radius: 100%;
   }
 
+.profile-info .profile-image-user {
+  width: 100px;
+  display: inline-block;
+  border-radius: 100%;
+  margin: 0 20px 20px 0;
+}
+
 .profile-info .profile-details {
   position: relative;
 }
@@ -1491,7 +1500,8 @@ div.social-links {
     padding-top: 10px;
   }
 
-  .profile-info .profile-details .name {
+  .profile-info .profile-details .name,
+  .profile-info .user-profile-details .name {
     font-size: 25px;
     line-height: 35px;
     font-weight: 700;
@@ -1541,12 +1551,24 @@ div.social-links {
   list-style: none;
 }
 
-.profile-info .profile-details ul li {
+.profile-info .profile-details ul li,
+.profile-info .user-profile-details ul li {
   display: inline-block;
-  margin-right: 15px;
+  margin: 0 15px 10px 0;
 }
 
-.profile-info .profile-details .email a {
+.profile-info .user-profile-details {
+  transform: translateY(-15px);
+}
+
+.profile-info .user-info-row {
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.profile-info .profile-details .email a,
+.profile-info .user-profile-details .email a {
   color: #868686;
   font-weight: 300;
   font-size: 18px;
@@ -2959,16 +2981,16 @@ ul.pagination {
       width: 100%;
     }
 
-.horses-form form .search-btn-mobile {
-  background: none;
-  border: none;
-  outline: none;
-  width: 100%;
-  text-align: left;
-  color: #868686;
-  font-style: italic;
-  font-size: 18px;
-}
+  .horses-form form .search-btn-mobile {
+    background: none;
+    border: none;
+    outline: none;
+    width: 100%;
+    text-align: left;
+    color: #868686;
+    font-style: italic;
+    font-size: 18px;
+  }
 
   .horses-form form .mobile-expandend-form {
     margin-top: 10px;
@@ -2976,19 +2998,19 @@ ul.pagination {
     padding-top: 20px;
   }
 
-.horses-form form .search-btn-mobile .fa {
-  color: #868686;
-}
-
-  .horses-form form .search-btn-mobile .fa.fa-angle-up,
-  .horses-form form .search-btn-mobile .fa.fa-angle-down {
-    float: right;
-    font-size: 20px;
+  .horses-form form .search-btn-mobile .fa {
+    color: #868686;
   }
 
-  .horses-form form .search-btn-mobile .fa.fa-search {
-    padding-right: 15px;
-  }
+    .horses-form form .search-btn-mobile .fa.fa-angle-up,
+    .horses-form form .search-btn-mobile .fa.fa-angle-down {
+      float: right;
+      font-size: 20px;
+    }
+
+    .horses-form form .search-btn-mobile .fa.fa-search {
+      padding-right: 15px;
+    }
 
 .category-text {
   color: #a7a7a7;
@@ -3891,6 +3913,10 @@ ul.pagination {
             width: 100%;
           }
 
+typeahead-container .dropdown-menu {
+  overflow: hidden;
+}
+
       .home-container .slider form typeahead-container {
         width: 100%;
         left: 0 !important;
@@ -3916,7 +3942,7 @@ ul.pagination {
     }
 
 /* HORSE LIST CATEGORY */
-.horses-categories-list .category-row .col-sm-4 {
+.category-row .col-sm-4 {
   margin-bottom: 35px;
 }
 
@@ -3953,13 +3979,18 @@ ul.pagination {
     float: right;
   }
 
-    .category-list-title li:last-of-type a {
-      color: #868686;
-      font-size: 17px;
-      transition: all 0.3s;
-      -webkit-transition: all 0.3s;
-      -moz-transition: all 0.3s;
-    }
+  .category-list-title li.category-title-user {
+    float: none;
+  }
+
+  .category-list-title li:last-of-type a {
+    color: #868686;
+    font-size: 17px;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    cursor: pointer;
+  }
 
       .category-list-title li:last-of-type a:hover {
         color: #363636;
@@ -3968,6 +3999,10 @@ ul.pagination {
       .category-list-title li:last-of-type a:hover {
         text-decoration: none;
       }
+
+.category-row {
+  padding: 0 15px;
+}
 
 .horse-card-article {
   border: 1px solid #E4E4E4;
@@ -6773,6 +6808,10 @@ aside.col-sm-4 {
 
   .horse-card-article .details .views {
     width: 25%;
+  }
+
+  .profile-info .user-info-row {
+    display: block;
   }
 }
 

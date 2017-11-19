@@ -4,14 +4,18 @@
     <div class="container">
 
       <ul class="lang-dropdown">
-        <li class="lang-dropdown-li dropdown-item">
-          <a *ngIf="currentLang" id="dropdown-link-button" (click)="isLangDropdownCollapsed = !isLangDropdownCollapsed">
+        <li class="lang-dropdown-li dropdown-item" dropdown>
+          <a *ngIf="currentLang" id="dropdown-link-button" (click)="isLangDropdownCollapsed = !isLangDropdownCollapsed" dropdownToggle>
             <img src="{{currentLang.imgUrl}}" /> {{currentLang.displayText}} <fa name="angle-down"></fa>
           </a>
-          <div *ngIf="!isLangDropdownCollapsed" class="notif-wrapper">
-            <div class="popover-arrow"></div>
-            <a *ngFor="let lang of languages" (click)="changeLanguage(lang.value)"><img src="{{lang.imgUrl}}" /> {{lang.displayText}}</a>
-          </div>
+          <ul id="lang-dropdown1" *dropdownMenu [collapse]="isLangDropdownCollapsed" role="menu" aria-labelledby="dropdown-link-button" class="language-drop dropdown-menu">
+            <li *ngFor="let lang of languages">
+              <img src="{{lang.imgUrl}}" />
+              <a class="dropdown-item" (click)="changeLanguage(lang.value)">
+                {{lang.displayText}}
+              </a>
+            </li>
+          </ul>
         </li>
       </ul>
 
