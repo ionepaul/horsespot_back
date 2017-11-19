@@ -3931,9 +3931,6 @@ typeahead-container .dropdown-menu {
         text-decoration: none;
       }
 
-.category-row {
-  padding: 0 15px;
-}
 
 .horse-card-article {
   border: 1px solid #E4E4E4;
@@ -4051,8 +4048,8 @@ typeahead-container .dropdown-menu {
 
     .horse-card-article .details .views {
       float: right;
-      text-align: center;
-      width: 20%;
+      text-align: right;
+      width: 25%;
     }
 
 .home-container .add {
@@ -4670,6 +4667,10 @@ aside.col-sm-4 {
   .profile-info .row .write {
     right: 50px;
   }
+
+  .category-row .col-sm-4 {
+    width: 50%;
+  }
 }
 
 
@@ -5258,10 +5259,6 @@ aside.col-sm-4 {
     padding: 0;
   }
 
-  .horse-card-article .details .views {
-    width: 10%;
-  }
-
   .horses-form form h4 {
     display: block;
   }
@@ -5384,6 +5381,14 @@ aside.col-sm-4 {
 }
 
 @media ( max-width: 767px ) {
+
+  .category-row .col-sm-4 {
+    width: 100%;
+  }
+
+  .horse-card-article .details .views {
+    width: 15%;
+  }
 
   .horses-details #contact .send-email {
     position: absolute;
@@ -6301,10 +6306,6 @@ aside.col-sm-4 {
 
   .appointments .layout .card {
     width: 100%;
-  }
-
-  .horse-card-article .details .views {
-    width: 15%;
   }
 
   /* PROFILE PAGE */
