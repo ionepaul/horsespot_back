@@ -3214,9 +3214,9 @@ ul.pagination {
 }
 
 .horses-details #overview p {
-  font-size: 18px;
+  font-size: 16px;
   color: #95989A;
-  line-height: 28px;
+  line-height: 26px;
 }
 
 .horses-details #overview ul {
@@ -5382,6 +5382,14 @@ aside.col-sm-4 {
 
 @media ( max-width: 767px ) {
 
+  .horse-details-slider {
+    height: 300px;
+  }
+
+  .horse-details-slider img {
+    height: 300px !important;
+  }
+
   .category-row .col-sm-4 {
     width: 100%;
   }
@@ -6409,7 +6417,7 @@ aside.col-sm-4 {
     }
 
   .horses-details .favorite li:last-child {
-    font-size: 22px;
+    font-size: 19px;
     position: relative;
     top: 2px;
   }
