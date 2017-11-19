@@ -40,9 +40,9 @@ export let CONFIG = {
     gender: "Gender",
 
     languages: [{ value: "en", displayText: "English", imgUrl: "../../assets/images/english.png" },
-    { value: "de", displayText: "Deutsch", imgUrl: "../../assets/images/germany.png" },
-    { value: "fr", displayText: "French", imgUrl: "../../assets/images/france.png" },
-    { value: "ro", displayText: "Romanian", imgUrl: "../../assets/images/romania.png" }],
+    { value: "de", displayText: "Deutsche", imgUrl: "../../assets/images/germany.png" },
+    { value: "fr", displayText: "Française", imgUrl: "../../assets/images/france.png" },
+    { value: "ro", displayText: "Română", imgUrl: "../../assets/images/romania.png" } ],
 
     defaultAge: { min: 4, max: 13 },
     defaultPrice: { min: 10000, max: 30000 },

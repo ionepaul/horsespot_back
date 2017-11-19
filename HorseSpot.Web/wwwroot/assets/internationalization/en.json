@@ -186,7 +186,7 @@
 
     },
     "ADD_AND_EDIT_PAGE":{
-        "TITLE_ADD":"Tell the world about your horse",
+        "TITLE_ADD":"Sell your horse",
         "TITLE_EDIT": "Edit the information about",
         "ALL_FIELDS":"All fields marked with",
         "ARE_REQUIRED": "are required.",
@@ -241,7 +241,7 @@
             "EDIT_AT_LEAST_ONE_IMG_P2": "If you uploaded new images, save changes, then try to delete the desired image."
         },
         "EDIT_SAVE_BTN": "Save Changes",
-        "ADD_HORSE_BTN": "Add your horse",
+        "ADD_HORSE_BTN": "Confirm",
         "ADD_SUCCESS_NOTIF": "Your horse have been succesfully uploaded. It will be available on the website after validation.",
         "EDIT_SUCCESS_NOTIF": "The updated information have been successfully saved.",
         "DELETE_IMAGE_SUCCESS_NOTIF": "The selected image have been successfully deleted."
