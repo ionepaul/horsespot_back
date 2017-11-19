@@ -57,6 +57,8 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
     isFavorite: boolean = false;
     showPedigree: boolean = false;
     notificationRefresh: number;
+    firstImage: string = '';
+    horseImages: string[] = [];
 
     private _routeSub$: Subscription;
 
@@ -96,6 +98,7 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
         this._horseAdService.getHorseAdDetails(id)
             .subscribe(res => {
                 this.horseAdModel = res;
+                this.initImages();
                 this.initializeMetadata();
                 this.horseAddress = res.Address;
                 this.pedigree = res.Pedigree;
@@ -122,6 +125,17 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
             { name: 'twitter:description', content: this.horseAdModel.Description },
             { name: 'twitter:image', content: CONFIG.imagesUrl + this.horseAdModel.Images[0] }
         ]);
+    }
+
+    initImages() {
+      this.horseAdModel.Images.forEach(img => {
+        if (!img.IsProfilePic) {
+          this.horseImages.push(img.ImageName);
+        }
+        else {
+          this.firstImage = img.ImageName
+        }
+      });
     }
 
     validateHorseAd(id: number) {

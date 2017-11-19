@@ -23,19 +23,15 @@
   <div class="row">
 
     <div class="col-sm-8">
-      <!--<div id="slider" class="carousel">
-        <carousel>
-          <slide *ngFor="let image of horseAdModel.Images">
-            <img src="{{imagesUrl}}{{image.ImageName}}">
-          </slide>
-        </carousel>-->
-
       <div class="slider">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
           <!-- Wrapper for slides -->
           <div class="carousel-inner">
-            <div *ngFor="let image of horseAdModel.Images" class="item active">
-              <img src="{{imagesUrl}}{{image.ImageName}}" alt="Show jumping slide">
+            <div class="item active">
+              <img src="{{imagesUrl}}{{firstImage}}" alt="{{horseAdModel.Title}}">
+            </div>
+            <div *ngFor="let imgName of horseImages" class="item">
+              <img src="{{imagesUrl}}{{imgName}}" alt="{{horseAdModel.Title}}">
             </div>
           </div>
           <!-- Left and right controls -->
