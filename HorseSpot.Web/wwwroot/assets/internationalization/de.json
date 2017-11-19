@@ -187,14 +187,14 @@
     "CANCEL_MESSAGE": " Füllen Sie bitte das Grund der Absage."
   },
   "ADD_AND_EDIT_PAGE": {
-    "TITLE_ADD": " Erzähle der Welt über deinen Pferd.",
-    "TITLE_EDIT": " Editiere die Information über.",
-    "ALL_FIELDS": " Alle Felder markiert mit.",
-    "ARE_REQUIRED": " sind erförderlich.",
+    "TITLE_ADD": "Verkaufe dein Pferd",
+    "TITLE_EDIT": "Editiere die Information über.",
+    "ALL_FIELDS": "Alle Felder markiert mit ",
+    "ARE_REQUIRED": "sind erförderlich.",
     "GENERAL_SECTION": {
       "TITLE": "Generälle information",
       "HORSE_NAME": "Name des Pferdes",
-      "HORSE_NAME_ERROR": " Fülle Sie bitte der Name des Pferdes ein.",
+      "HORSE_NAME_ERROR": "Fülle Sie bitte der Name des Pferdes ein.",
       "AGE": "Alter",
       "AGE_INVALID_ERROR": "Alter sollte nur Yahlen enthalten",
       "AGE_ERROR": "Füllen Sie bitte das Alter des Pferdes ein",
@@ -203,7 +203,7 @@
     },
     "DETAILS": {
       "TITLE": "Details",
-      "HORSE_ABILITY": " Abitität des Pferdes.",
+      "HORSE_ABILITY": " Abitität des Pferdes",
       "HORSE_ABILITY_ERROR": " Selectieren Sie bitte mindestens eine abititöt des Pferdes.",
       "RECOMMENDED_RIDER": "Recomandiertes Reiter",
       "RECOMMENDED_RIDER_ERROR": " Selectiren Sie bitte mindestens ein recomandiertes Reiter.",
@@ -223,7 +223,7 @@
       "STREET_ERROR": " Füllen Sie bitte Ihre Straße ein.",
       "DESCRIPTION": "Beschreibung",
       "DESCRIPTION_ERROR": " Fülen Sie die Beschreibung ein.",
-      "X_RAYS_QUESTION": " Hat Das Pferd X-Rays? .",
+      "X_RAYS_QUESTION": " Hat Das Pferd X-Rays?",
       "COMP_EXP_QUESTION": " Hat dein Pferd erfahrungen von Wettbewebe?"
     },
     "PEDIGREE_TITLE": "Pedigree",
@@ -241,8 +241,8 @@
       "EDIT_AT_LEAST_ONE_IMG": " Du musst mindestend ein Foto haben.",
       "EDIT_AT_LEAST_ONE_IMG_P2": " Falls du neue Fotos auflädst,speichere die Änderungen und danach versuche das gewunschte Foto zu löschen."
     },
-    "EDIT_SAVE_BTN": "Speichere Veränderung ",
-    "ADD_HORSE_BTN": " Hinzufüge dien Pferd.",
+    "EDIT_SAVE_BTN": "Änderungen speichern",
+    "ADD_HORSE_BTN": "Bestätigen",
     "ADD_SUCCESS_NOTIF": " dein Pferd war erfolgreich aufgeladen. Es wird auf der Website nach Gültigkeitserklärung vorhanden sein.",
     "EDIT_SUCCESS_NOTIF": " Die aufgeladene Information war erfolgreich gespeichert.",
     "DELETE_IMAGE_SUCCESS_NOTIF": " Das selectierte Foto war erfolgreich gelöscht."

@@ -192,17 +192,38 @@ const routes: Routes = [
       },
       resolve: { model: HorseListCategoriesResolver }
   },
-  { path: 'horses-for-sale/:id/:category/:title', component: HorseAdDetailComponent }
+  { path: 'horses-for-sale/:id/:category/:title', component: HorseAdDetailComponent },
+  {
+    path: 'horses/add', component: AddHorseAdComponent,
+    data: {
+      title: 'Sell Your Horse | Horse Spot',
+      meta: [
+        { name: 'description', content: 'Browse through thousands of quality leisure horses for sale, offered to you by multiple stables, owners, dealers or riders.' },
+        { property: 'og:title', content: 'Leisure | Horses For Sale' },
+        { property: 'og:description', content: 'Browse through thousands of quality leisure horses for sale, offered to you by multiple stables, owners, dealers or riders.' },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:title', content: 'Leisure | Horses For Sale' },
+        { name: 'twitter:description', content: 'Browse through thousands of quality leisure horses for sale, offered to you by multiple stables, owners, dealers or riders.' },
+      ],
+      links: [
+        { rel: 'alternate', hreflang: 'de', href: 'https://horse-spot.com/horses-for-sale/leisure/1?lang=de' },
+        { rel: 'alternate', hreflang: 'fr', href: 'https://horse-spot.com/horses-for-sale/leisure/1?lang=fr' },
+        { rel: 'alternate', hreflang: 'ro', href: 'https://horse-spot.com/horses-for-sale/leisure/1?lang=ro' }
+      ]
+    },
+    canActivate: [LoggedInGuard]
+  },
+  { path: 'account/profile/:userId', component: ProfileComponent }
 
 
   //{ path: 'contact', component: ContactComponent },
   //{ path: 'error/:statusCode', component: ErrorComponent },
   //{ path: 'account/appointments', component: AppointmentsListComponent, canActivate: [ LoggedInGuard ] },
-  //{ path: 'account/profile/:userId', component: ProfileComponent },
+
   //{ path: 'account/horses-for-sale/:userId/:page', component: UserPostsComponent, resolve: { model: UserPostsResolver } },
   //{ path: 'account/sold-horses/:userId/:page', component: UserReferencesComponent, resolve: { model: UserReferencesResolver } },
   //{ path: 'account/wishlist/:page', component: UserFavoritesComponent, canActivate: [ LoggedInGuard ],resolve: { model: UserFavoritesResolver } },
-  //{ path: 'horses/add', component: AddHorseAdComponent, canActivate: [ LoggedInGuard ] },
+
   //{ path: 'horses/edit/:id', component: EditHorseAdComponent, canActivate: [ LoggedInGuard, IsPostOwnerGuard ] },
   //{ path: 'horses/unvalidated/:page', component: HorseListUnvalidatedComponent, canActivate: [ LoggedInGuard, AdminGuard ], resolve: { model: UnvalidatedHorseListResolver } },
 ];

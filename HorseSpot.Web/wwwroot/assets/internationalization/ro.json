@@ -186,7 +186,7 @@
 
     },
     "ADD_AND_EDIT_PAGE":{
-        "TITLE_ADD":"Spune lumii despre calul tău",
+        "TITLE_ADD":"Vinde calul tău",
         "TITLE_EDIT": "Editează informațiile despre",
         "ALL_FIELDS":"Toate câmpurile marcate cu ",
         "ARE_REQUIRED": "sunt obligatorii.",
@@ -241,8 +241,8 @@
             "EDIT_AT_LEAST_ONE_IMG_P2": "Dacă ai încărcat imagini noi, salvează modificările, iar apoi șterge……..If you uploaded new images, save changes, then try to delete the desired image."
         },
         "EDIT_SAVE_BTN": "Salvează modificările",
-        "ADD_HORSE_BTN": "Adaugă cal",
-        "ADD_SUCCESS_NOTIF": "Calul tău a fost încărcat cu succes. Va apărea pe site după validare.",
+        "ADD_HORSE_BTN": "Confirmă",
+        "ADD_SUCCESS_NOTIF": "Calul tău a fost salvat cu succes. Va apărea pe site după validare.",
         "EDIT_SUCCESS_NOTIF": "Informațiile au fost modificate cu success.",
         "DELETE_IMAGE_SUCCESS_NOTIF": "Imaginea selectată a fost ștearsă cu succes."
     },
