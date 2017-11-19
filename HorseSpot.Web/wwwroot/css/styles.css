@@ -694,8 +694,8 @@ nav.navbar div.user-bg-part {
 
   nav.navbar div.user-bg-part .notif-wrapper {
     position: absolute;
-    top: 50px;
-    right: 0;
+    top: 45px;
+    right: 15px;
     z-index: 20;
     background: #fff;
     width: 160px;
@@ -4342,7 +4342,7 @@ aside.col-sm-4 {
   }
 
     nav.navbar div.user-bg-part .notif-wrapper {
-      width: 95%;
+      width: 160px;
     }
 
   /* NAVBAR */
@@ -5084,17 +5084,6 @@ aside.col-sm-4 {
   }
 
   /* LOGO and NAVBAR */
-  .navbar-brand {
-    bottom: 0;
-  }
-
-  ul.navbar-nav {
-    top: 9px;
-  }
-
-  nav.navbar div.user-bg-part {
-    top: 24px;
-  }
 
 
   /*nav .login-list .signup-btn, nav .login-list .login-btn {
@@ -5126,7 +5115,6 @@ aside.col-sm-4 {
   }
 
   nav.navbar div.user-bg-part {
-    top: 20px;
     right: 0px;
   }
 
