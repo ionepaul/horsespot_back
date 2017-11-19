@@ -99,8 +99,8 @@ export class EditHorseAdComponent implements OnInit {
         this.horseAdModel.Abilities = res.Abilities;
         this.horseAdModel.RecomendedRiders = res.RecomendedRiders;
         this.horseAdModel.PriceRange = res.PriceRange,
-        this.horseAdModel.PriceRangeId = res.PriceRange.Id,
-        this.setAbilitiesAndRecommendedRidersIds();
+          this.horseAdModel.PriceRangeId = res.PriceRange.Id,
+          this.setAbilitiesAndRecommendedRidersIds();
         this.getPriceRanges();
         this.getHorseAbilities();
         this.getRecommendedRiders();
@@ -172,7 +172,7 @@ export class EditHorseAdComponent implements OnInit {
       this._horseAdService.deleteUnsavedImage(imageName)
         .subscribe(res => this.removeDeleteImage(imageId),
         error => this.errorMessage);
-    }  
+    }
   }
 
   removeDeleteImage(imageId: number) {
@@ -226,7 +226,11 @@ export class EditHorseAdComponent implements OnInit {
         .subscribe(res => {
           let img = new ImageModel();
           img.ImageName = res;
-          this.horseAdModel.Images.push(img);
+
+          this._horseAdService.saveHorseAdImage(this.horseAdModel.Id, res).subscribe(res => {
+            img.ImageId = res;
+            this.horseAdModel.Images.push(img);
+          }, error => this.errorMessage = error);
         },
         error => this.errorMessage = error);
     });

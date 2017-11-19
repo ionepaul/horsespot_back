@@ -128,10 +128,10 @@ namespace HorseSpot.Api.Controllers
 
         [HttpPost]
         [Authorize]
-        [Route("api/horses/images/save/{adId}/{imageName}")]
-        public async Task SaveNewImage([FromUri] int adId, [FromUri] string imageName)
+        [Route("api/horses/images/save/{adId}")]
+        public async Task<int> SaveNewImage([FromUri] int adId, string imageName)
         {
-            await _iHorseAdBus.SaveNewImage(adId, imageName, UserIdExtractor.GetUserIdFromRequest(Request));
+            return await _iHorseAdBus.SaveNewImage(adId, imageName, UserIdExtractor.GetUserIdFromRequest(Request));
         }
 
         [HttpPost]
@@ -163,9 +163,9 @@ namespace HorseSpot.Api.Controllers
         [HttpPost]
         [Authorize]
         [Route("api/horses/images/delete/{imageId}")]
-        public void Delete([FromUri] int imageId)
+        public async Task Delete([FromUri] int imageId)
         {
-            var imageName = _iHorseAdBus.DeleteImage(imageId, UserIdExtractor.GetUserIdFromRequest(Request));
+            var imageName = await _iHorseAdBus.DeleteImage(imageId, UserIdExtractor.GetUserIdFromRequest(Request));
 
             var horseAdvImageDir = ConfigurationManager.AppSettings["HorseAdsImgDirectory"];
             var serverPath = HttpContext.Current.Server.MapPath(horseAdvImageDir);

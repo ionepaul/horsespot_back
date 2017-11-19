@@ -129,6 +129,7 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
 
     initImages() {
       this.horseAdModel.Images.forEach(img => {
+        console.log(img);
         if (!img.IsProfilePic) {
           this.horseImages.push(img.ImageName);
         }

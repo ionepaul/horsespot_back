@@ -44,6 +44,7 @@ export class HorseAdsService {
   private _setHorseAdProfilePicUrl = CONFIG.baseUrls.apiUrl + 'horses/images/profilepic/';
   private _deletaUnsavedImageUrl = CONFIG.baseUrls.apiUrl + 'horses/images/delete?imageName='
   private _getLatestHorses = CONFIG.baseUrls.apiUrl + 'horses/latest';
+  private _saveHorseImageUrl = CONFIG.baseUrls.apiUrl + 'horses/images/save/';
 
   sharedSearchModel: SearchModel = new SearchModel();
 
@@ -76,6 +77,12 @@ export class HorseAdsService {
   increaseViews(adId: number) {
     return this._http.post(this._increseViewsUrl + adId, "")
       .catch(this.handleError);
+  }
+
+  saveHorseAdImage(adId: number, imageName: string) {
+    return this._httpWrapper.post(`${this._saveHorseImageUrl}${adId}?imageName=${imageName}`, "")
+                            .map((res) => res.json())
+                            .catch(this.handleError);
   }
 
   postHorseAd(model: HorseAdModel) {
