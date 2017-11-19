@@ -6392,14 +6392,21 @@ aside.col-sm-4 {
     .add-horse-container .info-container .form-group.client-side {
       margin-left: 0;
     }
+
+  .horses-form form .range-inputs-container .input-range-col:nth-of-type(3),
+  .horses-form form .range-inputs-container .input-range-col:last-of-type {
+    flex-basis: 100%;
+  }
+
+  .horses-form form .range-inputs-container .input-range-col:last-of-type {
+    margin-top: 40px;
+  }
+
+    .horses-form form .range-inputs-container .input-range-col:nth-of-type(3) .ng2-nouislider {
+      width: 100% !important;
+    }
 }
 
-@media ( max-width: 610px ) {
-
-  /* SEARCH HORSE */
-
-
-}
 
 @media ( max-width: 600px ) {
 
