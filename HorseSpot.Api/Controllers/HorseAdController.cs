@@ -163,9 +163,9 @@ namespace HorseSpot.Api.Controllers
         [HttpPost]
         [Authorize]
         [Route("api/horses/images/delete/{imageId}")]
-        public async Task Delete([FromUri] int imageId)
+        public void Delete([FromUri] int imageId)
         {
-            var imageName = await _iHorseAdBus.DeleteImage(imageId, UserIdExtractor.GetUserIdFromRequest(Request));
+            var imageName = _iHorseAdBus.DeleteImage(imageId, UserIdExtractor.GetUserIdFromRequest(Request));
 
             var horseAdvImageDir = ConfigurationManager.AppSettings["HorseAdsImgDirectory"];
             var serverPath = HttpContext.Current.Server.MapPath(horseAdvImageDir);

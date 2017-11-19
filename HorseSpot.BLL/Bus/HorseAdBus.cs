@@ -243,18 +243,11 @@ namespace HorseSpot.BLL.Bus
             return horseAd.Images.Where(img => string.Equals(img.Name, imageName, StringComparison.InvariantCultureIgnoreCase)).First().ImageId;
         }
 
-        public async Task<string> DeleteImage(int imageId, string userId)
+        public string DeleteImage(int imageId, string userId)
         {
             var image = _iImageDao.GetById(imageId);
 
             CheckImageAndUserIdentity(image, userId);
-
-            if (image.IsProfilePic)
-            {
-                image.HorseAd.Images.First().IsProfilePic = true;
-
-                await _iHorseAdDao.UpdateAsync(image.HorseAd);
-            }
 
             var imageName = image.Name;
 

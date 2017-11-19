@@ -10,7 +10,7 @@ export class LoggedInGuard implements CanActivate {
 
   canActivate() {
       if (!this._accountService.isLoggedIn()) {
-          this._router.navigate(['/account/login']);
+          this._router.navigate(['/error/401']);
           return false;
       }
       else {

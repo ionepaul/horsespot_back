@@ -39,7 +39,7 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
     @ViewChild('deleteModal') public deleteModal: ModalDirective;
     @ViewChild('video') public video: ElementRef;
     @ViewChild('horseVideoFrame') public horseVideoFrame: ElementRef;
-    @ViewChild('map') public map: ElementRef;
+    @ViewChild('map') public googleMap: ElementRef;
     @ViewChild('userImage') public userImage: ElementRef;
 
     googleMapError: boolean = false;
@@ -57,7 +57,7 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
     isFavorite: boolean = false;
     showPedigree: boolean = false;
     notificationRefresh: number;
-    firstImage: string = '';
+    firstImage: string;
     horseImages: string[] = [];
 
     private _routeSub$: Subscription;
@@ -129,7 +129,6 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
 
     initImages() {
       this.horseAdModel.Images.forEach(img => {
-        console.log(img);
         if (!img.IsProfilePic) {
           this.horseImages.push(img.ImageName);
         }
@@ -137,6 +136,11 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
           this.firstImage = img.ImageName
         }
       });
+
+      if (this.firstImage === undefined) {
+        this.firstImage = this.horseAdModel.Images[0].ImageName;
+        this.horseAdModel.Images = this.horseAdModel.Images.slice(1, this.horseAdModel.Images.length);
+      }
     }
 
     validateHorseAd(id: number) {
@@ -182,7 +186,7 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
     }
 
     initMap() {
-        var map = new google.maps.Map(this.map.nativeElement, {
+        var map = new google.maps.Map(this.googleMap.nativeElement, {
             zoom: 12,
             center: { lat: 46.770439, lng: 23.591423 }
         });
@@ -197,7 +201,7 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
                     position: results[0].geometry.location
                 });
             } else {
-                this.googleMapError = true;
+              this.googleMap.nativeElement.classList.add('map-error');
             }
         })
     }

@@ -16,7 +16,7 @@ namespace HorseSpot.BLL.Interfaces
         bool CheckPostOwner(int adId, string userId);
         Task IncreaseViews(int id);
         Task<int> SaveNewImage(int adId, string imageName, string userId);
-        Task<string> DeleteImage(int imageId, string userId);
+        string DeleteImage(int imageId, string userId);
         void SetHorseAdProfilePicture(int imageId, string userId);
         LatestHorsesHomePageViewModel GetLatestHorsesForHomePage();
     }
