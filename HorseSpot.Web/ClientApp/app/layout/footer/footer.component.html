@@ -11,12 +11,10 @@
       <div class="col-sm-3 footer-2">
           <h4>{{'FOOTER.QUICK_LINKS.TITLE' | translate}}</h4>
           <ul>
-            <li><a [routerLink]="['/home']">{{'FOOTER.QUICK_LINKS.HOME' | translate}}</a></li>
-            <li><a [routerLink]="['/about']">{{'FOOTER.QUICK_LINKS.ABOUT' | translate}}</a></li>
-            <li><a [routerLink]="['/get-involved']">{{'FOOTER.QUICK_LINKS.GET_INVOLVED' | translate}}</a></li>
-            <li><a [routerLink]="['/contact']">{{'FOOTER.QUICK_LINKS.CONTACT' | translate}}</a></li>
-            <li><a [routerLink]="['/account/login']">{{'FOOTER.QUICK_LINKS.LOGIN' | translate}}</a></li>
-            <li><a [routerLink]="['/account/register']">{{'FOOTER.QUICK_LINKS.SIGNUP' | translate}}</a></li>
+            <li><a [routerLink]="['/home']">{{ 'NAVBAR.HOME' | translate }}</a></li>
+            <li><a [routerLink]="['/advertise']">{{ 'NAVBAR.ADVERTISE' | translate }}</a></li>
+            <li><a [routerLink]="['/contact']">{{ 'NAVBAR.CONTACT' | translate }}</a></li>
+            <li><a [routerLink]="['/hire-us']">{{ 'NAVBAR.HIRE_US' | translate }}</a></li>
           </ul>
       </div><!-- col-sm-3 -->
 
@@ -64,15 +62,15 @@
   <div class="row">
 
     <div class="col-sm-4 logo-1">
-        <a [routerLink]="['/get-involved']"><img src="../../../../wwwroot/assets/images/footer-logo-2.png" alt=""></a>
+        <a><img src="../../../../wwwroot/assets/images/footer-logo-2.png" alt=""></a>
     </div><!-- col-sm-4 -->
 
     <div class="col-sm-4 logo-2">
-      <a [routerLink]="['/get-involved']"><img src="../../../../wwwroot/assets/images/footer-logo-1.png" alt=""></a>
+      <a><img src="../../../../wwwroot/assets/images/footer-logo-1.png" alt=""></a>
     </div><!-- col-sm-4 -->
 
     <div class="col-sm-4 logo-3">
-        <a [routerLink]="['/get-involved']"><img src="../../../../wwwroot/assets/images/footer-logo-3.png" alt=""></a>
+        <a><img src="../../../../wwwroot/assets/images/footer-logo-3.png" alt=""></a>
     </div><!-- col-sm-4 -->
 
   </div><!-- row -->

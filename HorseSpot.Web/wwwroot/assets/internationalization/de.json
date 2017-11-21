@@ -117,7 +117,7 @@
     "CHANGE_PIC": " Ändern Sie ihr Profilbild.",
     "UNSUPPORTED_PIC": " Ununterstützte Profil-Bilderausdehnung.",
     "CHANGE_PASS": {
-      "TITLE": " Kennwort verändern.",
+      "TITLE": " Kennwort verändern",
       "BTN": " Kennwort wechseln.",
       "CURR_PASS": " Aktuelles Kennwort.",
       "CURR_PASS_ERR": " Füllen sie bitte das aktulelle Kennwort aus.",
@@ -132,6 +132,8 @@
     },
     "SAVE_BTN": "Sichern",
     "EDIT_BTN": "Redigieren",
+    "CANCEL_BTN": "Stornieren",
+    "PROFILE_NAME_ERROR": "Füllen Sie Ihren Profilnamen aus.",
     "PROFILE_CHANGES_SUCCESS_NOTIF": " Deine Profilinformationen wurden erfolgreich aktualisiert.",
     "HORSES_FOR_SALE": "Pferde zum Verkauf",
     "REFERENCES": "Referenzen",

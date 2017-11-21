@@ -89,7 +89,7 @@
         <div class="user-info">
           <img #userImage src="" alt="Owner profile picture">
           <p class="name"><span>{{userModel.FirstName}}</span></p>
-          <p class="tel"><a href="tel:{{userModel.PhoneNumber}}"><i class="fa fa-mobile" aria-hidden="true"></i> {{userModel.PhoneNumber}}</a></p>
+          <p *ngIf="userModel.PhoneNumber" class="tel"><a href="tel:{{userModel.PhoneNumber}}"><i class="fa fa-mobile" aria-hidden="true"></i> {{userModel.PhoneNumber}}</a></p>
           <p class="mail"><a href="mailto:{{userModel.Email}}"><i class="fa fa-envelope" aria-hidden="true"></i> {{userModel.Email}}</a></p>
 
           <ul class="send-email">

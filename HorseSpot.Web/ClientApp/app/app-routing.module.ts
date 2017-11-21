@@ -20,6 +20,7 @@ import { HorseAdDetailComponent } from './horse-advertisments/horse-ad-detail/ho
 import { LoggedInGuard } from './shared/guards/loggedInGuard';
 import { AdminGuard } from './shared/guards/adminGuard';
 import { IsPostOwnerGuard } from './shared/guards/isPostOwnerGuard';
+import { WishListGuard } from './shared/guards/wishlist.guard';
 
 // ROUTE RESOLVERS
 import { UserPostsResolver } from './account/user-posts/user-posts.route-resolver';
@@ -218,18 +219,29 @@ const routes: Routes = [
     path: 'horses/edit/:id', component: EditHorseAdComponent,
     canActivate: [LoggedInGuard, IsPostOwnerGuard]
   },
-
-
-  //{ path: 'contact', component: ContactComponent },
-  //{ path: 'error/:statusCode', component: ErrorComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'error/:statusCode', component: ErrorComponent },
   //{ path: 'account/appointments', component: AppointmentsListComponent, canActivate: [ LoggedInGuard ] },
 
-  //{ path: 'account/horses-for-sale/:userId/:page', component: UserPostsComponent, resolve: { model: UserPostsResolver } },
-  //{ path: 'account/sold-horses/:userId/:page', component: UserReferencesComponent, resolve: { model: UserReferencesResolver } },
-  //{ path: 'account/wishlist/:page', component: UserFavoritesComponent, canActivate: [ LoggedInGuard ],resolve: { model: UserFavoritesResolver } },
+  {
+    path: 'account/horses-for-sale/:userId/:page', component: UserPostsComponent,
+    resolve: { model: UserPostsResolver }
+  },
+  {
+    path: 'account/sold-horses/:userId/:page', component: UserReferencesComponent,
+    resolve: { model: UserReferencesResolver }
+  },
+  {
+    path: 'account/wishlist/:userId/:page', component: UserFavoritesComponent,
+    canActivate: [ LoggedInGuard, WishListGuard ],
+    resolve: { model: UserFavoritesResolver }
+  },
 
-  
-  //{ path: 'horses/unvalidated/:page', component: HorseListUnvalidatedComponent, canActivate: [ LoggedInGuard, AdminGuard ], resolve: { model: UnvalidatedHorseListResolver } },
+  //{
+  //  path: 'horses/unvalidated/:page',
+  //  component: HorseListUnvalidatedComponent, canActivate: [LoggedInGuard, AdminGuard],
+  //  resolve: { model: UnvalidatedHorseListResolver }
+  //},
 ];
 
 @NgModule({

@@ -9,6 +9,8 @@ export let CONFIG = {
 
     horseAdsImagesUrl: 'http://localhost/horsespotservices/Images/HorseAdsImg/',
 
+    profileImagesUrl: 'http://localhost/horsespotservices/Images/ProfilePhotos/',
+
     authUrl: 'http://localhost/horsespotservices/token',
 
     restCountriesUrl: 'https://restcountries.eu/rest/v2/name/',

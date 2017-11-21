@@ -14,6 +14,7 @@
   <ItemGroup>
     <!-- Files not to show in IDE -->
     <None Remove="ClientApp\app\shared\advertisments\right-side.advertisments.component.ts" />
+    <None Remove="ClientApp\app\shared\guards\wishlist.guard.ts" />
     <None Remove="yarn.lock" />
     <Content Remove="wwwroot\dist\**" />
     <None Remove="ClientApp\dist\**" />
@@ -28,6 +29,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\shared\advertisments\right-side.advertisments.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\guards\wishlist.guard.ts" />
   </ItemGroup>
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
     <!-- Ensure Node.js is installed -->
