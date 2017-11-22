@@ -125,9 +125,6 @@
           </div><!-- form-group -->
 
           <div *ngIf="phone.errors && phone.touched" class="client-side-validation-error">
-            <small [hidden]="!phone.errors.required">
-              {{'REGISTER_PAGE.PHONE_NUMBER_ERROR' | translate}}
-            </small>
             <small [hidden]="!phone.errors.pattern || !phone.errors.minlength">
               {{'REGISTER_PAGE.PHONE_NUMBER_INVALID_FORMAT' | translate}}
             </small>
@@ -136,7 +133,7 @@
           <div class="form-group">
             <div class="input-group">
               <input autocomplete="off" name="phone" type="tel" class="form-control" id="phone" placeholder="{{'REGISTER_PAGE.PHONE_NUMBER' | translate}}"
-                     [(ngModel)]="registerInput.PhoneNumber" required #phone="ngModel"
+                     [(ngModel)]="registerInput.PhoneNumber" #phone="ngModel"
                      pattern="^(?=.*[0-9])[- +()0-9].*[0-9]+$" minlength="5"/>
             </div><!-- input-group -->
           </div><!-- form-group -->

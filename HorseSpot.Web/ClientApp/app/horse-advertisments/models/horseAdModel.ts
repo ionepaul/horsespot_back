@@ -34,4 +34,5 @@ export interface HorseAdModel {
     FavoritesFor: Array<string>;
     RecomendedRidersIds: Array<number>;
     AbilityIds: Array<number>;
+    IsSold: boolean;
 }

@@ -306,8 +306,8 @@ export class HorseAdsService {
   sendEmail(emailModel: EmailModel) {
     let body = JSON.stringify(emailModel);
 
-    return this._http.post(this._sendEmailUrl, body)
-      .catch(this.handleError)
+    return this._httpWrapper.post(this._sendEmailUrl, body)
+                            .catch(this.handleError)
   }
 
   search(searchModel: SearchModel) {

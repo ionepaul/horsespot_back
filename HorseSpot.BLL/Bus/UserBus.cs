@@ -257,9 +257,12 @@ namespace HorseSpot.BLL.Bus
                 throw new ValidationException(Resources.InvalidConfirmPasswordFormat);
             }
 
-            if (!phoneNumberRegex.IsMatch(user.PhoneNumber) || user.PhoneNumber.Length < 5)
+            if (!string.IsNullOrEmpty(user.PhoneNumber))
             {
-                throw new ValidationException(Resources.InvalidPhoneNumberFormat);
+                if (!phoneNumberRegex.IsMatch(user.PhoneNumber) || user.PhoneNumber.Length < 5)
+                {
+                    throw new ValidationException(Resources.InvalidPhoneNumberFormat);
+                }
             }
 
             if (!CheckIfUserExistsByEmail(user.Email))
@@ -275,9 +278,12 @@ namespace HorseSpot.BLL.Bus
 
             Regex phoneNumberRegex = new Regex(@"^(?=.*[0-9])[- +()0-9].*[0-9]+$");
 
-            if ((editProfile.PhoneNumber != null && !phoneNumberRegex.IsMatch(editProfile.PhoneNumber)) || editProfile.PhoneNumber.Length < 5)
+            if (!string.IsNullOrEmpty(editProfile.PhoneNumber))
             {
-                throw new ValidationException(Resources.InvalidPhoneNumberFormat);
+                if (!phoneNumberRegex.IsMatch(editProfile.PhoneNumber) || editProfile.PhoneNumber.Length < 5)
+                {
+                    throw new ValidationException(Resources.InvalidPhoneNumberFormat);
+                }
             }
 
             user.PhoneNumber = editProfile.PhoneNumber;

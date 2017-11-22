@@ -9,7 +9,7 @@ import 'rxjs/add/observable/throw';
 
 import { HttpWrapper } from '../shared/http/http.wrapper';
 import { AuthService } from '../shared/auth/auth.service';
-import { AppointmentsService } from './appointments/appointments.service';
+//import { AppointmentsService } from './appointments/appointments.service';
 
 import { LoginModel } from './models/login.model';
 import { UserModel } from './models/user.model';
@@ -42,8 +42,8 @@ export class AccountService {
   constructor(private _httpWrapper: HttpWrapper,
     private _http: Http,
     private _authService: AuthService,
-    private _router: Router,
-    private _appointmentsService: AppointmentsService) { }
+    private _router: Router) { }
+    //private _appointmentsService: AppointmentsService) { }
 
   loginService(model: LoginModel) {
     return this._authService.authenticateUser(model);

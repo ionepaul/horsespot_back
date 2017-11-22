@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpWrapper } from '../shared/http/http.wrapper';
 import { Meta, Title } from '@angular/platform-browser';
 import { NotificationService } from '../shared/notifications/notification.service';
 
@@ -21,7 +21,7 @@ export class ContactComponent implements OnInit, OnDestroy {
     notificationRefresh: number;
     private _contactReceiveEmailUrl = CONFIG.baseUrls.apiUrl + "contactformemail";
 
-    constructor(private _http: Http,
+    constructor(private _httpWrapper: HttpWrapper,
                 private _notificationService: NotificationService,
                 private _metaData: Meta, pageTitle: Title) {
         pageTitle.setTitle('Contact | Horse Spot');
@@ -53,7 +53,7 @@ export class ContactComponent implements OnInit, OnDestroy {
     }
 
     send(form: any) {
-        this._http.post(this._contactReceiveEmailUrl, JSON.stringify(this.emailModel))
+        this._httpWrapper.post(this._contactReceiveEmailUrl, JSON.stringify(this.emailModel))
                    .subscribe(res => { this.notificationRefresh++;
                                        this._notificationService.setRefreshAndText(this.notificationRefresh, this._notificationService.contactEmailSentSuccessText());
                                        form.reset();
