@@ -204,8 +204,8 @@
         },
         "DETAILS": {
             "TITLE": "Detalii",
-            "HORSE_ABILITY":"Abilitățile calului",
-            "HORSE_ABILITY_ERROR":"Selectează cel puțin o abilitate.",
+            "HORSE_ABILITY":"Categoria calului",
+            "HORSE_ABILITY_ERROR":"Selectează cel puțin o categorie.",
             "RECOMMENDED_RIDER":"Călăreț recomandat",
             "RECOMMENDED_RIDER_ERROR":" Selectează cel puțin un călăreț recomandat.",
             "BREED": "Rasa",

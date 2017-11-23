@@ -204,8 +204,8 @@
     },
     "DETAILS": {
       "TITLE": "Details",
-      "HORSE_ABILITY": "Horse Ability",
-      "HORSE_ABILITY_ERROR": "Please select at least one horse ability.",
+      "HORSE_ABILITY": "Horse Category",
+      "HORSE_ABILITY_ERROR": "Please select at least one horse category.",
       "RECOMMENDED_RIDER": "Recommended Rider",
       "RECOMMENDED_RIDER_ERROR": "Please select at least one recommended rider.",
       "BREED": "Breed",
@@ -287,7 +287,7 @@
   "ERROR_PAGE": {
     "FORBBIDEN_TITLE": "FORBBIDEN",
     "FORBBIDEN_TEXT": "This page is forbbiden. You have been logged out.",
-    "FORBBIDEN_BTN": "Log In",
+    "FORBBIDEN_BTN": "Home Page",
     "UNAUTHORIZED_TITLE": "UNAUTHORIZED",
     "UNAUTHORIZED_TEXT": "You do not have the rights to access this page.",
     "HOME_BTN": "Home Page",

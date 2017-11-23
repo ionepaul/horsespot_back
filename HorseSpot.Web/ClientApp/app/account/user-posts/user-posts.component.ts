@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { CONFIG } from '../../config';
+import { Title } from '@angular/platform-browser';
 
 //MODELS
 import { HorseAdListModel } from '../../horse-advertisments/models/horseAdListModel';
@@ -29,6 +30,7 @@ export class UserPostsComponent implements OnInit, OnDestroy {
   constructor(private _route: ActivatedRoute,
     private _router: Router,
     private _accountService: AccountService,
+    private _titleService: Title,
     private _location: Location) {
 
     this.routerSub$ = this._router.events.subscribe((event) => {
@@ -48,6 +50,7 @@ export class UserPostsComponent implements OnInit, OnDestroy {
     this._accountService.getUserDetails(this.userId)
       .subscribe(res =>
       {
+        this._titleService.setTitle(`${res.FirstName} | Horses For Sale | Horse Spot`);
         this.userModel = res;
         this.setProfilePicture(res.ImagePath);
       },

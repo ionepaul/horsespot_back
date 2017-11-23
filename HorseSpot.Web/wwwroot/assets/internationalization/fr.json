@@ -203,8 +203,8 @@
     },
     "DETAILS": {
       "TITLE": "détails ",
-      "HORSE_ABILITY": "Habilités du cheval",
-      "HORSE_ABILITY_ERROR": "Veuillez sélectionner au moins une habilité pour votre cheval.",
+      "HORSE_ABILITY": "Catégorie de cheval",
+      "HORSE_ABILITY_ERROR": "Veuillez sélectionner au moins une catégorie pour votre cheval.",
       "RECOMMENDED_RIDER": "Cavalier recommandé",
       "RECOMMENDED_RIDER_ERROR": "Veuillez sélectionner au moins un cavalier recommandé .",
       "BREED": "Race",

@@ -4,17 +4,35 @@
 
     <div class="col-sm-6">
       <div class="logo-wrapper">
-      <!--    <img src="../../../../wwwroot/assets/images/error-head.png" alt="Horse Spot Icon Logo">-->
+          <img src="../../../../wwwroot/assets/images/error-head.png" alt="Horse spot logo">
       </div><!-- logo-wrapper -->
 
     </div><!-- col-sm-6 -->
 
     <div class="col-sm-6">
-      <div class="text-wrapper">
+      <div *ngIf="statusCode == '401'"class="text-wrapper">
           <h1>{{statusCode}}</h1>
-          <h2>{{statusCodeInfo}}</h2>
-          <div class="message"><p>{{additionalInfo}}</p></div>
-          <a (click)="navigateTo()">{{buttonText}}</a>
+          <h2>{{'ERROR_PAGE.UNAUTHORIZED_TITLE' | translate}}</h2>
+          <div class="message"><p>{{'ERROR_PAGE.UNAUTHORIZED_TEXT' | translate}}</p></div>
+          <a [routerLink]="['/home']">{{'ERROR_PAGE.HOME_BTN' | translate}}</a>
+      </div><!-- text-wrapper -->
+      <div *ngIf="statusCode == '403'" class="text-wrapper">
+        <h1>{{statusCode}}</h1>
+        <h2>{{'ERROR_PAGE.FORBBIDEN_TITLE' | translate}}</h2>
+        <div class="message"><p>{{'ERROR_PAGE.FORBBIDEN_TEXT' | translate}}</p></div>
+        <a [routerLink]="['/home']">{{'ERROR_PAGE.HOME_BTN' | translate}}</a>
+      </div><!-- text-wrapper -->
+      <div *ngIf="statusCode == '500'" class="text-wrapper">
+        <h1>{{statusCode}}</h1>
+        <h2>{{'ERROR_PAGE.INTERNAL_TITLE' | translate}}</h2>
+        <div class="message"><p>{{'ERROR_PAGE.INTERNAL_TEXT' | translate}}</p></div>
+        <a [routerLink]="['/home']">{{'ERROR_PAGE.HOME_BTN' | translate}}</a>
+      </div><!-- text-wrapper -->
+      <div *ngIf="statusCode == '404'" class="text-wrapper">
+        <h1>{{statusCode}}</h1>
+        <h2>{{'ERROR_PAGE.NOT_FOUND_TITLE' | translate}}</h2>
+        <div class="message"><p>{{'ERROR_PAGE.NOT_FOUND_TEXT' | translate}}</p></div>
+        <a [routerLink]="['/home']">{{'ERROR_PAGE.HOME_BTN' | translate}}</a>
       </div><!-- text-wrapper -->
     </div><!-- col-sm-6 -->
 

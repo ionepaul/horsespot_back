@@ -10,6 +10,7 @@
   </ul>
 
   <ul class="favorite">
+    <li class="round-button" *ngIf="isAdmin && !horseAdModel.IsValidated"><a (click)="validateHorseAd()">{{'HORSE_AD_DETAIL.VALIDATE_BTN' | translate}}</a></li>
     <li class="round-button" *ngIf="currentUserId == horseAdModel.UserId && !horseAdModel.IsSold"><a (click)="deleteModal.show()">{{'HORSE_AD_DETAIL.SOLD_BTN' | translate}}</a></li>
     <li class="round-button" *ngIf="currentUserId == horseAdModel.UserId && !horseAdModel.IsSold"><a (click)="redirectToEdit()">{{'HORSE_AD_DETAIL.EDIT_BTN' | translate}}</a></li>
     <li class="heart">

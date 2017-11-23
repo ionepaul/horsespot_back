@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { DOCUMENT } from '@angular/platform-browser';
+import { DOCUMENT, Title } from '@angular/platform-browser';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 
 //SERVICES
@@ -53,6 +53,7 @@ export class ProfileComponent implements OnInit {
     private _notificationService: NotificationService,
     private _location: Location,
     private _horseAdService: HorseAdsService,
+    private _titleService: Title,
     @Inject(DOCUMENT) private document,
     @Inject(PLATFORM_ID) private platformId: Object) { }
 
@@ -66,7 +67,8 @@ export class ProfileComponent implements OnInit {
 
     this._accountService.getUserFullProfile(this.userId)
       .subscribe(response => {
-      this.userModel = response;
+        this._titleService.setTitle(`${response.FullName} | Horse Spot`);
+        this.userModel = response;
         this.setProfilePicture(response.ImagePath);
       },
       error => this.editErrorMessage = error);
