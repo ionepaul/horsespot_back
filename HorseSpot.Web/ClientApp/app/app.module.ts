@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { AdsenseModule } from 'ng2-adsense';
 
 //MODULES
 import { SharedModule } from './shared/shared.module';
@@ -23,7 +24,11 @@ import { ContactComponent } from './contact/contact.component';
     SharedModule,
     LayoutModule,
     AccountModule,
-    HorseAdsModule
+    HorseAdsModule,
+    //AdsenseModule.forRoot({
+    //  adClient: 'ca-pub-4911156518333270"',
+    //  adSlot: 7259870550
+    //})
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -15,6 +15,8 @@ import { AuthService } from './shared/auth/auth.service';
 //import { AppointmentsService } from './account/appointments/appointments.service';
 import { LinkService } from './shared/link.service';
 
+declare var ga: Function;
+
 @Component({
     selector: 'app',
     template: `
@@ -108,6 +110,8 @@ export class AppComponent implements OnInit, OnDestroy {
             .filter(route => route.outlet === 'primary')
             .mergeMap(route => route.data)
             .subscribe((event) => {
+                ga('set', 'page', event.urlAfterRedirects);
+                ga('send', 'pageview');
                 this._setMetaAndLinks(event);
                 window.scrollTo(0, 1);
             });
