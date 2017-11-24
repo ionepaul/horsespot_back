@@ -67,6 +67,14 @@ namespace HorseSpot.Web.Controllers
       xml += "<lastmod>" + DateTime.Now.ToString("yyyy-MM-dd") + "</lastmod>";
       xml += "</url>";
       xml += "<url>";
+      xml += "<loc>https://horse-spot.com/advertise</loc>";
+      xml += "<lastmod>" + DateTime.Now.ToString("yyyy-MM-dd") + "</lastmod>";
+      xml += "</url>";
+      xml += "<url>";
+      xml += "<loc>https://horse-spot.com/hire-us</loc>";
+      xml += "<lastmod>" + DateTime.Now.ToString("yyyy-MM-dd") + "</lastmod>";
+      xml += "</url>";
+      xml += "<url>";
       xml += "<loc>https://horse-spot.com/contact</loc>";
       xml += "<lastmod>" + DateTime.Now.ToString("yyyy-MM-dd") + "</lastmod>";
       xml += "</url>";

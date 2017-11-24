@@ -12,12 +12,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
+import { AdvertiseComponent } from './advertise/advertise.component';
+import { HireUsComponent } from './hire-us/hire-us.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    ContactComponent
+    ContactComponent,
+    AdvertiseComponent,
+    HireUsComponent
   ],
   imports: [
     AppRoutingModule,

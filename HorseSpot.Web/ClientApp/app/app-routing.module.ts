@@ -15,6 +15,8 @@ import { HorseListCategoriesComponent } from './horse-advertisments/horse-list-c
 import { HorseListUnvalidatedComponent } from './horse-advertisments/horse-list-unvalidated/horse-list-unvalidated.component';
 import { ContactComponent } from './contact/contact.component';
 import { HorseAdDetailComponent } from './horse-advertisments/horse-ad-detail/horse-ad-detail.component';
+import { AdvertiseComponent } from './advertise/advertise.component';
+import { HireUsComponent } from './hire-us/hire-us.component';
 
 //GUARDS
 import { LoggedInGuard } from './shared/guards/loggedInGuard';
@@ -302,6 +304,25 @@ const routes: Routes = [
     canActivate: [LoggedInGuard, AdminGuard],
     resolve: { model: UnvalidatedHorseListResolver }
   },
+  {
+    path: 'advertise', component: AdvertiseComponent,
+    data: {
+      title: 'Advertise | Horse Spot',
+      meta: [
+        { name: 'robots', content: 'NOINDEX, NOFOLLOW' },
+      ],
+    },
+  },
+  {
+    path: 'hire-us', component: HireUsComponent,
+    data: {
+      title: 'Hire Us | Horse Spot',
+      meta: [
+        { name: 'robots', content: 'NOINDEX, NOFOLLOW' },
+      ],
+    },
+  }
+
   //{ path: 'account/appointments', component: AppointmentsListComponent, canActivate: [ LoggedInGuard ] },
 ];
 
