@@ -1488,6 +1488,7 @@ div.social-links {
 
   .profile-info .profile-image img {
     width: 190px;
+    height: 190px;
     display: inline-block;
     border-radius: 100%;
   }
@@ -1516,7 +1517,7 @@ div.social-links {
   }
 
   .profile-info .profile-details .edit-info {
-    width: 80%;
+    width: 100%;
     padding-top: 10px;
   }
 
@@ -4751,37 +4752,28 @@ aside.col-sm-4 {
   }
 
   .profile-info .row {
-    display: block;
+    display: flex;
+    flex-wrap: wrap;
     position: relative;
   }
 
   .profile-info .ctas {
-    width: 100%;
+    flex-basis: 100%;
     text-align: center;
-  }
-
-  .profile-info .profile-image {
-    width: auto;
-    position: absolute;
-    left: 0;
-  }
-
-    .profile-info .profile-image img {
-      width: 100%;
-    }
-
-  .profile-info .ctas {
     margin-top: 35px;
   }
 
     .profile-info .ctas a {
       display: inline-block;
-      width: 25%;
+      width: 220px;
+    }
+
+    .profile-info .profile-image {
+      width: auto;
     }
 
   .profile-info .profile-details {
-    width: 80%;
-    margin-left: 20%;
+      flex: 1;
   }
 
     .profile-info .profile-details ul li {
@@ -5313,6 +5305,10 @@ aside.col-sm-4 {
 }
 
 @media ( max-width: 800px ) {
+
+  .profile-info .profile-details .edit-info .form-group .icon {
+    display: none;
+  }
 
   /* LOGO and NAVBAR */
   .appointment-navbar-notif {
