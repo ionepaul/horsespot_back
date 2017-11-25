@@ -2859,19 +2859,24 @@ ul.pagination {
       color: #95989A;
     }
 
-    /* GENERAL CHECKBOXES */
-    .horses-form form .checkbox .regular-checkbox,
-    form.details input[type="checkbox"] {
-      -webkit-appearance: none;
-      border: 1px solid #cacece;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
-      padding: 9px;
-      border-radius: 3px !important;
-      display: inline-block;
-      position: relative;
-      margin: 0 10px 0 0;
-      vertical-align: text-bottom;
-    }
+form.details typeahead-container,
+form.details typeahead-container ul {
+  width: 100%;
+}
+
+/* GENERAL CHECKBOXES */
+.horses-form form .checkbox .regular-checkbox,
+form.details input[type="checkbox"] {
+  -webkit-appearance: none;
+  border: 1px solid #cacece;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+  padding: 9px;
+  border-radius: 3px !important;
+  display: inline-block;
+  position: relative;
+  margin: 0 10px 0 0;
+  vertical-align: text-bottom;
+}
 
       .horses-form form .checkbox .regular-checkbox:active,
       .horses-form form .checkbox .regular-checkbox:checked:active,
@@ -4038,6 +4043,14 @@ typeahead-container .dropdown-menu {
   .horse-card-article .breed {
     text-align: right;
   }
+
+    .horse-card-article .breed .breed-country {
+      display: inline-block;
+      max-width: 225px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
     .horse-card-article .breed img {
       width: 15px;
