@@ -363,6 +363,14 @@ div.social-bar-lang {
         div.social-bar-lang ul.lang-dropdown li:last-child a img {
           margin-top: -3px;
           margin-right: 5px;
+          border-radius: 100%;
+          height: 15px;
+          width: 15px;
+        }
+
+        div.social-bar-lang ul.lang-dropdown li a img {
+          border-radius: 100%;
+          height: 15px;
         }
 
         div.social-bar-lang ul.lang-dropdown li a {
@@ -383,8 +391,10 @@ div.social-bar-lang {
     div.social-bar-lang ul.language-drop img {
       position: absolute;
       top: 5px;
-      padding-left: 10px;
-      margin-right: 18px;
+      margin-left: 5px;
+      height:15px;
+      border-radius: 100%;
+      width: 15px;
     }
 
     div.social-bar-lang ul.main-links img {
@@ -415,7 +425,8 @@ div.social-bar-lang {
 /* ===================================== */
 
 nav.navbar div.social-bar-lang ul.language-drop li a {
-  padding-left: 32px;
+  padding-left: 28px;
+
 }
 
 div.social-bar-lang ul#lang-dropdown1 {
