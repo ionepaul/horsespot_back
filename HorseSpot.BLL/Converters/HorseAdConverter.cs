@@ -71,7 +71,8 @@ namespace HorseSpot.BLL.Converters
                 HeightInCm = horseAd.Height,
                 CountFavoritesFor = horseAd.FavoriteFor?.Count ?? 0,
                 Views = horseAd.Views,
-                FavoritesFor = horseAd.FavoriteFor?.Where(x=> !x.IsDeleted).Select(x => x.UserId) ?? new List<string>()
+                FavoritesFor = horseAd.FavoriteFor?.Where(x=> !x.IsDeleted).Select(x => x.UserId) ?? new List<string>(),
+                IsSold = horseAd.IsSold
             };
 
             return horseAdDTO;

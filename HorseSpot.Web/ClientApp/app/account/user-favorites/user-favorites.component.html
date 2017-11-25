@@ -2,13 +2,13 @@
   <div class="profile-info">
     <a (click)="back()" class="go-back"><i class="fa fa-angle-left" aria-hidden="true"></i> {{'HORSE_AD_DETAIL.BACK' | translate}}</a>
     <div class="user-info-row">
-      <img class="profile-image-user" src="http://via.placeholder.com/350x350">
+      <img class="profile-image-user" src="{{profileImageUrl}}">
       <div class="main-info">
         <div class="user-profile-details">
-          <p class="name">Test Name</p>
+          <p class="name">{{userModel.FirstName}}</p>
           <ul class="email">
-            <li><a href="tel:45343434"><i class="fa fa-mobile" aria-hidden="true"></i> 86453453483483</a></li>
-            <li><a href="email:test@gmail.com"><i class="fa fa-envelope" aria-hidden="true"></i> test@gmail.com</a></li>
+            <li *ngIf="userModel.PhoneNumber"><a href="tel:{{userModel.PhoneNumber}}"><i class="fa fa-mobile" aria-hidden="true"></i> {{userModel.PhoneNumber}}</a></li>
+            <li><a href="{{userModel.Email}}"><i class="fa fa-envelope" aria-hidden="true"></i> {{userModel.Email}}</a></li>
           </ul>
         </div><!-- profile-details -->
       </div><!-- main-info -->
@@ -17,10 +17,10 @@
 
   <div class="horse-wrapper">
     <ul class="category-list-title">
-      <li class="category-title category-title-user">{{'PROFILE.HORSES_FOR_SALE' | translate}}</li>
+      <li class="category-title category-title-user">{{'PROFILE.WISH_LIST' | translate}}</li>
     </ul>
 
-    <horse-list [horses]="userPosts" [threeOnRow]="true"></horse-list>
+    <horse-list [horses]="userFavoritesPosts" [threeOnRow]="true"></horse-list>
   </div>
 </div>
 

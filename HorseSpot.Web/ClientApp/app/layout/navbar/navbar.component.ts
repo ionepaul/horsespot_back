@@ -169,6 +169,7 @@ export class NavbarComponent implements OnInit, OnDestroy, OnChanges {
         this._accountService.registerService(this.registerInput)
             .subscribe(res => {
                 this.signUpModal.hide();
+                this.loginInput.Email = res.Email
                 this.loginModal.show();
             },
             error => this.errorMessage = error);

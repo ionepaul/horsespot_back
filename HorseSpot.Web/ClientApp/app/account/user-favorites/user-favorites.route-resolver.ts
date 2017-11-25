@@ -11,8 +11,9 @@ export class UserFavoritesResolver implements Resolve<GetHorseAdListResultsModel
   constructor(private _accountService: AccountService) { }
 
   resolve(route: ActivatedRouteSnapshot) {
-    var pageNumber = parseInt(route.url[2].path);
+    var userId = route.url[2].path;
+    var pageNumber = parseInt(route.url[3].path);
 
-    return this._accountService.getUserFavoritesPosts(pageNumber);
+    return this._accountService.getUserFavoritesPosts(pageNumber, userId);
   }
 }

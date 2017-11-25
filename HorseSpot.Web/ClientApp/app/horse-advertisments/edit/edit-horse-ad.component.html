@@ -1,4 +1,6 @@
 <div class="container add-horse-container">
+    <p class="back"><a (click)="goBack()"><fa name="angle-left"></fa> {{'HORSE_AD_DETAIL.BACK' | translate }}</a></p>
+
     <h1 class="page-title">{{'ADD_AND_EDIT_PAGE.TITLE_EDIT' | translate}} {{horseAdModel.HorseName}}</h1>
     <h5>{{'ADD_AND_EDIT_PAGE.ALL_FIELDS' | translate}} <span class="required-indicatior">*</span> {{'ADD_AND_EDIT_PAGE.ARE_REQUIRED' | translate}}</h5>
     <p *ngIf="errorMessage" class="server-error">{{errorMessage}}</p>
@@ -6,7 +8,6 @@
     <div class="add-errors-client-side">
         <p *ngIf="horseAbilityNotSelected" class="client-side-validation-error">{{'ADD_AND_EDIT_PAGE.DETAILS.HORSE_ABILITY_ERROR' | translate}}</p>
         <p *ngIf="recommendedRiderNotSelected" class="client-side-validation-error">{{'ADD_AND_EDIT_PAGE.DETAILS.RECOMMENDED_RIDER_ERROR' | translate}}</p>
-        <p *ngIf="photoLimitError" class="client-side-validation-error">{{'ADD_AND_EDIT_PAGE.MEDIA.PHOTO_ERROR_2' | translate}}</p>
         <p *ngIf="imagesSizeExceed" class="client-side-validation-error">{{'ADD_AND_EDIT_PAGE.MEDIA.IMAGES_SIZE_EXEEDED' | translate}}</p>
     </div>
 
@@ -32,15 +33,15 @@
 
             <div class="form-group client-side">
                 <label for="gender">{{'ADD_AND_EDIT_PAGE.GENERAL_SECTION.GENDER' | translate}} <span class="required-indicatior">*</span></label>
-                <select class="form-control" id="gender" name="gender" (ngModelChange)="updateGender($event)" [ngModel]="horseGender">
-                    <option *ngFor="let gender of genders" [ngValue]="gender">{{gender.Gender}}</option>
+                <select class="form-control" id="gender" name="gender" [(ngModel)]="horseAdModel.Gender">
+                    <option *ngFor="let gender of genders" [ngValue]="gender">{{gender}}</option>
                 </select>
             </div><!-- form-group -->
 
             <div class="form-group">
-                <label for="price-range">{{'ADD_AND_EDIT_PAGE.GENERAL_SECTION.PRICE_RANGE' | translate}} <span class="required-indicatior">*</span> (<fa name="eur"></fa>)</label>
-                <select class="form-control" id="price-range" name="priceRange" (ngModelChange)="updatePriceRange($event)" [ngModel]="horsePriceRange">
-                    <option *ngFor="let priceRange of priceRanges" [ngValue]="priceRange"> {{priceRange.PriceRangeValue}} </option>
+                <label for="price-range">{{'ADD_AND_EDIT_PAGE.GENERAL_SECTION.PRICE_RANGE' | translate}} (&euro;) <span class="required-indicatior">*</span> </label>
+                <select class="form-control" id="price-range" name="priceRange" [(ngModel)]="horseAdModel.PriceRangeId">
+                    <option *ngFor="let priceRange of priceRanges" [ngValue]="priceRange.Id"> {{priceRange.PriceRangeValue}} </option>
                 </select>
             </div><!-- form-group -->
 
@@ -128,7 +129,7 @@
 
             <div class="form-group price">
                 <label for="price">
-                    {{'ADD_AND_EDIT_PAGE.DETAILS.PRICE' | translate}} (<fa name="eur"></fa>)
+                    {{'ADD_AND_EDIT_PAGE.DETAILS.PRICE' | translate}} (&euro;)
                     <div *ngIf="price.errors && price.touched" class="client-side-validation-error addHorseErr">
                         <small [hidden]="!price.errors.pattern">
                             {{'ADD_AND_EDIT_PAGE.DETAILS.PRICE_ERROR' | translate}}
@@ -156,18 +157,19 @@
                 </label>
                 <div class="input-group">
                 <!--<input name="text" type="text" class="form-control" id="country">-->
-                <input [(ngModel)]="horseAdModel.Address.Country"
-                   autocomplete="off"
-                   name="country"
-                   required
-                   [typeahead]="countries"
-                   [typeaheadOptionsLimit]="7"
-                   (typeaheadNoResults)="changeTypeaheadNoResults($event)"
-                   [typeaheadMinLength]="0"
-                   placeholder="Select country"
-                   class="form-control"
-                   id="country"
-                   #country="ngModel">
+                  <input [(ngModel)]="selectedCountry"
+                         autocomplete="off"
+                         name="countries"
+                         [typeahead]="countryData"
+                         [typeaheadOptionsLimit]="7"
+                         (typeaheadNoResults)="changeTypeaheadNoResults($event)"
+                         [typeaheadMinLength]="2"
+                         [typeaheadWaitMs]="300"
+                         typeaheadOptionField="name"
+                         class="form-control"
+                         id="country"
+                         required
+                         #country="ngModel">
                 </div><!-- input-group -->
             </div><!-- form-group -->
 
@@ -219,8 +221,6 @@
                 <label><input type="checkbox" name="xRays" [(ngModel)]="horseAdModel.HaveXRays" value="">{{'ADD_AND_EDIT_PAGE.DETAILS.X_RAYS_QUESTION' | translate}}</label>
             </div><!-- checkbox -->
 
-
-
         </form>
 
     </div><!-- info-container -->
@@ -231,71 +231,24 @@
 
         <div class="scroll-pedigree-table">
 
-        <table class="pedigree">
-
-        <tbody><tr><td rowspan="15" ><input type="text" name="father" [(ngModel)]="horseAdModel.Pedigree.Father"></td></tr>
-
-        <tr><td rowspan="7"><input type="text" name="father father" [(ngModel)]="horseAdModel.Pedigree.Father_Father"></td></tr>
-
-        <tr><td rowspan="3"><input type="text" name="father father father" [(ngModel)]="horseAdModel.Pedigree.Father_Father_Father"></td></tr>
-
-        <tr><td><input type="text" name="father father father father" [(ngModel)]="horseAdModel.Pedigree.Father_Father_Father_Father"></td></tr>
-
-        <tr><td><input type="text" name="father father father mother" [(ngModel)]="horseAdModel.Pedigree.Father_Father_Father_Mother"></td></tr>
-
-        <tr><td rowspan="3"><input type="text" name="father father mother" [(ngModel)]="horseAdModel.Pedigree.Father_Father_Mother"></td></tr>
-
-        <tr><td><input type="text" name="father father mother father" [(ngModel)]="horseAdModel.Pedigree.Father_Father_Mother_Father"></td></tr>
-
-        <tr><td ><input type="text"name="father father mother mother" [(ngModel)]="horseAdModel.Pedigree.Father_Father_Mother_Mother"></td></tr>
-
-        <tr><td rowspan="7"><input type="text" name="father mother" [(ngModel)]="horseAdModel.Pedigree.Father_Mother"></td></tr>
-
-        <tr><td rowspan="3"><input type="text" name="father mother father" [(ngModel)]="horseAdModel.Pedigree.Father_Mother_Father"></td></tr>
-
-        <tr><td><input type="text" name="father mother father father" [(ngModel)]="horseAdModel.Pedigree.Father_Mother_Father_Father"></td></tr>
-
-        <tr><td><input type="text" name="father mother father mother" [(ngModel)]="horseAdModel.Pedigree.Father_Mother_Father_Mother"></td></tr>
-
-        <tr><td rowspan="3"><input type="text" name="father mother mother" [(ngModel)]="horseAdModel.Pedigree.Father_Mother_Mother"></td></tr>
-
-        <tr><td><input type="text" name="father mother mother father" [(ngModel)]="horseAdModel.Pedigree.Father_Mother_Mother_Father"></td></tr>
-
-        <tr><td><input type="text" name="father mother mother mother" [(ngModel)]="horseAdModel.Pedigree.Father_Mother_Mother_Mother"></td></tr>
-
-        <tr><td rowspan="15"><input type="text" name="mother" [(ngModel)]="horseAdModel.Pedigree.Mother"></td></tr>
-
-        <tr><td rowspan="7"><input type="text" name="mother father" [(ngModel)]="horseAdModel.Pedigree.Mother_Father"></td></tr>
-
-        <tr><td rowspan="3"><input type="text" name="mother father father" [(ngModel)]="horseAdModel.Pedigree.Mother_Father_Father"></td></tr>
-
-        <tr><td><input type="text" name="mother father father father" [(ngModel)]="horseAdModel.Pedigree.Mother_Father_Father_Father"></td></tr>
-
-        <tr><td><input type="text" name="mother father father mother" [(ngModel)]="horseAdModel.Pedigree.Mother_Father_Father_Mother"></td></tr>
-
-        <tr><td rowspan="3"><input type="text" name="mother father mother" [(ngModel)]="horseAdModel.Pedigree.Mother_Father_Mother"></td></tr>
-
-        <tr><td><input type="text" name="mother father mother father" [(ngModel)]="horseAdModel.Pedigree.Mother_Father_Mother_Father"></td></tr>
-
-        <tr><td><input type="text" name="mother father mother mother" [(ngModel)]="horseAdModel.Pedigree.Mother_Father_Mother_Mother"></td></tr>
-
-        <tr><td rowspan="7"><input type="text" name="mother mother" [(ngModel)]="horseAdModel.Pedigree.Mother_Mother"></td></tr>
-
-        <tr><td rowspan="3"><input type="text" name="mother mother father" [(ngModel)]="horseAdModel.Pedigree.Mother_Mother_Father"></td></tr>
-
-        <tr><td><input type="text" name="mother mother father father" [(ngModel)]="horseAdModel.Pedigree.Mother_Mother_Father_Father"></td></tr>
-
-        <tr><td><input type="text" name="mother mother father mother" [(ngModel)]="horseAdModel.Pedigree.Mother_Mother_Father_Mother"></td></tr>
-
-        <tr><td rowspan="3"><input type="text" name="mother mother mother" [(ngModel)]="horseAdModel.Pedigree.Mother_Mother_Mother"></td></tr>
-
-        <tr><td><input type="text" name="mother mother mother father" [(ngModel)]="horseAdModel.Pedigree.Mother_Mother_Mother_Father"></td></tr>
-
-        <tr><td><input type="text" name="mother mother mother mother" [(ngModel)]="horseAdModel.Pedigree.Mother_Mother_Mother_Mother"></td></tr>
-
-        </tbody>
-
-        </table>
+          <table class="pedigree">
+            <tbody>
+              <tr><td rowspan="7"><input type="text" name="father" [(ngModel)]="horseAdModel.Pedigree.Father"></td></tr>
+              <tr><td rowspan="3"><input type="text" name="father father" [(ngModel)]="horseAdModel.Pedigree.Father_Father"></td></tr>
+              <tr><td><input type="text" name="father father father" [(ngModel)]="horseAdModel.Pedigree.Father_Father_Father"></td></tr>
+              <tr><td><input type="text" name="father father mother" [(ngModel)]="horseAdModel.Pedigree.Father_Father_Mother"></td></tr>
+              <tr><td rowspan="3"><input type="text" name="father mother" [(ngModel)]="horseAdModel.Pedigree.Father_Mother"></td></tr>
+              <tr><td><input type="text" name="father mother father" [(ngModel)]="horseAdModel.Pedigree.Father_Mother_Father"></td></tr>
+              <tr><td><input type="text" name="father mother mother" [(ngModel)]="horseAdModel.Pedigree.Father_Mother_Mother"></td></tr>
+              <tr><td rowspan="7"><input type="text" name="mother" [(ngModel)]="horseAdModel.Pedigree.Mother"></td></tr>
+              <tr><td rowspan="3"><input type="text" name="mother father" [(ngModel)]="horseAdModel.Pedigree.Mother_Father"></td></tr>
+              <tr><td><input type="text" name="mother father father" [(ngModel)]="horseAdModel.Pedigree.Mother_Father_Father"></td></tr>
+              <tr><td><input type="text" name="mother father mother" [(ngModel)]="horseAdModel.Pedigree.Mother_Father_Mother"></td></tr>
+              <tr><td rowspan="3"><input type="text" name="mother mother" [(ngModel)]="horseAdModel.Pedigree.Mother_Mother"></td></tr>
+              <tr><td><input type="text" name="mother mother father" [(ngModel)]="horseAdModel.Pedigree.Mother_Mother_Father"></td></tr>
+              <tr><td><input type="text" name="mother mother mother" [(ngModel)]="horseAdModel.Pedigree.Mother_Mother_Mother"></td></tr>
+            </tbody>
+          </table>
 
         </div><!-- scroll-pedigree-table -->
 
@@ -328,27 +281,20 @@
             </div><!-- media-upload -->
         </div><!-- drag-media -->
 
-        <p *ngIf="cannotDeleteLastPhotoError" style="margin-bottom: 0px" class="client-side-validation-error">{{'ADD_AND_EDIT_PAGE.MEDIA.EDIT_AT_LEAST_ONE_IMG' | translate}}</p>
-        <p *ngIf="cannotDeleteLastPhotoError" class="client-side-validation-error">{{'ADD_AND_EDIT_PAGE.MEDIA.EDIT_AT_LEAST_ONE_IMG_P2' | translate}}</p>
-        <p *ngIf="photoLimitError" class="client-side-validation-error">{{'ADD_AND_EDIT_PAGE.MEDIA.PHOTO_ERROR_2' | translate}}</p>
+       <p *ngIf="cannotDeleteLastPhotoError" style="margin-bottom: 0px" class="client-side-validation-error">{{'ADD_AND_EDIT_PAGE.MEDIA.EDIT_AT_LEAST_ONE_IMG' | translate}}</p>
+       <p *ngIf="imagesSizeExceed" class="client-side-validation-error">{{'ADD_AND_EDIT_PAGE.MEDIA.IMAGES_SIZE_EXEEDED' | translate}}</p>
         
-        <div class="images-wrapper">
-            <ul class="uploaded-img" >
-                <!--<li *ngFor="let imageId of horseAdModel.ImageIds">-->
-                    <!--<div class="font-awesome">
-                        <fa title="{{'ADD_AND_EDIT_PAGE.MEDIA.REMOVE_TOOLTIP' | translate}}" (click)="deleteImage(imageId)" name="minus-circle"></fa>
-                        <fa title="{{'ADD_AND_EDIT_PAGE.MEDIA.PRIMARY_TOOLTIP' | translate}}" (click)="setHorseAdProfileImage(imageId)" name="flag" class="flag"></fa>
-                    </div--><!-- font-awesome -->
-                    <!--<img src="{{picturesUrl}}{{imageId}}" />
-                </li>-->
-                <li *ngFor="let item of uploader.queue">
-                    <div class="font-awesome">
-                        <fa title="{{'ADD_AND_EDIT_PAGE.MEDIA.REMOVE_TOOLTIP' | translate}}" (click)="removePhotoFromQueue(item)" name="minus-circle"></fa>
-                    </div><!-- font-awesome -->
-                    <img src="" imgPreview [image]="item?._file"/>
-                </li>
-            </ul>
-        </div><!-- images wrapper -->
+       <div class="images-wrapper">
+         <ul class="uploaded-img">
+           <li *ngFor="let item of horseAdModel.Images">
+             <div class="font-awesome">
+               <fa title="{{'ADD_AND_EDIT_PAGE.MEDIA.REMOVE_TOOLTIP' | translate}}" (click)="deleteImage(item.ImageId, item.ImageName)" name="minus-circle"></fa>
+               <fa title="{{'ADD_AND_EDIT_PAGE.MEDIA.PRIMARY_TOOLTIP' | translate}}" (click)="setHorseAdProfileImage(item.ImageId, item.ImageName)" name="flag" class="flag"></fa>
+             </div><!-- font-awesome -->
+             <img src="{{imageDisplayUrl}}{{item.ImageName}}" />
+           </li>
+         </ul>
+       </div><!-- images wrapper -->
 
      </div><!-- info-container -->
 

@@ -12,7 +12,6 @@ namespace HorseSpot.Models.Models
 
         public string LastName { get; set; }
 
-        [Required]
         public string PhoneNumber { get; set; }
 
         [Required]

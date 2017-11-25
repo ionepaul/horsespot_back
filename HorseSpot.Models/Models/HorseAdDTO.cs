@@ -79,6 +79,8 @@ namespace HorseSpot.Models.Models
 
         public IEnumerable<RecommendedRiderDTO> RecomendedRiders { get; set; }
 
-        public IEnumerable<HorseAbilityDTO> Abilities { get; set; } 
+        public IEnumerable<HorseAbilityDTO> Abilities { get; set; }
+        
+        public bool IsSold { get; set; }
     }
 }

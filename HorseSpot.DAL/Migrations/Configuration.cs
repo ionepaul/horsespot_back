@@ -454,6 +454,10 @@ namespace HorseSpot.DAL.Migrations
                 new HorseAbility
                 {
                     Ability = "Leisure"
+                },
+                new HorseAbility
+                {
+                    Ability = "Foals"
                 }
             };
 

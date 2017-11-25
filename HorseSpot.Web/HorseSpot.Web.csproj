@@ -13,7 +13,10 @@
   </ItemGroup>
   <ItemGroup>
     <!-- Files not to show in IDE -->
+    <None Remove="ClientApp\app\advertise\advertise.component.ts" />
+    <None Remove="ClientApp\app\hire-us\hire-us.component.ts" />
     <None Remove="ClientApp\app\shared\advertisments\right-side.advertisments.component.ts" />
+    <None Remove="ClientApp\app\shared\guards\wishlist.guard.ts" />
     <None Remove="yarn.lock" />
     <Content Remove="wwwroot\dist\**" />
     <None Remove="ClientApp\dist\**" />
@@ -27,7 +30,10 @@
     <None Include="wwwroot\css\styles.css" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\advertise\advertise.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\hire-us\hire-us.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\advertisments\right-side.advertisments.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\shared\guards\wishlist.guard.ts" />
   </ItemGroup>
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
     <!-- Ensure Node.js is installed -->

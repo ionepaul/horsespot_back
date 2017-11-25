@@ -128,10 +128,10 @@ namespace HorseSpot.Api.Controllers
 
         [HttpPost]
         [Authorize]
-        [Route("api/horses/images/save/{adId}/{imageName}")]
-        public async Task SaveNewImage([FromUri] int adId, [FromUri] string imageName)
+        [Route("api/horses/images/save/{adId}")]
+        public async Task<int> SaveNewImage([FromUri] int adId, string imageName)
         {
-            await _iHorseAdBus.SaveNewImage(adId, imageName, UserIdExtractor.GetUserIdFromRequest(Request));
+            return await _iHorseAdBus.SaveNewImage(adId, imageName, UserIdExtractor.GetUserIdFromRequest(Request));
         }
 
         [HttpPost]

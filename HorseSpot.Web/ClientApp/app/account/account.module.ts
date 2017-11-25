@@ -27,10 +27,11 @@ import { LoggedInGuard } from '../shared/guards/loggedInGuard';
         ProfileComponent,
         UserPostsComponent,
         UserFavoritesComponent,
-        AppointmentsListComponent,
+        //AppointmentsListComponent,
         UserReferencesComponent
     ],
-    providers: [ AccountService, WebSocketService, AppointmentsService, UserPostsResolver, UserFavoritesResolver, UserReferencesResolver ]
+    providers: [AccountService, WebSocketService, UserPostsResolver, UserFavoritesResolver, UserReferencesResolver]
+                //AppointmentsService, 
 })
 
 export class AccountModule { }

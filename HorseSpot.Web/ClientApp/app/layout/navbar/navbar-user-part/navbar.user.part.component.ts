@@ -1,23 +1,24 @@
-import { Component, Input, OnDestroy, OnInit, Output, EventEmitter, HostListener, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { CONFIG } from '../../../config';
 
+//SERVICES
 import { AccountService } from '../../../account/account.service';
-import { AppointmentsService } from '../../../account/appointments/appointments.service';
+//import { AppointmentsService } from '../../../account/appointments/appointments.service';
 import { NotificationService } from '../../../shared/notifications/notification.service';
 
+//MODELS
 import { AppointmentModel } from '../../../account/models/appointmentModel';
-
-import { CONFIG } from '../../../config';
 
 @Component({
     selector: 'navbar-user-part',
     templateUrl: './navbar.user.part.component.html'
 })
 
-export class NavbarUserPartComponent implements OnDestroy, OnInit {
-    @ViewChild('notificationBell') notificationBell: ElementRef;
+export class NavbarUserPartComponent implements OnInit {
+    //@ViewChild('notificationBell') notificationBell: ElementRef;
     @ViewChild('userPart') userPart: ElementRef;
     @ViewChild('userProfileBtn') userProfileBtn: ElementRef;
     @Input() userId: string;
@@ -25,7 +26,7 @@ export class NavbarUserPartComponent implements OnDestroy, OnInit {
     @Output() menuItemClicked:EventEmitter<boolean> = new EventEmitter<boolean>();
     @Output() notifNumber: EventEmitter<number> = new EventEmitter<number>();
 
-    profilePhotoUrl: string = CONFIG.imagesUrl + '/Images/ProfilePhotos/';    
+    profilePhotoUrl: string = CONFIG.profileImagesUrl;    
     isAdmin: boolean;
     isCollapsed: boolean = true;
     notificationRefresh: number;
@@ -35,7 +36,7 @@ export class NavbarUserPartComponent implements OnDestroy, OnInit {
     currentUserId: string;
   
     constructor(private _accountService: AccountService, 
-                private _appointmentsService: AppointmentsService,
+                //private _appointmentsService: AppointmentsService,
                 private _notificationService: NotificationService,
                 private _router: Router) { }
 
@@ -79,11 +80,11 @@ export class NavbarUserPartComponent implements OnDestroy, OnInit {
 
     }
 
-    ngOnDestroy() {
-        if (this._appointmentsService.appointments != undefined) {
-            this._appointmentsService.appointments.unsubscribe();
-        }
-    }
+    //ngOnDestroy() {
+    //    if (this._appointmentsService.appointments != undefined) {
+    //        this._appointmentsService.appointments.unsubscribe();
+    //    }
+    //}
 
     itemClicked() {
         this.showUserMenu = false;
@@ -99,16 +100,16 @@ export class NavbarUserPartComponent implements OnDestroy, OnInit {
         this._accountService.logout();
     }
 
-    initializeNotifList(notifListLength: number) {
-        if (notifListLength != 0) { 
-            this.notificationBell.nativeElement.classList.add('hasNotif');
-            this.notifNumber.emit(notifListLength); 
-        } 
-    }
+    //initializeNotifList(notifListLength: number) {
+    //    if (notifListLength != 0) { 
+    //        this.notificationBell.nativeElement.classList.add('hasNotif');
+    //        this.notifNumber.emit(notifListLength); 
+    //    } 
+    //}
 
     // navigateToAppointments() {
     //     if (this.isMobileDevice) {
-	// 	    this.menuItemClicked.emit(true);
+	  // 	    this.menuItemClicked.emit(true);
     //     }
     //     this.notificationBell.nativeElement.click();
     //     this._router.navigate(["/account/appointments"]);

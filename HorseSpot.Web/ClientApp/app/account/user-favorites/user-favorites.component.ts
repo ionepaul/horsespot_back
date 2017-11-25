@@ -1,52 +1,80 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { Meta, Title } from '@angular/platform-browser';
+import { Subscription } from 'rxjs/Subscription';
+import { CONFIG } from '../../config';
+import { Title } from '@angular/platform-browser';
 
+//MODELS
 import { HorseAdListModel } from '../../horse-advertisments/models/horseAdListModel';
+import { UserModel } from '../models/user.model';
+
+//SERVICES
+import { AccountService } from '../account.service';
 
 @Component({
-    templateUrl: './user-favorites.component.html'
+  templateUrl: './user-favorites.component.html'
 })
 
 export class UserFavoritesComponent implements OnInit, OnDestroy {
-    pageNumber: number = 1;
-    totalNumber: number;
-    userFavoritesPosts: HorseAdListModel[];
+  pageNumber: number = 1;
+  totalNumber: number;
+  userId: string = "";
+  userFavoritesPosts: HorseAdListModel[];
+  userModel: UserModel = <UserModel>{};
+  errorMessage: string;
+  profileImageUrl: string = CONFIG.profileImagesUrl;
 
-    constructor(private _route: ActivatedRoute, 
-                private _router: Router, 
-                private _location: Location,
-                private _metaData: Meta, pageTitle: Title) {
-        pageTitle.setTitle('Your Horses | Horse Spot');
-        _metaData.addTags([ 
-            { name: 'robots', content: 'NOINDEX, NOFOLLOW'}
-        ]);
+  private routerSub$: Subscription;
 
-        this._router.events.subscribe((event) => {
-            if(event instanceof NavigationEnd) {
-                 this.pageNumber = parseInt(_route.snapshot.url[2].path);
-                 this.totalNumber = this._route.snapshot.data['model'].TotalCount;
-                 this.userFavoritesPosts = this._route.snapshot.data['model'].HorseAdList;
-            }
-        });
-    }
+  constructor(private _route: ActivatedRoute,
+    private _router: Router,
+    private _accountService: AccountService,
+    private _titleService: Title,
+    private _location: Location) {
 
-    ngOnInit() {
+    this.routerSub$ = this._router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.userId = _route.snapshot.url[2].path;
+        this.pageNumber = parseInt(_route.snapshot.url[3].path);
         this.totalNumber = this._route.snapshot.data['model'].TotalCount;
         this.userFavoritesPosts = this._route.snapshot.data['model'].HorseAdList;
-    }
+      }
+    });
+  }
 
-    back() {
-        this._location.back();
-    }
+  ngOnInit() {
+    this.totalNumber = this._route.snapshot.data['model'].TotalCount;
+    this.userFavoritesPosts = this._route.snapshot.data['model'].HorseAdList;
 
-    pageChanged(event: any) {
-         this.pageNumber = event.page;
-         this._router.navigate(['/account/wishlist', event.page]);             
-    }
+    this._accountService.getUserDetails(this.userId)
+      .subscribe(res => {
+        this._titleService.setTitle(`${res.FirstName} | Wish List | Horse Spot`);
+        this.userModel = res;
+        this.setProfilePicture(res.ImagePath);
+      },
+      error => this.errorMessage = error);
+  }
 
-    ngOnDestroy() {
-        this._metaData.removeTag("name='robots'");
-    }  
+  back() {
+    this._location.back();
+  }
+
+  setProfilePicture(profilePicture) {
+    if (profilePicture.indexOf('http') >= 0) {
+      this.profileImageUrl = profilePicture;
+    }
+    else {
+      this.profileImageUrl += profilePicture;
+    }
+  }
+
+  pageChanged(event: any) {
+    this.pageNumber = event.page;
+    this._router.navigate(['/account/wishlist', this.userId, event.page]);
+  }
+
+  ngOnDestroy() {
+    this.routerSub$.unsubscribe();
+  }
 }

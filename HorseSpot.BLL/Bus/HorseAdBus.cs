@@ -228,7 +228,7 @@ namespace HorseSpot.BLL.Bus
             return false;
         }
 
-        public async Task SaveNewImage(int adId, string imageName, string userId)
+        public async Task<int> SaveNewImage(int adId, string imageName, string userId)
         {
             var horseAd = _iHorseAdDao.GetById(adId);
 
@@ -239,6 +239,8 @@ namespace HorseSpot.BLL.Bus
             horseAd.Images.Add(image);
 
             await _iHorseAdDao.UpdateAsync(horseAd);
+
+            return horseAd.Images.Where(img => string.Equals(img.Name, imageName, StringComparison.InvariantCultureIgnoreCase)).First().ImageId;
         }
 
         public string DeleteImage(int imageId, string userId)
@@ -260,7 +262,10 @@ namespace HorseSpot.BLL.Bus
 
             CheckImageAndUserIdentity(image, userId);
 
-            image.HorseAd.Images.Where(img => img.IsProfilePic).FirstOrDefault().IsProfilePic = false;
+            if (image.HorseAd.Images.Any(img => img.IsProfilePic))
+            {
+                image.HorseAd.Images.Where(img => img.IsProfilePic).ToList().ForEach(x => x.IsProfilePic = false);
+            }
 
             image.IsProfilePic = true;
 

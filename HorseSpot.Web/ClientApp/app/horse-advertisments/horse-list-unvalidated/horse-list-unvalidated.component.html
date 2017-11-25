@@ -1,12 +1,18 @@
-<div class="container profile-info-container extra">
-    <h3 class="page-title-account">{{'UNVALIDATED_POSTS.TITLE' | translate}}</h3>
+<div class="container">
+  <div class="profile-info">
+    <a (click)="back()" class="go-back"><i class="fa fa-angle-left" aria-hidden="true"></i> {{'HORSE_AD_DETAIL.BACK' | translate}}</a>
+  </div>
+
+  <div class="horse-wrapper">
+    <ul class="category-list-title">
+      <li class="category-title category-title-user">{{'UNVALIDATED_POSTS.TITLE' | translate}}</li>
+    </ul>
+
+    <horse-list [horses]="unvalidatedHorseList" [threeOnRow]="true"></horse-list>
+  </div>
 </div>
 
-<h2 class="no-horses-found-message" *ngIf="unvalidatedHorseList.length == 0">{{'UNVALIDATED_POSTS.NO_UNVALIDATED' | translate}}</h2>
-
-<horse-list [horses]="unvalidatedHorseList"></horse-list>
-
-<pagination *ngIf="unvalidatedHorseList.length != 0" [itemsPerPage]="8" [totalItems]="totalNumber" [(ngModel)]="pageNumber" [maxSize]="8" 
+<pagination *ngIf="unvalidatedHorseList.length != 0" [itemsPerPage]="16" [totalItems]="totalNumber" [(ngModel)]="pageNumber" [maxSize]="8"
             class="pagination-sm" [boundaryLinks]="true" [rotate]="false" (pageChanged)="pageChanged($event)"
             previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
 </pagination>

@@ -39,6 +39,7 @@ import { DescriptionFormatPipe } from './pipes/descriptionFormat.pipe';
 import { LoggedInGuard } from '../shared/guards/loggedInGuard';
 import { AdminGuard } from '../shared/guards/adminGuard';
 import { IsPostOwnerGuard } from '../shared/guards/isPostOwnerGuard';
+import { WishListGuard } from '../shared/guards/wishlist.guard';
 
 //DIRECTIVES
 import { ImagePreview } from './utils/image.preview.directive';
@@ -101,7 +102,7 @@ export function createTranslateLoader(http: Http, baseHref) {
     RightSideAdvertismentsComponent
   ],
   providers: [
-    NotificationService, AuthService, LoggedInGuard, AdminGuard, IsPostOwnerGuard, SpinnerService, StorageService, TranslateModule,
+    NotificationService, AuthService, LoggedInGuard, AdminGuard, IsPostOwnerGuard, WishListGuard, SpinnerService, StorageService, TranslateModule,
     LinkService,
     {
       provide: HttpWrapper, useFactory: httpFactory,

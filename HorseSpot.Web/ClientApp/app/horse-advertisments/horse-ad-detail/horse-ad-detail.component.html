@@ -10,13 +10,14 @@
   </ul>
 
   <ul class="favorite">
-    <li class="round-button" *ngIf="currentUserId == horseAdModel.UserId"><a (click)="deleteModal.show()">{{'HORSE_AD_DETAIL.SOLD_BTN' | translate}}</a></li>
-    <li class="round-button" *ngIf="currentUserId == horseAdModel.UserId"><a (click)="redirectToEdit()">{{'HORSE_AD_DETAIL.EDIT_BTN' | translate}}</a></li>
+    <li class="round-button" *ngIf="isAdmin && !horseAdModel.IsValidated"><a (click)="validateHorseAd()">{{'HORSE_AD_DETAIL.VALIDATE_BTN' | translate}}</a></li>
+    <li class="round-button" *ngIf="currentUserId == horseAdModel.UserId && !horseAdModel.IsSold"><a (click)="deleteModal.show()">{{'HORSE_AD_DETAIL.SOLD_BTN' | translate}}</a></li>
+    <li class="round-button" *ngIf="currentUserId == horseAdModel.UserId && !horseAdModel.IsSold"><a (click)="redirectToEdit()">{{'HORSE_AD_DETAIL.EDIT_BTN' | translate}}</a></li>
     <li class="heart">
       <a *ngIf="!isFavorite && currentUserId != undefined" title="{{'HORSE_AD_DETAIL.SAVE_WISHLIST' | translate}}" (click)="addHorseAdToFavorites(horseAdModel.Id)"><fa name="heart-o"></fa></a>
       <a *ngIf="isFavorite && currentUserId" title="{{'HORSE_AD_DETAIL.REM_WISHLIST' | translate}}" (click)="addHorseAdToFavorites(horseAdModel.Id)"><fa name="heart"></fa></a>
     </li>
-    <li><fb-share href="location.href"></fb-share></li>
+    <li><fb-share href="{{location.href}}" layout="button"></fb-share></li>
     <li>{{horseAdModel.PriceRange.PriceRangeValue}} &euro;</li>
   </ul>
 
@@ -89,7 +90,7 @@
         <div class="user-info">
           <img #userImage src="" alt="Owner profile picture">
           <p class="name"><span>{{userModel.FirstName}}</span></p>
-          <p class="tel"><a href="tel:{{userModel.PhoneNumber}}"><i class="fa fa-mobile" aria-hidden="true"></i> {{userModel.PhoneNumber}}</a></p>
+          <p *ngIf="userModel.PhoneNumber" class="tel"><a href="tel:{{userModel.PhoneNumber}}"><i class="fa fa-mobile" aria-hidden="true"></i> {{userModel.PhoneNumber}}</a></p>
           <p class="mail"><a href="mailto:{{userModel.Email}}"><i class="fa fa-envelope" aria-hidden="true"></i> {{userModel.Email}}</a></p>
 
           <ul class="send-email">
@@ -142,15 +143,20 @@
       <div class="add">
         <div class="lists">
           <ul>
-            <li><fb-share href="location.href"></fb-share></li>
+            <li><fb-share href="{{location.href}}" layout="button"></fb-share></li>
           </ul>
           <ul>
             <li><img src="../../../../wwwroot/assets/images/eye.png" alt="Horse views"> {{horseAdModel.Views}}</li>
             <li><img src="../../../../wwwroot/assets/images/heart.png" alt="Horse likes"> {{horseAdModel.CountFavoritesFor}}</li>
           </ul>
         </div><!-- lists -->
-        <!-- Will be replaced with google ad sense advertisment -->
-        <img src="../../../../wwwroot/assets/images/add_1.png" alt="Add" />
+
+        <!--<ng-adsense [adClient]="'ca-pub-7640562161899788'"
+                    [adSlot]="7259870550"
+                    [display]="'inline-block'"
+                    [width]="320"
+                    [height]="108">
+        </ng-adsense>-->
       </div><!-- add -->
 
     </div><!-- col-sm-8 -->

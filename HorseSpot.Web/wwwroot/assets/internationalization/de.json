@@ -117,7 +117,7 @@
     "CHANGE_PIC": " Ändern Sie ihr Profilbild.",
     "UNSUPPORTED_PIC": " Ununterstützte Profil-Bilderausdehnung.",
     "CHANGE_PASS": {
-      "TITLE": " Kennwort verändern.",
+      "TITLE": " Kennwort verändern",
       "BTN": " Kennwort wechseln.",
       "CURR_PASS": " Aktuelles Kennwort.",
       "CURR_PASS_ERR": " Füllen sie bitte das aktulelle Kennwort aus.",
@@ -132,6 +132,8 @@
     },
     "SAVE_BTN": "Sichern",
     "EDIT_BTN": "Redigieren",
+    "CANCEL_BTN": "Stornieren",
+    "PROFILE_NAME_ERROR": "Füllen Sie Ihren Profilnamen aus.",
     "PROFILE_CHANGES_SUCCESS_NOTIF": " Deine Profilinformationen wurden erfolgreich aktualisiert.",
     "HORSES_FOR_SALE": "Pferde zum Verkauf",
     "REFERENCES": "Referenzen",
@@ -188,7 +190,7 @@
   },
   "ADD_AND_EDIT_PAGE": {
     "TITLE_ADD": "Verkaufe dein Pferd",
-    "TITLE_EDIT": "Editiere die Information über.",
+    "TITLE_EDIT": "Editiere die Information über",
     "ALL_FIELDS": "Alle Felder markiert mit ",
     "ARE_REQUIRED": "sind erförderlich.",
     "GENERAL_SECTION": {
@@ -203,8 +205,8 @@
     },
     "DETAILS": {
       "TITLE": "Details",
-      "HORSE_ABILITY": " Abitität des Pferdes",
-      "HORSE_ABILITY_ERROR": " Selectieren Sie bitte mindestens eine abititöt des Pferdes.",
+      "HORSE_ABILITY": "Pferdekategorie",
+      "HORSE_ABILITY_ERROR": " Selectieren Sie bitte mindestens eine pferdekategorie.",
       "RECOMMENDED_RIDER": "Recomandiertes Reiter",
       "RECOMMENDED_RIDER_ERROR": " Selectiren Sie bitte mindestens ein recomandiertes Reiter.",
       "BREED": "Rasse",

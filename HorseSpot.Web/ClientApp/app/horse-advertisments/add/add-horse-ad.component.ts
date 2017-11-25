@@ -12,7 +12,6 @@ import 'rxjs/add/observable/of';
 //SERVICES
 import { HorseAdsService } from '../horse-ads.service';
 import { NotificationService } from '../../shared/notifications/notification.service';
-import { AccountService } from '../../account/account.service';
 
 //MODELS
 import { PriceRangeModel } from '../models/priceRangeModel';
@@ -55,7 +54,6 @@ export class AddHorseAdComponent implements OnInit {
   constructor(private _horseAdService: HorseAdsService,
     private _router: Router,
     private _notificationService: NotificationService,
-    private _accountService: AccountService,
     @Inject(DOCUMENT) private document,
     @Inject(PLATFORM_ID) private platformId: Object) { }
 

@@ -100,6 +100,13 @@
   <horse-list [horses]="categoryHorseList" [threeOnRow]="true"></horse-list>
 </div>
 
+<!--<ng-adsense [adClient]="'ca-pub-7640562161899788'"
+            [adSlot]="7259870550"
+            [display]="'inline-block'"
+            [width]="320"
+            [height]="108">
+</ng-adsense>-->
+
 <pagination *ngIf="categoryHorseList.length != 0" [itemsPerPage]="16" [totalItems]="totalNumber" [(ngModel)]="pageNumber" [maxSize]="8"
             class="pagination-sm" [boundaryLinks]="true" [rotate]="false" (pageChanged)="pageChanged($event)"
             previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
