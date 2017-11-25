@@ -81,7 +81,7 @@ export class HorseAdsService {
   }
 
   increaseViews(adId: number) {
-    return this._httpWrapper.post(this._increseViewsUrl + adId, "")
+    return this._http.post(this._increseViewsUrl + adId, "")
       .catch(this.handleError);
   }
 

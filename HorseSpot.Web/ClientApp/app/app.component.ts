@@ -111,10 +111,9 @@ export class AppComponent implements OnInit, OnDestroy {
             .mergeMap(route => route.data)
             .subscribe((event) => {
                 this._setMetaAndLinks(event);
-                window.scrollTo(0, 1);
-                ga('set', 'page', event.urlAfterRedirects);
-                ga('send', 'pageview');
-
+                window.scrollTo(0, 0);
+                //ga('set', 'page', event.urlAfterRedirects);
+                //ga('send', 'pageview');
             });
     }
 

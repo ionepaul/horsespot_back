@@ -85,7 +85,7 @@ export class AccountService {
   }
 
   getUserDetails(userId: string): Observable<UserModel> {
-    return this._httpWrapper
+    return this._http
       .get(`${this._detailsUrl + userId}`)
       .map((res: Response) => res.json() as UserModel)
       .catch(this.handleError);

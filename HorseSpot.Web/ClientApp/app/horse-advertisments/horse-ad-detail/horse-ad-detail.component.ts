@@ -222,7 +222,7 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
       profilePicutre = this.userModel.ImagePath;
     }
     else {
-      profilePicutre += this.userModel.ImagePath;
+      profilePicutre = CONFIG.profileImagesUrl + this.userModel.ImagePath;
     }
 
     setTimeout(() => {
