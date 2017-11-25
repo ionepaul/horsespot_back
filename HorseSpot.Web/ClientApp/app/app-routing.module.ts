@@ -201,7 +201,7 @@ const routes: Routes = [
   {
     path: 'horses/add', component: AddHorseAdComponent,
     data: {
-      title: 'Sell Your Horse | Horse Spot',
+      title: 'Sell Your Horse',
       meta: [
         { name: 'description', content: 'Selling your horse on Horse Spot it easy and free, just fill in the information and get in touch with the clients.' },
         { property: 'og:title', content: 'Sell Your Horse | Horses For Sale' },
@@ -234,7 +234,7 @@ const routes: Routes = [
   {
     path: 'horses/edit/:id', component: EditHorseAdComponent,
     data: {
-      title: 'Edit | Horse Spot',
+      title: 'Edit',
       meta: [
         { name: 'robots', content: 'NOINDEX, NOFOLLOW' },
       ],
@@ -244,7 +244,7 @@ const routes: Routes = [
   {
     path: 'contact', component: ContactComponent,
     data: {
-      title: 'Contact | Horse Spot',
+      title: 'Contact',
       meta: [
         { name: 'description', content: 'Please feel free to write us about any thought, suggestion or complain you have about our web site.' },
         { property: 'og:title', content: 'Contact | Horses For Sale' },
@@ -258,7 +258,7 @@ const routes: Routes = [
   {
     path: 'error/:statusCode', component: ErrorComponent,
     data: {
-      title: 'Error | Horse Spot',
+      title: 'Error',
       meta: [
         { name: 'robots', content: 'NOINDEX, NOFOLLOW' },
       ],
@@ -285,7 +285,6 @@ const routes: Routes = [
   {
     path: 'account/wishlist/:userId/:page', component: UserFavoritesComponent,
     data: {
-      title: 'Wish List | Horse Spot',
       meta: [
         { name: 'robots', content: 'NOINDEX, NOFOLLOW' },
       ],
@@ -296,7 +295,7 @@ const routes: Routes = [
   {
     path: 'horses/unvalidated/:page', component: HorseListUnvalidatedComponent,
     data: {
-      title: 'Unvalidated | Horse Spot',
+      title: 'Unvalidated',
       meta: [
         { name: 'robots', content: 'NOINDEX, NOFOLLOW' },
       ],
@@ -307,7 +306,7 @@ const routes: Routes = [
   {
     path: 'advertise', component: AdvertiseComponent,
     data: {
-      title: 'Advertise | Horse Spot',
+      title: 'Advertise',
       meta: [
         { name: 'robots', content: 'NOINDEX, NOFOLLOW' },
       ],
@@ -316,7 +315,7 @@ const routes: Routes = [
   {
     path: 'hire-us', component: HireUsComponent,
     data: {
-      title: 'Hire Us | Horse Spot',
+      title: 'Hire Us',
       meta: [
         { name: 'robots', content: 'NOINDEX, NOFOLLOW' },
       ],

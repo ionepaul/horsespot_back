@@ -3,16 +3,18 @@ import { Http, URLSearchParams, Headers, RequestOptions, Response } from '@angul
 import { Router } from '@angular/router';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-
+import { CONFIG } from '../../config';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
+//SERVICES
+import { HttpWrapper } from '../http/http.wrapper';
+
+//MODELS
 import { LoginModel } from '../../account/models/login.model';
 import { RegisterExternalModel } from '../../account/models/registerExternalModel';
-import { HttpWrapper } from '../http/http.wrapper';
-import { CONFIG } from '../../config';
 
 @Injectable()
 export class AuthService {
@@ -40,14 +42,16 @@ export class AuthService {
   }
 
   updateExternalUser(provider: string, externalToken: string, phoneNumber: string) {
-    return this._httpWrapper.post(CONFIG.baseUrls.apiUrl + "account/updateExternalUser?provider=" + provider + "&externalToken=" + externalToken + "&phoneNumber=" + phoneNumber, "")
+    return this._httpWrapper
+      .post(CONFIG.baseUrls.apiUrl + "account/updateExternalUser?provider=" + provider + "&externalToken=" + externalToken + "&phoneNumber=" + phoneNumber, "")
       .map((res: Response) => res.json())
       .do(data => this.storeUserAccessInfo(data))
       .catch(this._handleAuthError);
   }
 
   obtainLocalAccessToken(provider: string, externalToken: string) {
-    return this._httpWrapper.get(CONFIG.baseUrls.apiUrl + "account/obtainLocalAccessToken?provider=" + provider + "&externalAccessToken=" + externalToken)
+    return this._httpWrapper
+      .get(CONFIG.baseUrls.apiUrl + "account/obtainLocalAccessToken?provider=" + provider + "&externalAccessToken=" + externalToken)
       .map((res: Response) => res.json())
       .do(data => this.storeUserAccessInfo(data))
       .catch(this._handleAuthError);
@@ -104,7 +108,7 @@ export class AuthService {
     this.storeItem('access_token', data.access_token);
     this.storeItem('refresh_token', data.refresh_token);
     this.storeItem('token_expires', new Date(data[".expires"]).getTime().toString());
-    this.storeItem('refresh_token_expires', (new Date().getTime() + data.expires_in * 1000).toString());
+    this.storeItem('refresh_token_expires', (new Date(data[".expires"]).getTime() + (CONFIG.refresh_token_lifetime_min * 60 * 1000)).toString());
     this.storeItem('user_name', data.fullName);
     this.storeItem('pic_name', data.profilePic);
   }
@@ -119,11 +123,12 @@ export class AuthService {
   }
 
   checkPostOwner(adId: string) {
-    return this._httpWrapper.get(this._checkPostOwner + adId)
+    return this._httpWrapper
+      .get(this._checkPostOwner + adId)
       .map((res) => res.json())
       .catch(error => {
         if (error && error.status === 401 && this.isTokenExpired()) {
-          return this.refreshToken().merge((data) => {
+          return this.refreshToken().mergeMap((data) => {
             this.storeUserAccessInfo(data);
             return this._httpWrapper.get(this._checkPostOwner + adId)
               .catch(this._handleError);

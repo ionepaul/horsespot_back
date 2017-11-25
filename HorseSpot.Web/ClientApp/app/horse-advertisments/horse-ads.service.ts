@@ -1,12 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { CONFIG } from '../config';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
+
+//SERVICES
 import { HttpWrapper } from '../shared/http/http.wrapper';
+
+//MODELS
 import { PriceRangeModel } from './models/priceRangeModel';
 import { CountryModel } from './models/countryModel';
 import { GenderModel } from './models/genderModel';
@@ -19,8 +24,6 @@ import { PedigreeModel } from './models/pedigree';
 import { SearchModel } from './models/searchModel';
 import { AuthService } from '../shared/auth/auth.service';
 import { LatestHorsesModel } from './models/latestHorses.model';
-import { TransferHttp } from '../../modules/transfer-http/transfer-http';
-import { CONFIG } from '../config';
 
 @Injectable()
 export class HorseAdsService {
@@ -50,7 +53,6 @@ export class HorseAdsService {
 
   constructor(private _http: Http,
     private _httpWrapper: HttpWrapper,
-    private transferHttp: TransferHttp,
     private _authService: AuthService,
     private _router: Router) { }
 
@@ -60,29 +62,33 @@ export class HorseAdsService {
       .catch(this.handleError);
   }
 
-  getAllCountries(name?: string): Observable<string[]> {
-    return this.transferHttp.get(CONFIG.restCountriesUrl + name).catch((error: any) => Observable.of([]));
+  getAllCountries(name?: string) {
+    return this._http.get(CONFIG.restCountriesUrl + name)
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.of([]));
   }
 
   getAllAbilities(): Observable<HorseAbilityModel[]> {
     return this._http.get(this._horseAbilitiesUrl)
       .map((res: Response) => res.json() as HorseAbilityModel[])
-      .catch(this.handleError);
+      .catch(error => this.handleError(error));
   }
 
   getAllRecomendedRiders(): Observable<RecommendedRiderModel[]> {
-    return this.transferHttp.get(this._recommendedRidersUrl);
+    return this._http.get(this._recommendedRidersUrl)
+      .map((res: Response) => res.json())
+      .catch(error => this.handleError(error));
   }
 
   increaseViews(adId: number) {
-    return this._http.post(this._increseViewsUrl + adId, "")
+    return this._httpWrapper.post(this._increseViewsUrl + adId, "")
       .catch(this.handleError);
   }
 
   saveHorseAdImage(adId: number, imageName: string) {
     return this._httpWrapper.post(`${this._saveHorseImageUrl}${adId}?imageName=${imageName}`, "")
-                            .map((res) => res.json())
-                            .catch(this.handleError);
+      .map((res) => res.json())
+      .catch(this.handleError);
   }
 
   postHorseAd(model: HorseAdModel) {
@@ -92,7 +98,7 @@ export class HorseAdsService {
       .map((res: Response) => res.json())
       .catch(error => {
         if (error && error.status === 401 && this._authService.isTokenExpired()) {
-          return this._authService.refreshToken().merge((data) => {
+          return this._authService.refreshToken().mergeMap((data) => {
             this._authService.storeUserAccessInfo(data);
             return this._httpWrapper.post(this._postHorseAdUrl, body)
               .map((res: Response) => res.json())
@@ -114,7 +120,7 @@ export class HorseAdsService {
       .map((res: Response) => res)
       .catch(error => {
         if (error && error.status === 401 && this._authService.isTokenExpired()) {
-          return this._authService.refreshToken().merge((data) => {
+          return this._authService.refreshToken().mergeMap((data) => {
             this._authService.storeUserAccessInfo(data);
             return this._httpWrapper.post(this._editHorseAdUrl + id, body)
               .map((res: Response) => res)
@@ -134,7 +140,7 @@ export class HorseAdsService {
       .map((res: Response) => res)
       .catch(error => {
         if (error && error.status === 401 && this._authService.isTokenExpired()) {
-          return this._authService.refreshToken().merge((data) => {
+          return this._authService.refreshToken().mergeMap((data) => {
             this._authService.storeUserAccessInfo(data);
             return this._httpWrapper.delete(this._deleteHorseAdUrl + id)
               .map((res: Response) => res)
@@ -166,7 +172,7 @@ export class HorseAdsService {
       .map((res: Response) => res.json())
       .catch(error => {
         if (error && error.status === 401 && this._authService.isTokenExpired()) {
-          return this._authService.refreshToken().merge((data) => {
+          return this._authService.refreshToken().mergeMap((data) => {
             this._authService.storeUserAccessInfo(data);
             requestOptions.headers.delete('Authorization');
             requestOptions.headers.append('Authorization', 'Bearer ' + data.access_token)
@@ -186,7 +192,7 @@ export class HorseAdsService {
     return this._httpWrapper.post(this._deleteHorseAdPhotoUrl + imageId, "")
       .catch(error => {
         if (error && error.status === 401 && this._authService.isTokenExpired()) {
-          return this._authService.refreshToken().merge((data) => {
+          return this._authService.refreshToken().mergeMap((data) => {
             this._authService.storeUserAccessInfo(data);
             return this._httpWrapper.post(this._deleteHorseAdPhotoUrl + imageId, "")
               .catch(this.handleError);
@@ -204,7 +210,7 @@ export class HorseAdsService {
     return this._httpWrapper.post(this._deletaUnsavedImageUrl + imageName, "")
       .catch(error => {
         if (error && error.status === 401 && this._authService.isTokenExpired()) {
-          return this._authService.refreshToken().merge((data) => {
+          return this._authService.refreshToken().mergeMap((data) => {
             this._authService.storeUserAccessInfo(data);
             return this._httpWrapper.post(this._deletaUnsavedImageUrl + imageName, "")
               .catch(this.handleError);
@@ -222,7 +228,7 @@ export class HorseAdsService {
     return this._httpWrapper.post(this._setHorseAdProfilePicUrl + imageId, "")
       .catch(error => {
         if (error && error.status === 401 && this._authService.isTokenExpired()) {
-          return this._authService.refreshToken().merge((data) => {
+          return this._authService.refreshToken().mergeMap((data) => {
             this._authService.storeUserAccessInfo(data);
             return this._httpWrapper.post(this._setHorseAdProfilePicUrl + imageId, "")
               .catch(this.handleError);
@@ -247,7 +253,7 @@ export class HorseAdsService {
       .map((res: Response) => res.json() as GetHorseAdListResultsModel)
       .catch(error => {
         if (error && error.status === 401 && this._authService.isTokenExpired()) {
-          return this._authService.refreshToken().merge((data) => {
+          return this._authService.refreshToken().mergeMap((data) => {
             this._authService.storeUserAccessInfo(data);
             return this._httpWrapper.get(`${this._getUnvalidatedHorsePosts + pageNumber}`)
               .map((res: Response) => res.json() as GetHorseAdListResultsModel)
@@ -263,7 +269,8 @@ export class HorseAdsService {
   }
 
   getHorseAdDetails(horseAdId: number): Observable<HorseAdModel> {
-    return this.transferHttp.get(`${this._getHorseAdDetails + horseAdId}`)
+    return this._http.get(`${this._getHorseAdDetails + horseAdId}`)
+      .map((res: Response) => res.json())
       .catch(this.handleError);
   }
 
@@ -271,7 +278,7 @@ export class HorseAdsService {
     return this._httpWrapper.post(`${this._validateHorseAdUrl + horseAdId}`, "")
       .catch(error => {
         if (error && error.status === 401 && this._authService.isTokenExpired()) {
-          return this._authService.refreshToken().merge((data) => {
+          return this._authService.refreshToken().mergeMap((data) => {
             this._authService.storeUserAccessInfo(data);
             return this._httpWrapper.post(`${this._validateHorseAdUrl + horseAdId}`, "")
               .catch(this.handleError);
@@ -289,7 +296,7 @@ export class HorseAdsService {
     return this._httpWrapper.post(`${this._addHorseAdToFavoritesUrl + horseAdId}`, "")
       .catch(error => {
         if (error && error.status === 401 && this._authService.isTokenExpired()) {
-          return this._authService.refreshToken().merge((data) => {
+          return this._authService.refreshToken().mergeMap((data) => {
             this._authService.storeUserAccessInfo(data);
             return this._httpWrapper.post(`${this._addHorseAdToFavoritesUrl + horseAdId}`, "")
               .catch(this.handleError);
@@ -307,7 +314,7 @@ export class HorseAdsService {
     let body = JSON.stringify(emailModel);
 
     return this._httpWrapper.post(this._sendEmailUrl, body)
-                            .catch(this.handleError)
+      .catch(this.handleError)
   }
 
   search(searchModel: SearchModel) {
@@ -331,7 +338,9 @@ export class HorseAdsService {
   }
 
   getLatestHorses() {
-    return this.transferHttp.get(this._getLatestHorses);
+    return this._http.get(this._getLatestHorses)
+      .map((res: Response) => res.json())
+      .catch(error => this.handleError(error));
   }
 
   private handleError(error: Response) {

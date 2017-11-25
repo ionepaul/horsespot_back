@@ -27,6 +27,8 @@ export let CONFIG = {
 
     refresh_token_grant_type: "refresh_token",
 
+    refresh_token_lifetime_min: 7200,
+
     mobile_width: 767,
 
     _true: "true",
