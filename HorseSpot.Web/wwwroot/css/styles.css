@@ -4057,7 +4057,7 @@ typeahead-container .dropdown-menu {
 
     .horse-card-article .breed .breed-country {
       display: inline-block;
-      max-width: 225px;
+      max-width: 200px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
