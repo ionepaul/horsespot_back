@@ -1630,9 +1630,7 @@ div.social-links {
 
   .profile-info .ctas a:hover {
     text-decoration: none;
-    transform: translateX(3px);
-    -moz-transform: translateX(3px);
-    -webkit-transform: translateX(3px);
+    background: #a52319;
   }
 
 /* ================================================================================== */
@@ -2144,15 +2142,24 @@ modal.cancel-app textarea {
   -moz-transition: all 0.3s;
 }
 
-  .send-email button:hover {
-    transform: translateX(2px);
+  .send-email button:first-of-type:hover {
+    background: #a52319;
   }
 
   .delete-modal button:first-of-type,
   .send-email button:first-of-type {
     color: #fff;
     background: #ba3326;
-    margin-top: 15px;
+    margin: 15px 0;
+  }
+
+  .send-email p {
+    text-align: center;
+  }
+
+  .send-email .just-delete {
+    color: #868686;
+    font-size: 14px;
   }
 
 .delete-modal p {
