@@ -8,7 +8,7 @@
 
         <div class="container">
 
-            <div class="col-sm-6">
+            <div class="col-sm-12">
                 <form #contactSendEmail="ngForm">
                     <div class="form-group">
                         <div *ngIf="email.errors && email.touched" class="client-side-validation-error">
@@ -42,20 +42,16 @@
 
                     <button type="submit" class="btn btn-default" [disabled]="!contactSendEmail.form.valid" (click)="send(contactSendEmail.form)">{{'CONTACT_PAGE.SUBMIT_BTN' | translate}}</button>
                 </form>
-            </div><!-- col-sm-6 -->
-
-            <div class="col-sm-6">
-              <!--  <img src="../../../wwwroot/assets/images/logo_2.png" alt="Horse Spot">-->
-                <ul>
-                    <li><fa name="map-marker"></fa> Dorobantilor, Cluj-Napoca
-                    <li class="margin">Cluj, Romania</li>
+                <!-- ul>
+                  <li><fa name="map-marker"></fa> Dorobantilor, Cluj-Napoca
+                  <li class="margin">Cluj, Romania</li>
                 </ul>
                 <ul>
-                    <li><a href="mailto:info@horse-spot.com" style="color:#000"><fa name="envelope-o"></fa> contact@horse-spot.com</a></li>
-                    <li><a style="color:#000" href="tel:0040757520997"><fa name="phone"></fa> +40757520997</a></li>
-                    <li class="margin-two"><a style="color:#000" href="tel:0040726308064">+40726308064</a></li>
-                </ul>
-            </div><!-- col-sm-6 -->
+                  <li><a href="mailto:info@horse-spot.com" style="color:#000"><fa name="envelope-o"></fa> contact@horse-spot.com</a></li>
+                  <li><a style="color:#000" href="tel:0040757520997"><fa name="phone"></fa> +40757520997</a></li>
+                  <li class="margin-two"><a style="color:#000" href="tel:0040726308064">+40726308064</a></li>
+                </ul> -->
+            </div><!-- col-sm-12 -->
 
         </div><!--container -->
 
