@@ -22,7 +22,7 @@
 
         <div class="details-inputs cf">
           <div class="form-group">
-            <img src="../../../../wwwroot/assets/images/female_form.png" alt="Gender search icon">
+            <span class="female"></span>
             <select class="form-control" name="gender" [(ngModel)]="searchModel.GenderId">
               <option [ngValue]="0">{{ 'HOME_PAGE.GENDERS.GENDER' | translate }}</option>
               <option [ngValue]="1">{{ 'HOME_PAGE.GENDERS.GELDING' | translate }}</option>
@@ -31,7 +31,7 @@
             </select>
           </div>
           <div class="form-group">
-            <img src="../../../../wwwroot/assets/images/pin_form.png" alt="Location search icon">
+            <span class="location"></span>
             <input [(ngModel)]="selectedCountry"
                    autocomplete="off"
                    name="countries"
@@ -45,15 +45,15 @@
                    class="form-control" />
           </div>
           <div class="form-group">
-            <img src="../../../../wwwroot/assets/images/breed_form.png" alt="Breed search icon">
+            <span class="breed"></span>
             <input placeholder="{{'CATEGORIES_SEARCH.BREED' | translate}}" name="breed" id="breed" [(ngModel)]="searchModel.Breed" type="text" class="form-control">
           </div>
           <div class="form-group">
-            <img src="../../../../wwwroot/assets/images/father_form.png" alt="Father's name search icon">
+            <span class="father"></span>
             <input placeholder="{{'CATEGORIES_SEARCH.FATHER_NAME' | translate}}" name="fatherName" [(ngModel)]="searchModel.AfterFatherName" type="text" class="form-control">
           </div>
           <div class="form-group">
-            <img src="../../../../wwwroot/assets/images/sortby_form.png" alt="Sort by icon">
+            <span class="sort"></span>
             <select class="form-control" name="sortBy" [(ngModel)]="searchModel.SortModel.SortAfter">
               <option [ngValue]="0">{{'CATEGORIES_SEARCH.SORT_BY.OPTION_DATE' | translate}}</option>
               <option [ngValue]="1">{{'CATEGORIES_SEARCH.SORT_BY.OPTION_VIEWS' | translate}}</option>
@@ -63,7 +63,7 @@
             </select>
           </div>
           <div class="form-group">
-            <img src="../../../../wwwroot/assets/images/sortoder_form.png" alt="Sort order icon">
+            <span class="sort-order"></span>
             <select class="form-control" name="sortDirection" [(ngModel)]="searchModel.SortModel.SortDirection">
               <option [ngValue]="0">{{'CATEGORIES_SEARCH.SORT_ORDER.DESCENDING' | translate}}</option>
               <option [ngValue]="1">{{'CATEGORIES_SEARCH.SORT_ORDER.ASCENDING' | translate}}</option>

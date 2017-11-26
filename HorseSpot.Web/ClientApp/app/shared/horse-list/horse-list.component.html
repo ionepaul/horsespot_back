@@ -24,8 +24,8 @@
 
         <div class="details">
           <p class="date">{{horseModel.DatePosted | dateFormatPipe}}</p>
-          <p class="views"><img src="../../../../wwwroot/assets/images/eye.png" alt="Horse views"> {{horseModel.Views}}</p>
-          <p class="views"><img src="../../../../wwwroot/assets/images/heart.png" alt="Horse likes"> {{horseModel.CountFavoritesFor}}</p>
+          <p class="views"><span class="heart"></span> {{horseModel.Views}}</p>
+          <p class="views"><span class="eye"></span> {{horseModel.CountFavoritesFor}}</p>
         </div><!-- details -->
       </div>
     </article>
