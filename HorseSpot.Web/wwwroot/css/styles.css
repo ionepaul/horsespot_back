@@ -319,6 +319,31 @@ div.social-bar-lang {
   padding: 5px 0;
 }
 
+  div.social-bar-lang .main-links li span {
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+    position: relative;
+    top: 5px;
+    margin-right: 5px;
+  }
+
+  div.social-bar-lang .main-links .home {
+    background: url("../assets/images/icons_sprites.png") -210px -202px;
+  }
+
+  div.social-bar-lang .main-links .advertise {
+    background: url("../assets/images/icons_sprites.png") -252px -202px;
+  }
+
+  div.social-bar-lang .main-links .contact {
+    background: url("../assets/images/icons_sprites.png") -310px -256px;
+  }
+
+  div.social-bar-lang .main-links .hire-us {
+    background: url("../assets/images/icons_sprites.png") -210px -310px;
+  }
+
   div.social-bar-lang .container {
     border-bottom: 0 !important;
   }
@@ -408,8 +433,26 @@ div.social-bar-lang {
       right: 0;
     }
 
-      div.social-bar-lang ul.social-links img {
-        width: 65%;
+      div.social-bar-lang ul.social-links span {
+        width: 40px;
+        height: 40px;
+        display: inline-block;
+      }
+
+      div.social-bar-lang ul.social-links .facebook {
+        background: url('../assets/images/icons_sprites.png') -310px -10px;
+      }
+
+      div.social-bar-lang ul.social-links .instagram {
+        background: url('../assets/images/icons_sprites.png') -210px -250px;
+      }
+
+      div.social-bar-lang ul.social-links .twitter {
+        background: url('../assets/images/icons_sprites.png') -90px -250px;
+      }
+
+      div.social-bar-lang ul.social-links .youtube {
+        background: url('../assets/images/icons_sprites.png') -150px -250px;
       }
 
 /* ===================================== */
