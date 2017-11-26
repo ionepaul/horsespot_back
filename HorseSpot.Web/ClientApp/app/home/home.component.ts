@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
   priceRanges: PriceRangeModel[];
   countries: string[];
   searchModel: SearchModel;
-  priceRangeId: number;
+  priceRangeId: number = 0;
   errorMessage: string;
   categoryId: number = 0;
   genderId: number = 0;
@@ -35,6 +35,7 @@ export class HomeComponent implements OnInit {
   latestHorses: LatestHorsesModel = <LatestHorsesModel>{};
   selectedCountry: string;
   countryData: Observable<any[]>;
+  selectedPriceRangeValue: string;
 
   constructor(private _router: Router,
     private _horseAdService: HorseAdsService,
@@ -71,6 +72,18 @@ export class HomeComponent implements OnInit {
 
   search() {
     this.searchModel.Country = this.selectedCountry;
+
+    if (this.priceRangeId != 0) {
+      let priceRangeArray = this.getPriceRangeModelIntValues(this.priceRanges.find(x => x.Id == this.priceRangeId).PriceRangeValue);
+     
+      if (priceRangeArray.length == 1) {
+        priceRangeArray.push(CONFIG.frontMaxPriceRangeValue);
+      }
+
+      this.searchModel.PriceModel.MinPrice = priceRangeArray[0];
+      this.searchModel.PriceModel.MaxPrice = priceRangeArray[1];
+    }
+
     this._horseAdService.setSearchModel(this.searchModel);
     this._router.navigate(['/horses-for-sale/' + this.utilDictionaries.getUrlByCategoryId(this.categoryId) + '/1']);
   }
@@ -79,5 +92,22 @@ export class HomeComponent implements OnInit {
     this._horseAdService.getLatestHorses()
       .subscribe(res => this.latestHorses = res,
       error => this.errorMessage = error);
+  }
+
+  getPriceRangeModelIntValues(priceRangeModelValue: string) {
+    let priceRangeValues: number[] = [];
+
+    if (priceRangeModelValue === CONFIG.dbMaxPriceRangeValue) {
+      priceRangeValues.push(parseInt(priceRangeModelValue.replace(",", "").replace("+", "")));
+
+      return priceRangeValues;
+    }
+
+    let values = priceRangeModelValue.trim().split('-');
+
+    priceRangeValues.push(parseInt(values[0].trim().replace(",", "")));
+    priceRangeValues.push(parseInt(values[1].trim().replace(",", "")));
+
+    return priceRangeValues;
   }
 }

@@ -40,6 +40,7 @@ export class HorseListCategoriesComponent implements OnInit, OnDestroy {
   categoryName: string;
   totalNumber: number;
   pageNumber: number = 1;
+  adsPerPage: number = CONFIG.adsPerPage;
   errorMessage: string;
   recommendedRiders: RecommendedRiderModel[];
   priceRanges: PriceRangeModel[];
@@ -70,11 +71,20 @@ export class HorseListCategoriesComponent implements OnInit, OnDestroy {
         this.categoryHorseList = this._route.snapshot.data['model'].HorseAdList;
       }
     });
-
-    this.searchModel = this._horseAdService.getSearchModel();
   }
 
   ngOnInit() {
+    this.searchModel = this._horseAdService.getSearchModel();
+
+    if (this.searchModel.PriceModel.MinPrice != 0 && this.searchModel.PriceModel.MaxPrice != 0) {
+      this.priceRange[0] = this.searchModel.PriceModel.MinPrice;
+      this.priceRange[1] = this.searchModel.PriceModel.MaxPrice;
+    }
+
+    if (this.searchModel.Country != undefined) {
+      this.selectedCountry = this.searchModel.Country;
+    }
+
     this.countryData = Observable.create((observer: any) => {
       observer.next(this.selectedCountry);
     }).mergeMap((name: string) => this.getCountries(name));

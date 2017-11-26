@@ -25,7 +25,7 @@
   </div>
 </div>
 
-<pagination *ngIf="userPosts.length != 0" [itemsPerPage]="16" [totalItems]="totalNumber" [(ngModel)]="pageNumber" [maxSize]="8"
+<pagination *ngIf="userPosts.length != 0" [itemsPerPage]="adsPerPage" [totalItems]="totalNumber" [(ngModel)]="pageNumber" [maxSize]="8"
             class="pagination-sm" [boundaryLinks]="true" [rotate]="false" (pageChanged)="pageChanged($event)"
             previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
 </pagination>

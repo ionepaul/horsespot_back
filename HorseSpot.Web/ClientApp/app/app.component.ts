@@ -22,7 +22,7 @@ declare var ga: Function;
     template: `
         <app-notification *ngIf="isBrowser" [refresh]="_notificationService.getRefresh()" [text]="_notificationService.getText()"></app-notification>
         <spinner></spinner>
-        <navbar [langCode]="lang"></navbar>      
+        <navbar></navbar>      
         <router-outlet></router-outlet>
         <horse-spot-footer></horse-spot-footer>
     `,
@@ -36,14 +36,12 @@ declare var ga: Function;
 })
 export class AppComponent implements OnInit, OnDestroy {
     isBrowser: boolean = false;
-    lang: string;
 
     private endPageTitle: string = 'Horse Spot';
     // If no Title is provided, we'll use a default one before the dash(-)
     private defaultPageTitle: string = 'Horses For Sale';
 
     private _routerSub$: Subscription;
-    private _activatedRouteSub$: Subscription;
 
     constructor(public _accountService: AccountService,
         //public _appointmentsService: AppointmentsService,
@@ -70,7 +68,10 @@ export class AppComponent implements OnInit, OnDestroy {
         //if (userId != null) {
         //     this._appointmentsService.webSocketConnect(userId);        
         //}
-
+        
+        this._translateService.setDefaultLang('en');
+        this._translateService.use('en');
+        
         this._initFacebookSdkConnection();
 
         if (isPlatformBrowser(this.platformId)) {
@@ -88,23 +89,8 @@ export class AppComponent implements OnInit, OnDestroy {
             .map(() => this._activatedRoute)
             .map(route => {
 
-                this._activatedRouteSub$ = this._activatedRoute.queryParams.subscribe(params => {
-                    this.lang = this._translateService.currentLang != undefined ? this._translateService.currentLang : 'en';
-
-                    if (params['lang'] != undefined) {
-                        this.lang = params['lang'];
-                        let basePath = this._location.path().slice(0, this._location.path().indexOf('?'));
-
-                        this._location.replaceState(basePath);
-                    }
-
-                    this._translateService.setDefaultLang(this.lang);
-                    this._translateService.use(this.lang);
-                });
-
                 while (route.firstChild) route = route.firstChild;
 
-                this._activatedRouteSub$.unsubscribe();
                 return route;
             })
             .filter(route => route.outlet === 'primary')

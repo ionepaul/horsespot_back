@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
+import { CONFIG } from '../../config';
+
+//MODELS
 import { HorseAdListModel } from '../models/horseAdListModel';
 
 @Component({
@@ -11,6 +14,7 @@ export class HorseListUnvalidatedComponent implements OnInit {
   unvalidatedHorseList: HorseAdListModel[];
   totalNumber: number;
   pageNumber: number = 1;
+  adsPerPage: number = CONFIG.adsPerPage;
 
   constructor(private _route: ActivatedRoute,
     private _router: Router,

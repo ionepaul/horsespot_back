@@ -19,6 +19,7 @@ import { AccountService } from '../account.service';
 export class UserFavoritesComponent implements OnInit, OnDestroy {
   pageNumber: number = 1;
   totalNumber: number;
+  adsPerPage: number = CONFIG.adsPerPage;
   userId: string = "";
   userFavoritesPosts: HorseAdListModel[];
   userModel: UserModel = <UserModel>{};

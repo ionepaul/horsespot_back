@@ -53,6 +53,8 @@ export let CONFIG = {
     defaultHeight: { min: 160, max: 178 },
 
     dbMaxPriceRangeValue: "40,000 +",
+    frontMaxPriceRangeValue: 100000,
+    adsPerPage: 12,
 
     fbAppId: '275509216289907',
     fbSdkVersion: 'v2.8'

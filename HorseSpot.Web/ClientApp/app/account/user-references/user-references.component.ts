@@ -18,6 +18,7 @@ import { AccountService } from '../account.service';
 
 export class UserReferencesComponent implements OnInit, OnDestroy {
   pageNumber: number = 1;
+  adsPerPage: number = CONFIG.adsPerPage;
   userId: string = "";
   totalNumber: number;
   userReferences: HorseAdListModel[];
