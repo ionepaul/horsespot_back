@@ -319,6 +319,35 @@ div.social-bar-lang {
   padding: 5px 0;
 }
 
+  div.social-bar-lang .main-links li span {
+    height: 15px;
+    display: inline-block;
+    position: relative;
+    top: 3px;
+    margin-right: 5px;
+  }
+
+  div.social-bar-lang .main-links .home {
+    width: 17px;
+    background: url("../assets/images/icons_sprites.png") -91px -210px;
+  }
+
+  div.social-bar-lang .main-links .advertise {
+    background: url("../assets/images/icons_sprites.png") -51px -210px;
+    width: 20px;
+  }
+
+  div.social-bar-lang .main-links .contact {
+    background: url("../assets/images/icons_sprites.png") -169px -170px;
+    width: 21px;
+  }
+
+  div.social-bar-lang .main-links .hire-us {
+    background: url("../assets/images/icons_sprites.png") -130px -170px;
+    width: 19px;
+    height: 19px;
+  }
+
   div.social-bar-lang .container {
     border-bottom: 0 !important;
   }
@@ -332,6 +361,7 @@ div.social-bar-lang {
       display: inline-block;
       position: relative;
       vertical-align: middle;
+      margin-right: 10px;
     }
 
       div.social-bar-lang ul li a {
@@ -418,8 +448,26 @@ div.social-bar-lang {
       right: 0;
     }
 
-      div.social-bar-lang ul.social-links img {
-        width: 65%;
+      div.social-bar-lang ul.social-links span {
+        width: 26px;
+        height: 26px;
+        display: inline-block;
+      }
+
+      div.social-bar-lang ul.social-links .facebook {
+        background: url('../assets/images/icons_sprites.png') -178px -56px;
+      }
+
+      div.social-bar-lang ul.social-links .instagram {
+        background: url('../assets/images/icons_sprites.png') -126px -65px;
+      }
+
+      div.social-bar-lang ul.social-links .twitter {
+        background: url('../assets/images/icons_sprites.png') -178px -10px;
+      }
+
+      div.social-bar-lang ul.social-links .youtube {
+        background: url('../assets/images/icons_sprites.png') -93px -115px;
       }
 
 /* ===================================== */
@@ -4055,6 +4103,20 @@ typeahead-container .dropdown-menu {
     text-align: right;
   }
 
+    .horse-card-article .breed .pin {
+      display: inline-block;
+      width: 15px;
+      height: 25px;
+      background: url('../assets/images/icons_sprites.png') -139px -115px;
+    }
+
+    .horse-card-article .breed .breed-bg {
+      display: inline-block;
+      width: 16px;
+      height: 25px;
+      background: url('../assets/images/icons_sprites.png') -178px -102px;
+    }
+
     .horse-card-article .breed .breed-country {
       display: inline-block;
       max-width: 200px;
@@ -4320,6 +4382,66 @@ aside.col-sm-4 {
     margin: 0 auto 10px;
     text-align: left;
   }
+
+
+.hire-us .title-wrapper {
+  border-bottom: 1px solid #B6B6B6;
+  margin-bottom: 35px;
+}
+
+  .hire-us h4 {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 0;
+    text-transform: capitalize;
+    font-size: 25px;
+  }
+
+  .hire-us h6 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+    .hire-us h4::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      height: 2px;
+      background: #767676;
+      width: 100%;
+    }
+
+    .hire-us .together {
+      text-align: center;
+      margin: 50px 0;
+    }
+
+    .hire-us .together p {
+      margin-bottom: 20px;
+      font-size: 30px;
+      color: #868686;
+      text-transform: uppercase;
+      font-weight: 300;
+    }
+
+    .hire-us form {
+      width: 70%;
+    }
+
+    .hire-us textarea {
+      width: 100%;
+    }
+
+    .hire-us ol {
+      padding-left: 30px;
+      margin-bottom: 20px;
+    }
+
+    .hire-us ol li {
+      margin-bottom: 5px;
+    }
 
 /* === MEDIA QUERIES === */
 
