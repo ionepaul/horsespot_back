@@ -54,28 +54,28 @@
         <p>{{horseAdModel.Description}}</p>
         <ul class="cf">
           <li>
-            <img src="../../../../wwwroot/assets/images/gender.png" alt="Horse gender icon">
+            <span class="ic-bg gender"></span>
             <span>{{'HORSE_AD_DETAIL.GENDER' | translate}}</span>
             <span>{{horseAdModel.Gender}}</span>
           </li>
           <li>
-            <img src="../../../../wwwroot/assets/images/breed.png" alt="Horse breed icon">
+            <span class="ic-bg breed"></span>
             <span>{{'HORSE_AD_DETAIL.BREED' | translate}}</span>
             <span>{{horseAdModel.Breed}}</span>
           </li>
           <li>
-            <img src="../../../../wwwroot/assets/images/height.png" alt="Horse height icon">
+            <span class="ic-bg height"></span>
             <span>{{'HORSE_AD_DETAIL.HEIGHT' | translate}}</span>
             <span>{{horseAdModel.HeightInCm}} cm</span>
           </li>
           <li>
-            <img src="../../../../wwwroot/assets/images/rays.png" alt="Horse x-rays icon">
+            <span class="ic-bg rays"></span>
             <span>{{'HORSE_AD_DETAIL.XRAYS' | translate}}</span>
             <span *ngIf="horseAdModel.HaveXRays">{{'HORSE_AD_DETAIL.YES' | translate}}</span>
             <span *ngIf="!horseAdModel.HaveXRays">{{'HORSE_AD_DETAIL.NO' | translate}}</span>
           </li>
           <li>
-            <img src="../../../../wwwroot/assets/images/exp.png" alt="Horse competitional experience icon">
+            <span class="ic-bg xp"></span>
             <span>{{'HORSE_AD_DETAIL.COMP_EXP' | translate}}</span>
             <span *ngIf="horseAdModel.HaveCompetionalExperience">{{'HORSE_AD_DETAIL.YES' | translate}}</span>
             <span *ngIf="!horseAdModel.HaveCompetionalExperience">{{'HORSE_AD_DETAIL.NO' | translate}}</span>
@@ -146,8 +146,8 @@
             <li><fb-share href="{{location.href}}" layout="button"></fb-share></li>
           </ul>
           <ul>
-            <li><img src="../../../../wwwroot/assets/images/eye.png" alt="Horse views"> {{horseAdModel.Views}}</li>
-            <li><img src="../../../../wwwroot/assets/images/heart.png" alt="Horse likes"> {{horseAdModel.CountFavoritesFor}}</li>
+            <li><span class="eye"></span> {{horseAdModel.Views}}</li>
+            <li><span class="heart"></span> {{horseAdModel.CountFavoritesFor}}</li>
           </ul>
         </div><!-- lists -->
 

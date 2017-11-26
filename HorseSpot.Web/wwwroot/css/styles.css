@@ -445,12 +445,13 @@ div.social-bar-lang {
 
     div.social-bar-lang ul.social-links {
       position: absolute;
+      top: 1px;
       right: 0;
     }
 
       div.social-bar-lang ul.social-links span {
         width: 26px;
-        height: 26px;
+        height: 27px;
         display: inline-block;
       }
 
@@ -2991,11 +2992,48 @@ form.details input[type="checkbox"] {
       padding-left: 30px;
     }
 
-    .horses-form form .details-inputs .form-group img {
+    .horses-form form .details-inputs span {
+      display: inline-block;
       position: absolute;
-      top: 7px;
+      top: 5px;
       left: 5px;
     }
+
+    .horses-form form .female {
+      background: url('../assets/images/icons_sprites.png') -224px -90px;
+      width: 14px;
+      height: 20px;
+    }
+
+.horses-form form .location {
+  background: url('../assets/images/icons_sprites.png') -224px -50px;
+  width: 14px;
+  height: 20px;
+}
+
+.horses-form form .breed {
+  background: url('../assets/images/icons_sprites.png') -10px -170px;
+  width: 20px;
+  height: 20px;
+}
+
+.horses-form form .father {
+  background: url('../assets/images/icons_sprites.png') -90px -170px;
+  width: 20px;
+  height: 20px;
+}
+
+.horses-form form .sort {
+  background: url('../assets/images/icons_sprites.png') -50px -170px;
+  width: 20px;
+  height: 20px;
+}
+
+.horses-form form .sort-order {
+  background: url('../assets/images/icons_sprites.png') -224px -10px;
+  width: 16px;
+  height: 20px;
+}
 
   .horses-form form .range-inputs-container {
     display: flex;
@@ -3320,9 +3358,39 @@ form.details input[type="checkbox"] {
     margin: 0 auto;
   }
 
-  .horses-details #overview ul li img {
-    width: 35px;
+  .horses-details #overview .ic-bg {
+    display: inline-block;
   }
+
+    .horses-details #overview .gender {
+      background: url('../assets/images/icons_sprites.png') -52px -115px;
+      width: 21px;
+      height: 35px;
+    }
+
+    .horses-details #overview .breed {
+      background: url('../assets/images/icons_sprites.png') -10px -60px;
+      width: 35px;
+      height: 35px;
+    }
+
+.horses-details #overview .height {
+  background: url('../assets/images/icons_sprites.png') -126px -10px;
+  width: 32px;
+  height: 35px;
+}
+
+.horses-details #overview .rays {
+  background: url('../assets/images/icons_sprites.png') -10px -115px;
+  width: 22px;
+  height: 35px;
+}
+
+.horses-details #overview .xp {
+  background: url('../assets/images/icons_sprites.png') -71px -10px;
+  width: 35px;
+  height: 35px;
+}
 
   .horses-details #overview ul li span:first-of-type {
     font-weight: 700;
@@ -3452,8 +3520,20 @@ form.details input[type="checkbox"] {
       margin-left: 15px;
     }
 
-  .horses-details .add li img {
-    width: 30px;
+  .horses-details .add span {
+    display: inline-block;
+  }
+
+  .horses-details .add .eye {
+    background: url('../assets/images/icons_sprites.png') -10px -210px;
+    width: 21px;
+    height: 15px;
+  }
+
+  .horses-details .add .heart {
+    background: url('../assets/images/icons_sprites.png') 128px -210px;
+    width: 25px;
+    height: 14px;
   }
 
 /* SLIDER */
@@ -4105,9 +4185,12 @@ typeahead-container .dropdown-menu {
 
     .horse-card-article .breed .pin {
       display: inline-block;
-      width: 15px;
+      width: 16px;
       height: 25px;
       background: url('../assets/images/icons_sprites.png') -139px -115px;
+      margin-right: 5px;
+      position: relative;
+      top: 4px;
     }
 
     .horse-card-article .breed .breed-bg {
@@ -4115,6 +4198,7 @@ typeahead-container .dropdown-menu {
       width: 16px;
       height: 25px;
       background: url('../assets/images/icons_sprites.png') -178px -102px;
+      margin-right: 5px;
     }
 
     .horse-card-article .breed .breed-country {
@@ -4164,6 +4248,24 @@ typeahead-container .dropdown-menu {
       text-align: right;
       width: 25%;
     }
+
+    .horse-card-article .details .views .eye {
+      background: url('../assets/images/icons_sprites.png') -10px -210px;
+      display: inline-block;
+      width: 21px;
+      height: 15px;
+      position: relative;
+      top: 2px;
+    }
+
+      .horse-card-article .details .views .heart {
+        background: url('../assets/images/icons_sprites.png') -128px -210px;
+        display: inline-block;
+        width: 17px;
+        height: 14px;
+        position: relative;
+        top: 2px;
+      }
 
 .home-container .add {
   text-align: center;
