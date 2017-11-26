@@ -1,38 +1,66 @@
-<div class="container">
+<div class="container hire-us">
 
   <div class="row">
 
     <div class="col-sm-8">
-      <h4>HIRE US</h4>
-      <hr />
+    <div class="title-wrapper">
+      <h4>Hire us</h4>
+    </div>
       <p>
         We've decided to make our team <span> your team.</span> We are keen to be part of your journey and help your bussiness grow.
         From design to development, from development to going live, from going live to attention and social media marketing, we got it all covered for you.
       </p>
-      <div>
-        We build thougheth with you.
-        We build something that respresents you.
+      <div class="together">
+        <p>We build together with you.</p>
+        <p>We build something that represents you.</p>
       </div>
-      <p>
-        What exactly can we do for you ?
+      <h6>What exactly can we do for you ?</h6>
+      <ol>
+        <li>
+          Presentation web sites for stables, riders or events.
+        </li>
+        <li>
+          Management web or/and mobile application for stables in order to keep track of horses, daily routine, staff management, shows management, lessons management - for equestrian ceneters and anything you may need to make your equine bussiness management easier.
+        </li>
+        <li>
+          Management web or/and mobile application for events - keep track of competiton schedule, riders, results, etc.
+        </li>
+        <li>
+          All kind of graphic design - advertisments, business cards, logo, web, etc.
+        </li>
+      </ol>
+      <h6>Get a quote</h6>
+      <form novalidate="" class="ng-pristine ng-invalid ng-touched">
+        <div class="form-group">
+          <!--bindings={
+        "ng-reflect-ng-if": "true"
+      }-->
+          <div class="client-side-validation-error">
+            <small>
+              Please enter your email address.
+            </small>
+            <small hidden="">
+              Email format should be john@doe.com.
+            </small>
+          </div>
+          <input class="form-control ng-pristine ng-invalid ng-touched" name="senderEmail" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" required="" type="text" ng-reflect-required="" ng-reflect-pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]" ng-reflect-name="senderEmail" placeholder="Enter your email">
+        </div>
 
-      </p>
-      <p>
-        Presentation web sites for stables, riders or events.
-      </p>
-      <p>
-        Management web or/and mobile application for stables in order to keep track of horses, daily routine, staff management, shows management, lessons management - for equestrian ceneters and anything you may need to make your equine bussiness management easier.
-      </p>
-      <p>
-        Management web or/and mobile application for events - keep track of competiton schedule, riders, results, etc.
-      </p>
-      <p>
-        All kind of graphic design - advertisments, business cards, logo, web, etc.
-      </p>
+        <div class="form-group">
+          <!--bindings={
+        "ng-reflect-ng-if": "false"
+      }-->
+          <input class="form-control ng-untouched ng-pristine ng-invalid" name="senderName" required="" type="text" ng-reflect-required="" ng-reflect-name="senderName" placeholder="Enter your name">
+        </div>
 
-      GET A QUOTE:
-      <form>
-        <input type="text" />
+        <div class="form-group">
+          <!--bindings={
+        "ng-reflect-ng-if": "false"
+      }-->
+          <textarea cols="30" name="message" required="" rows="10" ng-reflect-required="" ng-reflect-name="message" placeholder="Enter your message" class="ng-untouched ng-pristine ng-invalid"></textarea>
+        </div>
+
+        <button class="btn btn-default" type="submit" disabled="">Submit</button>
       </form>
 
     </div><!-- col-sm-8 -->
