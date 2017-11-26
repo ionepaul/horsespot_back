@@ -27,6 +27,8 @@ export let CONFIG = {
 
     refresh_token_grant_type: "refresh_token",
 
+    refresh_token_lifetime_min: 7200,
+
     mobile_width: 767,
 
     _true: "true",
@@ -41,10 +43,10 @@ export let CONFIG = {
 
     gender: "Gender",
 
-    languages: [{ value: "en", displayText: "English", imgUrl: "../../assets/images/english.png" },
-    { value: "de", displayText: "Deutsche", imgUrl: "../../assets/images/germany.png" },
-    { value: "fr", displayText: "Française", imgUrl: "../../assets/images/france.png" },
-    { value: "ro", displayText: "Română", imgUrl: "../../assets/images/romania.png" } ],
+    languages: [{ value: "en", displayText: "English", imgUrl: "../../assets/images/gb.svg" },
+    { value: "de", displayText: "Deutsche", imgUrl: "../../assets/images/de.svg" },
+    { value: "fr", displayText: "Française", imgUrl: "../../assets/images/fr.svg" },
+    { value: "ro", displayText: "Română", imgUrl: "../../assets/images/ro.svg" } ],
 
     defaultAge: { min: 4, max: 13 },
     defaultPrice: { min: 10000, max: 30000 },

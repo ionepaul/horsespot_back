@@ -2,15 +2,18 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { CONFIG } from '../config';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 
+//SERVICES
 import { HttpWrapper } from '../shared/http/http.wrapper';
 import { AuthService } from '../shared/auth/auth.service';
 //import { AppointmentsService } from './appointments/appointments.service';
 
+//MODELS
 import { LoginModel } from './models/login.model';
 import { UserModel } from './models/user.model';
 import { RegisterExternalModel } from './models/registerExternalModel';
@@ -19,11 +22,8 @@ import { ChangePasswordModel } from './models/changePassword.model';
 import { GetHorseAdListResultsModel } from '../horse-advertisments/models/getHorseAdListResultsModel';
 import { UserFullProfile } from './models/userFullProfile.model';
 
-import { CONFIG } from '../config';
-
 @Injectable()
 export class AccountService {
-
   private _loginUrl: string = CONFIG.authUrl;
   private _registerUrl: string = CONFIG.baseUrls.apiUrl + 'account/register'
   private _profilePhotoUploadUrl: string = CONFIG.baseUrls.apiUrl + 'user/profilephoto/upload/';
@@ -43,7 +43,7 @@ export class AccountService {
     private _http: Http,
     private _authService: AuthService,
     private _router: Router) { }
-    //private _appointmentsService: AppointmentsService) { }
+  //private _appointmentsService: AppointmentsService) { }
 
   loginService(model: LoginModel) {
     return this._authService.authenticateUser(model);
@@ -85,7 +85,7 @@ export class AccountService {
   }
 
   getUserDetails(userId: string): Observable<UserModel> {
-    return this._httpWrapper
+    return this._http
       .get(`${this._detailsUrl + userId}`)
       .map((res: Response) => res.json() as UserModel)
       .catch(this.handleError);
@@ -100,7 +100,7 @@ export class AccountService {
       .do(data => this._authService.storeItem('user_name', data.FirstName))
       .catch(error => {
         if (error && error.status === 401 && this._authService.isTokenExpired()) {
-          return this._authService.refreshToken().merge((data) => {
+          return this._authService.refreshToken().mergeMap((data) => {
             this._authService.storeUserAccessInfo(data);
             return this._httpWrapper.post(`${this._editProfileUrl + userId}`, body)
               .map((res: Response) => res.json() as UserModel)
@@ -124,7 +124,7 @@ export class AccountService {
       .map((res: Response) => res)
       .catch(error => {
         if (error && error.status === 401 && this._authService.isTokenExpired()) {
-          return this._authService.refreshToken().merge((data) => {
+          return this._authService.refreshToken().mergeMap((data) => {
             this._authService.storeUserAccessInfo(data);
             return this._httpWrapper.post(`${this._changePasswordUrl + userId}`, body)
               .map((res: Response) => res)
@@ -150,7 +150,7 @@ export class AccountService {
       .map((res: Response) => res.json() as GetHorseAdListResultsModel)
       .catch(error => {
         if (error && error.status === 401 && this._authService.isTokenExpired()) {
-          return this._authService.refreshToken().merge((data) => {
+          return this._authService.refreshToken().mergeMap((data) => {
             this._authService.storeUserAccessInfo(data);
             return this._httpWrapper.get(`${this._getUserFavoritesPostsUrl + pageNumber}?userId=${userId}`)
               .map((res: Response) => res.json() as GetHorseAdListResultsModel)
@@ -194,7 +194,7 @@ export class AccountService {
       .map(res => res.json())
       .catch(error => {
         if (error && error.status === 401 && this._authService.isTokenExpired()) {
-          return this._authService.refreshToken().merge((data) => {
+          return this._authService.refreshToken().mergeMap((data) => {
             this._authService.storeUserAccessInfo(data);
             return this._httpWrapper.get(this._isAdminUrl + userId)
               .catch(this.handleError);
