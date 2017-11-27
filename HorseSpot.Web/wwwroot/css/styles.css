@@ -4349,8 +4349,11 @@ aside.col-sm-4 {
 }
 
 .container.contact-section form {
-  width: 65%;
-  margin: 0 auto;
+  width: 70%;
+}
+
+.contact-section p {
+  margin-bottom: 20px;
 }
 
 .contact-section .row {

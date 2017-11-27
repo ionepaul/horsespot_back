@@ -26,41 +26,46 @@
           Management web or/and mobile application for events - keep track of competiton schedule, riders, results, etc.
         </li>
         <li>
+          E-commerce web site for equine shops.
+        </li>
+        <li>
           All kind of graphic design - advertisments, business cards, logo, web, etc.
         </li>
       </ol>
       <h6>Get a quote</h6>
-      <form novalidate="" class="ng-pristine ng-invalid ng-touched">
+
+      <form #quoteForm="ngForm">
         <div class="form-group">
-          <!--bindings={
-        "ng-reflect-ng-if": "true"
-      }-->
-          <div class="client-side-validation-error">
-            <small>
-              Please enter your email address.
+          <div *ngIf="email.errors && email.touched" class="client-side-validation-error">
+            <small [hidden]="!email.errors.required">
+              {{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.EMAIL_ERROR' | translate}}
             </small>
-            <small hidden="">
-              Email format should be john@doe.com.
+            <small [hidden]="!email.errors.pattern">
+              {{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.EMAIL_INVALID' | translate}}
             </small>
           </div>
-          <input class="form-control ng-pristine ng-invalid ng-touched" name="senderEmail" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" required="" type="text" ng-reflect-required="" ng-reflect-pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]" ng-reflect-name="senderEmail" placeholder="Enter your email">
+          <input type="text" class="form-control" [(ngModel)]="emailModel.Sender" required pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" #email="ngModel" name="senderEmail" placeholder="{{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.EMAIL_PLACEHOLDER' | translate}}">
         </div>
 
         <div class="form-group">
-          <!--bindings={
-        "ng-reflect-ng-if": "false"
-      }-->
-          <input class="form-control ng-untouched ng-pristine ng-invalid" name="senderName" required="" type="text" ng-reflect-required="" ng-reflect-name="senderName" placeholder="Enter your name">
+          <div *ngIf="senderName.errors && senderName.touched" class="client-side-validation-error">
+            <small [hidden]="!senderName.errors.required">
+              {{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.NAME_ERROR' | translate}}
+            </small>
+          </div>
+          <input type="text" required #senderName="ngModel" [(ngModel)]="emailModel.SenderName" class="form-control" name="senderName" placeholder="{{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.NAME_PLACEHOLDER' | translate}}">
         </div>
 
         <div class="form-group">
-          <!--bindings={
-        "ng-reflect-ng-if": "false"
-      }-->
-          <textarea cols="30" name="message" required="" rows="10" ng-reflect-required="" ng-reflect-name="message" placeholder="Enter your message" class="ng-untouched ng-pristine ng-invalid"></textarea>
+          <div *ngIf="message.errors && message.touched" class="client-side-validation-error">
+            <small [hidden]="!message.errors.required">
+              {{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.MSG_ERROR' | translate}}
+            </small>
+          </div>
+          <textarea cols="30" rows="10" name="message" required #message="ngModel" [(ngModel)]="emailModel.Message" placeholder="Tell us about your project"></textarea>
         </div>
 
-        <button class="btn btn-default" type="submit" disabled="">Submit</button>
+        <button type="submit" class="btn btn-default" [disabled]="!quoteForm.form.valid" (click)="send()">{{'CONTACT_PAGE.SUBMIT_BTN' | translate}}</button>
       </form>
 
     </div><!-- col-sm-8 -->

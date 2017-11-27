@@ -1,64 +1,49 @@
-<div class="container contact-section">
+<div class="container contact-section hire-us">
 
-    <div class="row">
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="title-wrapper">
+        <h4>{{'CONTACT_PAGE.TITLE' | translate}}</h4>
+      </div>
+      <p>{{'CONTACT_PAGE.TITLE_TEXT' | translate}}<br>{{'CONTACT_PAGE.TITLE_TEXT_2' | translate}}</p>
 
-        <h1 class="page-title">{{'CONTACT_PAGE.TITLE' | translate}}</h1>
-        <p *ngIf="errorMessage" class="server-error" style="text-align: center">{{errorMessage}}</p>
-        <h3 class="subtitle">{{'CONTACT_PAGE.TITLE_TEXT' | translate}}<br>{{'CONTACT_PAGE.TITLE_TEXT_2' | translate}}</h3>
+      <form #contactForm="ngForm">
+        <div class="form-group">
+          <div *ngIf="email.errors && email.touched" class="client-side-validation-error">
+            <small [hidden]="!email.errors.required">
+              {{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.EMAIL_ERROR' | translate}}
+            </small>
+            <small [hidden]="!email.errors.pattern">
+              {{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.EMAIL_INVALID' | translate}}
+            </small>
+          </div>
+          <input type="text" class="form-control" [(ngModel)]="emailModel.Sender" required pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" #email="ngModel" name="senderEmail" placeholder="{{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.EMAIL_PLACEHOLDER' | translate}}">
+        </div>
 
-        <div class="container">
+        <div class="form-group">
+          <div *ngIf="senderName.errors && senderName.touched" class="client-side-validation-error">
+            <small [hidden]="!senderName.errors.required">
+              {{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.NAME_ERROR' | translate}}
+            </small>
+          </div>
+          <input type="text" required #senderName="ngModel" [(ngModel)]="emailModel.SenderName" class="form-control" name="senderName" placeholder="{{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.NAME_PLACEHOLDER' | translate}}">
+        </div>
 
-            <div class="col-sm-12">
-                <form #contactSendEmail="ngForm">
-                    <div class="form-group">
-                        <div *ngIf="email.errors && email.touched" class="client-side-validation-error">
-                            <small [hidden]="!email.errors.required">
-                                {{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.EMAIL_ERROR' | translate}}
-                            </small>
-                            <small [hidden]="!email.errors.pattern">
-                                {{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.EMAIL_INVALID' | translate}}
-                            </small>
-                        </div>  
-                        <input type="text" class="form-control" [(ngModel)]="emailModel.Sender" required pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" #email="ngModel" name="senderEmail" placeholder="{{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.EMAIL_PLACEHOLDER' | translate}}">
-                    </div>
+        <div class="form-group">
+          <div *ngIf="message.errors && message.touched" class="client-side-validation-error">
+            <small [hidden]="!message.errors.required">
+              {{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.MSG_ERROR' | translate}}
+            </small>
+          </div>
+          <textarea cols="30" rows="10" name="message" required #message="ngModel" [(ngModel)]="emailModel.Message" placeholder="{{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.MSG_PLACEHOLDER' | translate}}"></textarea>
+        </div>
 
-                    <div class="form-group">
-                        <div *ngIf="senderName.errors && senderName.touched" class="client-side-validation-error">
-                             <small [hidden]="!senderName.errors.required">
-                                {{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.NAME_ERROR' | translate}}
-                            </small>
-                        </div>
-                        <input type="text" required #senderName="ngModel" [(ngModel)]="emailModel.SenderName" class="form-control" name="senderName" placeholder="{{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.NAME_PLACEHOLDER' | translate}}">
-                    </div>
+        <button type="submit" class="btn btn-default" [disabled]="!contactForm.form.valid" (click)="send()">{{'CONTACT_PAGE.SUBMIT_BTN' | translate}}</button>
+      </form>
+    </div> <!-- col-sm-8 -->
 
-                    <div class="form-group">
-                        <div *ngIf="message.errors && message.touched" class="client-side-validation-error">
-                            <small [hidden]="!message.errors.required">
-                                {{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.MSG_ERROR' | translate}}
-                            </small>
-                        </div>
-                        <textarea cols="30" rows="10" name="message" required #message="ngModel" [(ngModel)]="emailModel.Message" placeholder="{{'HORSE_AD_DETAIL.SEND_MAIL_MODAL.MSG_PLACEHOLDER' | translate}}"></textarea>
-                    </div>
+    <right-side-advertisments></right-side-advertisments>
 
-                    <button type="submit" class="btn btn-default" [disabled]="!contactSendEmail.form.valid" (click)="send(contactSendEmail.form)">{{'CONTACT_PAGE.SUBMIT_BTN' | translate}}</button>
-                </form>
-                <!-- ul>
-                  <li><fa name="map-marker"></fa> Dorobantilor, Cluj-Napoca
-                  <li class="margin">Cluj, Romania</li>
-                </ul>
-                <ul>
-                  <li><a href="mailto:info@horse-spot.com" style="color:#000"><fa name="envelope-o"></fa> contact@horse-spot.com</a></li>
-                  <li><a style="color:#000" href="tel:0040757520997"><fa name="phone"></fa> +40757520997</a></li>
-                  <li class="margin-two"><a style="color:#000" href="tel:0040726308064">+40726308064</a></li>
-                </ul> -->
-            </div><!-- col-sm-12 -->
-
-        </div><!--container -->
-
-    </div><!--row -->
+  </div><!--row -->
 
 </div><!--contact-section -->
-
-<div #googleContactMap class="map">
-    <div #map style="width:100%; height:380px;"></div>
-</div>
