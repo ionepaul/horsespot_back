@@ -2898,20 +2898,23 @@ form.details input[type="checkbox"] {
       padding-left: 30px;
     }
 
-    .horses-form form .details-inputs span {
-      display: inline-block;
-      position: absolute;
-      top: 5px;
-      left: 5px;
-    }
+.horses-form form .details-inputs span,
+.home-container .slider form .form-group span{
+  display: inline-block;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
 
-    .horses-form form .female {
+    .horses-form form .female,
+    .home-container .slider form .form-group .female {
       background: url('../assets/images/icons_sprites.png') -224px -90px;
       width: 14px;
       height: 20px;
     }
 
-.horses-form form .location {
+.horses-form form .location,
+.home-container .slider form .form-group .location {
   background: url('../assets/images/icons_sprites.png') -224px -50px;
   width: 14px;
   height: 20px;
@@ -2929,13 +2932,15 @@ form.details input[type="checkbox"] {
   height: 20px;
 }
 
-.horses-form form .sort {
+.horses-form form .sort,
+.home-container .slider form .form-group .sort {
   background: url('../assets/images/icons_sprites.png') -50px -170px;
   width: 20px;
   height: 20px;
 }
 
-.horses-form form .sort-order {
+.horses-form form .sort-order,
+.home-container .slider form .form-group .sort-order {
   background: url('../assets/images/icons_sprites.png') -224px -10px;
   width: 16px;
   height: 20px;
@@ -3907,6 +3912,7 @@ form.details input[type="checkbox"] {
     }
 
       .home-container .slider form .form-group {
+        position: relative;
         box-sizing: border-box;
         width: calc(20% - 20px);
         margin: 0 10px;
@@ -4250,10 +4256,6 @@ aside.col-sm-4 {
     }
 
 /* === CONTACT PAGE === */
-.container.contact-section {
-  margin-top: 35px;
-}
-
 .container.contact-section form {
   width: 70%;
 }
@@ -4377,6 +4379,43 @@ aside.col-sm-4 {
 
 /* ================================================================================== */
 
+/* CONTACT US AND ADEVERTISE */
+
+div.advertise {
+  margin-bottom: 30px;
+}
+
+.advertise a {
+  font-weight: 700;
+  color: #333;
+  font-weight: 700;
+}
+
+.advertise img {
+  display: inline-block;
+  margin: 20px 0;
+}
+
+.advertise .description {
+  color: #868686;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.advertise hr {
+  border: 0;
+  height: 1px;
+  background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+}
+
+.advertise .price {
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
 .advertisment-text {
   border-bottom: 1px solid #ccc;
   color: #888;
@@ -4395,12 +4434,14 @@ aside.col-sm-4 {
   }
 
 
-.hire-us .title-wrapper {
+.hire-us .title-wrapper,
+.advertise .title-wrapper {
   border-bottom: 1px solid #B6B6B6;
   margin-bottom: 35px;
 }
 
-  .hire-us h4 {
+  .hire-us h4,
+  .advertise h4 {
     position: relative;
     display: inline-block;
     margin-bottom: 0;
@@ -4414,7 +4455,8 @@ aside.col-sm-4 {
     margin-bottom: 20px;
   }
 
-    .hire-us h4::after {
+    .hire-us h4::after,
+    .advertise h4::after {
       content: "";
       position: absolute;
       bottom: -4px;
@@ -5624,6 +5666,9 @@ aside.col-sm-4 {
       padding: 50px 15px;
       height: 100%;
       position: static;
+      background: #fff;
+      border: 1px solid #e4e4e4;
+      border-radius: 5px;
     }
 
     .home-container .slider .carousel {
