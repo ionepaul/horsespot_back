@@ -27,7 +27,7 @@ export class ContactComponent implements OnInit {
     this.notificationRefresh = this._notificationService.getRefresh();
   }
 
-  send(form: any) {
+  send() {
     this._httpWrapper.post(this._contactReceiveEmailUrl, JSON.stringify(this.emailModel))
       .subscribe(res => {
       this.notificationRefresh++;

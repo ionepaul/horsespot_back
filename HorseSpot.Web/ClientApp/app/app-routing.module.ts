@@ -4,7 +4,7 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 //COMPONENTS
 import { HomeComponent } from './home/home.component';
 import { ErrorComponent } from './shared/error/error.component';
-import { AppointmentsListComponent } from './account/appointments/appointments-list/appointments-list.component';
+//import { AppointmentsListComponent } from './account/appointments/appointments-list/appointments-list.component';
 import { ProfileComponent } from './account/profile/profile.component';
 import { UserPostsComponent } from './account/user-posts/user-posts.component';
 import { UserFavoritesComponent } from './account/user-favorites/user-favorites.component';

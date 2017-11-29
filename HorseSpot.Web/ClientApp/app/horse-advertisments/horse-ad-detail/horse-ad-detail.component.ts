@@ -59,6 +59,7 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
   notificationRefresh: number;
   firstImage: string;
   horseImages: string[] = [];
+  pageHref: string = '';
 
   private _routeSub$: Subscription;
 
@@ -91,6 +92,7 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
       });
 
     window.FB.XFBML.parse();
+    this.pageHref = window.location.href;
   }
 
   getHorseAd(id: number) {

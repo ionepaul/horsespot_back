@@ -15,7 +15,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { UserPostsComponent } from './user-posts/user-posts.component';
 import { UserFavoritesComponent } from './user-favorites/user-favorites.component';
 import { UserReferencesComponent } from './user-references/user-references.component';
-import { AppointmentsListComponent } from './appointments/appointments-list/appointments-list.component';
+//import { AppointmentsListComponent } from './appointments/appointments-list/appointments-list.component';
 import { LoggedInGuard } from '../shared/guards/loggedInGuard';
 
 @NgModule({

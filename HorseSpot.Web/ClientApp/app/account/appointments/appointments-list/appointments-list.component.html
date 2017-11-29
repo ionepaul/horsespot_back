@@ -1,4 +1,4 @@
-<div class="container appointments">
+<!--<div class="container appointments">
 
 <h3 class="page-title-account">{{'APPOINTMENTS.TITLE' | translate}}</h3>
 
@@ -8,9 +8,9 @@
   <li class="yellowL">{{'APPOINTMENTS.YELLOW_BAR' | translate}}</li>
   <li class="greenL">{{'APPOINTMENTS.GREEN_BAR' | translate}}</li>
 </ul>
-</div><!-- legend -->
+</div>--><!-- legend -->
 
-  <div class="row">
+  <!--<div class="row">
 
     <div class="col-sm-6">
       <h3>{{'APPOINTMENTS.PENDING' | translate}}</h3>
@@ -22,67 +22,67 @@
         <h4>{{'APPOINTMENTS.PENDING_USERS_PLANNED' | translate}}</h4>
         
         <section *ngFor="let appointment of pendingAppointmentsOwner; let ind = index" class="card" [ngClass]="{'border-red': appointment.STATUS == appointmentStatus.DATE_CHANGED_BY_INITIATOR || appointment.STATUS == appointmentStatus.CREATED,
-                                                                                   'border-yellow': appointment.STATUS == appointmentStatus.DATE_CHANGED_BY_OWNER}">
+                                                                                   'border-yellow': appointment.STATUS == appointmentStatus.DATE_CHANGED_BY_OWNER}">-->
 
-          <div class="date">
+          <!--<div class="date">
             <p>{{appointment.AppointmentDateTime | dateFormatPipe: true}}</p>
             <p>{{appointment.AppointmentDateTime | dateFormatHourPipe }}</p>
-          </div><!-- date -->
+          </div>--><!-- date -->
 
-          <div class="owner">
+          <!--<div class="owner">
              <p class="h-name">{{'APPOINTMENTS.APPOINTMENT_FOR' | translate}} {{appointment.AdvertismentTitle}}</p>
              <p class="name"><fa name="user"></fa> {{appointment.InitiatorFullName}}</p>
              <p class="phone">{{appointment.InitiatorPhoneNumber}}</p>
              <p class="email">{{appointment.InitiatorEmail}}</p>
              <p class="loc"><fa name="map-marker"></fa> {{appointment.AdvertismentLocation}}</p>
-          </div><!-- owner -->
+          </div>--><!-- owner -->
 
-          <div class="buttons">
+          <!--<div class="buttons">
             <button *ngIf="appointment.STATUS == appointmentStatus.DATE_CHANGED_BY_INITIATOR || appointment.STATUS == appointmentStatus.CREATED" (click)="openAcceptAppointmentModal(appointment)" class="accept">{{'APPOINTMENTS.ACCEPT_BTN' | translate}}</button>
             <button *ngIf="appointment.STATUS == appointmentStatus.DATE_CHANGED_BY_INITIATOR || appointment.STATUS == appointmentStatus.CREATED" (click)="openChangeDateModal(appointment, ind)" class="date-b">{{'APPOINTMENTS.CHANGE_DATE_BTN' | translate}}</button>
             <button (click)="openCancelModal(appointment)" class="cancel">{{'APPOINTMENTS.CANCEL_BTN' | translate}}</button>
           </div>
 
-        </section><!-- card -->
+        </section>--><!-- card -->
 
-        <hr *ngIf="pendingAppointmentsInitiator.length != 0 && pendingAppointmentsOwner.length != 0">
-      </div><!-- owner -->
+        <!--<hr *ngIf="pendingAppointmentsInitiator.length != 0 && pendingAppointmentsOwner.length != 0">
+      </div>--><!-- owner -->
 
-      <div *ngIf="pendingAppointmentsInitiator.length != 0" class="owner layout">
+      <!--<div *ngIf="pendingAppointmentsInitiator.length != 0" class="owner layout">
 
         <h4>{{'APPOINTMENTS.PENDING_OWNER_PLANNED' | translate}}</h4>
         
         <section *ngFor="let appointment of pendingAppointmentsInitiator; let ind = index" class="card" [ngClass]="{'border-red': appointment.STATUS == appointmentStatus.DATE_CHANGED_BY_OWNER,
-                                                                                                   'border-yellow': appointment.STATUS == appointmentStatus.DATE_CHANGED_BY_INITIATOR || appointment.STATUS == appointmentStatus.CREATED }">
+                                                                                                   'border-yellow': appointment.STATUS == appointmentStatus.DATE_CHANGED_BY_INITIATOR || appointment.STATUS == appointmentStatus.CREATED }">-->
 
-          <div class="date">
+          <!--<div class="date">
             <p>{{appointment.AppointmentDateTime | dateFormatPipe: true}}</p>
             <p>{{appointment.AppointmentDateTime | dateFormatHourPipe }}</p>
-          </div><!-- date -->
+          </div>--><!-- date -->
 
-          <div class="owner">
+          <!--<div class="owner">
              <p class="h-name">{{'APPOINTMENTS.APPOINTMENT_FOR' | translate}} {{appointment.AdvertismentTitle}}</p>
              <p class="name"><fa name="user"></fa> {{appointment.OwnerFullName}}</p>
              <p class="phone">{{appointment.OwnerEmail}}</p>
              <p class="email">{{appointment.OwnerPhoneNumber}}</p>
              <p class="loc"><fa name="map-marker"></fa> {{appointment.AdvertismentLocation}}</p>
-          </div><!-- owner -->
+          </div>--><!-- owner -->
 
-          <div class="buttons">
+          <!--<div class="buttons">
             <button *ngIf="appointment.STATUS == appointmentStatus.DATE_CHANGED_BY_OWNER" (click)="openAcceptAppointmentModal(appointment)" class="accept">{{'APPOINTMENTS.ACCEPT_BTN' | translate}}</button>
             <button *ngIf="appointment.STATUS == appointmentStatus.DATE_CHANGED_BY_OWNER" (click)="openChangeDateModal(appointment, ind)" class="date-b">{{'APPOINTMENTS.CHANGE_DATE_BTN' | translate}}</button>
             <button (click)="openCancelModal(appointment)" class="cancel">{{'APPOINTMENTS.CANCEL_BTN' | translate}}</button>
-          </div>
+          </div>-->
 
-        </section><!-- card -->
+        <!--</section>--><!-- card -->
 
-      </div><!-- owner -->
+      <!--</div>--><!-- owner -->
 
-    </div><!-- col-sm-6 -->
+    <!--</div>--><!-- col-sm-6 -->
 
-    <div class="col-sm-6">
+    <!--<div class="col-sm-6">-->
 
-      <h3>{{'APPOINTMENTS.UPCOMING' | translate}}</h3>
+      <!--<h3>{{'APPOINTMENTS.UPCOMING' | translate}}</h3>
        
         <h4 *ngIf="upcomingAppointmentsOwner.length == 0 && upcomingAppointmentsInitiator.length == 0">{{'APPOINTMENTS.NO_UPCOMING' | translate}}</h4>
 
@@ -95,57 +95,48 @@
           <div class="date">
             <p>{{appointment.AppointmentDateTime | dateFormatPipe: true}}</p>
             <p>{{appointment.AppointmentDateTime | dateFormatHourPipe }}</p>
-          </div><!-- date -->
+          </div>--><!-- date -->
 
-          <div class="owner">
+          <!--<div class="owner">
              <p class="h-name">{{'APPOINTMENTS.APPOINTMENT_FOR' | translate}} {{appointment.AdvertismentTitle}}</p>
              <p class="name"><fa name="user"></fa> {{appointment.InitiatorFullName}}</p>
              <p class="phone">{{appointment.InitiatorPhoneNumber}}</p>
              <p class="email">{{appointment.InitiatorEmail}}</p>
              <p class="loc"><fa name="map-marker"></fa> {{appointment.AdvertismentLocation}}</p>
-          </div><!-- owner -->
+          </div>--><!-- owner -->
 
-          <div class="buttons">
+          <!--<div class="buttons">
             <button (click)="openCancelModal(appointment)" class="cancel">{{'APPOINTMENTS.CANCEL_BTN' | translate}}</button>
           </div>
 
-        </section><!-- card -->
+        </section>--><!-- card -->
 
-        <hr *ngIf="upcomingAppointmentsInitiator.length != 0 &&  upcomingAppointmentsOwner.length != 0">
-      </div><!-- owner -->
+        <!--<hr *ngIf="upcomingAppointmentsInitiator.length != 0 &&  upcomingAppointmentsOwner.length != 0">
+      </div>--><!-- owner -->
 
-       <div *ngIf="upcomingAppointmentsInitiator.length != 0" class="owner layout">
+       <!--<div *ngIf="upcomingAppointmentsInitiator.length != 0" class="owner layout">
         
         <h4>{{'APPOINTMENTS.UPCOMING_EXPECTED' | translate}}</h4>
         
-        <section *ngFor="let appointment of upcomingAppointmentsInitiator" class="card border-green">
+        <section *ngFor="let appointment of upcomingAppointmentsInitiator" class="card border-green">-->
 
-          <div class="date">
+          <!--<div class="date">
             <p>{{appointment.AppointmentDateTime | dateFormatPipe: true}}</p>
             <p>{{appointment.AppointmentDateTime | dateFormatHourPipe }}</p>
-          </div><!-- date -->
+          </div>--><!-- date -->
 
-          <div class="owner">
+          <!--<div class="owner">
              <p class="h-name">{{'APPOINTMENTS.APPOINTMENT_FOR' | translate}} {{appointment.AdvertismentTitle}}</p>
              <p class="name"><fa name="user"></fa> {{appointment.OwnerFullName}}</p>
              <p class="phone">{{appointment.OwnerEmail}}</p>
              <p class="email">{{appointment.OwnerPhoneNumber}}</p>
              <p class="loc"><fa name="map-marker"></fa> {{appointment.AdvertismentLocation}}</p>
-          </div><!-- owner -->
+          </div--><!-- owner -->
 
-          <div class="buttons">
+          <!--<div class="buttons">
              <button (click)="openCancelModal(appointment)" class="cancel">{{'APPOINTMENTS.CANCEL_BTN' | translate}}</button>
-          </div>
+          </div>-->
 
-        </section><!-- card -->
-
-      </div><!-- owner -->
-
-    </div><!-- col-sm-6 -->
-
-  </div><!-- row -->
-
-</div><!-- appointments -->
 
 <!-- Change Appointment Date Modal -->
 <!--<modal #changeAppointmentDateModal class="make-app" (onClose)="hideChangeDateModal()">
