@@ -54,7 +54,7 @@
       </div><!-- form-group -->
 
       <div class="form-group">
-        <span class="location"></span>
+        <span class="sort-order"></span>
         <select class="form-control" name="priceRange" [(ngModel)]="priceRangeId">
           <option [ngValue]="0">{{ 'HOME_PAGE.PRICE_RANGE' | translate }} </option>
           <option *ngFor="let x of priceRanges" [ngValue]="x.Id">{{x.PriceRangeValue}} &euro; </option>
@@ -76,7 +76,7 @@
       </div><!-- form-group -->
 
       <div class="form-group countries-dropdown">
-        <span class="sort-order"></span>
+        <span class="location"></span>
         <input [(ngModel)]="selectedCountry"
                autocomplete="off"
                name="countries"

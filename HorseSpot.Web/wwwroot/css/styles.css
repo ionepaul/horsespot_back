@@ -2898,6 +2898,11 @@ form.details input[type="checkbox"] {
       padding-left: 30px;
     }
 
+.home-container .slider form .form-group select,
+.home-container .slider form .form-group input {
+  padding-left: 25px;
+}
+
 .horses-form form .details-inputs span,
 .home-container .slider form .form-group span{
   display: inline-block;
@@ -2913,11 +2918,22 @@ form.details input[type="checkbox"] {
       height: 20px;
     }
 
+.home-container .slider form .form-group .female,
+.horses-form form .details-inputs span,
+.horses-form form .details-inputs span,
+.horses-form form .details-inputs span {
+  left: 8px;
+}
+
 .horses-form form .location,
 .home-container .slider form .form-group .location {
   background: url('../assets/images/icons_sprites.png') -224px -50px;
   width: 14px;
   height: 20px;
+}
+
+.home-container .slider form .form-group .location {
+  left: 8px;
 }
 
 .horses-form form .breed {
@@ -2944,6 +2960,10 @@ form.details input[type="checkbox"] {
   background: url('../assets/images/icons_sprites.png') -224px -10px;
   width: 16px;
   height: 20px;
+}
+
+.home-container .slider form .form-group .sort-order {
+  left: 7px;
 }
 
   .horses-form form .range-inputs-container {
@@ -5663,6 +5683,7 @@ div.advertise {
 
     .home-container .slider form {
       width: 100%;
+      margin-top: 25px;
       padding: 50px 15px;
       height: 100%;
       position: static;
