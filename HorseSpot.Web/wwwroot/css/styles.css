@@ -2813,7 +2813,20 @@ ul.pagination {
   border-radius: 5px;
   padding: 50px 10px;
   margin-bottom: 30px;
+  position: relative;
 }
+
+  .horses-form form .reset {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    background: 0;
+    border: 0;
+    color: #333;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+  }
 
   .horses-form form h4,
   .horses-form form .checkbox {
@@ -3947,6 +3960,10 @@ form.details input[type="checkbox"] {
             width: 100%;
           }
 
+          .home-container .slider form .form-group.countries-dropdown .dropdown-menu span {
+            position: static;
+          }
+
 typeahead-container .dropdown-menu {
   overflow: hidden;
 }
@@ -4414,6 +4431,7 @@ div.advertise {
 .advertise img {
   display: inline-block;
   margin: 20px 0;
+  width: 100%;
 }
 
 .advertise .description {
@@ -5615,6 +5633,10 @@ div.advertise {
 }
 
 @media ( max-width: 767px ) {
+
+  .horses-form form .reset {
+    top: 50px;
+  }
 
   .horse-details-slider {
     height: 300px;
