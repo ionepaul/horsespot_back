@@ -2812,7 +2812,21 @@ ul.pagination {
   border-radius: 5px;
   padding: 50px 10px;
   margin-bottom: 30px;
+  position: relative;
 }
+
+  .horses-form form .reset {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    background: 0;
+    border: 0;
+    color: #333;
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
 
   .horses-form form h4,
   .horses-form form .checkbox {
@@ -3279,6 +3293,7 @@ form.cf .search-btn-mobile .fa {
   width: 20%;
   float: left;
   text-align: center;
+  word-break: break-all;
 }
 
 .horses-details #overview p {
@@ -3955,6 +3970,10 @@ form.cf .search-btn-mobile .fa {
             width: 100%;
           }
 
+          .home-container .slider form .form-group.countries-dropdown .dropdown-menu span {
+            position: static;
+          }
+
 typeahead-container .dropdown-menu {
   overflow: hidden;
 }
@@ -4422,6 +4441,7 @@ div.advertise {
 .advertise img {
   display: inline-block;
   margin: 20px 0;
+  width: 100%;
 }
 
 .advertise .description {
@@ -4686,9 +4706,17 @@ div.advertise {
   }
 
   .horses-details #overview ul li {
-    width: 25%;
+    width: 33.33%;
     margin-bottom: 20px;
   }
+
+    .horses-details #overview ul li span:last-of-type {
+      max-width: 180px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0 auto;
+    }
 }
 
 @media ( max-width: 1240px ) {
@@ -5623,6 +5651,14 @@ div.advertise {
 }
 
 @media ( max-width: 767px ) {
+
+aside.col-sm-4 img {
+  width: 50%;
+}
+
+  .horses-form form .reset {
+    top: 50px;
+  }
 
   .horse-details-slider {
     height: 300px;
@@ -6714,7 +6750,7 @@ div.advertise {
   }
 
   .horses-details #overview ul li {
-    width: 33.3333333%;
+    width: 50%;
   }
 
     .horses-details #overview ul li span:last-of-type {
@@ -6847,6 +6883,10 @@ div.advertise {
 }
 
 @media ( max-width: 500px ) {
+
+  aside.col-sm-4 img {
+    width: 100%;
+  }
 
   /* 404 */
   .error-wrapper .col-sm-6:first-of-type {
