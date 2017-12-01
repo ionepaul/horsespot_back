@@ -81,6 +81,16 @@ export class HorseListCategoriesComponent implements OnInit, OnDestroy {
       this.priceRange[1] = this.searchModel.PriceModel.MaxPrice;
     }
 
+    if (this.searchModel.HeightModel.MinHeight != 0 && this.searchModel.HeightModel.MaxHeight != 0) {
+      this.heightRange[0] = this.searchModel.HeightModel.MinHeight;
+      this.heightRange[1] = this.searchModel.HeightModel.MaxHeight;
+    }
+
+    if (this.searchModel.AgeModel.MinAge != 0 && this.searchModel.AgeModel.MaxAge != 0) {
+      this.ageRange[0] = this.searchModel.AgeModel.MinAge;
+      this.ageRange[1] = this.searchModel.AgeModel.MaxAge;
+    }
+
     if (this.searchModel.Country != undefined) {
       this.selectedCountry = this.searchModel.Country;
     }
@@ -112,6 +122,7 @@ export class HorseListCategoriesComponent implements OnInit, OnDestroy {
 
     this._horseAdService.setSearchModel(this.searchModel);
 
+    this.toggleSearchOnMobile();
     if (this.pageNumber == 1) {
       this.searchingWhenFirstPage();
     }

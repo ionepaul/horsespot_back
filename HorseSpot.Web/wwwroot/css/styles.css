@@ -739,7 +739,7 @@ nav.navbar div.user-bg-part {
 
   nav.navbar div.user-bg-part .notif-wrapper {
     position: absolute;
-    top: 45px;
+    top: 55px;
     right: 15px;
     z-index: 20;
     background: #fff;
@@ -753,8 +753,7 @@ nav.navbar div.user-bg-part {
     nav.navbar div.user-bg-part .notif-wrapper .popover-arrow {
       position: absolute;
       top: -15px;
-      left: 0;
-      right: 0;
+      right: 30px;
       margin: 0 auto;
       display: inline-block;
     }

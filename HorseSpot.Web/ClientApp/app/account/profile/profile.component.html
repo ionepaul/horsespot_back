@@ -72,21 +72,21 @@
       <!-- HORSES FOR SALE -->
       <ul *ngIf="userModel.TotalForSale != 0" class="category-list-title">
         <li class="category-title">{{'PROFILE.HORSES_FOR_SALE' | translate}}</li>
-        <li><a (click)="goToUserHorsesForSale()">{{ 'HORSE_LIST_VIEW_MORE' | translate }} <i aria-hidden="true" class="fa fa-angle-right"></i></a></li>
+        <li *ngIf="userModel.HorsesForSale.length > 3"><a (click)="goToUserHorsesForSale()">{{ 'HORSE_LIST_VIEW_MORE' | translate }} <i aria-hidden="true" class="fa fa-angle-right"></i></a></li>
       </ul>
       <horse-list id="horses-for-sale" [horses]="userModel.HorsesForSale" [threeOnRow]="true"></horse-list>
 
       <!-- WISH LIST -->
       <ul *ngIf="userModel.UserId == currentUserId && userModel.TotalFavorites != 0" class="category-list-title">
         <li class="category-title">{{'PROFILE.WISH_LIST' | translate}}</li>
-        <li><a (click)="goToUserWishList()">{{ 'HORSE_LIST_VIEW_MORE' | translate }} <i aria-hidden="true" class="fa fa-angle-right"></i></a></li>
+        <li *ngIf="userModel.FavoriteHorses.length > 3"><a (click)="goToUserWishList()">{{ 'HORSE_LIST_VIEW_MORE' | translate }} <i aria-hidden="true" class="fa fa-angle-right"></i></a></li>
       </ul>
       <horse-list id="favorites" *ngIf="userModel.UserId == currentUserId" [horses]="userModel.FavoriteHorses" [threeOnRow]="true"></horse-list>
 
       <!-- REFERENCES -->
       <ul *ngIf="userModel.TotalReferenes != 0" class="category-list-title">
         <li class="category-title">{{'PROFILE.REFERENCES' | translate}}</li>
-        <li><a (click)="goToUserHorseReferences()">{{ 'HORSE_LIST_VIEW_MORE' | translate }} <i aria-hidden="true" class="fa fa-angle-right"></i></a></li>
+        <li *ngIf="userModel.ReferenceHorses.length > 3"><a (click)="goToUserHorseReferences()">{{ 'HORSE_LIST_VIEW_MORE' | translate }} <i aria-hidden="true" class="fa fa-angle-right"></i></a></li>
       </ul>
       <horse-list id="references" [horses]="userModel.ReferenceHorses" [threeOnRow]="true"></horse-list>
 
