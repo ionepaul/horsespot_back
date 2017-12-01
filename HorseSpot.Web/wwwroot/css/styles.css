@@ -405,7 +405,7 @@ div.social-bar-lang {
       position: absolute;
       top: 5px;
       margin-left: 5px;
-      height:15px;
+      height: 15px;
       border-radius: 100%;
       width: 15px;
     }
@@ -458,7 +458,6 @@ div.social-bar-lang {
 
 nav.navbar div.social-bar-lang ul.language-drop li a {
   padding-left: 28px;
-
 }
 
 div.social-bar-lang ul#lang-dropdown1 {
@@ -1679,27 +1678,27 @@ div.social-links {
     flex-wrap: wrap;
   }
 
-  .modal-body .myWrapper .form {
-    flex-basis: 65%;
-    padding: 10px 40px 0;
-    -ms-flex-preferred-size: 65%;
-    flex-basis: 65%;
-    padding: 10px 40px 0;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -ms-flex-pack: center;
-    justify-content: center;
-  }
-
-    .modal-body .myWrapper .form .error-head {
-      text-align: center;
+    .modal-body .myWrapper .form {
+      flex-basis: 65%;
+      padding: 10px 40px 0;
+      -ms-flex-preferred-size: 65%;
+      flex-basis: 65%;
+      padding: 10px 40px 0;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      -ms-flex-pack: center;
+      justify-content: center;
     }
 
-      .modal-body .myWrapper .form .error-head img {
-        width: 10%;
+      .modal-body .myWrapper .form .error-head {
+        text-align: center;
       }
+
+        .modal-body .myWrapper .form .error-head img {
+          width: 10%;
+        }
 
 modal h3 {
   font-family: sans-serif;
@@ -2119,14 +2118,14 @@ modal.cancel-app textarea {
     margin: 15px 0;
   }
 
-  .send-email p {
-    text-align: center;
-  }
+.send-email p {
+  text-align: center;
+}
 
-  .send-email .just-delete {
-    color: #868686;
-    font-size: 14px;
-  }
+.send-email .just-delete {
+  color: #868686;
+  font-size: 14px;
+}
 
 .delete-modal p {
   margin-bottom: 0;
@@ -2844,59 +2843,59 @@ form.details input[type="checkbox"] {
   vertical-align: text-bottom;
 }
 
-      .horses-form form .checkbox .regular-checkbox:active,
-      .horses-form form .checkbox .regular-checkbox:checked:active,
-      form.details input[type="checkbox"]:active {
-        box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
-        outline: none;
-      }
-
-      .horses-form form .checkbox .regular-checkbox:checked,
-      form.details input[type="checkbox"]:checked {
-        background-color: #fff;
-        border: 1px solid #adb8c0;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
-        color: #99a1a7;
-        outline: none;
-      }
-
-        .horses-form form .checkbox .regular-checkbox:checked::after,
-        form.details input[type="checkbox"]:checked::after {
-          content: '\2714';
-          font-size: 14px;
-          position: absolute;
-          top: 0px;
-          left: 3px;
-          color: #ba3326;
-        }
-
-        .horse-ability label,
-        .rider label,
-        form.details label {
-          font-size: 15px;
-          padding-left: 0;
-        }
-
-  .horses-form form h4 {
-    font-size: 16px;
-    color: #767676;
-    text-transform: uppercase;
-    font-weight: 500;
+  .horses-form form .checkbox .regular-checkbox:active,
+  .horses-form form .checkbox .regular-checkbox:checked:active,
+  form.details input[type="checkbox"]:active {
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+    outline: none;
   }
 
-  .horses-form form .details-inputs .form-group {
-    width: calc(16.66% - 10px);
-    margin: 0 5px;
-    position: relative;
-    float: left;
-    border-radius: 0;
+  .horses-form form .checkbox .regular-checkbox:checked,
+  form.details input[type="checkbox"]:checked {
+    background-color: #fff;
+    border: 1px solid #adb8c0;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+    color: #99a1a7;
+    outline: none;
   }
 
-    .horses-form form .details-inputs .form-group select,
-    .horses-form form .details-inputs .form-group input {
-      border-radius: 0 !important;
-      padding-left: 30px;
+    .horses-form form .checkbox .regular-checkbox:checked::after,
+    form.details input[type="checkbox"]:checked::after {
+      content: '\2714';
+      font-size: 14px;
+      position: absolute;
+      top: 0px;
+      left: 3px;
+      color: #ba3326;
     }
+
+.horse-ability label,
+.rider label,
+form.details label {
+  font-size: 15px;
+  padding-left: 0;
+}
+
+.horses-form form h4 {
+  font-size: 16px;
+  color: #767676;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.horses-form form .details-inputs .form-group {
+  width: calc(16.66% - 10px);
+  margin: 0 5px;
+  position: relative;
+  float: left;
+  border-radius: 0;
+}
+
+  .horses-form form .details-inputs .form-group select,
+  .horses-form form .details-inputs .form-group input {
+    border-radius: 0 !important;
+    padding-left: 30px;
+  }
 
 .home-container .slider form .form-group select,
 .home-container .slider form .form-group input {
@@ -2904,19 +2903,19 @@ form.details input[type="checkbox"] {
 }
 
 .horses-form form .details-inputs span,
-.home-container .slider form .form-group span{
+.home-container .slider form .form-group span {
   display: inline-block;
   position: absolute;
   top: 5px;
   left: 5px;
 }
 
-    .horses-form form .female,
-    .home-container .slider form .form-group .female {
-      background: url('../assets/images/icons_sprites.png') -224px -90px;
-      width: 14px;
-      height: 20px;
-    }
+.horses-form form .female,
+.home-container .slider form .form-group .female {
+  background: url('../assets/images/icons_sprites.png') -224px -90px;
+  width: 14px;
+  height: 20px;
+}
 
 .home-container .slider form .form-group .female,
 .horses-form form .details-inputs span,
@@ -2966,115 +2965,122 @@ form.details input[type="checkbox"] {
   left: 7px;
 }
 
-  .horses-form form .range-inputs-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    padding: 0 5px;
-    margin-top: 15px;
+.horses-form form .range-inputs-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0 5px;
+  margin-top: 15px;
+}
+
+  .horses-form form .range-inputs-container p {
+    color: #767676;
+    font-weight: 500;
   }
 
-    .horses-form form .range-inputs-container p {
-      color: #767676;
-      font-weight: 500;
-    }
+  .horses-form form .range-inputs-container span {
+    float: right;
+  }
 
-    .horses-form form .range-inputs-container span {
-      float: right;
-    }
+  .horses-form form .range-inputs-container .noUi-horizontal {
+    height: 8px !important;
+  }
 
-    .horses-form form .range-inputs-container .noUi-horizontal {
-      height: 8px !important;
-    }
+  .horses-form form .range-inputs-container .noUi-base .noUi-connect {
+    background: #ba3326;
+  }
 
-    .horses-form form .range-inputs-container .noUi-base .noUi-connect {
-      background: #ba3326;
-    }
-
-    .horses-form form .range-inputs-container .noUi-base .noUi-origin .noUi-handle {
-      background: #ba3326;
-      border-radius: 100%;
-      width: 13px !important;
-      height: 13px !important;
-      border: none;
-      top: -3px;
-      box-shadow: none;
-      cursor: pointer;
-    }
-
-      .horses-form form .range-inputs-container .noUi-base .noUi-origin .noUi-handle:focus {
-        outline: none;
-      }
-
-      .horses-form form .range-inputs-container .noUi-base .noUi-origin .noUi-handle::after,
-      .horses-form form .range-inputs-container .noUi-base .noUi-origin .noUi-handle::before {
-        content: none;
-      }
-
-      .horses-form form .range-inputs-container .noUi-base .noUi-origin .noUi-handle.noUi-handle-lower {
-        left: -1px !important;
-      }
-
-      .horses-form form .range-inputs-container .noUi-base .noUi-origin .noUi-handle.noUi-handle-upper {
-        left: -12px !important;
-      }
-
-    .horses-form form .range-inputs-container .noUi-target {
-      background: #C7C7C7;
-      box-shadow: none;
-      border: none;
-    }
-
-    .horses-form form .range-inputs-container .search-col {
-      flex-basis: 290px;
-    }
-
-    .horses-form form .range-inputs-container .input-range-col {
-      margin-top: 20px;
-      text-transform: uppercase;
-    }
-
-    .horses-form form .range-inputs-container .search-col button {
-      border: 0;
-      background: #ba3326;
-      color: #fff;
-      padding: 8px;
-      font-size: 18px;
-      text-transform: capitalize;
-      width: 100%;
-    }
-
-  .horses-form form .search-btn-mobile {
-    background: none;
+  .horses-form form .range-inputs-container .noUi-base .noUi-origin .noUi-handle {
+    background: #ba3326;
+    border-radius: 100%;
+    width: 13px !important;
+    height: 13px !important;
     border: none;
-    outline: none;
-    width: 100%;
-    text-align: left;
-    color: #868686;
-    font-style: italic;
+    top: -3px;
+    box-shadow: none;
+    cursor: pointer;
+  }
+
+    .horses-form form .range-inputs-container .noUi-base .noUi-origin .noUi-handle:focus {
+      outline: none;
+    }
+
+    .horses-form form .range-inputs-container .noUi-base .noUi-origin .noUi-handle::after,
+    .horses-form form .range-inputs-container .noUi-base .noUi-origin .noUi-handle::before {
+      content: none;
+    }
+
+    .horses-form form .range-inputs-container .noUi-base .noUi-origin .noUi-handle.noUi-handle-lower {
+      left: -1px !important;
+    }
+
+    .horses-form form .range-inputs-container .noUi-base .noUi-origin .noUi-handle.noUi-handle-upper {
+      left: -12px !important;
+    }
+
+  .horses-form form .range-inputs-container .noUi-target {
+    background: #C7C7C7;
+    box-shadow: none;
+    border: none;
+  }
+
+  .horses-form form .range-inputs-container .search-col {
+    flex-basis: 290px;
+  }
+
+  .horses-form form .range-inputs-container .input-range-col {
+    margin-top: 20px;
+    text-transform: uppercase;
+  }
+
+  .horses-form form .range-inputs-container .search-col button {
+    border: 0;
+    background: #ba3326;
+    color: #fff;
+    padding: 8px;
     font-size: 18px;
+    text-transform: capitalize;
+    width: 100%;
   }
 
-  .horses-form form .mobile-expandend-form {
-    margin-top: 10px;
-    border-top: 1px solid #e4e4e4;
-    padding-top: 20px;
+.horses-form form .search-btn-mobile,
+form.cf .search-btn-mobile {
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+  text-align: left;
+  color: #868686;
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.horses-form form .mobile-expandend-form,
+form.cf .mobile-expandend-form {
+  margin-top: 10px;
+  border-top: 1px solid #e4e4e4;
+  padding-top: 20px;
+}
+
+.horses-form form .search-btn-mobile .fa,
+form.cf .search-btn-mobile .fa {
+  color: #868686;
+}
+
+  .horses-form form .search-btn-mobile .fa.fa-angle-up,
+  form.cf .search-btn-mobile .fa.fa-angle-up,
+  .horses-form form .search-btn-mobile .fa.fa-angle-down,
+  form.cf .search-btn-mobile .fa.fa-angle-down {
+    float: right;
+    font-size: 20px;
   }
 
-  .horses-form form .search-btn-mobile .fa {
-    color: #868686;
+  .horses-form form .search-btn-mobile .fa.fa-sliders,
+  form.cf .search-btn-mobile .fa.fa-sliders {
+    padding-right: 15px;
   }
-
-    .horses-form form .search-btn-mobile .fa.fa-angle-up,
-    .horses-form form .search-btn-mobile .fa.fa-angle-down {
-      float: right;
-      font-size: 20px;
-    }
-
-    .horses-form form .search-btn-mobile .fa.fa-search {
-      padding-right: 15px;
-    }
 
 .category-text {
   color: #a7a7a7;
@@ -3146,6 +3152,7 @@ form.details input[type="checkbox"] {
 .horses-details .back {
   margin: 0 0 15px;
 }
+
   .add-horse-container .back a,
   .horses-details .back a {
     padding: 0px 20px;
@@ -3157,6 +3164,7 @@ form.details input[type="checkbox"] {
     transition: all 0.3s;
     display: inline-block;
   }
+
     .add-horse-container .back a:hover,
     .horses-details .back a:hover,
     .profile-info .go-back:hover {
@@ -3289,21 +3297,21 @@ form.details input[type="checkbox"] {
     margin: 0 auto;
   }
 
-  .horses-details #overview .ic-bg {
-    display: inline-block;
-  }
+.horses-details #overview .ic-bg {
+  display: inline-block;
+}
 
-    .horses-details #overview .gender {
-      background: url('../assets/images/icons_sprites.png') -52px -115px;
-      width: 21px;
-      height: 35px;
-    }
+.horses-details #overview .gender {
+  background: url('../assets/images/icons_sprites.png') -52px -115px;
+  width: 21px;
+  height: 35px;
+}
 
-    .horses-details #overview .breed {
-      background: url('../assets/images/icons_sprites.png') -10px -60px;
-      width: 35px;
-      height: 35px;
-    }
+.horses-details #overview .breed {
+  background: url('../assets/images/icons_sprites.png') -10px -60px;
+  width: 35px;
+  height: 35px;
+}
 
 .horses-details #overview .height {
   background: url('../assets/images/icons_sprites.png') -126px -10px;
@@ -3323,16 +3331,16 @@ form.details input[type="checkbox"] {
   height: 35px;
 }
 
-  .horses-details #overview ul li span:first-of-type {
-    font-weight: 700;
-    margin: 10px 0;
-  }
+.horses-details #overview ul li span:first-of-type {
+  font-weight: 700;
+  margin: 10px 0;
+}
 
-  .horses-details #overview ul li span:last-of-type {
-    color: #767676;
-    font-size: 22px;
-    font-weight: 300;
-  }
+.horses-details #overview ul li span:last-of-type {
+  color: #767676;
+  font-size: 22px;
+  font-weight: 300;
+}
 
 .horses-details #contact .user-info {
   position: relative;
@@ -3951,29 +3959,29 @@ typeahead-container .dropdown-menu {
   overflow: hidden;
 }
 
-      .home-container .slider form typeahead-container {
-        width: 100%;
-        left: 0 !important;
-        right: 0 !important;
-      }
+.home-container .slider form typeahead-container {
+  width: 100%;
+  left: 0 !important;
+  right: 0 !important;
+}
 
-  .home-container #myCarousel img {
-    width: 100%;
+.home-container #myCarousel img {
+  width: 100%;
+}
+
+.home-container img {
+  width: 100%;
+  height: auto;
+}
+
+.home-container ul {
+  list-style: none;
+}
+
+  .home-container ul img,
+  .home-container p img {
+    width: auto;
   }
-
-  .home-container img {
-    width: 100%;
-    height: auto;
-  }
-
-  .home-container ul {
-    list-style: none;
-  }
-
-    .home-container ul img,
-    .home-container p img {
-      width: auto;
-    }
 
 /* HORSE LIST CATEGORY */
 .category-row .col-sm-4 {
@@ -4026,13 +4034,13 @@ typeahead-container .dropdown-menu {
     cursor: pointer;
   }
 
-      .category-list-title li:last-of-type a:hover {
-        color: #363636;
-      }
+    .category-list-title li:last-of-type a:hover {
+      color: #363636;
+    }
 
-      .category-list-title li:last-of-type a:hover {
-        text-decoration: none;
-      }
+    .category-list-title li:last-of-type a:hover {
+      text-decoration: none;
+    }
 
 
 .horse-card-article {
@@ -4181,14 +4189,14 @@ typeahead-container .dropdown-menu {
       width: 25%;
     }
 
-    .horse-card-article .details .views .eye {
-      background: url('../assets/images/icons_sprites.png') -10px -210px;
-      display: inline-block;
-      width: 21px;
-      height: 15px;
-      position: relative;
-      top: 2px;
-    }
+      .horse-card-article .details .views .eye {
+        background: url('../assets/images/icons_sprites.png') -10px -210px;
+        display: inline-block;
+        width: 21px;
+        height: 15px;
+        position: relative;
+        top: 2px;
+      }
 
       .horse-card-article .details .views .heart {
         background: url('../assets/images/icons_sprites.png') -128px -210px;
@@ -4460,61 +4468,61 @@ div.advertise {
   margin-bottom: 35px;
 }
 
-  .hire-us h4,
-  .advertise h4 {
-    position: relative;
-    display: inline-block;
-    margin-bottom: 0;
-    text-transform: capitalize;
-    font-size: 25px;
-  }
+.hire-us h4,
+.advertise h4 {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 0;
+  text-transform: capitalize;
+  font-size: 25px;
+}
 
-  .hire-us h6 {
-    font-size: 18px;
-    font-weight: 700;
+.hire-us h6 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.hire-us h4::after,
+.advertise h4::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  height: 2px;
+  background: #767676;
+  width: 100%;
+}
+
+.hire-us .together {
+  text-align: center;
+  margin: 50px 0;
+}
+
+  .hire-us .together p {
     margin-bottom: 20px;
+    font-size: 30px;
+    color: #868686;
+    text-transform: uppercase;
+    font-weight: 300;
   }
 
-    .hire-us h4::after,
-    .advertise h4::after {
-      content: "";
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      height: 2px;
-      background: #767676;
-      width: 100%;
-    }
+.hire-us form {
+  width: 70%;
+}
 
-    .hire-us .together {
-      text-align: center;
-      margin: 50px 0;
-    }
+.hire-us textarea {
+  width: 100%;
+}
 
-    .hire-us .together p {
-      margin-bottom: 20px;
-      font-size: 30px;
-      color: #868686;
-      text-transform: uppercase;
-      font-weight: 300;
-    }
+.hire-us ol {
+  padding-left: 30px;
+  margin-bottom: 20px;
+}
 
-    .hire-us form {
-      width: 70%;
-    }
-
-    .hire-us textarea {
-      width: 100%;
-    }
-
-    .hire-us ol {
-      padding-left: 30px;
-      margin-bottom: 20px;
-    }
-
-    .hire-us ol li {
-      margin-bottom: 5px;
-    }
+  .hire-us ol li {
+    margin-bottom: 5px;
+  }
 
 /* === MEDIA QUERIES === */
 
@@ -5014,12 +5022,12 @@ div.advertise {
       width: 220px;
     }
 
-    .profile-info .profile-image {
-      width: auto;
-    }
+  .profile-info .profile-image {
+    width: auto;
+  }
 
   .profile-info .profile-details {
-      flex: 1;
+    flex: 1;
   }
 
     .profile-info .profile-details ul li {
@@ -5620,9 +5628,9 @@ div.advertise {
     height: 300px;
   }
 
-  .horse-details-slider img {
-    height: 300px !important;
-  }
+    .horse-details-slider img {
+      height: 300px !important;
+    }
 
   .category-row .col-sm-4 {
     width: 100%;
@@ -6641,9 +6649,9 @@ div.advertise {
     margin-top: 40px;
   }
 
-    .horses-form form .range-inputs-container .input-range-col:nth-of-type(3) .ng2-nouislider {
-      width: 100% !important;
-    }
+  .horses-form form .range-inputs-container .input-range-col:nth-of-type(3) .ng2-nouislider {
+    width: 100% !important;
+  }
 }
 
 
@@ -7031,7 +7039,7 @@ div.advertise {
     }
 
   .home-container .slider form {
-    padding: 30px 15px;
+    padding: 10px 15px;
   }
 
   .horses-details #contact .user-info img {

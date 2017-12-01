@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, trigger, state, transition, style, animate } from '@angular/core';
 import { Router } from '@angular/router';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
@@ -19,11 +19,24 @@ import { LatestHorsesModel } from '../horse-advertisments/models/latestHorses.mo
 import { HorseAdsService } from '../horse-advertisments/horse-ads.service';
 
 @Component({
-  templateUrl: './home.component.html'
+  templateUrl: './home.component.html',
+  animations: [
+    trigger('searchForm', [
+      state('in', style({ display: 'block', height: '*', opacity: 1 })),
+      transition('* => in', [
+        animate('300ms ease-in')
+      ]),
+      state('out', style({ display: 'none', height: '0px', opacity: 0 })),
+      transition('in => out', [
+        animate('300ms ease-out')
+      ]),
+    ])
+  ]
 })
 
 export class HomeComponent implements OnInit {
   priceRanges: PriceRangeModel[];
+  searchFormState: string = "in";
   countries: string[];
   searchModel: SearchModel;
   priceRangeId: number = 0;
@@ -36,6 +49,7 @@ export class HomeComponent implements OnInit {
   selectedCountry: string;
   countryData: Observable<any[]>;
   selectedPriceRangeValue: string;
+  isMobile: boolean;
 
   constructor(private _router: Router,
     private _horseAdService: HorseAdsService,
@@ -48,6 +62,9 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isMobile = window.screen.width <= CONFIG.mobile_width;
+    this.searchFormState = this.isMobile ? "out" : "in";
+
     this.countryData = Observable.create((observer: any) => {
       observer.next(this.selectedCountry);
     }).mergeMap((name: string) => this.getCountries(name));
@@ -109,5 +126,9 @@ export class HomeComponent implements OnInit {
     priceRangeValues.push(parseInt(values[1].trim().replace(",", "")));
 
     return priceRangeValues;
+  }
+
+  toggleSearchOnMobile() {
+    this.searchFormState = this.searchFormState == 'in' ? 'out' : 'in';
   }
 }

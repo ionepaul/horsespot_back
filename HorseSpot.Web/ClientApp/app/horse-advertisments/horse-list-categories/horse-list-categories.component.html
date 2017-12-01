@@ -3,7 +3,7 @@
   <div class="container horses-form">
     <form>
       <button (click)="toggleSearchOnMobile()" class="search-btn-mobile" [ngClass]="{'hidden': !isMobile}">
-        <span class="fa fa-search"></span> {{'CATEGORIES_SEARCH.SEARCH_BTN' | translate}}
+        <span class="fa fa-sliders"></span> {{'CATEGORIES_SEARCH.SEARCH_BTN' | translate}}
         <span *ngIf="!collapsed" class="fa fa-angle-down"></span>
         <span *ngIf="collapsed" class="fa fa-angle-up"></span>
       </button>

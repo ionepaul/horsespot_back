@@ -14,19 +14,15 @@
         <div class="item">
           <img src="../../../wwwroot/assets/images/eventing-slide.jpg" alt="Eventing horses slide">
         </div>
-
         <div class="item">
           <img src="../../../wwwroot/assets/images/endurance-slide.jpg" alt="Endurance horses slide">
         </div>
-
         <div class="item">
           <img src="../../../wwwroot/assets/images/driving-slide.jpg" alt="Driving horses slide">
         </div>
-
         <div class="item">
           <img src="../../../wwwroot/assets/images/foals-slide.jpg" alt="Foals slide">
         </div>
-
         <div class="item">
           <img src="../../../wwwroot/assets/images/leisure-slide.jpg" alt="Leisure horses slide">
         </div>
@@ -43,56 +39,64 @@
     </div>
 
     <form class="cf">
-      <div class="form-group">
-        <span class="female"></span>
-        <select class="form-control" name="gender" [(ngModel)]="searchModel.GenderId">
-          <option [ngValue]="0">{{ 'HOME_PAGE.GENDERS.GENDER' | translate }}</option>
-          <option [ngValue]="1">{{ 'HOME_PAGE.GENDERS.GELDING' | translate }}</option>
-          <option [ngValue]="2">{{ 'HOME_PAGE.GENDERS.MARE' | translate }}</option>
-          <option [ngValue]="3">{{ 'HOME_PAGE.GENDERS.STALLION' | translate }}</option>
-        </select>
-      </div><!-- form-group -->
+      <button (click)="toggleSearchOnMobile()" class="search-btn-mobile" [ngClass]="{'hidden': !isMobile}">
+        <span class="fa fa-sliders"></span> {{'CATEGORIES_SEARCH.QUICK_SEARCH' | translate}}
+        <span *ngIf="!collapsed" class="fa fa-angle-down"></span>
+        <span *ngIf="collapsed" class="fa fa-angle-up"></span>
+      </button>
 
-      <div class="form-group">
-        <span class="sort-order"></span>
-        <select class="form-control" name="priceRange" [(ngModel)]="priceRangeId">
-          <option [ngValue]="0">{{ 'HOME_PAGE.PRICE_RANGE' | translate }} </option>
-          <option *ngFor="let x of priceRanges" [ngValue]="x.Id">{{x.PriceRangeValue}} &euro; </option>
-        </select>
-      </div><!-- form-group -->
+      <div id="searchForm" [ngClass]="{'mobile-expandend-form': isMobile}" [@searchForm]="searchFormState">
+        <div class="form-group">
+          <span class="female"></span>
+          <select class="form-control" name="gender" [(ngModel)]="searchModel.GenderId">
+            <option [ngValue]="0">{{ 'HOME_PAGE.GENDERS.GENDER' | translate }}</option>
+            <option [ngValue]="1">{{ 'HOME_PAGE.GENDERS.GELDING' | translate }}</option>
+            <option [ngValue]="2">{{ 'HOME_PAGE.GENDERS.MARE' | translate }}</option>
+            <option [ngValue]="3">{{ 'HOME_PAGE.GENDERS.STALLION' | translate }}</option>
+          </select>
+        </div><!-- form-group -->
 
-      <div class="form-group">
-        <span class="sort"></span>
-        <select class="form-control" name="category" [(ngModel)]="categoryId">
-          <option [ngValue]="0">{{ 'NAVBAR.HORSES_FOR_SALE.CATEGORY' | translate }}</option>
-          <option [ngValue]="1">{{ 'NAVBAR.HORSES_FOR_SALE.SHOWJUMPING' | translate }}</option>
-          <option [ngValue]="2">{{ 'NAVBAR.HORSES_FOR_SALE.DRESSAGE' | translate }}</option>
-          <option [ngValue]="3">{{ 'NAVBAR.HORSES_FOR_SALE.EVENTING' | translate }}</option>
-          <option [ngValue]="4">{{ 'NAVBAR.HORSES_FOR_SALE.ENDURANCE' | translate }}</option>
-          <option [ngValue]="4">{{ 'NAVBAR.HORSES_FOR_SALE.DRIVING' | translate }}</option>
-          <option [ngValue]="7">{{ 'NAVBAR.HORSES_FOR_SALE.FOALS' | translate }}</option>
-          <option [ngValue]="6">{{ 'NAVBAR.HORSES_FOR_SALE.LEISURE' | translate }}</option>
-        </select>
-      </div><!-- form-group -->
+        <div class="form-group">
+          <span class="sort-order"></span>
+          <select class="form-control" name="priceRange" [(ngModel)]="priceRangeId">
+            <option [ngValue]="0">{{ 'HOME_PAGE.PRICE_RANGE' | translate }} </option>
+            <option *ngFor="let x of priceRanges" [ngValue]="x.Id">{{x.PriceRangeValue}} &euro; </option>
+          </select>
+        </div><!-- form-group -->
 
-      <div class="form-group countries-dropdown">
-        <span class="location"></span>
-        <input [(ngModel)]="selectedCountry"
-               autocomplete="off"
-               name="countries"
-               [typeahead]="countryData"
-               [typeaheadOptionsLimit]="7"
-               (typeaheadNoResults)="changeTypeaheadNoResults($event)"
-               [typeaheadMinLength]="2"
-               [typeaheadWaitMs]="300"
-               typeaheadOptionField="name"
-               placeholder="{{ 'HOME_PAGE.COUNTRY' | translate }}"
-               class="form-control">
-      </div><!-- form-group -->
+        <div class="form-group">
+          <span class="sort"></span>
+          <select class="form-control" name="category" [(ngModel)]="categoryId">
+            <option [ngValue]="0">{{ 'NAVBAR.HORSES_FOR_SALE.CATEGORY' | translate }}</option>
+            <option [ngValue]="1">{{ 'NAVBAR.HORSES_FOR_SALE.SHOWJUMPING' | translate }}</option>
+            <option [ngValue]="2">{{ 'NAVBAR.HORSES_FOR_SALE.DRESSAGE' | translate }}</option>
+            <option [ngValue]="3">{{ 'NAVBAR.HORSES_FOR_SALE.EVENTING' | translate }}</option>
+            <option [ngValue]="4">{{ 'NAVBAR.HORSES_FOR_SALE.ENDURANCE' | translate }}</option>
+            <option [ngValue]="4">{{ 'NAVBAR.HORSES_FOR_SALE.DRIVING' | translate }}</option>
+            <option [ngValue]="7">{{ 'NAVBAR.HORSES_FOR_SALE.FOALS' | translate }}</option>
+            <option [ngValue]="6">{{ 'NAVBAR.HORSES_FOR_SALE.LEISURE' | translate }}</option>
+          </select>
+        </div><!-- form-group -->
 
-      <div class="form-group">
-        <button type="submit" (click)="search()">{{ 'HOME_PAGE.SEARCH_NOW' | translate }}</button>
-      </div><!-- form-group -->
+        <div class="form-group countries-dropdown">
+          <span class="location"></span>
+          <input [(ngModel)]="selectedCountry"
+                 autocomplete="off"
+                 name="countries"
+                 [typeahead]="countryData"
+                 [typeaheadOptionsLimit]="7"
+                 (typeaheadNoResults)="changeTypeaheadNoResults($event)"
+                 [typeaheadMinLength]="2"
+                 [typeaheadWaitMs]="300"
+                 typeaheadOptionField="name"
+                 placeholder="{{ 'HOME_PAGE.COUNTRY' | translate }}"
+                 class="form-control">
+        </div><!-- form-group -->
+
+        <div class="form-group">
+          <button type="submit" (click)="search()">{{ 'HOME_PAGE.SEARCH_NOW' | translate }}</button>
+        </div><!-- form-group -->
+      </div>
     </form>
   </div><!-- slider -->
   <div class="row">
@@ -137,7 +141,6 @@
         <horse-list [horses]="latestHorses.LatestInEventing" [category]="'eventing'"></horse-list>
 
       </div><!-- horse-wrapper -->
-
       <!--<ng-adsense [adClient]="'ca-pub-7640562161899788'"
                   [adSlot]="7259870550"
                   [display]="'inline-block'"
