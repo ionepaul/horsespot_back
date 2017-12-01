@@ -50,6 +50,7 @@ export class HomeComponent implements OnInit {
   countryData: Observable<any[]>;
   selectedPriceRangeValue: string;
   isMobile: boolean;
+  collapsed: boolean = false;
 
   constructor(private _router: Router,
     private _horseAdService: HorseAdsService,
@@ -130,5 +131,6 @@ export class HomeComponent implements OnInit {
 
   toggleSearchOnMobile() {
     this.searchFormState = this.searchFormState == 'in' ? 'out' : 'in';
+    this.collapsed = !this.collapsed;
   }
 }

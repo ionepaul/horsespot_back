@@ -92,6 +92,7 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
       });
 
     window.FB.XFBML.parse();
+    console.log(window);
     this.pageHref = window.location.href;
   }
 
@@ -100,7 +101,7 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
       .subscribe(res => {
         this.horseAdModel = res;
         this.initImages();
-        this.initializeMetadata();
+        this._initializeMetadata();
         this.horseAddress = res.Address;
         this.pedigree = res.Pedigree;
         this.priceRange = res.PriceRange;
@@ -113,19 +114,17 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
       error => this.errorMessage = error);
   }
 
-  initializeMetadata() {
+  private _initializeMetadata() {
     this._title.setTitle(`${this.horseAdModel.Title} | Horse Spot`);
 
-    this._metaData.addTags([
-      { name: 'description', content: this.horseAdModel.Description },
-      { property: 'og:title', content: this.horseAdModel.Title + ' | Horse Spot' },
-      { property: 'og:description', content: this.horseAdModel.Description },
-      { property: 'og:image', content: CONFIG.imagesUrl + this.horseAdModel.Images[0] },
-      { name: 'twitter:card', content: "summary_large_image" },
-      { name: 'twitter:title', content: this.horseAdModel.Title + ' | Horse Spot' },
-      { name: 'twitter:description', content: this.horseAdModel.Description },
-      { name: 'twitter:image', content: CONFIG.imagesUrl + this.horseAdModel.Images[0] }
-    ]);
+    this._metaData.updateTag({ name: 'description', content: this.horseAdModel.Description });
+    this._metaData.updateTag({ property: 'og:title', content: this.horseAdModel.Title + ' | Horse Spot' });
+    this._metaData.updateTag({ property: 'og:description', content: this.horseAdModel.Description });
+    this._metaData.updateTag({ property: 'og:image', content: CONFIG.imagesUrl + this.horseAdModel.Images[0].ImageName });
+    this._metaData.updateTag({ name: 'twitter:card', content: "summary_large_image" });
+    this._metaData.updateTag({ name: 'twitter:title', content: this.horseAdModel.Title + ' | Horse Spot' });
+    this._metaData.updateTag({ name: 'twitter:description', content: this.horseAdModel.Description });
+    this._metaData.updateTag({ name: 'twitter:image', content: CONFIG.imagesUrl + this.horseAdModel.Images[0].ImageName });
   }
 
   initImages() {
@@ -301,14 +300,6 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this._routeSub$.unsubscribe();
-    this._metaData.removeTag("name='description'");
-    this._metaData.removeTag("property='og:title'");
-    this._metaData.removeTag("property='og:description'");
-    this._metaData.removeTag("property='og:image'");
-    this._metaData.removeTag("name='twitter:card'");
-    this._metaData.removeTag("name='twitter:description'");
-    this._metaData.removeTag("name='twitter:card'");
-    this._metaData.removeTag("name='twitter:image'");
   }
 
   //dateChanged() {

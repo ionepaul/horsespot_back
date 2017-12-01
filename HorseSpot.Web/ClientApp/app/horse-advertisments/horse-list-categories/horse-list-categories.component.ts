@@ -100,6 +100,7 @@ export class HorseListCategoriesComponent implements OnInit, OnDestroy {
 
   toggleSearchOnMobile() {
     this.searchFormState = this.searchFormState == 'in' ? 'out' : 'in';
+    this.collapsed = !this.collapsed;
   }
 
   search() {
