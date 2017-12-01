@@ -186,24 +186,28 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
   }
 
   initMap() {
-    var map = new google.maps.Map(this.googleMap.nativeElement, {
-      zoom: 12,
-      center: { lat: 46.770439, lng: 23.591423 }
-    });
-
-    var horseAdAddress = this.horseAddress.Country + ", " + this.horseAddress.City + ", " + this.horseAddress.Street;
-    var geocoder = new google.maps.Geocoder();
-    geocoder.geocode({ 'address': horseAdAddress }, function (results: any, status: any) {
-      if (status === 'OK') {
-        map.setCenter(results[0].geometry.location);
-        var marker = new google.maps.Marker({
-          map: map,
-          position: results[0].geometry.location
+    if (isPlatformBrowser(this.platformId)) {
+      setTimeout(() => {
+        var map = new google.maps.Map(this.googleMap.nativeElement, {
+          zoom: 12,
+          center: { lat: 46.770439, lng: 23.591423 }
         });
-      } else {
-        this.googleMap.nativeElement.classList.add('map-error');
-      }
-    })
+
+        var horseAdAddress = this.horseAddress.Country + ", " + this.horseAddress.City + ", " + this.horseAddress.Street;
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({ 'address': horseAdAddress }, function (results: any, status: any) {
+          if (status === 'OK') {
+            map.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+              map: map,
+              position: results[0].geometry.location
+            });
+          } else {
+            this.googleMap.nativeElement.classList.add('map-error');
+          }
+        });
+      }, 0);
+    }
   }
 
   setHorseAdOwnerDetails() {
