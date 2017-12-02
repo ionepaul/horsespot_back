@@ -2909,7 +2909,7 @@ form.details input[type="checkbox"] {
     .horses-form form .details-inputs .form-group select,
     .horses-form form .details-inputs .form-group input {
       border-radius: 0 !important;
-      padding-left: 30px;
+      padding-left: 35px;
     }
 
 .home-container .slider form .form-group select,
@@ -2921,8 +2921,8 @@ form.details input[type="checkbox"] {
 .home-container .slider form .form-group span{
   display: inline-block;
   position: absolute;
-  top: 5px;
-  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
     .horses-form form .female,
@@ -2932,12 +2932,13 @@ form.details input[type="checkbox"] {
       height: 20px;
     }
 
-.home-container .slider form .form-group .female,
-.horses-form form .details-inputs span,
-.horses-form form .details-inputs span,
-.horses-form form .details-inputs span {
-  left: 8px;
-}
+    .home-container .slider form .form-group .female {
+      left: 10px;
+    }
+
+    .horses-form form .female {
+      left: 11px;
+    }
 
 .horses-form form .location,
 .home-container .slider form .form-group .location {
@@ -2947,19 +2948,25 @@ form.details input[type="checkbox"] {
 }
 
 .home-container .slider form .form-group .location {
-  left: 8px;
+  left: 10px;
+}
+
+.horses-form form .location {
+  left: 11px;
 }
 
 .horses-form form .breed {
   background: url('../assets/images/icons_sprites.png') -10px -170px;
   width: 20px;
   height: 20px;
+  left: 8px;
 }
 
 .horses-form form .father {
   background: url('../assets/images/icons_sprites.png') -90px -170px;
   width: 20px;
   height: 20px;
+  left: 9px;
 }
 
 .horses-form form .sort,
@@ -2967,6 +2974,14 @@ form.details input[type="checkbox"] {
   background: url('../assets/images/icons_sprites.png') -50px -170px;
   width: 20px;
   height: 20px;
+}
+
+.home-container .slider form .form-group .sort {
+  left: 5px;
+}
+
+.horses-form form .sort {
+  left: 8px;
 }
 
 .horses-form form .sort-order,
@@ -2977,7 +2992,11 @@ form.details input[type="checkbox"] {
 }
 
 .home-container .slider form .form-group .sort-order {
-  left: 7px;
+  left: 9px;
+}
+
+.horses-form form .sort-order {
+  left: 10px;
 }
 
   .horses-form form .range-inputs-container {
