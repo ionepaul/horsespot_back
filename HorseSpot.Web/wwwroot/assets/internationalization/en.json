@@ -1,4 +1,6 @@
 {
+  "PAGE": "Page",
+  "OF":  "of",
   "GENERAL": {
     "INVALID_EMAIL_FORMAT": "Email format should be john@doe.com."
   },

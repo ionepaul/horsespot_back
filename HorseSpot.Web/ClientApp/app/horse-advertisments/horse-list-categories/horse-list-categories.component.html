@@ -2,7 +2,7 @@
 
   <div class="container horses-form">
     <form>
-      <button data-toggle="collapse" href="#searchForm" aria-expanded="false" aria-controls="searchForm" class="search-btn-mobile" [ngClass]="{'hidden': !isMobile}">
+      <button #searchCollapseBtn (click)="collapsed = !collapsed" data-toggle="collapse" href="#searchForm" aria-expanded="false" aria-controls="searchForm" class="search-btn-mobile" [ngClass]="{'hidden': !isMobile}">
         <span class="fa fa-sliders"></span> {{'CATEGORIES_SEARCH.SEARCH_BTN' | translate}}
         <span *ngIf="!collapsed" class="fa fa-angle-down"></span>
         <span *ngIf="collapsed" class="fa fa-angle-up"></span>
@@ -98,6 +98,7 @@
 <h2 *ngIf="categoryHorseList.length == 0" class="no-horses-found-message">{{'CATEGORIES_SEARCH.NO_HORSES_FOUND_MSG' | translate}}</h2>
 
 <div class="container horses-categories-list">
+   <p class="horse-spot-breadcrumb">{{'PROFILE.HORSES_FOR_SALE' | translate}} > {{categoryName}} | <span>{{'PAGE' | translate}} {{pageNumber}} {{'OF' | translate}} {{totalPageNumber}}</span></p>
   <horse-list [horses]="categoryHorseList" [threeOnRow]="true"></horse-list>
 </div>
 

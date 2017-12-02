@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy, trigger, state, transition, style, animate } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
@@ -21,21 +21,10 @@ import { RecommendedRiderModel } from '../models/recommendedRiderModel';
 
 @Component({
   templateUrl: "./horse-list-categories.component.html",
-  animations: [
-    trigger('searchForm', [
-      state('in', style({ display: 'block', height: '*', opacity: 1 })),
-      transition('* => in', [
-        animate('300ms ease-in')
-      ]),
-      state('out', style({ display: 'none', height: '0px', opacity: 0 })),
-      transition('in => out', [
-        animate('300ms ease-out')
-      ]),
-    ])
-  ]
 })
 
 export class HorseListCategoriesComponent implements OnInit, OnDestroy {
+  @ViewChild('searchCollapseBtn') searchCollapseBtn: ElementRef;
   categoryHorseList: HorseAdListModel[];
   categoryName: string;
   totalNumber: number;
@@ -51,9 +40,9 @@ export class HorseListCategoriesComponent implements OnInit, OnDestroy {
   heightRange: number[] = [CONFIG.defaultHeight.min, CONFIG.defaultHeight.max];
   priceRange: number[] = [CONFIG.defaultPrice.min, CONFIG.defaultPrice.max];
   isMobile: boolean;
-  searchFormState: string = "in";
   selectedCountry: string;
   countryData: Observable<any[]>;
+  totalPageNumber: number;
 
   private _routerSub$: Subscription;
 
@@ -100,17 +89,12 @@ export class HorseListCategoriesComponent implements OnInit, OnDestroy {
     }).mergeMap((name: string) => this.getCountries(name));
 
     this.isMobile = window.screen.width <= CONFIG.mobile_width;
-    this.searchFormState = this.isMobile ? "out" : "in";
 
     this.getPriceRanges();
     this.getRecommendedRiders();
     this.totalNumber = this._route.snapshot.data['model'].TotalCount;
     this.categoryHorseList = this._route.snapshot.data['model'].HorseAdList;
-  }
-
-  toggleSearchOnMobile() {
-    this.searchFormState = this.searchFormState == 'in' ? 'out' : 'in';
-    this.collapsed = !this.collapsed;
+    this.totalPageNumber = Math.floor(this.totalNumber / CONFIG.adsPerPage);
   }
 
   search() {
@@ -123,7 +107,7 @@ export class HorseListCategoriesComponent implements OnInit, OnDestroy {
     this._horseAdService.setSearchModel(this.searchModel);
 
     if (this.isMobile) {
-      this.toggleSearchOnMobile();
+      this.searchCollapseBtn.nativeElement.click();
     }
 
     if (this.pageNumber == 1) {

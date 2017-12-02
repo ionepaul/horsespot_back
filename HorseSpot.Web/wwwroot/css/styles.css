@@ -2842,6 +2842,16 @@ form.details typeahead-container ul {
   width: 100%;
 }
 
+.horse-spot-breadcrumb {
+  text-transform: uppercase;
+  font-size: 15px;
+  color: #868686;
+}
+
+.horse-spot-breadcrumb span {
+  text-transform: none;
+}
+
 /* GENERAL CHECKBOXES */
 .horses-form form .checkbox .regular-checkbox,
 form.details input[type="checkbox"] {
