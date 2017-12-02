@@ -2072,6 +2072,8 @@ modal.cancel-app textarea {
   border: 0;
 }
 
+/* navbar modals checkbox */
+
 /* DELETE HORSE MODAL and SEND EMAIL MODAL */
 .delete-modal {
   text-align: center;
@@ -2846,7 +2848,8 @@ form.details typeahead-container ul {
 
 /* GENERAL CHECKBOXES */
 .horses-form form .checkbox .regular-checkbox,
-form.details input[type="checkbox"] {
+form.details input[type="checkbox"],
+.navbar-modals input[type="checkbox"] {
   -webkit-appearance: none;
   border: 1px solid #cacece;
   box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
@@ -2858,31 +2861,34 @@ form.details input[type="checkbox"] {
   vertical-align: text-bottom;
 }
 
-      .horses-form form .checkbox .regular-checkbox:active,
-      .horses-form form .checkbox .regular-checkbox:checked:active,
-      form.details input[type="checkbox"]:active {
-        box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
-        outline: none;
-      }
+  .horses-form form .checkbox .regular-checkbox:active,
+  .horses-form form .checkbox .regular-checkbox:checked:active,
+  form.details input[type="checkbox"]:active,
+  .navbar-modals input[type="checkbox"]:active {
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+    outline: none;
+  }
 
-      .horses-form form .checkbox .regular-checkbox:checked,
-      form.details input[type="checkbox"]:checked {
-        background-color: #fff;
-        border: 1px solid #adb8c0;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
-        color: #99a1a7;
-        outline: none;
-      }
+  .horses-form form .checkbox .regular-checkbox:checked,
+  form.details input[type="checkbox"]:checked,
+  .navbar-modals input[type="checkbox"]:checked {
+    background-color: #fff;
+    border: 1px solid #adb8c0;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+    color: #99a1a7;
+    outline: none;
+  }
 
-        .horses-form form .checkbox .regular-checkbox:checked::after,
-        form.details input[type="checkbox"]:checked::after {
-          content: '\2714';
-          font-size: 14px;
-          position: absolute;
-          top: 0px;
-          left: 3px;
-          color: #ba3326;
-        }
+    .horses-form form .checkbox .regular-checkbox:checked::after,
+    form.details input[type="checkbox"]:checked::after,
+    .navbar-modals input[type="checkbox"]:checked::after {
+      content: '\2714';
+      font-size: 14px;
+      position: absolute;
+      top: 0px;
+      left: 3px;
+      color: #ba3326;
+    }
 
         .horse-ability label,
         .rider label,
@@ -2988,7 +2994,7 @@ form.details input[type="checkbox"] {
 .home-container .slider form .form-group .sort-order {
   background: url('../assets/images/icons_sprites.png') -224px -10px;
   width: 16px;
-  height: 20px;
+  height: 21px;
 }
 
 .home-container .slider form .form-group .sort-order {
@@ -5119,7 +5125,16 @@ div.advertise {
   }
 }
 
-@media ( max-width: 995px ) { /* era 950px inainte */
+@media ( max-width: 995px ) {
+
+  .hire-us .together p {
+    font-size: 25px;
+    margin-bottom: 10px;
+  }
+
+  .hire-us .together {
+    margin: 35px 0;
+  }
 
   .involved-section .col-sm-4 button {
     width: 45%;
@@ -5662,6 +5677,20 @@ div.advertise {
 }
 
 @media ( max-width: 767px ) {
+
+  .hire-us .together p {
+    font-size: 22px;
+    line-height: 32px;
+  }
+
+  .container.contact-section form {
+    width: 100%;
+  }
+
+  .hire-us form {
+    margin-bottom: 35px;
+    width: 100%;
+  }
 
 aside.col-sm-4 img {
   width: 50%;
