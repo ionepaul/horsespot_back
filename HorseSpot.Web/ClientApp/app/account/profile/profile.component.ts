@@ -10,6 +10,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 //SERVICES
 import { AccountService } from '../account.service';
 import { NotificationService } from '../../shared/notifications/notification.service';
+import { AuthService } from '../../shared/auth/auth.service';
 
 //MODELS
 import { ChangePasswordModel } from '../models/changePassword.model';
@@ -54,6 +55,7 @@ export class ProfileComponent implements OnInit {
     private _location: Location,
     private _horseAdService: HorseAdsService,
     private _titleService: Title,
+    private _authService: AuthService,
     @Inject(DOCUMENT) private document,
     @Inject(PLATFORM_ID) private platformId: Object) { }
 
@@ -127,16 +129,14 @@ export class ProfileComponent implements OnInit {
           this.profilePhotoUrl = "";
           this.profilePhotoUrl = CONFIG.profileImagesUrl;
           this.setProfilePicture(result);
-          this.refresh();
+          this.refreshUserToken();
         },
         error => this.uploadImageErrorMessage = error);
     }
   }
 
-  refresh() {
-    if (isPlatformBrowser(this.platformId)) {
-      window.location.reload();
-    }
+  refreshUserToken() {
+    this._authService.refreshToken().subscribe(data => this._authService.storeUserAccessInfo(data));
   }
 
   onFileInputEventChange(fileInput: any) {

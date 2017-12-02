@@ -141,11 +141,6 @@ export class HorseListCategoriesComponent implements OnInit, OnDestroy {
       error => this.errorMessage = error);
   }
 
-  resetSearchCriteria() {
-    this.searchModel = new SearchModel();
-    this.search();
-  }
-
   getCountries(name: string): Observable<any[]> {
     return this._horseAdService.getAllCountries(name);
   }
@@ -220,6 +215,15 @@ export class HorseListCategoriesComponent implements OnInit, OnDestroy {
     priceRangeValues.push(parseInt(values[1].trim().replace(",", "")));
 
     return priceRangeValues;
+  }
+
+  resetSearchForm() {
+      this.searchModel = new SearchModel();
+      this.ageRange = [CONFIG.defaultAge.min, CONFIG.defaultAge.max];
+      this.heightRange = [CONFIG.defaultHeight.min, CONFIG.defaultHeight.max];
+      this.priceRange = [CONFIG.defaultPrice.min, CONFIG.defaultPrice.max];
+      this.selectedCountry = this.searchModel.Country;
+      this.search();
   }
 
   ngOnDestroy() {

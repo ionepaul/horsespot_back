@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { CONFIG } from '../config';
@@ -7,9 +7,11 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
+import { isPlatformBrowser } from '@angular/common';
 
 //SERVICES
 import { HttpWrapper } from '../shared/http/http.wrapper';
+import { SpinnerService } from '../shared/spinner/spinner.service';
 
 //MODELS
 import { PriceRangeModel } from './models/priceRangeModel';
@@ -54,7 +56,9 @@ export class HorseAdsService {
   constructor(private _http: Http,
     private _httpWrapper: HttpWrapper,
     private _authService: AuthService,
-    private _router: Router) { }
+    private _router: Router,
+    private _spinnerService: SpinnerService,
+    @Inject(PLATFORM_ID) private platformId: Object) { }
 
   getAllPriceRanges(): Observable<PriceRangeModel[]> {
     return this._http.get(this._priceRangesUrl)
@@ -320,9 +324,19 @@ export class HorseAdsService {
   search(searchModel: SearchModel) {
     let body = JSON.stringify(searchModel);
 
+    if (isPlatformBrowser(this.platformId)) {
+      this._spinnerService.isLoading = true;
+    }
+
     return this._http.get(this._searchUrl + body)
-      .map((res) => res.json())
-      .catch(this.handleError);
+      .map((res) => {
+        this._spinnerService.isLoading = false;
+        return res.json();
+      })
+      .catch((error) => {
+        this._spinnerService.isLoading = false;
+        return this.handleError(error);
+      });
   }
 
   setSearchModel(searchModel: SearchModel) {

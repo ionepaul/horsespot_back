@@ -20,10 +20,10 @@
       </ul>
 
       <ul class="main-links">
-        <li><span class="home"></span><a [routerLink]="['/home']">{{ 'NAVBAR.HOME' | translate }}</a></li>
-        <li><span class="advertise"></span><a [routerLink]="['/advertise']">{{ 'NAVBAR.ADVERTISE' | translate }}</a></li>
-        <li><span class="contact"></span><a [routerLink]="['/contact']">{{ 'NAVBAR.CONTACT' | translate }}</a></li>
-        <li><span class="hire-us"></span><a [routerLink]="['/hire-us']">{{ 'NAVBAR.HIRE_US' | translate }}</a></li>
+        <li [routerLinkActive]="['active']"><span class="home"></span><a [routerLink]="['/home']">{{ 'NAVBAR.HOME' | translate }}</a></li>
+        <li [routerLinkActive]="['active']"><span class="advertise"></span><a [routerLink]="['/advertise']">{{ 'NAVBAR.ADVERTISE' | translate }}</a></li>
+        <li [routerLinkActive]="['active']"><span class="contact"></span><a [routerLink]="['/contact']">{{ 'NAVBAR.CONTACT' | translate }}</a></li>
+        <li [routerLinkActive]="['active']"><span class="hire-us"></span><a [routerLink]="['/hire-us']">{{ 'NAVBAR.HIRE_US' | translate }}</a></li>
       </ul>
 
       <ul class="social-links">
@@ -64,13 +64,13 @@
       </div><!-- slide-from-right -->
 
       <ul class="nav navbar-nav">
-        <li><a (click)="burgerMenuItemClick()" [routerLink]="['/horses-for-sale/showjumping/1']">{{'NAVBAR.HORSES_FOR_SALE.SHOWJUMPING' | translate}}</a></li>
-        <li><a (click)="burgerMenuItemClick()" [routerLink]="['/horses-for-sale/dressage/1']">{{'NAVBAR.HORSES_FOR_SALE.DRESSAGE' | translate}}</a></li>
-        <li><a (click)="burgerMenuItemClick()" [routerLink]="['/horses-for-sale/eventing/1']">{{'NAVBAR.HORSES_FOR_SALE.EVENTING' | translate}}</a></li>
-        <li><a (click)="burgerMenuItemClick()" [routerLink]="['/horses-for-sale/endurance/1']">{{'NAVBAR.HORSES_FOR_SALE.ENDURANCE' | translate}}</a></li>
-        <li><a (click)="burgerMenuItemClick()" [routerLink]="['/horses-for-sale/driving/1']">{{'NAVBAR.HORSES_FOR_SALE.DRIVING' | translate}}</a></li>
-        <li><a (click)="burgerMenuItemClick()" [routerLink]="['/horses-for-sale/foals/1']">{{'NAVBAR.HORSES_FOR_SALE.FOALS' | translate}}</a></li>
-        <li><a (click)="burgerMenuItemClick()" [routerLink]="['/horses-for-sale/leisure/1']">{{'NAVBAR.HORSES_FOR_SALE.LEISURE' | translate}}</a></li>
+        <li [routerLinkActive]="['active']"><a (click)="burgerMenuItemClick()" [routerLink]="['/horses-for-sale/showjumping/1']">{{'NAVBAR.HORSES_FOR_SALE.SHOWJUMPING' | translate}}</a></li>
+        <li [routerLinkActive]="['active']"><a (click)="burgerMenuItemClick()" [routerLink]="['/horses-for-sale/dressage/1']">{{'NAVBAR.HORSES_FOR_SALE.DRESSAGE' | translate}}</a></li>
+        <li [routerLinkActive]="['active']"><a (click)="burgerMenuItemClick()" [routerLink]="['/horses-for-sale/eventing/1']">{{'NAVBAR.HORSES_FOR_SALE.EVENTING' | translate}}</a></li>
+        <li [routerLinkActive]="['active']"><a (click)="burgerMenuItemClick()" [routerLink]="['/horses-for-sale/endurance/1']">{{'NAVBAR.HORSES_FOR_SALE.ENDURANCE' | translate}}</a></li>
+        <li [routerLinkActive]="['active']"><a (click)="burgerMenuItemClick()" [routerLink]="['/horses-for-sale/driving/1']">{{'NAVBAR.HORSES_FOR_SALE.DRIVING' | translate}}</a></li>
+        <li [routerLinkActive]="['active']"><a (click)="burgerMenuItemClick()" [routerLink]="['/horses-for-sale/foals/1']">{{'NAVBAR.HORSES_FOR_SALE.FOALS' | translate}}</a></li>
+        <li [routerLinkActive]="['active']"><a (click)="burgerMenuItemClick()" [routerLink]="['/horses-for-sale/leisure/1']">{{'NAVBAR.HORSES_FOR_SALE.LEISURE' | translate}}</a></li>
       </ul>
     </div><!-- nav-collapse -->
 
