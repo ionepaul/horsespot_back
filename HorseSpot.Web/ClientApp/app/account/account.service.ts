@@ -49,12 +49,12 @@ export class AccountService {
     return this._authService.authenticateUser(model);
   }
 
-  updateExternalUser(provider, externalToken, phoneNumber) {
-    return this._authService.updateExternalUser(provider, externalToken, phoneNumber);
+  updateExternalUser(provider, externalToken, phoneNumber, clientId) {
+    return this._authService.updateExternalUser(provider, externalToken, phoneNumber, clientId);
   }
 
-  obtainLocalAccessToken(provider: string, externalToken: string) {
-    return this._authService.obtainLocalAccessToken(provider, externalToken);
+  obtainLocalAccessToken(provider: string, externalToken: string, clientId: string) {
+    return this._authService.obtainLocalAccessToken(provider, externalToken, clientId);
   }
 
   registerService(model: RegisterModel) {

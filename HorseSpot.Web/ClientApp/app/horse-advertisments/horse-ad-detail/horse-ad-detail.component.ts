@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, HostListener, ElementRef, Inject, PLATFORM_ID  } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, HostListener, ElementRef, Inject, PLATFORM_ID } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common'
 import { Subscription } from 'rxjs/Subscription';
@@ -80,10 +80,6 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
     this.notificationRefresh = this._notificationService.getRefresh();
     this.currentUserId = this._accountService.getUserId();
 
-    if (this.currentUserId) {
-      this._accountService.isAdmin(this.currentUserId).subscribe(res => this.isAdmin = res);
-    }
-
     this._routeSub$ = this._route.params.subscribe(
       params => {
         let id = params['id'];
@@ -158,8 +154,14 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
       this._horseAdService.increaseViews(this.horseAdModel.Id).subscribe();
     }
 
-    if (!this.horseAdModel.IsValidated && !this.isAdmin) {
-      this._router.navigate(['/error/403']);
+    if (this.currentUserId && !this.horseAdModel.IsValidated) {
+      this._accountService.isAdmin(this.currentUserId)
+        .subscribe(res => {
+          this.isAdmin = res;
+          if (res != true) {
+            this._router.navigate(['/error/403']);
+          }
+        });
     }
   }
 

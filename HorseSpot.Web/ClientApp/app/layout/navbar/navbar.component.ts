@@ -78,7 +78,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.handleExternalFirstAuth();
       }
       else if (firstReg.toLocaleLowerCase() === CONFIG._false) {
-        this._accountService.obtainLocalAccessToken(this.provider, this.externalToken).subscribe(res => {
+        this._accountService.obtainLocalAccessToken(this.provider, this.externalToken, CONFIG.client_id).subscribe(res => {
           let basePath = this._location.path().slice(0, this._location.path().indexOf('?'));
           this._location.replaceState(basePath);
         });
@@ -153,7 +153,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   updateExternalUserPhoneNumber() {
-    this._accountService.updateExternalUser(this.provider, this.externalToken, this.externalUserPhoneNumber)
+    this._accountService.updateExternalUser(this.provider, this.externalToken, this.externalUserPhoneNumber, CONFIG.client_id)
       .subscribe(res => {
         this.phoneNumberModal.hide();
       })
@@ -214,7 +214,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   skipPhoneNumberEntering() {
-    this._accountService.obtainLocalAccessToken(this.provider, this.externalToken)
+    this._accountService.obtainLocalAccessToken(this.provider, this.externalToken, CONFIG.client_id)
       .subscribe(res => {
         this.phoneNumberModal.hide();
       });

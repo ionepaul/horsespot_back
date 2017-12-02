@@ -540,6 +540,7 @@ nav .navbar-nav li a {
   nav .navbar-nav li a:hover,
   nav .navbar-nav li a:active,
   nav .navbar-nav li a:focus,
+  nav .navbar-nav li.active a,
   nav.navbar div.user-bg-part .notif-wrapper a:hover,
   nav.navbar div.user-bg-part .notif-wrapper a:active,
   nav.navbar div.user-bg-part .notif-wrapper a:focus {
@@ -2809,18 +2810,17 @@ ul.pagination {
 .horses-form form {
   border: 1px solid #e4e4e4;
   border-radius: 5px;
-  padding: 50px 10px;
+  padding: 40px 10px;
   margin-bottom: 30px;
   position: relative;
 }
 
   .horses-form form .reset {
-    position: absolute;
-    top: 5px;
-    right: 15px;
+    float: right;
+    margin-right: 7px;
     background: 0;
     border: 0;
-    color: #333;
+    color: #767676;
     font-weight: 700;
     font-size: 16px;
     text-transform: uppercase;
@@ -5655,10 +5655,6 @@ aside.col-sm-4 img {
   width: 50%;
 }
 
-  .horses-form form .reset {
-    top: 50px;
-  }
-
   .horse-details-slider {
     height: 300px;
   }
@@ -6534,10 +6530,9 @@ aside.col-sm-4 img {
     padding: 10px;
   }
 }
+
 /* end of 767px */
-
 @media ( max-width: 700px ) {
-
   /* 404 */
   .error-wrapper {
     width: auto;

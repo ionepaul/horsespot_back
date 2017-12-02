@@ -122,7 +122,10 @@ export class HorseListCategoriesComponent implements OnInit, OnDestroy {
 
     this._horseAdService.setSearchModel(this.searchModel);
 
-    this.toggleSearchOnMobile();
+    if (this.isMobile) {
+      this.toggleSearchOnMobile();
+    }
+
     if (this.pageNumber == 1) {
       this.searchingWhenFirstPage();
     }

@@ -129,14 +129,10 @@ export class ProfileComponent implements OnInit {
           this.profilePhotoUrl = "";
           this.profilePhotoUrl = CONFIG.profileImagesUrl;
           this.setProfilePicture(result);
-          this.refreshUserToken();
+          window.location.reload();
         },
         error => this.uploadImageErrorMessage = error);
     }
-  }
-
-  refreshUserToken() {
-    this._authService.refreshToken().subscribe(data => this._authService.storeUserAccessInfo(data));
   }
 
   onFileInputEventChange(fileInput: any) {

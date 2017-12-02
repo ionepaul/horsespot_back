@@ -41,17 +41,17 @@ export class AuthService {
       .catch(this._handleAuthError);
   }
 
-  updateExternalUser(provider: string, externalToken: string, phoneNumber: string) {
+  updateExternalUser(provider: string, externalToken: string, phoneNumber: string, clientId: string) {
     return this._httpWrapper
-      .post(CONFIG.baseUrls.apiUrl + "account/updateExternalUser?provider=" + provider + "&externalToken=" + externalToken + "&phoneNumber=" + phoneNumber, "")
+      .post(CONFIG.baseUrls.apiUrl + "account/updateExternalUser?provider=" + provider + "&externalToken=" + externalToken + "&phoneNumber=" + phoneNumber + "&clientId=" + clientId, "")
       .map((res: Response) => res.json())
       .do(data => this.storeUserAccessInfo(data))
       .catch(this._handleAuthError);
   }
 
-  obtainLocalAccessToken(provider: string, externalToken: string) {
+  obtainLocalAccessToken(provider: string, externalToken: string, clientId: string) {
     return this._httpWrapper
-      .get(CONFIG.baseUrls.apiUrl + "account/obtainLocalAccessToken?provider=" + provider + "&externalAccessToken=" + externalToken)
+      .get(CONFIG.baseUrls.apiUrl + "account/obtainLocalAccessToken?provider=" + provider + "&externalAccessToken=" + externalToken + "&clientId=" + clientId)
       .map((res: Response) => res.json())
       .do(data => this.storeUserAccessInfo(data))
       .catch(this._handleAuthError);
@@ -92,6 +92,7 @@ export class AuthService {
 
   isRefreshTokenExpired(): boolean {
     var refreshTokenExpires = this.getItem('refresh_token_expires');
+ 
     if (refreshTokenExpires != null) {
       var refreshTokenExpirationDate = parseInt(refreshTokenExpires);
 
@@ -120,6 +121,7 @@ export class AuthService {
     this._removeItem('token_expires');
     this._removeItem('refresh_token_expires');
     this._removeItem('user_name');
+    this._removeItem('pic_name');
   }
 
   checkPostOwner(adId: string) {

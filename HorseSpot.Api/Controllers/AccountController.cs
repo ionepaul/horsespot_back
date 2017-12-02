@@ -21,6 +21,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Linq;
+using HorseSpot.Infrastructure.Utils;
 
 namespace HorseSpot.Api.Controllers
 {
@@ -91,7 +92,7 @@ namespace HorseSpot.Api.Controllers
         [HttpGet]
         [AllowAnonymous]
         [Route("api/account/obtainLocalAccessToken")]
-        public async Task<JObject> ObtainLocalAccessToken(string provider, string externalAccessToken)
+        public async Task<JObject> ObtainLocalAccessToken(string provider, string externalAccessToken, string clientId)
         {
             var verifiedAccessToken = await VerifyExternalAccessToken(provider, externalAccessToken);
 
@@ -109,7 +110,7 @@ namespace HorseSpot.Api.Controllers
                 throw new ConflictException(Resources.ExternalUserIsNotRegistred);
             }
 
-            var accessTokenResponse = await GenerateLocalAccessTokenResponse(user.Email);
+            var accessTokenResponse = await GenerateLocalAccessTokenResponse(user.Email, clientId);
 
             return accessTokenResponse;
         }
@@ -251,7 +252,7 @@ namespace HorseSpot.Api.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("api/account/updateExternalUser")]
-        public async Task<JObject> AddPhoneNumberToExternalUser(string provider, string externalToken, string phoneNumber)
+        public async Task<JObject> AddPhoneNumberToExternalUser(string provider, string externalToken, string phoneNumber, string clientId)
         {
             var verifiedAccessToken = await VerifyExternalAccessToken(provider, externalToken);
 
@@ -269,7 +270,7 @@ namespace HorseSpot.Api.Controllers
                 await _iUserBus.EditProfile(user.Id, new EditProfileViewModel { PhoneNumber = phoneNumber });
             }
 
-            var accessTokenResponse = await GenerateLocalAccessTokenResponse(user.Email);
+            var accessTokenResponse = await GenerateLocalAccessTokenResponse(user.Email, clientId);
 
             return accessTokenResponse;
         }
@@ -403,9 +404,9 @@ namespace HorseSpot.Api.Controllers
             return parsedToken;
         }
 
-        private async Task<JObject> GenerateLocalAccessTokenResponse(string email)
+        private async Task<JObject> GenerateLocalAccessTokenResponse(string email, string clientId)
         {
-            var tokenExpiration = TimeSpan.FromHours(6);
+            var tokenExpiration = TimeSpan.FromMinutes(1);
 
             var user = _iUserBus.FindUserByEmail(email);
             var userRoles = await _iAuthorizationBus.UserRoles(user.Id);
@@ -423,19 +424,21 @@ namespace HorseSpot.Api.Controllers
             var props = new AuthenticationProperties()
             {
                 IssuedUtc = DateTime.UtcNow,
-                ExpiresUtc = DateTime.UtcNow.Add(tokenExpiration),
+                ExpiresUtc = DateTimeOffset.UtcNow.Add(tokenExpiration)
             };
 
             var ticket = new AuthenticationTicket(identity, props);
 
             var accessToken = Startup.OAuthBearerOptions.AccessTokenFormat.Protect(ticket);
+            var refreshToken = await GenerateLocalRefreshToken(accessToken, email, clientId);
 
             JObject tokenResponse = new JObject(new JProperty(AuthConstants.CustomAuthProps.UserName, email),
                                                 new JProperty("access_token", accessToken),
+                                                new JProperty("refresh_token", refreshToken),
                                                 new JProperty("token_type", "bearer"),
                                                 new JProperty("expires_in", tokenExpiration.TotalSeconds.ToString()),
                                                 new JProperty(".issued", ticket.Properties.IssuedUtc.ToString()),
-                                                new JProperty(".expires", ticket.Properties.ExpiresUtc.ToString()),
+                                                new JProperty(".expires", ticket.Properties.ExpiresUtc.Value.ToString("o")),
                                                 new JProperty(AuthConstants.CustomAuthProps.UserId, user.Id),
                                                 new JProperty(AuthConstants.CustomAuthProps.FullName, user.FirstName),
                                                 new JProperty(AuthConstants.CustomAuthProps.ProfilePic, user.ImagePath),
@@ -503,6 +506,37 @@ namespace HorseSpot.Api.Controllers
                                  provider,
                                  externalEmailAlreadyRegistred.ToString(),
                                  localEmail);
+        }
+
+        private async Task<string> GenerateLocalRefreshToken(string accessToken, string email, string clientId)
+        {
+            var client = _iAuthorizationBus.FindClient(clientId);
+
+            if (client == null)
+            {
+                throw new ForbiddenException(string.Format(Resources.ClientIdNotRegistred, clientId));
+            }
+
+            var refreshTokenId = Guid.NewGuid().ToString("n");
+
+            var refreshToken = new RefreshTokenDTO()
+            {
+                Id = Helper.GetHash(refreshTokenId),
+                ClientId = clientId,
+                Subject = email,
+                IssuedUtc = DateTime.UtcNow,
+                ExpiresUtc = DateTime.UtcNow.AddMinutes(Convert.ToDouble(client.RefreshTokenLifeTime)),
+                ProtectedTicket = accessToken
+            };
+
+            var result = await _iAuthorizationBus.AddRefreshToken(refreshToken);
+
+            if (result)
+            {
+                return refreshTokenId;
+            }
+
+            return null;
         }
 
         #endregion
