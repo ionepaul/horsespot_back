@@ -5721,6 +5721,11 @@ div.advertise {
 
 @media ( max-width: 767px ) {
 
+  nav.navbar div.user-bg-part .notif-wrapper a {
+    font-size: 17px;
+    line-height: 27px;
+  }
+
   .hire-us .together p {
     font-size: 22px;
     line-height: 32px;
