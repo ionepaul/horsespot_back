@@ -83,6 +83,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this._accountService.obtainLocalAccessToken(this.provider, this.externalToken, CONFIG.client_id).subscribe(res => {
           let basePath = this._location.path().slice(0, this._location.path().indexOf('?'));
           this._location.replaceState(basePath);
+          this.setUserNameAndId();
         });
       }
 
@@ -96,6 +97,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       }
 
       this.changeLanguage(this.lang);
+      this.setUserNameAndId();
     });
   }
 
