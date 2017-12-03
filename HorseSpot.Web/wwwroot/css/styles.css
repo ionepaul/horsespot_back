@@ -2817,6 +2817,12 @@ ul.pagination {
   position: relative;
 }
 
+  .horses-form form .details-inputs .dropdown-menu span {
+    position: static;
+    top: auto;
+    transform: translateY(0);
+  }
+
   .horses-form form .reset {
     float: right;
     margin-right: 7px;
@@ -4054,6 +4060,8 @@ form.cf .search-btn-mobile .fa {
 
           .home-container .slider form .form-group.countries-dropdown .dropdown-menu span {
             position: static;
+            top: auto;
+            transform: translateY(0);
           }
 
 typeahead-container .dropdown-menu {
