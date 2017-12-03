@@ -19,6 +19,9 @@ import { CountryModel } from '../models/countryModel';
 import { GenderModel } from '../models/genderModel';
 import { RecommendedRiderModel } from '../models/recommendedRiderModel';
 
+//UTILS
+import { UtilDictionaries } from '../../shared/utils/util-dictionaries';
+
 @Component({
   templateUrl: "./horse-list-categories.component.html",
 })
@@ -43,6 +46,7 @@ export class HorseListCategoriesComponent implements OnInit, OnDestroy {
   selectedCountry: string;
   countryData: Observable<any[]>;
   totalPageNumber: number;
+  utilDictionary: UtilDictionaries = new UtilDictionaries();
 
   private _routerSub$: Subscription;
 
@@ -58,6 +62,7 @@ export class HorseListCategoriesComponent implements OnInit, OnDestroy {
         this.pageNumber = parseInt(_route.snapshot.url[2].path);
         this.totalNumber = this._route.snapshot.data['model'].TotalCount;
         this.categoryHorseList = this._route.snapshot.data['model'].HorseAdList;
+        this.totalPageNumber = Math.floor(this.totalNumber / CONFIG.adsPerPage) + 1;
       }
     });
   }
@@ -94,15 +99,16 @@ export class HorseListCategoriesComponent implements OnInit, OnDestroy {
     this.getRecommendedRiders();
     this.totalNumber = this._route.snapshot.data['model'].TotalCount;
     this.categoryHorseList = this._route.snapshot.data['model'].HorseAdList;
-    this.totalPageNumber = Math.floor(this.totalNumber / CONFIG.adsPerPage) + 1;
   }
 
-  search() {
-    this.searchModel.AgeModel = new BetweenAge(this.ageRange[0], this.ageRange[1]);
-    this.searchModel.HeightModel = new BetweenHeight(this.heightRange[0], this.heightRange[1]);
-    this.searchModel.PriceModel = new BetweenPrice(this.priceRange[0], this.priceRange[1]);
-    this.searchModel.Country = this.selectedCountry;
-    this.searchModel.PriceRangeIds = this.getRangesIdToSearchAfter();
+  search(isRefresh: boolean) {
+    if (!isRefresh) {
+      this.searchModel.AgeModel = new BetweenAge(this.ageRange[0], this.ageRange[1]);
+      this.searchModel.HeightModel = new BetweenHeight(this.heightRange[0], this.heightRange[1]);
+      this.searchModel.PriceModel = new BetweenPrice(this.priceRange[0], this.priceRange[1]);
+      this.searchModel.Country = this.selectedCountry;
+      this.searchModel.PriceRangeIds = this.getRangesIdToSearchAfter();
+    }
 
     this._horseAdService.setSearchModel(this.searchModel);
 
@@ -212,9 +218,9 @@ export class HorseListCategoriesComponent implements OnInit, OnDestroy {
       this.heightRange = [CONFIG.defaultHeight.min, CONFIG.defaultHeight.max];
       this.priceRange = [CONFIG.defaultPrice.min, CONFIG.defaultPrice.max];
       this.selectedCountry = this.searchModel.Country;
-      this._horseAdService.setSearchModel(this.searchModel);
+      this.searchModel.AbilityId = parseInt(this.utilDictionary.getUrlByCategoryName(this.categoryName));
 
-      this.search();
+      this.search(true);
   }
 
   ngOnDestroy() {
