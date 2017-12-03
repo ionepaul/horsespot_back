@@ -2916,11 +2916,13 @@ form.details input[type="checkbox"],
     .horses-form form .details-inputs .form-group input {
       border-radius: 0 !important;
       padding-left: 35px;
+      -webkit-appearance: none;
     }
 
 .home-container .slider form .form-group select,
 .home-container .slider form .form-group input {
   padding-left: 25px;
+  -webkit-appearance: none;
 }
 
 .horses-form form .details-inputs span,
