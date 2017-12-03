@@ -5153,7 +5153,7 @@ div.advertise {
 
   /* PROFILE PAGE */
   .profile-info .profile-image .change-img-hover {
-    left: 45px;
+    left: 88px;
   }
 
   .profile-info .row {
@@ -5783,6 +5783,11 @@ div.advertise {
 }
 
 @media ( max-width: 767px ) {
+
+  nav.navbar div.user-bg-part .notif-wrapper a {
+    font-size: 17px;
+    line-height: 27px;
+  }
 
   .hire-us .together p {
     font-size: 22px;
@@ -6735,6 +6740,18 @@ aside.col-sm-4 img {
 }
 
 @media ( max-width: 650px ) {
+
+  .profile-info .profile-image .change-img-hover {
+    width: 25px;
+    height: 25px;
+    padding: 0 6px;
+    left: 32px;
+    top: 30px;
+  }
+
+  .profile-info .profile-image .change-img-hover .fa {
+    font-size: 13px;
+  }
 
   /* APPOINTMENS */
   .appointments .legend ul li {
