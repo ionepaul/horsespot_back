@@ -203,7 +203,7 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
               position: results[0].geometry.location
             });
           } else {
-            this.googleMap.nativeElement.classList.add('map-error');
+            document.getElementById('googleMap').classList.add('map-error');
           }
         });
       }, 0);
