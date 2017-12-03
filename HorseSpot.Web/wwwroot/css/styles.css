@@ -5132,6 +5132,11 @@ div.advertise {
     padding: 0;
   }
 
+    .horse-wrapper .category-row .col-sm-6 .desc {
+      max-height: 75px;
+      height: auto;
+    }
+
     .horse-wrapper .category-row .col-sm-6:last-of-type {
       margin-bottom: 0;
     }
@@ -5797,6 +5802,11 @@ aside.col-sm-4 img {
 
   .category-row .col-sm-4 {
     width: 100%;
+  }
+
+  .category-row .col-sm-4 .desc {
+    max-height: 75px;
+    height: auto;
   }
 
   .horse-card-article .details .views {
