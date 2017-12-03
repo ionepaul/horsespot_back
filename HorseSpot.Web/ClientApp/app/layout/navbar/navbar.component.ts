@@ -152,6 +152,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this._accountService.updateExternalUser(this.provider, this.externalToken, this.externalUserPhoneNumber, CONFIG.client_id)
       .subscribe(res => {
         window.scrollTo(0, 0);
+        this.setUserNameAndId();
         this.phoneNumberModal.hide();
       })
   }
@@ -197,10 +198,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
       .subscribe(response => {
         window.scrollTo(0, 0);
         this.loginModal.hide();
-        this.userId = this._accountService.getUserId();
-        this.userName = this._accountService.getName();
+        this.setUserNameAndId();
       },
       error => this.errorMessage = error)
+  }
+
+  setUserNameAndId() {
+    this.userId = this._accountService.getUserId();
+    this.userName = this._accountService.getName();
   }
 
   getNewPassword() {
@@ -217,8 +222,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
   skipPhoneNumberEntering() {
     this._accountService.obtainLocalAccessToken(this.provider, this.externalToken, CONFIG.client_id)
       .subscribe(res => {
-        this.phoneNumberModal.hide();
+        this.setUserNameAndId();
         window.scrollTo(0, 0);
+        this.phoneNumberModal.hide();
       });
   }
 

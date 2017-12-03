@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter, HostListener, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, Output, EventEmitter, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
@@ -17,7 +17,7 @@ import { AppointmentModel } from '../../../account/models/appointmentModel';
     templateUrl: './navbar.user.part.component.html'
 })
 
-export class NavbarUserPartComponent implements OnInit {
+export class NavbarUserPartComponent implements OnInit, OnChanges {
     //@ViewChild('notificationBell') notificationBell: ElementRef;
     @ViewChild('userPart') userPart: ElementRef;
     @ViewChild('userProfileBtn') userProfileBtn: ElementRef;
@@ -35,6 +35,8 @@ export class NavbarUserPartComponent implements OnInit {
     showUserMenu: boolean = false;
     currentUserId: string;
     isMobileDevice: boolean = false;
+    loggedUserName: string;
+    loggedUserId: string;
   
     constructor(private _accountService: AccountService, 
                 //private _appointmentsService: AppointmentsService,
@@ -110,6 +112,11 @@ export class NavbarUserPartComponent implements OnInit {
       if (this.isMobileDevice) {
         this.menuItemClicked.emit(true);
       }
+    }
+
+    ngOnChanges() {
+      this.loggedUserName = this.userName;
+      this.loggedUserId = this.userId;
     }
 
     //initializeNotifList(notifListLength: number) {

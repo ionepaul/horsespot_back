@@ -7,7 +7,7 @@
         <li class="profile-image-li"><img src="{{profilePhotoUrl}}" class="user-profile-picture"></li>
         <!-- Logged in user menu -->
         <li>
-            <a  (click)="showUserMenu = !showUserMenu" id="dropdown-link-button">{{userName}} <fa name=" fa-angle-down"></fa></a>
+            <a  (click)="showUserMenu = !showUserMenu" id="dropdown-link-button">{{loggedUserName}} <fa name=" fa-angle-down"></fa></a>
         </li>
     </ul>
     <div *ngIf="showUserMenu" class="notif-wrapper">
