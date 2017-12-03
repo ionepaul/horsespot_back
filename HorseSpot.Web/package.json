@@ -8,7 +8,7 @@
     "test:ci": "npm run test -- --browsers PhantomJS_custom",
     "test:ci:watch": "npm run test:ci -- --auto-watch --no-single-run",
     "test:coverage": "npm run test -- --coverage",
-    "build:dev": "npm run build:vendor && npm run build:webpack",
+    "build:dev": "npm run build:vendor --env.dev && npm run build:webpack --env.dev",
     "build:webpack": "webpack --progress --color",
     "build:prod": "npm run clean && npm run build:vendor -- --env.prod && npm run build:webpack -- --env.prod",
     "build:vendor": "webpack --config webpack.config.vendor.js --progress --color",

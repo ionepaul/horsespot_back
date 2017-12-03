@@ -98,8 +98,8 @@ export class AppComponent implements OnInit, OnDestroy {
             .subscribe((event) => {
                 this._setMetaAndLinks(event);
                 window.scrollTo(0, 0);
-                //ga('set', 'page', event.urlAfterRedirects);
-                //ga('send', 'pageview');
+                ga('set', 'page', event.urlAfterRedirects);
+                ga('send', 'pageview');
             });
     }
 

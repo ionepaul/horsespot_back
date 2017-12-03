@@ -1,63 +1,63 @@
 import { environment } from '../environments/environment';
 
 export let CONFIG = {
-    baseUrls: {
-        apiUrl: 'http://localhost/horsespotservices/api/',
-    },
+  baseUrls: {
+    apiUrl: environment.httpBaseUrl + environment.virtualAppName  + '/api/',
+  },
 
-    imagesUrl: 'http://localhost/horsespotservices',
+  imagesUrl: environment.httpBaseUrl + environment.virtualAppName,
 
-    horseAdsImagesUrl: 'http://localhost/horsespotservices/Images/HorseAdsImg/',
+  horseAdsImagesUrl: environment.httpBaseUrl + environment.virtualAppName + '/Images/HorseAdsImg/',
 
-    profileImagesUrl: 'http://localhost/horsespotservices/Images/ProfilePhotos/',
+  profileImagesUrl: environment.httpBaseUrl + environment.virtualAppName + '/Images/ProfilePhotos/',
 
-    authUrl: 'http://localhost/horsespotservices/token',
+  authUrl: environment.httpBaseUrl + environment.virtualAppName + 'api.horsespot/token',
 
-    restCountriesUrl: 'https://restcountries.eu/rest/v2/name/',
+  restCountriesUrl: 'https://restcountries.eu/rest/v2/name/',
 
-    webSocketUrl: 'ws://localhost/horsespotservices' + '/api/appointment?userId=',
+  webSocketUrl: 'ws://192.168.100.7/horsespotservices' + '/api/appointment?userId=',
 
-    accepted_file_extension: ['.JPEG', '.JPG', '.PNG', '.BMP', '.TIFF'],
+  accepted_file_extension: ['.JPEG', '.JPG', '.PNG', '.BMP', '.TIFF'],
 
-    adminRole: "Admin",
+  adminRole: "Admin",
 
-    client_id: "Horsespot_Web_Angular2",
+  client_id: "Horsespot_Web_Angular2",
 
-    login_grant_type: "password",
+  login_grant_type: "password",
 
-    refresh_token_grant_type: "refresh_token",
+  refresh_token_grant_type: "refresh_token",
 
-    refresh_token_lifetime_min: 7200,
+  refresh_token_lifetime_min: 7200,
 
-    mobile_width: 767,
+  mobile_width: 767,
 
-    _true: "true",
+  _true: "true",
 
-    _false: "false",
+  _false: "false",
 
-    allImagesSizeLimit: 5242880, //bytes
+  allImagesSizeLimit: 5242880, //bytes
 
-    horseSpot_contact_email: "contact@horse-spot.com",
+  horseSpot_contact_email: "contact@horse-spot.com",
 
-    genders: ["Gelding", "Mare", "Stallion"],
+  genders: ["Gelding", "Mare", "Stallion"],
 
-    gender: "Gender",
+  gender: "Gender",
 
-    languages: [{ value: "en", displayText: "English", imgUrl: "../../assets/images/gb.svg" },
-    { value: "de", displayText: "Deutsche", imgUrl: "../../assets/images/de.svg" },
-    { value: "fr", displayText: "Française", imgUrl: "../../assets/images/fr.svg" },
-    { value: "ro", displayText: "Română", imgUrl: "../../assets/images/ro.svg" } ],
+  languages: [{ value: "en", displayText: "English", imgUrl: "../../assets/images/gb.svg" },
+  { value: "de", displayText: "Deutsche", imgUrl: "../../assets/images/de.svg" },
+  { value: "fr", displayText: "Française", imgUrl: "../../assets/images/fr.svg" },
+  { value: "ro", displayText: "Română", imgUrl: "../../assets/images/ro.svg" }],
 
-    defaultAge: { min: 4, max: 13 },
-    defaultPrice: { min: 10000, max: 30000 },
-    defaultHeight: { min: 160, max: 178 },
+  defaultAge: { min: 4, max: 13 },
+  defaultPrice: { min: 10000, max: 30000 },
+  defaultHeight: { min: 160, max: 178 },
 
-    dbMaxPriceRangeValue: "40,000 +",
-    frontMaxPriceRangeValue: 100000,
-    adsPerPage: 12,
+  dbMaxPriceRangeValue: "40,000 +",
+  frontMaxPriceRangeValue: 100000,
+  adsPerPage: 12,
 
-    fbAppId: '275509216289907',
-    fbSdkVersion: 'v2.8'
+  fbAppId: '275509216289907',
+  fbSdkVersion: 'v2.8'
 }
 
 export * from './config';
