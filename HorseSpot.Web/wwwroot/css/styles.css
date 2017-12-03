@@ -2315,7 +2315,7 @@ table.pedigree {
       font-size: 22px;
       color: #767676;
       font-weight: 300;
-      -webkit-appearance: none;
+      -webkit-text-fill-color: #767676;
     }
 
 /* MEDIA */
