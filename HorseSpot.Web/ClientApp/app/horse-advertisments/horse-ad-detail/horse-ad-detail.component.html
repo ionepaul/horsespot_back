@@ -13,9 +13,9 @@
     <li class="round-button" *ngIf="isAdmin && !horseAdModel.IsValidated"><a (click)="validateHorseAd()">{{'HORSE_AD_DETAIL.VALIDATE_BTN' | translate}}</a></li>
     <li class="round-button" *ngIf="currentUserId == horseAdModel.UserId && !horseAdModel.IsSold"><a (click)="deleteModal.show()">{{'HORSE_AD_DETAIL.SOLD_BTN' | translate}}</a></li>
     <li class="round-button" *ngIf="currentUserId == horseAdModel.UserId && !horseAdModel.IsSold"><a (click)="redirectToEdit()">{{'HORSE_AD_DETAIL.EDIT_BTN' | translate}}</a></li>
-    <li class="heart">
-      <a *ngIf="!isFavorite && currentUserId != undefined" title="{{'HORSE_AD_DETAIL.SAVE_WISHLIST' | translate}}" (click)="addHorseAdToFavorites(horseAdModel.Id)"><fa name="heart-o"></fa></a>
-      <a *ngIf="isFavorite && currentUserId" title="{{'HORSE_AD_DETAIL.REM_WISHLIST' | translate}}" (click)="addHorseAdToFavorites(horseAdModel.Id)"><fa name="heart"></fa></a>
+    <li *ngIf="currentUserId != undefined" class="heart">
+      <a *ngIf="!isFavorite" title="{{'HORSE_AD_DETAIL.SAVE_WISHLIST' | translate}}" (click)="addHorseAdToFavorites(horseAdModel.Id)"><fa name="heart-o"></fa></a>
+      <a *ngIf="isFavorite" title="{{'HORSE_AD_DETAIL.REM_WISHLIST' | translate}}" (click)="addHorseAdToFavorites(horseAdModel.Id)"><fa name="heart"></fa></a>
     </li>
     <li><fb-share href="{{pageHref}}" layout="button"></fb-share></li>
     <li>{{horseAdModel.PriceRange.PriceRangeValue}} &euro;</li>
