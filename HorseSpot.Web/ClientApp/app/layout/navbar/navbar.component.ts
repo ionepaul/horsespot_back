@@ -48,6 +48,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   notificationRefresh: number;
   hasLocalAccount: boolean;
   lang: string;
+  userId: string;
+  userName: string;
 
   private _activatedRouteSub$: Subscription;
 
@@ -195,6 +197,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
       .subscribe(response => {
         window.scrollTo(0, 0);
         this.loginModal.hide();
+        this.userId = this._accountService.getUserId();
+        this.userName = this._accountService.getName();
       },
       error => this.errorMessage = error)
   }

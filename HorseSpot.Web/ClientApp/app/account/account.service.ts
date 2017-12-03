@@ -97,14 +97,14 @@ export class AccountService {
     return this._httpWrapper
       .post(`${this._editProfileUrl + userId}`, body)
       .map((res: Response) => res.json() as UserModel)
-      .do(data => this._authService.storeItem('user_name', data.FirstName))
+      .do(data => this._authService.storeItem('horsespot_userName', data.FirstName))
       .catch(error => {
         if (error && error.status === 401 && this._authService.isTokenExpired()) {
           return this._authService.refreshToken().mergeMap((data) => {
             this._authService.storeUserAccessInfo(data);
             return this._httpWrapper.post(`${this._editProfileUrl + userId}`, body)
               .map((res: Response) => res.json() as UserModel)
-              .do(data => this._authService.storeItem('user_name', data.FirstName))
+              .do(data => this._authService.storeItem('horsespot_userName', data.FirstName))
               .catch(this.handleError);
           })
         } else if (error && error.status === 401) {
@@ -209,7 +209,7 @@ export class AccountService {
   }
 
   getName() {
-    return this._authService.getItem('user_name');
+    return this._authService.getItem('horsespot_userName');
   }
 
   getUserId() {

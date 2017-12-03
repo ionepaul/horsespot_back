@@ -110,7 +110,7 @@ export class AuthService {
     this.storeItem('refresh_token', data.refresh_token);
     this.storeItem('token_expires', new Date(data[".expires"]).getTime().toString());
     this.storeItem('refresh_token_expires', (new Date(data[".expires"]).getTime() + (CONFIG.refresh_token_lifetime_min * 60 * 1000)).toString());
-    this.storeItem('user_name', data.fullName);
+    this.storeItem('horsespot_userName', data.fullName);
     this.storeItem('pic_name', data.profilePic);
   }
 
@@ -120,7 +120,7 @@ export class AuthService {
     this._removeItem('refresh_token');
     this._removeItem('token_expires');
     this._removeItem('refresh_token_expires');
-    this._removeItem('user_name');
+    this._removeItem('horsespot_userName');
     this._removeItem('pic_name');
   }
 
