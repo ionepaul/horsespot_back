@@ -2818,6 +2818,12 @@ ul.pagination {
   position: relative;
 }
 
+  .horses-form form .details-inputs .dropdown-menu span {
+    position: static;
+    top: auto;
+    transform: translateY(0);
+  }
+
   .horses-form form .reset {
     position: absolute;
     top: 5px;
@@ -3991,6 +3997,8 @@ form.details input[type="checkbox"],
 
           .home-container .slider form .form-group.countries-dropdown .dropdown-menu span {
             position: static;
+            top: auto;
+            transform: translateY(0);
           }
 
 typeahead-container .dropdown-menu {
