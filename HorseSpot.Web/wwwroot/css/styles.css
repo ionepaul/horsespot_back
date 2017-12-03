@@ -2229,6 +2229,7 @@ modal.cancel-app textarea {
 
       .add-horse-container .info-container .form-group select {
         -webkit-appearance: none;
+        -moz-appearance: none;
       }
 
     .add-horse-container .info-container .input-group {
@@ -2316,6 +2317,7 @@ table.pedigree {
       font-weight: 300;
       -webkit-text-fill-color: #767676;
       -webkit-appearance: none;
+      -moz-appearance: none;
       border-radius: 0;
     }
 
@@ -2954,6 +2956,7 @@ form.details input[type="checkbox"],
       border-radius: 0 !important;
       padding-left: 35px;
       -webkit-appearance: none;
+      -moz-appearance: none;
     }
 
 .horse-ability label,
@@ -2988,6 +2991,7 @@ form.details label {
 .home-container .slider form .form-group input {
   padding-left: 28px;
   -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 .horses-form form .details-inputs span,
