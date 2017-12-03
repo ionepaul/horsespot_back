@@ -2986,7 +2986,7 @@ form.details label {
 
 .home-container .slider form .form-group select,
 .home-container .slider form .form-group input {
-  padding-left: 25px;
+  padding-left: 28px;
   -webkit-appearance: none;
 }
 
@@ -3262,10 +3262,11 @@ form.cf .search-btn-mobile .fa {
   margin: 0 auto;
 }
 
+
 .horse-details-slider .carousel-inner,
 .horse-details-slider .item {
   text-align: center;
-  background: red;
+  background: #f5f5f5;
 }
 /* ----------------------------------------------------- */
 .horses-details ul {
@@ -4187,6 +4188,7 @@ typeahead-container .dropdown-menu {
     text-align: center;
     background-size: contain !important;
     cursor: pointer;
+    background: #f5f5f5;
   }
 
     .horse-card-article .featured-img img {
