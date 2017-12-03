@@ -2220,6 +2220,16 @@ modal.cancel-app textarea {
         margin-bottom: 5px;
       }
 
+      .add-horse-container .info-container .form-group .fa {
+        position: absolute;
+        right: 10px;
+        top: 38px;
+      }
+
+      .add-horse-container .info-container .form-group select {
+        -webkit-appearance: none;
+      }
+
     .add-horse-container .info-container .input-group {
       display: block !important;
     }
@@ -2982,6 +2992,14 @@ form.details label {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+}
+
+.home-container .slider form .form-group .fa,
+.horses-form form .details-inputs .fa {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
 }
 
     .horses-form form .female,

@@ -15,7 +15,7 @@
 
   <div class="info-container">
 
-    <form #generalInfoForm="ngForm" class="general">
+    <form #generalInfoForm="ngForm" class="general cf">
 
       <div class="form-group">
         <label for="horse-name">
@@ -32,6 +32,7 @@
       </div><!-- form-group -->
 
       <div class="form-group client-side">
+        <i class="fa fa-angle-down"></i>
         <label for="gender">{{'ADD_AND_EDIT_PAGE.GENERAL_SECTION.GENDER' | translate}} <span class="required-indicatior">*</span></label>
         <select class="form-control" id="gender" name="gender" [(ngModel)]="horseAdModel.Gender">
           <option *ngFor="let gender of genders" [ngValue]="gender"> {{gender}} </option>
@@ -39,6 +40,7 @@
       </div><!-- form-group -->
 
       <div class="form-group">
+        <i class="fa fa-angle-down"></i>
         <label for="price-range">{{'ADD_AND_EDIT_PAGE.GENERAL_SECTION.PRICE_RANGE' | translate}} (&euro;) <span class="required-indicatior">*</span></label>
         <select class="form-control" id="price-range" name="priceRange" [(ngModel)]="horseAdModel.PriceRangeId">
           <option *ngFor="let priceRange of priceRanges" [ngValue]="priceRange.Id"> {{priceRange.PriceRangeValue}} </option>
