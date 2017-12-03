@@ -54,7 +54,7 @@
       <div id="userPart" class="slide-from-right not-logged">
         <!-- Right part when logged in -->
         <ul *ngIf="_accountService.isLoggedIn()" class="user-logged-list">
-          <navbar-user-part (menuItemClicked)="toggle()" (notifNumber)="setNotifNumber($event)" [userId]="_accountService.getUserId()" [userName]="_accountService.getName()"></navbar-user-part>
+          <navbar-user-part (menuItemClicked)="burgerMenuItemClick()" (notifNumber)="setNotifNumber($event)" [userId]="_accountService.getUserId()" [userName]="_accountService.getName()"></navbar-user-part>
         </ul>
         <!-- Right part when not logged in -->
         <ul *ngIf="!_accountService.isLoggedIn()" class="login-list">

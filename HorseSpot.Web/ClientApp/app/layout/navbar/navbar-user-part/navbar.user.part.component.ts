@@ -34,11 +34,13 @@ export class NavbarUserPartComponent implements OnInit {
     profilePicture: string;
     showUserMenu: boolean = false;
     currentUserId: string;
+    isMobileDevice: boolean = false;
   
     constructor(private _accountService: AccountService, 
                 //private _appointmentsService: AppointmentsService,
                 private _notificationService: NotificationService,
-                private _router: Router) { }
+                private _router: Router,
+                @Inject(PLATFORM_ID) private _platformId: Object) { }
 
     ngOnInit() {
         this.currentUserId = this._accountService.getUserId();
@@ -56,6 +58,7 @@ export class NavbarUserPartComponent implements OnInit {
         }
 
         this.notificationRefresh = this._notificationService.getRefresh();
+        this.isMobileDevice = isPlatformBrowser(this._platformId) ? window.screen.width <= CONFIG.mobile_width : false;
 
         // if (this._accountService.isLoggedIn && this._appointmentsService.appointments != undefined) {
         //     this._appointmentsService.appointments.subscribe(appointmentNotification => {
@@ -88,16 +91,25 @@ export class NavbarUserPartComponent implements OnInit {
 
     itemClicked() {
         this.showUserMenu = false;
+        this.emitMenuItemClick();
     }
 
     goToUserProfile() {
         this.showUserMenu = false;
+        this.emitMenuItemClick();
         this._router.navigate(['/account/profile', this.currentUserId]);
     }
 
     logOut() {
         this.showUserMenu = false;
+        this.emitMenuItemClick();
         this._accountService.logout();
+    }
+
+    emitMenuItemClick() {
+      if (this.isMobileDevice) {
+        this.menuItemClicked.emit(true);
+      }
     }
 
     //initializeNotifList(notifListLength: number) {

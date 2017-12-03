@@ -119,12 +119,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.isBurgerMenuCollapsed = !this.isBurgerMenuCollapsed;
   }
 
-  toggle() {
-    if (!this.isBurgerMenuCollapsed) {
-      this.isBurgerMenuCollapsed = true;
-    }
-  }
-
   setNotifNumber(event: any) {
     this.notificationsNumber = event;
   }
