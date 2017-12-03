@@ -45,13 +45,6 @@ const routes: Routes = [
               { name: 'twitter:card', content: 'summary_large_image' },
               { name: 'twitter:title', content: 'Home | Horse Spot' },
               { name: 'twitter:description', content: 'Search horses for sale from all over the world through an online platform build with empathy and respect for horses, owners and riders.' }
-          ],
-          links: [
-              { rel: 'canonical', href: 'http://horse-spot.com/' },
-              { rel: 'canonical', href: 'https://horse-spot.com/' },
-              { rel: 'alternate', hreflang: 'de', href: 'https://horse-spot.com/home?lang=de' },
-              { rel: 'alternate', hreflang: 'fr', href: 'https://horse-spot.com/home?lang=fr' },
-              { rel: 'alternate', hreflang: 'ro', href: 'https://horse-spot.com/home?lang=ro' },
           ]
       }
   },
@@ -66,11 +59,6 @@ const routes: Routes = [
               { name: 'twitter:card', content: 'summary_large_image' },
               { name: 'twitter:title', content: 'Show Jumping | Horses For Sale' },
               { name: 'twitter:description', content: 'Browse through thousands of quality show jumping horses for sale, offered to you by multiple stables, owners, dealers or riders.' },
-          ],
-          links: [
-              { rel: 'alternate', hreflang: 'de', href: 'https://horse-spot.com/horses-for-sale/showjumping/1?lang=de' },
-              { rel: 'alternate', hreflang: 'fr', href: 'https://horse-spot.com/horses-for-sale/showjumping/1?lang=fr' },
-              { rel: 'alternate', hreflang: 'ro', href: 'https://horse-spot.com/horses-for-sale/showjumping/1?lang=ro' }
           ]
       },
       resolve: { model: HorseListCategoriesResolver }
@@ -86,11 +74,6 @@ const routes: Routes = [
               { name: 'twitter:card', content: 'summary_large_image' },
               { name: 'twitter:title', content: 'Dressage | Horses For Sale' },
               { name: 'twitter:description', content: 'Browse through thousands of quality dressage horses for sale, offered to you by multiple stables, owners, dealers or riders.' },
-          ],
-          links: [
-              { rel: 'alternate', hreflang: 'de', href: 'https://horse-spot.com/horses-for-sale/dressage/1?lang=de' },
-              { rel: 'alternate', hreflang: 'fr', href: 'https://horse-spot.com/horses-for-sale/dressage/1?lang=fr' },
-              { rel: 'alternate', hreflang: 'ro', href: 'https://horse-spot.com/horses-for-sale/dressage/1?lang=ro' }
           ]
       },
       resolve: { model: HorseListCategoriesResolver }
@@ -106,11 +89,6 @@ const routes: Routes = [
               { name: 'twitter:card', content: 'summary_large_image' },
               { name: 'twitter:title', content: 'Eventing | Horses For Sale' },
               { name: 'twitter:description', content: 'Browse through thousands of quality eventing horses for sale, offered to you by multiple stables, owners, dealers or riders.' },
-          ],
-          links: [
-              { rel: 'alternate', hreflang: 'de', href: 'https://horse-spot.com/horses-for-sale/eventing/1?lang=de' },
-              { rel: 'alternate', hreflang: 'fr', href: 'https://horse-spot.com/horses-for-sale/eventing/1?lang=fr' },
-              { rel: 'alternate', hreflang: 'ro', href: 'https://horse-spot.com/horses-for-sale/eventing/1?lang=ro' }
           ]
       },
       resolve: { model: HorseListCategoriesResolver }
@@ -126,11 +104,6 @@ const routes: Routes = [
               { name: 'twitter:card', content: 'summary_large_image' },
               { name: 'twitter:title', content: 'Endurance | Horses For Sale' },
               { name: 'twitter:description', content: 'Browse through thousands of quality endurance horses for sale, offered to you by multiple stables, owners, dealers or riders.' },
-          ],
-          links: [
-              { rel: 'alternate', hreflang: 'de', href: 'https://horse-spot.com/horses-for-sale/endurance/1?lang=de' },
-              { rel: 'alternate', hreflang: 'fr', href: 'https://horse-spot.com/horses-for-sale/endurance/1?lang=fr' },
-              { rel: 'alternate', hreflang: 'ro', href: 'https://horse-spot.com/horses-for-sale/endurance/1?lang=ro' }
           ]
       },
       resolve: { model: HorseListCategoriesResolver }
@@ -146,11 +119,6 @@ const routes: Routes = [
               { name: 'twitter:card', content: 'summary_large_image' },
               { name: 'twitter:title', content: 'Driving | Horses For Sale' },
               { name: 'twitter:description', content: 'Browse through thousands of quality driving horses for sale, offered to you by multiple stables, owners, dealers or riders.' },
-          ],
-          links: [
-              { rel: 'alternate', hreflang: 'de', href: 'https://horse-spot.com/horses-for-sale/driving/1?lang=de' },
-              { rel: 'alternate', hreflang: 'fr', href: 'https://horse-spot.com/horses-for-sale/driving/1?lang=fr' },
-              { rel: 'alternate', hreflang: 'ro', href: 'https://horse-spot.com/horses-for-sale/driving/1?lang=ro' }
           ]
       },
       resolve: { model: HorseListCategoriesResolver }
@@ -166,11 +134,6 @@ const routes: Routes = [
               { name: 'twitter:card', content: 'summary_large_image' },
               { name: 'twitter:title', content: 'Foals | Horses For Sale' },
               { name: 'twitter:description', content: 'Browse through thousands of quality foals horses for sale, offered to you by multiple stables, owners, dealers or riders.' },
-          ],
-          links: [
-              { rel: 'alternate', hreflang: 'de', href: 'https://horse-spot.com/horses-for-sale/foals/1?lang=de' },
-              { rel: 'alternate', hreflang: 'fr', href: 'https://horse-spot.com/horses-for-sale/foals/1?lang=fr' },
-              { rel: 'alternate', hreflang: 'ro', href: 'https://horse-spot.com/horses-for-sale/foals/1?lang=ro' }
           ]
       },
       resolve: { model: HorseListCategoriesResolver }
@@ -186,11 +149,6 @@ const routes: Routes = [
               { name: 'twitter:card', content: 'summary_large_image' },
               { name: 'twitter:title', content: 'Leisure | Horses For Sale' },
               { name: 'twitter:description', content: 'Browse through thousands of quality leisure horses for sale, offered to you by multiple stables, owners, dealers or riders.' },
-          ],
-          links: [
-              { rel: 'alternate', hreflang: 'de', href: 'https://horse-spot.com/horses-for-sale/leisure/1?lang=de' },
-              { rel: 'alternate', hreflang: 'fr', href: 'https://horse-spot.com/horses-for-sale/leisure/1?lang=fr' },
-              { rel: 'alternate', hreflang: 'ro', href: 'https://horse-spot.com/horses-for-sale/leisure/1?lang=ro' }
           ]
       },
       resolve: { model: HorseListCategoriesResolver }
@@ -209,11 +167,6 @@ const routes: Routes = [
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: 'Sell Your Horse | Horses For Sale' },
         { name: 'twitter:description', content: 'Selling your horse on Horse Spot it easy and free, just fill in the information and get in touch with the clients.' },
-      ],
-      links: [
-        { rel: 'alternate', hreflang: 'de', href: 'https://horse-spot.com/horses/add?lang=de' },
-        { rel: 'alternate', hreflang: 'fr', href: 'https://horse-spot.com/horses/add?lang=fr' },
-        { rel: 'alternate', hreflang: 'ro', href: 'https://horse-spot.com/horses/add?lang=ro' }
       ]
     },
     canActivate: [LoggedInGuard]
@@ -246,12 +199,12 @@ const routes: Routes = [
     data: {
       title: 'Contact',
       meta: [
-        { name: 'description', content: 'Please feel free to write us about any thought, suggestion or complain you have about our web site.' },
+        { name: 'description', content: 'Please feel free to write us about any thought, suggestion, partnership offer or complain you have about our web site.' },
         { property: 'og:title', content: 'Contact | Horses For Sale' },
-        { property: 'og:description', content: 'Please feel free to write us about any thought, suggestion or complain you have about our web site.' },
+        { property: 'og:description', content: 'Please feel free to write us about any thought, suggestion, partnership offer or complain you have about our web site.' },
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: 'Contact | Horses For Sale' },
-        { name: 'twitter:description', content: 'Please feel free to write us about any thought, suggestion or complain you have about our web site.' },
+        { name: 'twitter:description', content: 'Please feel free to write us about any thought, suggestion, partnership offer or complain you have about our web site.' },
       ]
     },
   },
@@ -308,8 +261,13 @@ const routes: Routes = [
     data: {
       title: 'Advertise',
       meta: [
-        { name: 'robots', content: 'NOINDEX, NOFOLLOW' },
-      ],
+        { name: 'description', content: 'We offer you the posibility to advertise your business on Horse Spot and get the attention of thousands of visitors per month.' },
+        { property: 'og:title', content: 'Advertise | Horses For Sale' },
+        { property: 'og:description', content: 'We offer you the posibility to advertise your business on Horse Spot and get the attention of thousands of visitors per month.' },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:title', content: 'Advertise | Horses For Sale' },
+        { name: 'twitter:description', content: 'We offer you the posibility to advertise your business on Horse Spot and get the attention of thousands of visitors per month.' },
+      ]
     },
   },
   {
@@ -317,8 +275,13 @@ const routes: Routes = [
     data: {
       title: 'Hire Us',
       meta: [
-        { name: 'robots', content: 'NOINDEX, NOFOLLOW' },
-      ],
+        { name: 'description', content: 'Grow your equine business to the next level through Horse Spot management and marketing solutions. We build together with you. We build something that represents you.' },
+        { property: 'og:title', content: 'Hire Us | Horses For Sale' },
+        { property: 'og:description', content: 'Grow your equine business to the next level through Horse Spot management and marketing solutions. We build together with you. We build something that represents you.' },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:title', content: 'Hire Us | Horses For Sale' },
+        { name: 'twitter:description', content: 'Grow your equine business to the next level through Horse Spot management and marketing solutions. We build together with you. We build something that represents you.' },
+      ]
     },
   }
 
