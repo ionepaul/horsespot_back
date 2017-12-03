@@ -18,6 +18,7 @@ namespace HorseSpot.Api
     {
         public static OAuthBearerAuthenticationOptions OAuthBearerOptions { get; private set; }
         public static FacebookAuthenticationOptions FacebookAuthOptions { get; private set; }
+        public static OAuthAuthorizationServerOptions OAuthServerOptions { get; private set; }
 
         public void Configuration(IAppBuilder app)
         {
@@ -44,7 +45,7 @@ namespace HorseSpot.Api
             //use a cookie to temporarily store information about a user logging in with a third party login provider
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
-            OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
+            OAuthServerOptions = new OAuthAuthorizationServerOptions()
             {
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/token"),

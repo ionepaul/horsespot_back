@@ -51,7 +51,7 @@ export class NavbarUserPartComponent implements OnInit {
             this.profilePhotoUrl += this.profilePicture;
         }
 
-        if (this.currentUserId) {
+        if (this.currentUserId != undefined) {
             this._accountService.isAdmin(this.currentUserId).subscribe(res => this.isAdmin = res);
         }
 

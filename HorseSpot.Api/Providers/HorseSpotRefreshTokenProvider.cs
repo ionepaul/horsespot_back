@@ -5,6 +5,7 @@ using HorseSpot.BLL.Interfaces;
 using HorseSpot.Infrastructure.Utils;
 using HorseSpot.Models.Models;
 using Microsoft.Owin.Security.Infrastructure;
+using Microsoft.Owin.Security.DataHandler.Serializer;
 
 namespace HorseSpot.Api.Providers
 {
@@ -39,7 +40,9 @@ namespace HorseSpot.Api.Providers
             context.Ticket.Properties.IssuedUtc = token.IssuedUtc;
             context.Ticket.Properties.ExpiresUtc = token.ExpiresUtc;
 
-            token.ProtectedTicket = context.SerializeTicket();
+            TicketSerializer serializer = new TicketSerializer();
+
+            token.ProtectedTicket = System.Text.Encoding.Default.GetString(serializer.Serialize(context.Ticket));
 
             var result = await _iAuthorizationBus.AddRefreshToken(token);
 
@@ -62,7 +65,9 @@ namespace HorseSpot.Api.Providers
 
             if (refreshToken != null)
             {
-                context.DeserializeTicket(refreshToken.ProtectedTicket);
+                TicketSerializer serializer = new TicketSerializer();
+                context.SetTicket(serializer.Deserialize(System.Text.Encoding.Default.GetBytes(refreshToken.ProtectedTicket)));
+
                 var result = await _iAuthorizationBus.RemoveRefreshToken(hashedTokenId);
             }
         }
