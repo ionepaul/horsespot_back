@@ -212,6 +212,8 @@ export class HorseListCategoriesComponent implements OnInit, OnDestroy {
       this.heightRange = [CONFIG.defaultHeight.min, CONFIG.defaultHeight.max];
       this.priceRange = [CONFIG.defaultPrice.min, CONFIG.defaultPrice.max];
       this.selectedCountry = this.searchModel.Country;
+      this._horseAdService.setSearchModel(this.searchModel);
+
       this.search();
   }
 
