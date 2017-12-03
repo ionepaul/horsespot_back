@@ -1521,6 +1521,7 @@ div.social-links {
 
 .profile-info .profile-image-user {
   width: 100px;
+  height: 100px;
   display: inline-block;
   border-radius: 100%;
   margin: 0 20px 20px 0;
@@ -3409,6 +3410,7 @@ form.details input[type="checkbox"],
     border-radius: 100%;
     margin: 0 20px 20px 0;
     height: 100px;
+    width: 100px;
   }
 
   .horses-details #contact .user-info p {
@@ -6699,8 +6701,18 @@ aside.col-sm-4 img {
     }
 
   .profile-info .profile-image {
-    display: none;
+    width: 100%;
   }
+
+    .profile-info .profile-image img,
+    .profile-info .profile-image-user {
+      width: 60px;
+      height: 60px;
+    }
+
+    .profile-info .profile-details .name, .profile-info .user-profile-details .name {
+      font-size: 20px;
+    }
 
   .profile-info .profile-details .edit-info {
     width: 100%;
@@ -7163,6 +7175,10 @@ aside.col-sm-4 img {
 
   .home-container .slider form {
     padding: 30px 15px;
+  }
+
+  .horses-details #contact .user-info {
+    text-align: center;
   }
 
   .horses-details #contact .user-info img {
