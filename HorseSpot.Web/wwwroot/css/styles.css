@@ -5008,6 +5008,11 @@ div.advertise {
 
 @media ( max-width: 1045px ) {
 
+  .profile-horses .category-row {
+    padding: 0 15px;
+    margin-bottom: 35px;
+  }
+
   /*.navbar-brand img { width: 70%; }*/
   .navbar-brand {
     margin-right: 0;
