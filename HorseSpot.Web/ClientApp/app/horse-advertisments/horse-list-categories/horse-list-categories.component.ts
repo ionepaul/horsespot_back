@@ -94,7 +94,7 @@ export class HorseListCategoriesComponent implements OnInit, OnDestroy {
     this.getRecommendedRiders();
     this.totalNumber = this._route.snapshot.data['model'].TotalCount;
     this.categoryHorseList = this._route.snapshot.data['model'].HorseAdList;
-    this.totalPageNumber = Math.floor(this.totalNumber / CONFIG.adsPerPage);
+    this.totalPageNumber = Math.floor(this.totalNumber / CONFIG.adsPerPage) + 1;
   }
 
   search() {
@@ -123,7 +123,9 @@ export class HorseListCategoriesComponent implements OnInit, OnDestroy {
     this._horseAdService.search(this.searchModel)
       .subscribe(res => {
         this.categoryHorseList = res.HorseAdList;
-        this.totalNumber = res.TotalCount
+        this.totalNumber = res.TotalCount;
+        this.totalPageNumber = Math.floor(this.totalNumber / CONFIG.adsPerPage) + 1;
+        window.scrollTo(0, 0);
       },
       error => this.errorMessage = error);
   }
