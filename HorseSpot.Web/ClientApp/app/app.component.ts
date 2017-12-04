@@ -72,9 +72,8 @@ export class AppComponent implements OnInit, OnDestroy {
         this._translateService.setDefaultLang('en');
         this._translateService.use('en');
         
-        this._initFacebookSdkConnection();
-
         if (isPlatformBrowser(this.platformId)) {
+            this._initFacebookSdkConnection();
             this.isBrowser = true;
         }
     }

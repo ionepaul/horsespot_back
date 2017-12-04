@@ -86,8 +86,10 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
         this.getHorseAd(id);
       });
 
-    window.FB.XFBML.parse();
-    this.pageHref = window.location.href;
+    if (isPlatformBrowser(this.platformId)) {
+      window.FB.XFBML.parse();
+      this.pageHref = window.location.href;
+    }
   }
 
   getHorseAd(id: number) {
