@@ -6,6 +6,7 @@ import { isPlatformBrowser, Location } from '@angular/common';
 import { Subscription } from 'rxjs/Subscription';
 import { Meta, Title, DOCUMENT, MetaDefinition } from '@angular/platform-browser';
 import { FacebookService, InitParams } from 'ngx-facebook';
+import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import { CONFIG } from './config';
 
 //SERVICES
@@ -14,8 +15,6 @@ import { AccountService } from './account/account.service';
 import { AuthService } from './shared/auth/auth.service';
 //import { AppointmentsService } from './account/appointments/appointments.service';
 import { LinkService } from './shared/link.service';
-
-declare var ga: Function;
 
 @Component({
     selector: 'app',
@@ -55,6 +54,7 @@ export class AppComponent implements OnInit, OnDestroy {
         private _linkService: LinkService,
         private _location: Location,
         private _facebookService: FacebookService,
+        angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
         @Inject(PLATFORM_ID) private platformId: Object) { }
 
     ngOnInit() {
@@ -98,8 +98,6 @@ export class AppComponent implements OnInit, OnDestroy {
             .subscribe((event) => {
                 this._setMetaAndLinks(event);
                 window.scrollTo(0, 0);
-                ga('set', 'page', event.urlAfterRedirects);
-                ga('send', 'pageview');
             });
     }
 

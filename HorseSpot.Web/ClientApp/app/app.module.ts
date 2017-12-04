@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { AdsenseModule } from 'ng2-adsense';
+import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 
 //MODULES
 import { SharedModule } from './shared/shared.module';
@@ -29,6 +30,7 @@ import { HireUsComponent } from './hire-us/hire-us.component';
     LayoutModule,
     AccountModule,
     HorseAdsModule,
+    Angulartics2Module.forRoot([Angulartics2GoogleAnalytics])
     //AdsenseModule.forRoot({
     //  adClient: 'ca-pub-4911156518333270"',
     //  adSlot: 7259870550
