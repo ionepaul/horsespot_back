@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Configuration;
+using System.IO;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web;
@@ -13,7 +14,7 @@ namespace HorseSpot.Infrastructure.MailService
         {
             var message = new MailMessage();
 
-            message.From = new MailAddress(emailModel.Sender);
+            message.From = new MailAddress(ConfigurationManager.AppSettings["AdminEmail"]);
             message.Subject = emailModel.EmailSubject;
 
             message.IsBodyHtml = true;
@@ -26,7 +27,7 @@ namespace HorseSpot.Infrastructure.MailService
 
             using (var smtpClient = new SmtpClient())
             {
-                smtpClient.EnableSsl = true;
+                smtpClient.EnableSsl = false;
 
                 smtpClient.SendCompleted += (s, e) =>
                 {

@@ -151,7 +151,7 @@ namespace HorseSpot.BLL.Converters
         {
             return new EmailModel
             {
-                Sender = ConfigurationManager.AppSettings["AdminEmail"],
+                Sender = emailModelDTO.Sender,
                 Receiver = emailModelDTO.Receiver,
                 EmailMessage = emailModelDTO.Message,
                 EmailSubject = EmailSubjects.EmailFromApplication,
@@ -166,7 +166,7 @@ namespace HorseSpot.BLL.Converters
         {
             return new EmailModel
             {
-                Sender = ConfigurationManager.AppSettings["AdminEmail"],
+                Sender = contactPageEmailModel.Sender,
                 Receiver = ConfigurationManager.AppSettings["AdminEmail"],
                 EmailMessage = contactPageEmailModel.Message,
                 EmailSubject = EmailSubjects.ContactPageEmailSubject,
