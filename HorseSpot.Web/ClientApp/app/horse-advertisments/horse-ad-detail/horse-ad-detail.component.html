@@ -18,7 +18,8 @@
       <a *ngIf="isFavorite" title="{{'HORSE_AD_DETAIL.REM_WISHLIST' | translate}}" (click)="addHorseAdToFavorites(horseAdModel.Id)"><fa name="heart"></fa></a>
     </li>
     <li><fb-share href="{{pageHref}}" layout="button"></fb-share></li>
-    <li>{{horseAdModel.PriceRange.PriceRangeValue}} &euro;</li>
+    <li *ngIf="horseModel.Price != ''">{{horseAdModel.Price}} &euro;</li>
+    <li *ngIf="horseModel.Price == ''">{{horseAdModel.PriceRange.PriceRangeValue}} &euro;</li>
   </ul>
 
   <div class="row">
