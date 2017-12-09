@@ -6,7 +6,7 @@ export interface HorseAdListModel {
     HorseName: string;
     Age: number;
     Breed: string;
-    Price: number;
+    Price: string;
     Country: string;
     PriceRange: PriceRangeModel;
     ImageId: string;

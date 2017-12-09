@@ -5,7 +5,6 @@
 
 export const environment = {
   production: false,
-  httpBaseUrl: "http://localhost/HorseSpotServices",
-  virtualAppName: "api.horsespot",
+  httpBaseUrl: "http://localhost/api.horsespot/",
   wsBaseUrl: "ws://localhost/HorseSpotServices"
 };

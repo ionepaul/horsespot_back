@@ -2,16 +2,16 @@ import { environment } from '../environments/environment';
 
 export let CONFIG = {
   baseUrls: {
-    apiUrl: environment.httpBaseUrl + environment.virtualAppName  + '/api/',
+    apiUrl: environment.httpBaseUrl + 'api/',
   },
 
-  imagesUrl: environment.httpBaseUrl + environment.virtualAppName,
+  imagesUrl: environment.httpBaseUrl,
 
-  horseAdsImagesUrl: environment.httpBaseUrl + environment.virtualAppName + '/Images/HorseAdsImg/',
+  horseAdsImagesUrl: environment.httpBaseUrl + 'Images/HorseAdsImg/',
 
-  profileImagesUrl: environment.httpBaseUrl + environment.virtualAppName + '/Images/ProfilePhotos/',
+  profileImagesUrl: environment.httpBaseUrl + 'Images/ProfilePhotos/',
 
-  authUrl: environment.httpBaseUrl + environment.virtualAppName + 'api.horsespot/token',
+  authUrl: environment.httpBaseUrl + 'token',
 
   restCountriesUrl: 'https://restcountries.eu/rest/v2/name/',
 

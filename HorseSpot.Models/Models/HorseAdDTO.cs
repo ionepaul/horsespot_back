@@ -53,7 +53,7 @@ namespace HorseSpot.Models.Models
 
         public IEnumerable<string> FavoritesFor { get; set; }
 
-        public decimal Price { get; set; }
+        public string Price { get; set; }
 
         [Required]
         public int PriceRangeId { get; set; }

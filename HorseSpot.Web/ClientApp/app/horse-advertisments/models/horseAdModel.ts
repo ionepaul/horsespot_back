@@ -23,7 +23,7 @@ export interface HorseAdModel {
     Address: AddressModel;
     HaveCompetionalExperience: boolean;
     RecomendedRiders: Array<RecommendedRiderModel>;
-    Price: number;
+    Price: string;
     PriceRange: PriceRangeModel;
     PriceRangeId: number;
     Images: Array<ImageModel>;

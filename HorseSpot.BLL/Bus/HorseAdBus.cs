@@ -345,7 +345,7 @@ namespace HorseSpot.BLL.Bus
         {
             horseAd.HorseName = horseAdDTO.HorseName;
             horseAd.HorseAbilitesIds = horseAdDTO.AbilityIds;
-            horseAd.Price = horseAdDTO.Price;
+            horseAd.Price = Convert.ToDecimal(horseAdDTO.Price);
             horseAd.PriceRangeId = horseAdDTO.PriceRangeId;
             horseAd.Breed = horseAdDTO.Breed;
             horseAd.Age = horseAdDTO.Age;

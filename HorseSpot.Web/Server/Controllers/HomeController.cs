@@ -87,7 +87,7 @@ namespace HorseSpot.Web.Controllers
       xml += "<lastmod>" + DateTime.Now.ToString("yyyy-MM-dd") + "</lastmod>";
       xml += "</url>";
       xml += "<url>";
-      xml += "<loc>http://www.horse-spot.com/horses/add<loc>";
+      xml += "<loc>http://www.horse-spot.com/horses/add</loc>";
       xml += "<xhtml:link rel=\"alternate\" hreflang=\"de\" href=\"https://www.horse-spot.com/horses/add?lang=de\"/>";
       xml += "<xhtml:link rel=\"alternate\" hreflang=\"fr\" href=\"https://www.horse-spot.com/horses/add?lang=fr\"/>";
       xml += "<xhtml:link rel=\"alternate\" hreflang=\"ro\" href=\"https://www.horse-spot.com/horses/add?lang=ro\"/>";
