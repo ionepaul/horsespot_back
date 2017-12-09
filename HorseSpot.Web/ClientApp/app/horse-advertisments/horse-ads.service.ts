@@ -12,6 +12,7 @@ import { isPlatformBrowser } from '@angular/common';
 //SERVICES
 import { HttpWrapper } from '../shared/http/http.wrapper';
 import { SpinnerService } from '../shared/spinner/spinner.service';
+import { TransferHttp } from '../../modules/transfer-http/transfer-http';
 
 //MODELS
 import { PriceRangeModel } from './models/priceRangeModel';
@@ -58,6 +59,7 @@ export class HorseAdsService {
     private _authService: AuthService,
     private _router: Router,
     private _spinnerService: SpinnerService,
+    private _transferHttp: TransferHttp,
     @Inject(PLATFORM_ID) private platformId: Object) { }
 
   getAllPriceRanges(): Observable<PriceRangeModel[]> {
@@ -352,9 +354,10 @@ export class HorseAdsService {
   }
 
   getLatestHorses() {
-    return this._http.get(this._getLatestHorses)
-      .map((res: Response) => res.json())
-      .catch(error => this.handleError(error));
+    //return this._http.get(this._getLatestHorses)
+    //  .map((res: Response) => res.json())
+    //  .catch(error => this.handleError(error));
+    return this._transferHttp.get(this._getLatestHorses);
   }
 
   private handleError(error: Response) {

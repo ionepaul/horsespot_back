@@ -106,7 +106,7 @@
 
     <div class="col-sm-8">
 
-      <div class="horse-wrapper">
+      <div class="horse-wrapper" *ngIf="latestHorses?.LatestInShowJumping?.length == 2">
 
         <ul class="category-list-title">
           <li class="category-title">{{ 'NAVBAR.HORSES_FOR_SALE.SHOWJUMPING' | translate }}</li>
@@ -116,7 +116,6 @@
         <horse-list [horses]="latestHorses.LatestInShowJumping" [category]="'showjumping'"></horse-list>
       </div><!-- horse-wrapper -->
 
-      <img src="../../../wwwroot/assets/images/add_1.png" />
       <!--<ng-adsense [adClient]="'ca-pub-7640562161899788'"
                   [adSlot]="7259870550"
                   [display]="'inline-block'"
@@ -124,7 +123,7 @@
                   [height]="108">
       </ng-adsense>-->
 
-      <div class="horse-wrapper">
+      <div class="horse-wrapper" *ngIf="latestHorses?.LatestInDressage?.length == 2">
 
         <ul class="category-list-title">
           <li class="category-title">{{ 'NAVBAR.HORSES_FOR_SALE.DRESSAGE' | translate }}</li>
@@ -134,7 +133,7 @@
         <horse-list [horses]="latestHorses.LatestInDressage" [category]="'dressage'"></horse-list>
       </div><!-- horse-wrapper -->
 
-      <div class="horse-wrapper">
+      <div class="horse-wrapper" *ngIf="latestHorses?.LatestInEventing?.length == 2">
 
         <ul class="category-list-title">
           <li class="category-title">{{ 'NAVBAR.HORSES_FOR_SALE.EVENTING' | translate }}</li>

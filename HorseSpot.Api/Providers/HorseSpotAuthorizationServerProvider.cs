@@ -72,6 +72,7 @@ namespace HorseSpot.Api.Providers
             context.OwinContext.Set<string>("as:clientRefreshTokenLifeTime", client.RefreshTokenLifeTime.ToString());
 
             context.Validated();
+
             return Task.FromResult<object>(null);
         }
 

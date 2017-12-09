@@ -76,6 +76,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.loginInput.Email = params['email'];
         this.loginModal.show();
         this.hasLocalAccount = true;
+        let basePath = this._location.path().slice(0, this._location.path().indexOf('?'));
+        this._location.replaceState(basePath);
       } else if (firstReg.toLocaleLowerCase() === CONFIG._true) {
         this.handleExternalFirstAuth();
       }

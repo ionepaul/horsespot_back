@@ -1,4 +1,17 @@
-﻿using System;
+﻿using HorseSpot.Api.Utils;
+using HorseSpot.BLL.Interfaces;
+using HorseSpot.Infrastructure.Constants;
+using HorseSpot.Infrastructure.Exceptions;
+using HorseSpot.Infrastructure.Resources;
+using HorseSpot.Models.Enums;
+using HorseSpot.Models.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.Infrastructure;
+using Microsoft.Owin.Security.OAuth;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -9,21 +22,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using HorseSpot.Api.Utils;
-using HorseSpot.BLL.Interfaces;
-using HorseSpot.Infrastructure.Constants;
-using HorseSpot.Infrastructure.Exceptions;
-using HorseSpot.Infrastructure.Resources;
-using HorseSpot.Models.Enums;
-using HorseSpot.Models.Models;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using Microsoft.Owin.Security.OAuth;
-using Newtonsoft.Json.Linq;
-using HorseSpot.Infrastructure.Utils;
-using Microsoft.Owin.Security.Infrastructure;
-using System.Globalization;
 
 namespace HorseSpot.Api.Controllers
 {
@@ -440,7 +438,7 @@ namespace HorseSpot.Api.Controllers
 
             var accessToken = Startup.OAuthBearerOptions.AccessTokenFormat.Protect(ticket);
 
-            AuthenticationTokenCreateContext context = new AuthenticationTokenCreateContext(Request.GetOwinContext(), Startup.OAuthBearerOptions.AccessTokenFormat, ticket);
+            AuthenticationTokenCreateContext context = new AuthenticationTokenCreateContext(Request.GetOwinContext(), Startup.OAuthServerOptions.RefreshTokenFormat, ticket);
             context.Ticket.Properties.Dictionary.Add("as:client_id", client.Id);
 
             context.OwinContext.Set("as:clientAllowedOrigin", client.AllowedOrigin);
