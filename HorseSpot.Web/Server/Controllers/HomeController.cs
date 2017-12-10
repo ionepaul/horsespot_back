@@ -29,7 +29,7 @@ namespace HorseSpot.Web.Controllers
     {
       String xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
 
-      xml += "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">";
+      xml += "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:xhtml=\"http://www.w3.org/1999/xhtml\">";
       xml += "<url>";
       xml += "<loc>http://www.horse-spot.com/home</loc>";
       xml += "<xhtml:link rel=\"alternate\" hreflang=\"de\" href=\"https://www.horse-spot.com/home?lang=de\"/>";
