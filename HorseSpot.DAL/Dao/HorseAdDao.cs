@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
-using HorseSpot.DAL.Entities;
+﻿using HorseSpot.DAL.Entities;
 using HorseSpot.DAL.Interfaces;
 using HorseSpot.DAL.Models;
 using HorseSpot.DAL.Search;
@@ -11,6 +6,10 @@ using HorseSpot.Infrastructure.Constants;
 using HorseSpot.Infrastructure.Exceptions;
 using HorseSpot.Infrastructure.Resources;
 using LinqKit;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace HorseSpot.DAL.Dao
 {
