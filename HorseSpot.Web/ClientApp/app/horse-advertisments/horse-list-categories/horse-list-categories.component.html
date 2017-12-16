@@ -103,17 +103,15 @@
 <div class="container horses-categories-list">
    <p class="horse-spot-breadcrumb">{{'PROFILE.HORSES_FOR_SALE' | translate}} > {{categoryName}} | <span>{{'PAGE' | translate}} {{pageNumber}} {{'OF' | translate}} {{totalPageNumber}}</span></p>
   <horse-list [horses]="categoryHorseList" [threeOnRow]="true"></horse-list>
+
+  <ng-adsense></ng-adsense>
+  <br />
 </div>
-
-
 
 <pagination *ngIf="categoryHorseList.length != 0" [itemsPerPage]="adsPerPage" [totalItems]="totalNumber" [(ngModel)]="pageNumber" [maxSize]="8"
             class="pagination-sm" [boundaryLinks]="true" [rotate]="false" (pageChanged)="pageChanged($event)"
             previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
 </pagination>
 
-<br />
-
-<ng-adsense></ng-adsense>
 
 <!-- <adv-logo [show]="true"></adv-logo> -->
