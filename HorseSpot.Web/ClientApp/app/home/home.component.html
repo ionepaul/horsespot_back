@@ -116,12 +116,7 @@
         <horse-list [horses]="latestHorses.LatestInShowJumping" [category]="'showjumping'"></horse-list>
       </div><!-- horse-wrapper -->
 
-      <!--<ng-adsense [adClient]="'ca-pub-7640562161899788'"
-                  [adSlot]="7259870550"
-                  [display]="'inline-block'"
-                  [width]="320"
-                  [height]="108">
-      </ng-adsense>-->
+      <ng-adsense></ng-adsense>
 
       <div class="horse-wrapper" *ngIf="latestHorses?.LatestInDressage?.length == 2">
 
@@ -143,12 +138,8 @@
         <horse-list [horses]="latestHorses.LatestInEventing" [category]="'eventing'"></horse-list>
 
       </div><!-- horse-wrapper -->
-      <!--<ng-adsense [adClient]="'ca-pub-7640562161899788'"
-                  [adSlot]="7259870550"
-                  [display]="'inline-block'"
-                  [width]="320"
-                  [height]="108">
-      </ng-adsense>-->
+
+      <ng-adsense></ng-adsense>
 
       <div class="horse-wrapper" *ngIf="latestHorses?.LatestInEndurance?.length == 2">
 
