@@ -116,11 +116,10 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
     this._metaData.updateTag({ name: 'description', content: this.horseAdModel.Description });
     this._metaData.updateTag({ property: 'og:title', content: this.horseAdModel.Title + ' | Horse Spot' });
     this._metaData.updateTag({ property: 'og:description', content: this.horseAdModel.Description });
-    this._metaData.addTag({ property: 'og:image', content: 'http://www.horse-spot.com/' });
+    this._metaData.addTag({ property: 'og:image', content: 'http://www.api.horse-spot.com/' + 'Images/HorseAdsImg/' + this.firstImage });
     this._metaData.updateTag({ name: 'twitter:card', content: 'summary' });
     this._metaData.updateTag({ name: 'twitter:title', content: this.horseAdModel.Title + ' | Horse Spot' });
     this._metaData.updateTag({ name: 'twitter:description', content: this.horseAdModel.Description });
-    this._metaData.addTag({ property: 'og:image', content: 'http://www.api.horse-spot.com/' + 'Images/HorseAdsImg/' + this.firstImage });
   }
 
   initImages() {
@@ -305,7 +304,7 @@ export class HorseAdDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this._metaData.removeTag('og:image');
+    this._metaData.removeTag("property='og:image'");
     this._routeSub$.unsubscribe();
   }
 

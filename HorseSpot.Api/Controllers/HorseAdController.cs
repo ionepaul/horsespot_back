@@ -148,7 +148,7 @@ namespace HorseSpot.Api.Controllers
 
                 var horseAdvImageDir = ConfigurationManager.AppSettings["HorseAdsImgDirectory"];
                 var serverPath = HttpContext.Current.Server.MapPath(horseAdvImageDir);
-                var imageName = Guid.NewGuid() + image.FileName;
+                var imageName = Guid.NewGuid() + image.FileName.Replace(" ", string.Empty);
                 var path = Path.Combine(serverPath, imageName);
 
                 CreateDirectoryIfNotExist(serverPath);
