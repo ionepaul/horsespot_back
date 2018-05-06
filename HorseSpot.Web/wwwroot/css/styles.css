@@ -878,7 +878,7 @@ div.login-wrapper {
 }
 
 .login-form {
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 
 .login-wrapper p.new {
@@ -1961,8 +1961,9 @@ modal.cancel-app textarea {
 .navbar-modals .modal-footer {
   display: block;
   border-top: 0;
-  text-align: center;
+  text-align: left;
   padding: 0;
+  margin-bottom: 15px;
 }
 
 .navbar-modals .close-modal-mobile {
@@ -1976,16 +1977,12 @@ modal.cancel-app textarea {
   z-index: 20;
 }
 
-.navbar-modals .modal-footer p {
-  margin-bottom: 0;
-}
-
 .navbar-modals .modal-dialog {
   width: 440px;
 }
 
 
-.navbar-modals .modal-footer p,
+.navbar-modals .modal-footer span,
 .navbar-modals .modal-footer a {
   color: #95989A;
 }
@@ -2031,7 +2028,7 @@ modal.cancel-app textarea {
   color: #ffffff;
   padding: 5px;
   font-size: 16px;
-  margin-bottom: 15px;
+  margin: 15px 0;
   position: relative;
   border-radius: 3px;
 }

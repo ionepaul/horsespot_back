@@ -132,9 +132,9 @@
 
           <div class="form-group">
             <div class="input-group">
-              <input autocomplete="off" name="phone" type="tel" class="form-control" id="phone" placeholder="{{'REGISTER_PAGE.PHONE_NUMBER' | translate}}"
+              <input autocomplete="off" name="phone" type="tel" class="form-control" id="phone" placeholder="{{'REGISTER_PAGE.PHONE_NUMBER' | translate}} (optional)"
                      [(ngModel)]="registerInput.PhoneNumber" #phone="ngModel"
-                     pattern="^(?=.*[0-9])[- +()0-9].*[0-9]+$" minlength="5"/>
+                     pattern="^(?=.*[0-9])[- +()0-9].*[0-9]+$" minlength="5" />
             </div><!-- input-group -->
           </div><!-- form-group -->
 
@@ -150,20 +150,21 @@
           <div class="form-group">
             <div class="input-group">
               <input autocomplete="off" name="password" type="password" class="form-control" id="password" placeholder="{{'REGISTER_PAGE.PASSWORD' | translate}}"
-                     [(ngModel)]="registerInput.Password" required #password="ngModel" minlength="6">
+                     [(ngModel)]="registerInput.Password" required #password="ngModel" minlength="6" style="margin-bottom: 15px;">
             </div><!-- input-group -->
           </div><!-- form-group -->
-          <button type="submit" (click)="register()" [disabled]="!registerForm.form.valid">{{'REGISTER_PAGE.SIGN_UP' | translate}}</button>
+
+          <div class="modal-footer">
+            <input type="checkbox" autocomplete="off" (change)="onTermsCheckboxChange($event)" [checked]="termsAccepted"> <span>{{'TERMS_AND_CONDITIONS.BY_SIGN_UP' | translate}} <a (click)="conditionsModal.show()">{{'TERMS_AND_CONDITIONS.TERMS_OF_USE' | translate}}</a></span>
+          </div>       
+         
+          <button type="submit" (click)="register()" [disabled]="!registerForm.form.valid && !termsAccepted">{{'REGISTER_PAGE.SIGN_UP' | translate}}</button>
         </form>
 
         <a (click)="authExternal('Facebook')" class="fb connect"><i class="fa fa-facebook-official" aria-hidden="true"></i> {{'FACEBOOK_CONNECT' | translate}}</a>
+
         <!-- <a href="#0" class="twitter connect"><i class="fa fa-twitter" aria-hidden="true"></i> Connect with Twitter</a> -->
-
       </div>
-
-      <div *ngIf="!isForgotPassword" class="modal-footer">
-        <p>{{'TERMS_AND_CONDITIONS.BY_SIGN_UP' | translate}} <a (click)="conditionsModal.show()">{{'TERMS_AND_CONDITIONS.TERMS_OF_USE' | translate}}</a></p>
-      </div><!-- modal-footer -->
     </div>
 
   </div>
@@ -229,16 +230,10 @@
             <button class="pass-submit" [disabled]="!forgotPasswordForm.form.valid" type="submit" (click)="getNewPassword()">{{'LOGIN_PAGE.FORGOT_SUBMIT' | translate}}</button>
           </form>
         </div><!-- forgot password section -->
-
-        <div *ngIf="!isForgotPassword" class="modal-footer">
-          <p>{{ 'TERMS_AND_CONDITIONS.BY_SIGN_IN' | translate }} <a (click)="conditionsModal.show()">{{ 'TERMS_AND_CONDITIONS.TERMS_OF_USE' | translate }}</a></p>
-        </div><!-- modal-footer -->
-
       </div>
     </div>
   </div>
 </div>
-
 <div class="modal fade navbar-modals" [config]="{ ignoreBackdropClick: true, keyboard: false }" bsModal #phoneNumberModal="bs-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" (onHide)="onPhoneNumberModalClose()">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -278,7 +273,6 @@
     </div>
   </div>
 </div>
-
 <div id="conditionsModal" class="modal fade navbar-modals" [config]="{ ignoreBackdropClick: true, keyboard: false }" bsModal #conditionsModal="bs-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" (onHide)="onPhoneNumberModalClose()">
   <div class="modal-dialog">
     <div class="modal-content">

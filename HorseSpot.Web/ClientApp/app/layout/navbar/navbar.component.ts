@@ -50,6 +50,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   lang: string;
   userId: string;
   userName: string;
+  termsAccepted: boolean = false;
 
   private _activatedRouteSub$: Subscription;
 
@@ -248,5 +249,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.phoneNumberModal.show();
       }, 0);
     }
+  }
+
+  onTermsCheckboxChange($event) {
+    this.termsAccepted = $event.target.checked;
   }
 }
