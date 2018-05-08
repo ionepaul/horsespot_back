@@ -236,6 +236,11 @@ namespace HorseSpot.BLL.Bus
                 throw new ValidationException(Resources.InvalidRegistrationRequest);
             }
 
+            if (user.TermsAccepted != true)
+            {
+                throw new ValidationException(Resources.InvalidRegistrationRequest);
+            }
+
             ValidationHelper.ValidateModelAttributes<UserViewModel>(user);
 
             Regex phoneNumberRegex = new Regex(@"^(?=.*[0-9])[- +()0-9].*[0-9]+$");

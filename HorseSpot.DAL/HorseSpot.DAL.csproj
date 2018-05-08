@@ -144,6 +144,10 @@
     <Compile Include="Migrations\201710101348530_InitialCreate.Designer.cs">
       <DependentUpon>201710101348530_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805080611127_GdprUserFieldsUpdates.cs" />
+    <Compile Include="Migrations\201805080611127_GdprUserFieldsUpdates.Designer.cs">
+      <DependentUpon>201805080611127_GdprUserFieldsUpdates.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\GetHorseAdListResults.cs" />
     <Compile Include="Models\SearchModelDao.cs" />
@@ -178,6 +182,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710101348530_InitialCreate.resx">
       <DependentUpon>201710101348530_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805080611127_GdprUserFieldsUpdates.resx">
+      <DependentUpon>201805080611127_GdprUserFieldsUpdates.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

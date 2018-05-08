@@ -155,10 +155,22 @@
           </div><!-- form-group -->
 
           <div class="modal-footer">
-            <input type="checkbox" autocomplete="off" (change)="onTermsCheckboxChange($event)" [checked]="termsAccepted"> <span>{{'TERMS_AND_CONDITIONS.BY_SIGN_UP' | translate}} <a (click)="conditionsModal.show()">{{'TERMS_AND_CONDITIONS.TERMS_OF_USE' | translate}}</a></span>
-          </div>       
+            <input type="checkbox" name="termsAccepted" #termsAccepted="ngModel" autocomplete="off" [(ngModel)]="registerInput.TermsAccepted" mustBeChecked> <span>{{'TERMS_AND_CONDITIONS.BY_SIGN_UP' | translate}} <a (click)="conditionsModal.show()">{{'TERMS_AND_CONDITIONS.TERMS_OF_USE' | translate}}</a></span>
+          </div>
+
+          <div class="modal-footer">
+            <input type="checkbox" name="newsletter-checkbox" autocomplete="off" [(ngModel)]="registerInput.NewsletterSubscription"> <span>I want to receive news and horse advertisments through email.</span>
+          </div>   
+
+          <div class="modal-footer">
+            <input type="checkbox" name="display-email" autocomplete="off" [(ngModel)]="registerInput.DisplayEmail"> <span>I agree to display the email on my profile.</span>
+          </div>
+
+          <div *ngIf="phone.valid && phone.touched && phone.value" class="modal-footer">
+            <input type="checkbox" name="display-phone" autocomplete="off" [(ngModel)]="registerInput.DisplayPhoneNumber"> <span>I agree to display the phone number on my profile.</span>
+          </div>     
          
-          <button type="submit" (click)="register()" [disabled]="!registerForm.form.valid && !termsAccepted">{{'REGISTER_PAGE.SIGN_UP' | translate}}</button>
+          <button type="submit" (click)="register()" [disabled]="!registerForm.form.valid">{{'REGISTER_PAGE.SIGN_UP' | translate}}</button>
         </form>
 
         <a (click)="authExternal('Facebook')" class="fb connect"><i class="fa fa-facebook-official" aria-hidden="true"></i> {{'FACEBOOK_CONNECT' | translate}}</a>
@@ -394,7 +406,7 @@
           <br /><br />
 
 
-          <b style="font-weight:700">© Horse Spot 2017</b>
+          <b style="font-weight:700">© Horse Spot 2018</b>
         </article>
         <button class="agreeTerms" (click)="conditionsModal.hide()">{{ 'TERMS_AND_CONDITIONS.AGREE' | translate }}</button>
 

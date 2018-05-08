@@ -27,6 +27,13 @@ namespace HorseSpot.Models.Models
 
         public bool? NewsletterSubscription { get; set; }
 
+        [Required]
+        public bool TermsAccepted { get; set; }
+
+        public bool DisplayEmail { get; set; }
+
+        public bool DisplayPhoneNumber { get; set; }
+
         public string RoleName { get; set; }
     }
 }

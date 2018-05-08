@@ -45,6 +45,7 @@ import { WishListGuard } from '../shared/guards/wishlist.guard';
 //DIRECTIVES
 import { ImagePreview } from './utils/image.preview.directive';
 import { EqualValidator } from './utils/equal-validator.directive';
+import { CheckboxSelectedValidator } from './utils/checkbox-selected.directive';
 
 //CONSTANTS
 import { ORIGIN_URL } from './constants/baseurl.constants';
@@ -104,7 +105,8 @@ export function createTranslateLoader(http: Http, baseHref) {
     DescriptionFormatPipe,
     NotificationComponent,
     ErrorComponent,
-    RightSideAdvertismentsComponent
+    RightSideAdvertismentsComponent,
+    CheckboxSelectedValidator
   ],
   providers: [
     NotificationService, AuthService, LoggedInGuard, AdminGuard, IsPostOwnerGuard, WishListGuard, SpinnerService, StorageService, TranslateModule,
@@ -114,7 +116,7 @@ export function createTranslateLoader(http: Http, baseHref) {
       deps: [XHRBackend, RequestOptions, Router, SpinnerService, StorageService]
     },
   ],
-  exports: [CommonModule, FormsModule, ReactiveFormsModule, NotificationComponent, ErrorComponent, SpinnerComponent, EqualValidator, ImagePreview,
+  exports: [CommonModule, FormsModule, ReactiveFormsModule, NotificationComponent, ErrorComponent, SpinnerComponent, EqualValidator, CheckboxSelectedValidator, ImagePreview,
     DateFormatPipe, DateFormatHourPipe, HttpModule, ModalModule, Angular2FontawesomeModule, TranslateModule, HorseListComponent, PaginationModule,
     TypeaheadModule, FileUploadModule, DescriptionFormatPipe, BsDropdownModule, CollapseModule, NouisliderModule, RightSideAdvertismentsComponent, FacebookModule, CarouselModule, AdsenseModule ]
 })

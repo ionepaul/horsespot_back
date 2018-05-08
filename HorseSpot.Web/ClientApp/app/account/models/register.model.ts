@@ -7,4 +7,7 @@ export interface RegisterModel {
         Password: string;
         ConfirmPassword: string;
         NewsletterSubscription: boolean;
+        TermsAccepted: boolean;
+        DisplayEmail: boolean;
+        DisplayPhoneNumber: boolean;
 }

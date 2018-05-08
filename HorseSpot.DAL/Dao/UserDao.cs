@@ -69,7 +69,7 @@ namespace HorseSpot.DAL.Dao
         public async Task<UserModel> FindUserByLoginInfo(UserLoginInfo loginInfo)
         {
             UserModel user = await _userManager.FindAsync(loginInfo);
-
+            
             return user;
         }
 

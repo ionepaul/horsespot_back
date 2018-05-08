@@ -10,6 +10,9 @@ namespace HorseSpot.DAL.Entities
         public string LastName { get; set; }
         public Nullable<bool> NewsletterSubscription { get; set; }
         public string ImagePath { get; set; }
+        public bool TermsAccepted { get; set; }
+        public bool DisplayEmail { get; set; }
+        public bool DisplayPhoneNumber { get; set; }
 
         public virtual ICollection<HorseAd> HorseAds { get; set; }
         public virtual ICollection<UserFavoriteHorseAd> FavoriteHorseAds { get; set; }

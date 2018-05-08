@@ -17,7 +17,10 @@ namespace HorseSpot.BLL.Converters
                 NewsletterSubscription = user.NewsletterSubscription,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
-                UserName = user.Email
+                UserName = user.Email,
+                TermsAccepted = user.TermsAccepted,
+                DisplayEmail = user.DisplayEmail,
+                DisplayPhoneNumber = user.DisplayPhoneNumber
             };
         }
 
