@@ -16,6 +16,7 @@ import { SpinnerService } from '../../shared/spinner/spinner.service';
 import { RegisterModel } from '../../account/models/register.model';
 import { RegisterExternalModel } from '../../account/models/registerExternalModel';
 import { LoginModel } from '../../account/models/login.model';
+import { ExternalUserModel } from '../../account/models/external-user.model'; 
 
 import { CONFIG } from '../../config';
 
@@ -41,6 +42,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   externalUserPhoneNumber: string;
   loginInput: LoginModel = <LoginModel>{};
   registerInput: RegisterModel = <RegisterModel>{};
+  externalUserModel: ExternalUserModel = <ExternalUserModel>{};
   errorMessage: string;
   isForgotPassword: boolean = false;
   forgotPasswordEmail: string;
@@ -153,13 +155,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }
   }
 
-  updateExternalUserPhoneNumber() {
-    this._accountService.updateExternalUser(this.provider, this.externalToken, this.externalUserPhoneNumber, CONFIG.client_id)
-      .subscribe(res => {
-        window.scrollTo(0, 0);
-        this.setUserNameAndId();
-        this.phoneNumberModal.hide();
-      })
+  updateExternalUser() {
+    console.log(this.externalUserModel);
+    //this._accountService.updateExternalUser(this.provider, this.externalToken, this.externalUserPhoneNumber, CONFIG.client_id)
+    //  .subscribe(res => {
+    //    window.scrollTo(0, 0);
+    //    this.setUserNameAndId();
+    //    this.phoneNumberModal.hide();
+    //  });
   }
 
   register() {
@@ -254,5 +257,17 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   onTermsCheckboxChange($event) {
     this.termsAccepted = $event.target.checked;
+  }
+
+  deleteExternalUser() {
+    this._accountService.deleteExternalUser(this.provider, this.externalToken)
+      .subscribe(res => {
+        window.scrollTo(0, 0);
+        this.phoneNumberModal.hide();
+      },
+      error => {
+        window.scrollTo(0, 0);
+        this.phoneNumberModal.hide();
+      });
   }
 }

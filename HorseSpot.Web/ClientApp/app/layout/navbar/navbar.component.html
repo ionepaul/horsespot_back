@@ -59,7 +59,7 @@
         <!-- Right part when not logged in -->
         <ul *ngIf="!_accountService.isLoggedIn()" class="login-list">
           <button type="button" class="signup-btn my-btn" (click)="signUpModal.show()">{{'NAVBAR.SIGNUP' | translate}}!</button>
-          <button type="button" class="login-btn my-btn" (click)="loginModal.show()">{{'NAVBAR.LOGIN' | translate}}</button>
+          <button type="button" class="login-btn my-btn" (click)="phoneNumberModal.show()">{{'NAVBAR.LOGIN' | translate}}</button>
         </ul>
       </div><!-- slide-from-right -->
 
@@ -255,13 +255,6 @@
           <img src="../../../../wwwroot/assets/images/logo_2.png" alt="Horse Spot Logo">
         </div><!-- horse-logo -->
 
-        <div class="modal-footer">
-          <p>
-            {{ 'PHONE_NUMBER_MODAL.ENTER_PN_TEXT' | translate }} <br />
-            {{'PHONE_NUMBER_MODAL.OR' | translate}} <a (click)="skipPhoneNumberEntering()">{{ 'PHONE_NUMBER_MODAL.SKIP' | translate }}</a>
-          </p>
-        </div><!-- modal-footer -->
-
         <div *ngIf="phoneNumber.errors && phoneNumber.touched" class="client-side-validation-error">
           <small [hidden]="!phoneNumber.errors.pattern || !phoneNumber.errors.pattern">
             {{'REGISTER_PAGE.PHONE_NUMBER_INVALID_FORMAT' | translate}}
@@ -272,14 +265,32 @@
           <div class="form-group">
             <div class="input-group">
               <input name="phoneNumber" autocomplete="off" type="tel" class="form-control"
-                     id="phoneNumber" [(ngModel)]="externalUserPhoneNumber" #phoneNumber="ngModel"
-                     placeholder="{{'REGISTER_PAGE.PHONE_NUMBER' | translate}}"
-                     required pattern="^(?=.*[0-9])[- +()0-9].*[0-9]+$" minlength="5">
+                     id="phoneNumber" [(ngModel)]="externalUserModel.PhoneNumber" #phoneNumber="ngModel"
+                     placeholder="{{'REGISTER_PAGE.PHONE_NUMBER' | translate}} (optional)"
+                     pattern="^(?=.*[0-9])[- +()0-9].*[0-9]+$" minlength="5" style="margin: 15px 0px 25px;">
             </div><!-- input-group -->
           </div><!-- form-group -->
 
-          <button [disabled]="!phoneNumberForm.form.valid" type="submit" (click)="updateExternalUserPhoneNumber()">{{ 'PHONE_NUMBER_MODAL.CONFIRM' | translate }}</button>
+          <div class="modal-footer">
+            <input type="checkbox" name="termsAccepted" #termsAccepted="ngModel" autocomplete="off" [(ngModel)]="externalUserModel.TermsAccepted" mustBeChecked> <span>{{'TERMS_AND_CONDITIONS.BY_SIGN_UP' | translate}} <a (click)="conditionsModal.show()">{{'TERMS_AND_CONDITIONS.TERMS_OF_USE' | translate}}</a></span>
+          </div>
+
+          <div class="modal-footer">
+            <input type="checkbox" name="newsletter-checkbox" autocomplete="off" [(ngModel)]="externalUserModel.NewsletterSubscription"> <span>I want to receive news and horse advertisments through email.</span>
+          </div>
+
+          <div class="modal-footer">
+            <input type="checkbox" name="display-email" autocomplete="off" [(ngModel)]="externalUserModel.DisplayEmail"> <span>I agree to display the email on my profile.</span>
+          </div>
+
+          <div *ngIf="phoneNumber.valid && phoneNumber.touched && phoneNumber.value" class="modal-footer">
+            <input type="checkbox" name="display-phone" autocomplete="off" [(ngModel)]="externalUserModel.DisplayPhoneNumber"> <span>I agree to display the phone number on my profile.</span>
+          </div>
+
+          <button [disabled]="!phoneNumberForm.form.valid" type="submit" (click)="updateExternalUser()">{{ 'PHONE_NUMBER_MODAL.CONFIRM' | translate }}</button>
         </form>
+
+        <a (click)="deleteExternalUser()" class="cancel-registration"> Cancel Registration</a>
 
       </div>
     </div>

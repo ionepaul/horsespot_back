@@ -2048,6 +2048,16 @@ modal.cancel-app textarea {
   -moz-transition: all 0.3s;
 }
 
+.navbar-modals a.cancel-registration {
+  display: block;
+  text-align: center;
+  font-size: 16px;
+  position: relative;
+  border-radius: 3px;
+  text-decoration: underline;
+  cursor:pointer;
+}
+
   .navbar-modals a.fb.connect:hover {
     text-decoration: none;
     background: #1c3774;

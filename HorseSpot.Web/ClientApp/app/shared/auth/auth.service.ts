@@ -57,6 +57,12 @@ export class AuthService {
       .catch(this._handleAuthError);
   }
 
+  deleteExternalUser(provider: string, externalToken: string) {
+    return this._httpWrapper
+               .post(CONFIG.baseUrls.apiUrl + "account/delete?provider=" + provider + "&externalToken=" + externalToken, "")
+               .catch(this._handleAuthError);
+  }
+
   refreshToken() {
     let data = new URLSearchParams();
     data.append('grant_type', CONFIG.refresh_token_grant_type);

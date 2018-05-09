@@ -227,6 +227,10 @@ export class AccountService {
       .catch(this.handleError);
   }
 
+  deleteExternalUser(provider: string, externalToken: string) {
+    return this._authService.deleteExternalUser(provider, externalToken);
+  }
+
   private handleError(error: Response) {
     let errorMsg = error.json().Message || "Server Error";
     return Observable.throw(errorMsg);
