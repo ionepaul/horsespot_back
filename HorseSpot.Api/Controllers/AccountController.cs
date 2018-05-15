@@ -252,7 +252,7 @@ namespace HorseSpot.Api.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("api/account/updateExternalUser")]
-        public async Task<JObject> AddPhoneNumberToExternalUser(string provider, string externalToken, string phoneNumber, string clientId)
+        public async Task<JObject> AddPhoneNumberToExternalUser(string provider, string externalToken, string clientId, [FromBody] EditProfileViewModel externalUpdates)
         {
             var verifiedAccessToken = await VerifyExternalAccessToken(provider, externalToken);
 
@@ -267,7 +267,7 @@ namespace HorseSpot.Api.Controllers
 
             if (hasRegistered)
             {
-                await _iUserBus.EditProfile(user.Id, new EditProfileViewModel { PhoneNumber = phoneNumber });
+                await _iUserBus.EditProfile(user.Id, externalUpdates);
             }
 
             var accessTokenResponse = await GenerateLocalAccessTokenResponse(user.Email, clientId);

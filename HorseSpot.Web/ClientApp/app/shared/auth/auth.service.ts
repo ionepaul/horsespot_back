@@ -15,6 +15,7 @@ import { HttpWrapper } from '../http/http.wrapper';
 //MODELS
 import { LoginModel } from '../../account/models/login.model';
 import { RegisterExternalModel } from '../../account/models/registerExternalModel';
+import { ExternalUserModel } from '../../account/models/external-user.model';
 
 @Injectable()
 export class AuthService {
@@ -41,9 +42,9 @@ export class AuthService {
       .catch(this._handleAuthError);
   }
 
-  updateExternalUser(provider: string, externalToken: string, phoneNumber: string, clientId: string) {
+  updateExternalUser(provider: string, externalToken: string, externalUserModel: ExternalUserModel, clientId: string) {
     return this._httpWrapper
-      .post(CONFIG.baseUrls.apiUrl + "account/updateExternalUser?provider=" + provider + "&externalToken=" + externalToken + "&phoneNumber=" + phoneNumber + "&clientId=" + clientId, "")
+      .post(CONFIG.baseUrls.apiUrl + "account/updateExternalUser?provider=" + provider + "&externalToken=" + externalToken + "&clientId=" + clientId, JSON.stringify(externalUserModel))
       .map((res: Response) => res.json())
       .do(data => this.storeUserAccessInfo(data))
       .catch(this._handleAuthError);

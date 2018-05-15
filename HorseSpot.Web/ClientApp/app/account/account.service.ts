@@ -21,6 +21,7 @@ import { RegisterModel } from './models/register.model';
 import { ChangePasswordModel } from './models/changePassword.model';
 import { GetHorseAdListResultsModel } from '../horse-advertisments/models/getHorseAdListResultsModel';
 import { UserFullProfile } from './models/userFullProfile.model';
+import { ExternalUserModel } from './models/external-user.model';
 
 @Injectable()
 export class AccountService {
@@ -49,8 +50,8 @@ export class AccountService {
     return this._authService.authenticateUser(model);
   }
 
-  updateExternalUser(provider, externalToken, phoneNumber, clientId) {
-    return this._authService.updateExternalUser(provider, externalToken, phoneNumber, clientId);
+  updateExternalUser(provider, externalToken, externalUserModel: ExternalUserModel, clientId) {
+    return this._authService.updateExternalUser(provider, externalToken, externalUserModel, clientId);
   }
 
   obtainLocalAccessToken(provider: string, externalToken: string, clientId: string) {

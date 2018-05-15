@@ -278,8 +278,8 @@ namespace HorseSpot.BLL.Bus
 
         private async Task<UserDTO> UpdateUserInformation(UserModel user, EditProfileViewModel editProfile)
         {
-            user.FirstName = editProfile.FirstName != null ? editProfile.FirstName : user.FirstName;
-            user.LastName = editProfile.LastName != null ? editProfile.LastName : user.LastName;
+            user.FirstName = editProfile.FirstName ?? user.FirstName;
+            user.LastName = editProfile.LastName ?? user.LastName;
 
             Regex phoneNumberRegex = new Regex(@"^(?=.*[0-9])[- +()0-9].*[0-9]+$");
 
@@ -291,7 +291,16 @@ namespace HorseSpot.BLL.Bus
                 }
             }
 
+            if (editProfile.TermsAccepted != true)
+            {
+                throw new ValidationException(Resources.InvalidExternalLoginRequest);
+            }
+
+            user.TermsAccepted = editProfile.TermsAccepted;
             user.PhoneNumber = editProfile.PhoneNumber;
+            user.NewsletterSubscription = editProfile.NewsletterSubscription;
+            user.DisplayEmail = editProfile.DisplayEmail;
+            user.DisplayPhoneNumber = editProfile.DisplayPhoneNumber;
 
             var editedUser = await _iUserDao.UpdateUser(user);
 

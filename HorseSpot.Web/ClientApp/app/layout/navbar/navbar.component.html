@@ -272,19 +272,19 @@
           </div><!-- form-group -->
 
           <div class="modal-footer">
-            <input type="checkbox" name="termsAccepted" #termsAccepted="ngModel" autocomplete="off" [(ngModel)]="externalUserModel.TermsAccepted" mustBeChecked> <span>{{'TERMS_AND_CONDITIONS.BY_SIGN_UP' | translate}} <a (click)="conditionsModal.show()">{{'TERMS_AND_CONDITIONS.TERMS_OF_USE' | translate}}</a></span>
+            <input type="checkbox" name="termsAccepted-ext" #termsAccepted="ngModel" autocomplete="off" [(ngModel)]="externalUserModel.TermsAccepted" mustBeChecked> <span>{{'TERMS_AND_CONDITIONS.BY_SIGN_UP' | translate}} <a (click)="conditionsModal.show()">{{'TERMS_AND_CONDITIONS.TERMS_OF_USE' | translate}}</a></span>
           </div>
 
           <div class="modal-footer">
-            <input type="checkbox" name="newsletter-checkbox" autocomplete="off" [(ngModel)]="externalUserModel.NewsletterSubscription"> <span>I want to receive news and horse advertisments through email.</span>
+            <input type="checkbox" name="newsletter-checkbox-ext" autocomplete="off" [(ngModel)]="externalUserModel.NewsletterSubscription"> <span>I want to receive news and horse advertisments through email.</span>
           </div>
 
           <div class="modal-footer">
-            <input type="checkbox" name="display-email" autocomplete="off" [(ngModel)]="externalUserModel.DisplayEmail"> <span>I agree to display the email on my profile.</span>
+            <input type="checkbox" name="display-email-ext" autocomplete="off" [(ngModel)]="externalUserModel.DisplayEmail"> <span>I agree to display the email on my profile.</span>
           </div>
 
           <div *ngIf="phoneNumber.valid && phoneNumber.touched && phoneNumber.value" class="modal-footer">
-            <input type="checkbox" name="display-phone" autocomplete="off" [(ngModel)]="externalUserModel.DisplayPhoneNumber"> <span>I agree to display the phone number on my profile.</span>
+            <input type="checkbox" name="display-phone-ext" autocomplete="off" [(ngModel)]="externalUserModel.DisplayPhoneNumber"> <span>I agree to display the phone number on my profile.</span>
           </div>
 
           <button [disabled]="!phoneNumberForm.form.valid" type="submit" (click)="updateExternalUser()">{{ 'PHONE_NUMBER_MODAL.CONFIRM' | translate }}</button>

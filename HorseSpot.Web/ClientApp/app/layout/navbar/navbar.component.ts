@@ -156,13 +156,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   updateExternalUser() {
-    console.log(this.externalUserModel);
-    //this._accountService.updateExternalUser(this.provider, this.externalToken, this.externalUserPhoneNumber, CONFIG.client_id)
-    //  .subscribe(res => {
-    //    window.scrollTo(0, 0);
-    //    this.setUserNameAndId();
-    //    this.phoneNumberModal.hide();
-    //  });
+    this._accountService.updateExternalUser(this.provider, this.externalToken, this.externalUserModel, CONFIG.client_id)
+      .subscribe(res => {
+        window.scrollTo(0, 0);
+        this.setUserNameAndId();
+        this.phoneNumberModal.hide();
+      });
   }
 
   register() {
@@ -170,15 +169,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.registerInput.FirstName = names[0];
     this.registerInput.LastName = names[1];
     this.registerInput.ConfirmPassword = this.registerInput.Password;
-    console.log(this.registerInput);
 
-    //this._accountService.registerService(this.registerInput)
-    //  .subscribe(res => {
-    //    this.signUpModal.hide();
-    //    this.loginInput.Email = res.Email
-    //    this.loginModal.show();
-    //  },
-    //  error => this.errorMessage = error);
+    this._accountService.registerService(this.registerInput)
+      .subscribe(res => {
+        this.signUpModal.hide();
+        this.loginInput.Email = res.Email
+        this.loginModal.show();
+      },
+      error => this.errorMessage = error);
   }
 
   onSignUpModalClose() {
