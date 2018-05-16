@@ -97,7 +97,6 @@ namespace HorseSpot.BLL.Bus
             };
 
             await _iUserDao.CreateAsync(user);
-            await SendWelcomeEmail(user);
 
             return user;
         }
@@ -107,11 +106,7 @@ namespace HorseSpot.BLL.Bus
             return await _iUserDao.AddLoginAsync(userId, login);
         }
 
-        #endregion
-
-        #region Private Methods
-
-        private async Task SendWelcomeEmail(UserModel user)
+        public async Task SendWelcomeEmail(UserModel user)
         {
             EmailModel emailModel = new EmailModel
             {

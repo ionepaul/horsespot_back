@@ -39,7 +39,10 @@ namespace HorseSpot.BLL.Converters
                 Email = user.Email,
                 NewsletterSubscription = user.NewsletterSubscription,
                 PhoneNumber = user.PhoneNumber,
-                ProfileImage = user.ImagePath
+                ProfileImage = user.ImagePath,
+                TermsAccepted = user.TermsAccepted,
+                DisplayEmail = user.DisplayEmail,
+                DisplayPhoneNumber = user.DisplayPhoneNumber
             };
 
             return userViewModel;

@@ -17,5 +17,6 @@ namespace HorseSpot.BLL.Interfaces
         Task<UserModel> FindUserByLoginInfo(UserLoginInfo loginInfo);
         Task<UserModel> CreateExternalUser(RegisterExternalBindingModel model);
         Task<IdentityResult> AddLoginAsync(string userId, UserLoginInfo login);
+        Task SendWelcomeEmail(UserModel user);
     }
 }

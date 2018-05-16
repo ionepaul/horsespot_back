@@ -270,6 +270,8 @@ namespace HorseSpot.Api.Controllers
                 await _iUserBus.EditProfile(user.Id, externalUpdates);
             }
 
+            await _iAuthorizationBus.SendWelcomeEmail(user);
+
             var accessTokenResponse = await GenerateLocalAccessTokenResponse(user.Email, clientId);
 
             return accessTokenResponse;
