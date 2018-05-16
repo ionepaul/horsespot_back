@@ -22,5 +22,6 @@ namespace HorseSpot.BLL.Interfaces
         Task SetUserProfilePicture(string path, string id);
         UserDTO FindUserByEmail(string email);
         UserFullProfile GetUserFullProfile(string userId);
+        Task DeleteUserById(string userId);
     }
 }

@@ -62,7 +62,9 @@ namespace HorseSpot.BLL.Converters
                 LastName = user.LastName,
                 Email = user.Email,
                 ImagePath = user.ImagePath,
-                PhoneNumber = user.PhoneNumber
+                PhoneNumber = user.PhoneNumber,
+                DisplayEmail = user.DisplayEmail,
+                DisplayPhoneNumber = user.DisplayPhoneNumber
             };
         }
 
@@ -84,7 +86,10 @@ namespace HorseSpot.BLL.Converters
                 TotalFavorites = favoritesQuery?.Count() ?? 0,
                 FavoriteHorses = favoritesQuery.Select(x => HorseAdConverter.FromHorseAdToHorseAdListModel(x.FavoriteHorseAd)).AsEnumerable(),
                 HorsesForSale = forSaleQuery?.OrderByDescending(x => x.DatePosted).Take(3).Select(HorseAdConverter.FromHorseAdToHorseAdListModel),
-                ReferenceHorses = forSaleReference?.OrderByDescending(x => x.DatePosted).Take(3).Select(HorseAdConverter.FromHorseAdToHorseAdListModel)
+                ReferenceHorses = forSaleReference?.OrderByDescending(x => x.DatePosted).Take(3).Select(HorseAdConverter.FromHorseAdToHorseAdListModel),
+                DisplayPhoneNumber = user.DisplayPhoneNumber,
+                DisplayEmail = user.DisplayEmail,
+                NewsletterSubscription = user.NewsletterSubscription
             };
         }
     }

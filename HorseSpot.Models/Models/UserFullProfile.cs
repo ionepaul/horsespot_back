@@ -14,6 +14,10 @@ namespace HorseSpot.Models.Models
         public int TotalFavorites { get; set; }
         public int TotalMeetings { get; set; }
         public int TotalFeedback { get; set; }
+        public bool NewsletterSubscription { get; set; }
+        public bool DisplayEmail { get; set; }
+        public bool DisplayPhoneNumber { get; set; }
+
         public IEnumerable<HorseAdListModel> HorsesForSale { get; set; }
         public IEnumerable<HorseAdListModel> FavoriteHorses { get; set; }
         public IEnumerable<HorseAdListModel> ReferenceHorses { get; set; }

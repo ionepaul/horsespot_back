@@ -5,4 +5,8 @@ export interface UserModel {
     PhoneNumber: string,
     ImagePath: string,
     Email: string;
+    NewsletterSubscription: boolean;
+    TermsAccepted: boolean;
+    DisplayEmail: boolean;
+    DisplayPhoneNumber: boolean;
 }

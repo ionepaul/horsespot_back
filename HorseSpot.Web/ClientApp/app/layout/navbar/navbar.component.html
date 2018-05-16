@@ -59,7 +59,7 @@
         <!-- Right part when not logged in -->
         <ul *ngIf="!_accountService.isLoggedIn()" class="login-list">
           <button type="button" class="signup-btn my-btn" (click)="signUpModal.show()">{{'NAVBAR.SIGNUP' | translate}}!</button>
-          <button type="button" class="login-btn my-btn" (click)="phoneNumberModal.show()">{{'NAVBAR.LOGIN' | translate}}</button>
+          <button type="button" class="login-btn my-btn" (click)="loginModal.show()">{{'NAVBAR.LOGIN' | translate}}</button>
         </ul>
       </div><!-- slide-from-right -->
 
@@ -246,6 +246,7 @@
     </div>
   </div>
 </div>
+
 <div class="modal fade navbar-modals" [config]="{ ignoreBackdropClick: true, keyboard: false }" bsModal #phoneNumberModal="bs-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" (onHide)="onPhoneNumberModalClose()">
   <div class="modal-dialog">
     <div class="modal-content">

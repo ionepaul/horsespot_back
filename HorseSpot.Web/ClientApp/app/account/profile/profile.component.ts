@@ -27,6 +27,7 @@ import { HorseAdsService } from '../../horse-advertisments/horse-ads.service';
 export class ProfileComponent implements OnInit {
   @ViewChild('changePasswordModal') public changePasswordModal: ModalDirective;
   @ViewChild('sendEmailModal') public sendEmailModal: ModalDirective;
+  @ViewChild('deleteAccountModal') public deleteAccountModal: ModalDirective;
 
   @ViewChild('changePasswordForm') public changePasswordForm: NgForm;
   @ViewChild('sendEmailForm') public sendEmailForm: NgForm;
@@ -35,6 +36,7 @@ export class ProfileComponent implements OnInit {
   editModel: UserModel = <UserModel>{};
   changePasswordModel: ChangePasswordModel = <ChangePasswordModel>{};
   editErrorMessage: string;
+  deleteUserErrorMessage: string;
   changePasswordErrorMessage: string;
   uploadImageErrorMessage: string;
   userId: string;
@@ -47,6 +49,7 @@ export class ProfileComponent implements OnInit {
   errorMessage: string;
   emailModel: EmailModel = <EmailModel>{};
   profileNameError: boolean = false;
+  isPrivacySettings: boolean = false;
 
   constructor(private _router: Router,
     private _activatedRoute: ActivatedRoute,
@@ -85,6 +88,15 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  deleteUser() {
+    this._accountService.deleteUserById(this.userId)
+      .subscribe(res => {
+        this.deleteAccountModal.hide();
+        this._router.navigate(['/home']);
+        this._accountService.logout();
+      }, error => this.deleteUserErrorMessage = error);
+  }
+
   back() {
     this._location.back();
   }
@@ -92,6 +104,11 @@ export class ProfileComponent implements OnInit {
   saveChanges() {
     this.editModel.PhoneNumber = this.userModel.PhoneNumber;
     this.editModel.Email = this.userModel.Email;
+    this.editModel.TermsAccepted = true;
+    this.editModel.NewsletterSubscription = this.userModel.NewsletterSubscription;
+    this.editModel.DisplayEmail = this.userModel.DisplayEmail;
+    this.editModel.DisplayPhoneNumber = this.userModel.DisplayPhoneNumber;
+
     let names = this.userModel.FullName.split(" ");
 
     if (this.userModel.FullName == "") {

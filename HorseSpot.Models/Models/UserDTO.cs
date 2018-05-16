@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HorseSpot.Models.Models
+﻿namespace HorseSpot.Models.Models
 {
     public class UserDTO
     {
@@ -20,5 +13,9 @@ namespace HorseSpot.Models.Models
         public string ImagePath { get; set; }
 
         public string Email { get; set; }
+
+        public bool DisplayEmail { get; set; }
+
+        public bool DisplayPhoneNumber { get; set; }
     }
 }

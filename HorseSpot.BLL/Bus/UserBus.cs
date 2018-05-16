@@ -118,6 +118,15 @@ namespace HorseSpot.BLL.Bus
             await _iUserDao.DeleteUser(userModel);
         }
 
+        public async Task DeleteUserById(string userId)
+        {
+            var userModel = _iUserDao.FindUserById(userId);
+
+            CheckIfUserExists(userModel);
+
+            await _iUserDao.DeleteUser(userModel);
+        }
+
         public async Task ForgotPassword(string email)
         {
             if (email == null)

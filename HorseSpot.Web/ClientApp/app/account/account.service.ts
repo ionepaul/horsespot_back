@@ -39,6 +39,7 @@ export class AccountService {
   public _profilePhotoGetUrl: string = CONFIG.imagesUrl + '/Images/ProfilePhotos/';
   private _isAdminUrl: string = CONFIG.baseUrls.apiUrl + 'account/isAdmin/';
   private _getUserFullProfileUrl: string = CONFIG.baseUrls.apiUrl + 'account/fullProfile/';
+  private _deleteUserUrl: string = CONFIG.baseUrls.apiUrl + 'account/delete';
 
   constructor(private _httpWrapper: HttpWrapper,
     private _http: Http,
@@ -65,6 +66,12 @@ export class AccountService {
       .post(this._registerUrl, body)
       .map((res: Response) => res.json())
       .catch(this.handleError);
+  }
+
+  deleteUserById(userId: string) {
+    return this._httpWrapper
+               .post(this._deleteUserUrl, "")
+               .catch(this.handleError);
   }
 
   uploadProfilePhoto(profilePhoto: File, userId: string) {

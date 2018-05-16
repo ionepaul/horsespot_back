@@ -18,18 +18,39 @@
       <div class="col-sm-6 profile-details">
         <div style="border-bottom: 1px solid #ccc;" *ngIf="userModel.UserId == currentUserId">
           <p *ngIf="!isEditMode" (click)="isEditMode=!isEditMode" class="edit-info-btn write">{{'PROFILE.EDIT_BTN' | translate}}</p>
-          <p *ngIf="isEditMode" (click)="saveChanges()" class="save-btn write">{{ 'PROFILE.SAVE_BTN' | translate }}</p>
-          <p *ngIf="isEditMode" (click)="isEditMode=!isEditMode" class="save-btn write"> {{'PROFILE.CANCEL_BTN' | translate}}</p>
+          <p *ngIf="isEditMode || isPrivacySettings" (click)="saveChanges()" class="save-btn write">{{ 'PROFILE.SAVE_BTN' | translate }}</p>
+          <p *ngIf="isEditMode || isPrivacySettings" (click)="isEditMode=false; isPrivacySettings=false" class="save-btn write"> {{'PROFILE.CANCEL_BTN' | translate}}</p>
           <p *ngIf="isEditMode && editErrorMessage" class="client-side-validation-error">{{editErrorMessage}}</p>
           <p *ngIf="profileNameError" class="client-side-validation-error"> {{'PROFILE.PROFILE_NAME_ERROR' | translate}}</p>
           <p *ngIf="!isEditMode" (click)="changePasswordModal.show()" class="changePass-btn write"> {{'PROFILE.CHANGE_PASS.TITLE' | translate}}</p>
+
+          <p *ngIf="!isPrivacySettings" (click)="isPrivacySettings=!isPrivacySettings" class="edit-info-btn write">Privacy Settings</p>
+          <p class="edit-info-btn write">Delete Account</p>
         </div>
 
-        <div *ngIf="!isEditMode" class="main-info">
+        <div *ngIf="isPrivacySettings" class="edit-info">
+          <p>
+              This settings are affecting you horse spot profile page and your advertisments. How ever even if you do not want to display your email and phone on your ads the clients can contact you through our send email functionality. 
+          </p>
+
+          <div>
+            <input type="checkbox" name="newsletter-checkbox-ext" autocomplete="off" [(ngModel)]="userModel.NewsletterSubscription"> <span>I want to receive news and horse advertisments through email.</span>
+          </div>
+
+          <div>
+            <input type="checkbox" name="display-email-ext" autocomplete="off" [(ngModel)]="userModel.DisplayEmail"> <span>I agree to display the email on my profile.</span>
+          </div>
+
+          <div *ngIf="userModel.PhoneNumber">
+            <input type="checkbox" name="display-phone-ext" autocomplete="off" [(ngModel)]="userModel.DisplayPhoneNumber"> <span>I agree to display the phone number on my profile.</span>
+          </div>
+        </div>
+
+        <div *ngIf="!isEditMode && !isPrivacySettings" class="main-info">
           <p class="name">{{userModel.FullName}}</p>
           <ul class="email">
-            <li *ngIf="userModel.PhoneNumber"><a href="tel:{{userModel.PhoneNumber}}"><i class="fa fa-mobile" aria-hidden="true"></i> {{userModel.PhoneNumber}}</a></li>
-            <li><a href="email:{{userModel.Email}}"><i class="fa fa-envelope" aria-hidden="true"></i> {{userModel.Email}}</a></li>
+            <li *ngIf="userModel.PhoneNumber && userModel.DisplayPhoneNumber"><a href="tel:{{userModel.PhoneNumber}}"><i class="fa fa-mobile" aria-hidden="true"></i> {{userModel.PhoneNumber}}</a></li>
+            <li *ngIf="userModel.DisplayEmail"><a href="email:{{userModel.Email}}"><i class="fa fa-envelope" aria-hidden="true"></i> {{userModel.Email}}</a></li>
           </ul>
         </div><!-- main-info -->
 
@@ -51,6 +72,7 @@
             </div>
           </form>
         </div><!-- edit-info -->
+
         <ul class="numbers">
           <li (click)="scrollInto('horses-for-sale')"><span class="number">{{userModel.TotalForSale}}</span> {{'PROFILE.HORSES_FOR_SALE' | translate}}</li>
           <li (click)="scrollInto('references')"><span class="number">{{userModel.TotalReferenes}}</span> {{'PROFILE.REFERENCES' | translate}}</li>
@@ -192,6 +214,32 @@
           </form>
 
           <button class="save" (click)="changePassword()" [disabled]="!changePasswordForm.form.valid">{{'PROFILE.CHANGE_PASS.SAVE_BTN' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade navbar-modals send-email" bsModal #deleteAccountModal="bs-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p (click)="deleteAccountModal.hide()" class="close-modal-mobile"><i class="fa fa-times" aria-hidden="true"></i></p>
+
+        <div class="horse-logo">
+          <img src="../../../../wwwroot/assets/images/logo_2.png" alt="Horse Spot Logo">
+        </div><!-- horse-logo -->
+
+        <div class="form">
+          <p *ngIf="deleteUserErrorMessage" class="client-side-validation-error">{{deleteUserErrorMessage}}</p>
+
+          <p>
+            Are you sure you want to delete your account? <br />
+            <small>Note: Hitting 'YES' will permanently delete your account and your advertisments from our database.</small>
+          </p>
+          <button class="save" (click)="deleteUser()">Yes</button>
+          <button class="cancel" (click)="deleteAccountModal.hide()">Cancel</button>
         </div>
       </div>
     </div>

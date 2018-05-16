@@ -187,6 +187,13 @@ namespace HorseSpot.Api.Controllers
 
         [HttpPost]
         [Authorize]
+        public async Task Delete()
+        {
+            await _iUserBus.DeleteUserById(UserIdExtractor.GetUserIdFromRequest(Request));
+        }
+
+        [HttpPost]
+        [Authorize]
         public async Task ChangePassword([FromBody] ChangePasswordViewModel changePassword)
         {
             await _iUserBus.ChangePassword(UserIdExtractor.GetUserIdFromRequest(Request), changePassword);
@@ -207,7 +214,6 @@ namespace HorseSpot.Api.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public async Task Delete(string provider, string externalToken)
         {
             var verifiedAccessToken = await VerifyExternalAccessToken(provider, externalToken);

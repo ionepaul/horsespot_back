@@ -13,4 +13,7 @@ export class UserFullProfile {
     HorsesForSale: Array<HorseAdListModel>
     FavoriteHorses: Array<HorseAdListModel>
     ReferenceHorses: Array<HorseAdListModel>
+    DisplayPhoneNumber: boolean;
+    DisplayEmail: boolean;
+    NewsletterSubscription: boolean;
 }

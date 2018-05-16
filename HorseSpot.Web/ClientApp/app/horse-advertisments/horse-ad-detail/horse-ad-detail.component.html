@@ -91,8 +91,8 @@
         <div class="user-info">
           <img #userImage src="" alt="Owner profile picture">
           <p class="name"><span>{{userModel.FirstName}}</span></p>
-          <p *ngIf="userModel.PhoneNumber" class="tel"><a href="tel:{{userModel.PhoneNumber}}"><i class="fa fa-mobile" aria-hidden="true"></i> {{userModel.PhoneNumber}}</a></p>
-          <p class="mail"><a href="mailto:{{userModel.Email}}"><i class="fa fa-envelope" aria-hidden="true"></i> {{userModel.Email}}</a></p>
+          <p *ngIf="userModel.PhoneNumber && userModel.DisplayPhoneNumber" class="tel"><a href="tel:{{userModel.PhoneNumber}}"><i class="fa fa-mobile" aria-hidden="true"></i> {{userModel.PhoneNumber}}</a></p>
+          <p *ngIf="userModel.DisplayEmail "class="mail"><a href="mailto:{{userModel.Email}}"><i class="fa fa-envelope" aria-hidden="true"></i> {{userModel.Email}}</a></p>
 
           <ul class="send-email">
             <li><a (click)="showSendEmailModal()">{{'HORSE_AD_DETAIL.SEND_EMAIL' | translate}}</a></li>
@@ -176,6 +176,9 @@
 
         <div class="form">
           <section *ngIf="errorMessage" class="client-side-validation-error">{{errorMessage}}</section>
+
+          <p>Note: We will not store your email or use it for anything else than an information to the seller in order to respond to your email.</p>
+
           <form #sendEmailForm="ngForm">
             <div *ngIf="email.errors && email.touched" class="client-side-validation-error">
               <small [hidden]="!email.errors.required">
