@@ -8,8 +8,8 @@
         <div class="user-profile-details">
           <p class="name">{{userModel.FirstName}}</p>
           <ul class="email">
-            <li *ngIf="userModel.PhoneNumber"><a href="tel:{{userModel.PhoneNumber}}"><i class="fa fa-mobile" aria-hidden="true"></i> {{userModel.PhoneNumber}}</a></li>
-            <li><a href="{{userModel.Email}}"><i class="fa fa-envelope" aria-hidden="true"></i> {{userModel.Email}}</a></li>
+            <li *ngIf="userModel.PhoneNumber && userModel.DisplayPhoneNumber"><a href="tel:{{userModel.PhoneNumber}}"><i class="fa fa-mobile" aria-hidden="true"></i> {{userModel.PhoneNumber}}</a></li>
+            <li *ngIf="userModel.DisplayEmail"><a href="{{userModel.Email}}"><i class="fa fa-envelope" aria-hidden="true"></i> {{userModel.Email}}</a></li>
           </ul>
         </div><!-- profile-details -->
       </div><!-- main-info -->

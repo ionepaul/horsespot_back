@@ -17,18 +17,18 @@
 
       <div class="col-sm-6 profile-details">
         <div style="border-bottom: 1px solid #ccc;" *ngIf="userModel.UserId == currentUserId">
-          <p *ngIf="!isEditMode" (click)="isEditMode=!isEditMode" class="edit-info-btn write">{{'PROFILE.EDIT_BTN' | translate}}</p>
+          <p *ngIf="!isEditMode && !isPrivacySettings" (click)="isEditMode=!isEditMode" class="edit-info-btn write">{{'PROFILE.EDIT_BTN' | translate}}</p>
           <p *ngIf="isEditMode || isPrivacySettings" (click)="saveChanges()" class="save-btn write">{{ 'PROFILE.SAVE_BTN' | translate }}</p>
           <p *ngIf="isEditMode || isPrivacySettings" (click)="isEditMode=false; isPrivacySettings=false" class="save-btn write"> {{'PROFILE.CANCEL_BTN' | translate}}</p>
           <p *ngIf="isEditMode && editErrorMessage" class="client-side-validation-error">{{editErrorMessage}}</p>
           <p *ngIf="profileNameError" class="client-side-validation-error"> {{'PROFILE.PROFILE_NAME_ERROR' | translate}}</p>
-          <p *ngIf="!isEditMode" (click)="changePasswordModal.show()" class="changePass-btn write"> {{'PROFILE.CHANGE_PASS.TITLE' | translate}}</p>
+          <p *ngIf="!isEditMode && !isPrivacySettings" (click)="changePasswordModal.show()" class="changePass-btn write"> {{'PROFILE.CHANGE_PASS.TITLE' | translate}}</p>
 
-          <p *ngIf="!isPrivacySettings" (click)="isPrivacySettings=!isPrivacySettings" class="edit-info-btn write">Privacy Settings</p>
-          <p class="edit-info-btn write">Delete Account</p>
+          <p *ngIf="!isEditMode && !isPrivacySettings" (click)="isPrivacySettings=!isPrivacySettings" class="edit-info-btn write">Privacy Settings</p>
+          <p *ngIf="!isEditMode && !isPrivacySettings" class="edit-info-btn write" (click)="deleteAccountModal.show()">Delete Account</p>
         </div>
 
-        <div *ngIf="isPrivacySettings" class="edit-info">
+        <div *ngIf="isPrivacySettings" class="edit-info navbar-modals">
           <p>
               This settings are affecting you horse spot profile page and your advertisments. How ever even if you do not want to display your email and phone on your ads the clients can contact you through our send email functionality. 
           </p>

@@ -94,6 +94,7 @@ export class ProfileComponent implements OnInit {
         this.deleteAccountModal.hide();
         this._router.navigate(['/home']);
         this._accountService.logout();
+        this._notificationService.setRefreshAndText(this.notificationRefresh, this._notificationService.profileChangesSuccessText());
       }, error => this.deleteUserErrorMessage = error);
   }
 
@@ -120,6 +121,7 @@ export class ProfileComponent implements OnInit {
       this._accountService.editUserDetails(this.userId, this.editModel)
         .subscribe(response => {
           this.isEditMode = false;
+          this.isPrivacySettings = false;
           this.editErrorMessage = "";
           this.notificationRefresh++;
           this.profileNameError = false;
