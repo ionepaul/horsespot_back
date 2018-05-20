@@ -9,7 +9,6 @@ namespace HorseSpot.BLL.Interfaces
     {
         Task<UserViewModel> RegisterUser(UserViewModel user);
         Task<UserDTO> EditProfile(string id, EditProfileViewModel editProfile);
-        Task Delete(UserModel userModel);
         Task ChangePassword(string id, ChangePasswordViewModel changePassword);
         IEnumerable<UserViewModel> GetAllUsers();
         UserDTO GetUserDetails(string id);

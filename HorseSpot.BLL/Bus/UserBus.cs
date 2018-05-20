@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -23,15 +24,17 @@ namespace HorseSpot.BLL.Bus
 
         private readonly IMailerService _iMailerService;
         private readonly IUserDao _iUserDao;
+        private readonly IHorseAdDao _iHorseAdDao;
 
         #endregion
 
         #region Constructor
 
-        public UserBus(IUserDao iUserDao, IMailerService iMailerService)
+        public UserBus(IUserDao iUserDao, IMailerService iMailerService, IHorseAdDao iHorseAdDao)
         {
             _iMailerService = iMailerService;
             _iUserDao = iUserDao;
+            _iHorseAdDao = iHorseAdDao;
         }
 
         #endregion
@@ -111,18 +114,25 @@ namespace HorseSpot.BLL.Bus
             return userRoles.Contains(ApplicationConstants.ADMIN);
         }
 
-        public async Task Delete(UserModel userModel)
-        {
-            CheckIfUserExists(userModel);
-
-            await _iUserDao.DeleteUser(userModel);
-        }
-
         public async Task DeleteUserById(string userId)
         {
             var userModel = _iUserDao.FindUserById(userId);
 
             CheckIfUserExists(userModel);
+
+            if (userModel.HorseAds?.Count > 0)
+            {
+                foreach (var horseAdsId in userModel.HorseAds.Select(x => x.Id))
+                {
+                    var horseAd = _iHorseAdDao.GetById(horseAdsId);
+
+                    horseAd.IsDeleted = true;
+
+                    await _iHorseAdDao.UpdateAsync(horseAd);
+                }
+
+                userModel.HorseAds.Clear();
+            }
 
             await _iUserDao.DeleteUser(userModel);
         }

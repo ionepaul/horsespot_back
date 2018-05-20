@@ -225,7 +225,7 @@ namespace HorseSpot.Api.Controllers
 
             var user = await _iAuthorizationBus.FindUserByLoginInfo(new UserLoginInfo(provider, verifiedAccessToken.user_id));
 
-            await _iUserBus.Delete(user);
+            await _iUserBus.DeleteUserById(user?.Id);
         }
 
         [HttpPost]

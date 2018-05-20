@@ -89,7 +89,7 @@ namespace HorseSpot.BLL.Converters
                 ReferenceHorses = forSaleReference?.OrderByDescending(x => x.DatePosted).Take(3).Select(HorseAdConverter.FromHorseAdToHorseAdListModel),
                 DisplayPhoneNumber = user.DisplayPhoneNumber,
                 DisplayEmail = user.DisplayEmail,
-                NewsletterSubscription = user.NewsletterSubscription
+                NewsletterSubscription = user.NewsletterSubscription ?? false
             };
         }
     }
