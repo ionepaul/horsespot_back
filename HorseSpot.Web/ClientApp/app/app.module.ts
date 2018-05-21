@@ -15,6 +15,11 @@ import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
 import { AdvertiseComponent } from './advertise/advertise.component';
 import { HireUsComponent } from './hire-us/hire-us.component';
+import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
+import { CookiePageComponent } from './cookie-page/cookie-page.component';
+
+//PROVIDERS
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -22,7 +27,9 @@ import { HireUsComponent } from './hire-us/hire-us.component';
     HomeComponent,
     ContactComponent,
     AdvertiseComponent,
-    HireUsComponent
+    HireUsComponent,
+    TermsAndConditionsComponent,
+    CookiePageComponent
   ],
   imports: [
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
@@ -32,7 +39,7 @@ import { HireUsComponent } from './hire-us/hire-us.component';
     AccountModule,
     HorseAdsModule,
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 

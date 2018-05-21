@@ -53,6 +53,7 @@
     "ng2-adsense": "^4.0.12",
     "ng2-nouislider": "^1.7.4",
     "ngx-bootstrap": "2.0.0-beta.3",
+    "ngx-cookie-service": "^1.0.10",
     "node-sass": "^4.5.2",
     "nouislider": "^10.1.0",
     "preboot": "^5.0.0",

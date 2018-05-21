@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { NotificationService } from '../../shared/notifications/notification.service';
 import { AccountService } from '../../account/account.service';
 import { SpinnerService } from '../../shared/spinner/spinner.service';
+import { CookieService } from 'ngx-cookie-service';
 
 //MODELS
 import { RegisterModel } from '../../account/models/register.model';
@@ -53,6 +54,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   userId: string;
   userName: string;
   termsAccepted: boolean = false;
+  showCookieBar: boolean = false;
 
   private _activatedRouteSub$: Subscription;
 
@@ -63,12 +65,18 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private _notificationService: NotificationService,
     private _location: Location,
     private _spinnerService: SpinnerService,
+    private _cookieService: CookieService,
     @Inject(PLATFORM_ID) private _platformId: Object) {
     this.notificationRefresh = this._notificationService.getRefresh();
     this.isMobileDevice = isPlatformBrowser(this._platformId) ? window.screen.width <= CONFIG.mobile_width : false;
   }
 
   ngOnInit() {
+    if (this._cookieService.get('_cahs') != 'true') {
+      this.showCookieBar = true;
+    }
+
+
     this._activatedRouteSub$ = this._activatedRoute.queryParams.subscribe(params => {
       let firstReg: string = params['first_reg'] != undefined ? params['first_reg'] : "";
       let extEmailLocallyReg: string = params['haslocalaccount'] != undefined ? params['haslocalaccount'] : "";
@@ -267,5 +275,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
         window.scrollTo(0, 0);
         this.phoneNumberModal.hide();
       });
+  }
+
+  acceptCookies() {
+    let expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 30);
+    this._cookieService.set('_cahs', 'true', expirationDate);
+    this.showCookieBar = false;
   }
 }

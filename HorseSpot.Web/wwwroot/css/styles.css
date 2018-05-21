@@ -7292,3 +7292,31 @@ aside.col-sm-4 img {
     margin: 5px 0;
   }
 }
+
+.cookies-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  text-align: center;
+  bottom: 0;
+  padding: 10px;
+  font-weight: 700;
+}
+
+  .cookies-bar a {
+    color: #fff;
+    text-decoration: underline;
+  }
+
+  .cookies-bar span {
+    display: inline-block;
+    background: #ba3326;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 3px;
+  }
