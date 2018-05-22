@@ -17,6 +17,7 @@ import { AdvertiseComponent } from './advertise/advertise.component';
 import { HireUsComponent } from './hire-us/hire-us.component';
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 import { CookiePageComponent } from './cookie-page/cookie-page.component';
+import { PrivacyPageComponent } from './privacy-page/privacy-page.component';
 
 //PROVIDERS
 import { CookieService } from 'ngx-cookie-service';
@@ -29,7 +30,8 @@ import { CookieService } from 'ngx-cookie-service';
     AdvertiseComponent,
     HireUsComponent,
     TermsAndConditionsComponent,
-    CookiePageComponent
+    CookiePageComponent,
+    PrivacyPageComponent
   ],
   imports: [
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),

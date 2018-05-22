@@ -279,7 +279,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   acceptCookies() {
     let expirationDate = new Date();
-    expirationDate.setDate(expirationDate.getDate() + 30);
+    expirationDate.setDate(expirationDate.getDate() + 90);
     this._cookieService.set('_cahs', 'true', expirationDate);
     this.showCookieBar = false;
   }

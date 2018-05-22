@@ -19,6 +19,7 @@ import { AdvertiseComponent } from './advertise/advertise.component';
 import { HireUsComponent } from './hire-us/hire-us.component';
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 import { CookiePageComponent } from './cookie-page/cookie-page.component';
+import { PrivacyPageComponent } from './privacy-page/privacy-page.component';
 
 //GUARDS
 import { LoggedInGuard } from './shared/guards/loggedInGuard';
@@ -296,6 +297,9 @@ const routes: Routes = [
   },
   {
     path: 'cookies-usage', component: CookiePageComponent
+  },
+  {
+    path: 'privacy-policy', component: PrivacyPageComponent
   }
 
   //{ path: 'account/appointments', component: AppointmentsListComponent, canActivate: [ LoggedInGuard ] },

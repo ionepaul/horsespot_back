@@ -7320,3 +7320,25 @@ aside.col-sm-4 img {
     cursor: pointer;
     border-radius: 3px;
   }
+
+.cookies-page table tr {
+  border-bottom: 1px solid #ccc;
+}
+
+.cookies-page table th {
+  font-weight: 700;
+}
+
+.cookies-page table tr td:first-child,
+.cookies-page table tr th:first-child {
+  border-right: 1px solid #ccc;
+  width: 20%;
+  vertical-align: top;
+  padding: 10px;
+}
+
+.cookies-page table tr td:last-child,
+.cookies-page table tr th:last-child {
+  text-align: justify;
+  padding: 10px;
+}
