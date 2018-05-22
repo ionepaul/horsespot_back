@@ -11,7 +11,6 @@ import { ModalModule, TypeaheadModule, PaginationModule, BsDropdownModule, Colla
 import { FileUploadModule } from 'ng2-file-upload';
 import { NouisliderModule } from 'ng2-nouislider';
 import { FacebookModule } from 'ngx-facebook';
-import { AdsenseModule } from 'ng2-adsense';
 
 //MODULES
 import { TransferHttpModule } from '../../modules/transfer-http/transfer-http.module';
@@ -66,10 +65,6 @@ export function createTranslateLoader(http: Http, baseHref) {
 
 @NgModule({
   imports: [
-    AdsenseModule.forRoot({
-      adClient: 'ca-pub-4911156518333270',
-      adSlot: 6319636664
-    }),
     CommonModule,
     RouterModule,
     FormsModule,
@@ -118,7 +113,7 @@ export function createTranslateLoader(http: Http, baseHref) {
   ],
   exports: [CommonModule, FormsModule, ReactiveFormsModule, NotificationComponent, ErrorComponent, SpinnerComponent, EqualValidator, CheckboxSelectedValidator, ImagePreview,
     DateFormatPipe, DateFormatHourPipe, HttpModule, ModalModule, Angular2FontawesomeModule, TranslateModule, HorseListComponent, PaginationModule,
-    TypeaheadModule, FileUploadModule, DescriptionFormatPipe, BsDropdownModule, CollapseModule, NouisliderModule, RightSideAdvertismentsComponent, FacebookModule, CarouselModule, AdsenseModule ]
+    TypeaheadModule, FileUploadModule, DescriptionFormatPipe, BsDropdownModule, CollapseModule, NouisliderModule, RightSideAdvertismentsComponent, FacebookModule, CarouselModule ]
 })
 
 export class SharedModule { }
