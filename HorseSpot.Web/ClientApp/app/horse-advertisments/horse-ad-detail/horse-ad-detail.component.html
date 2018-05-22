@@ -177,7 +177,8 @@
         <div class="form">
           <section *ngIf="errorMessage" class="client-side-validation-error">{{errorMessage}}</section>
 
-          <p>Note: We will not store your email or use it for anything else than an information to the seller in order to respond to your email.</p>
+          <p *ngIf="currentUserId == undefined">Note: We will not store your email or use it for any purpose. <br />
+             Your email is requested as an information in order for seller to respond to your email.</p>
 
           <form #sendEmailForm="ngForm">
             <div *ngIf="email.errors && email.touched" class="client-side-validation-error">

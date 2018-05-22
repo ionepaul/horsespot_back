@@ -30,7 +30,8 @@
 
         <div *ngIf="isPrivacySettings" class="edit-info navbar-modals">
           <p>
-              This settings are affecting you horse spot profile page and your advertisments. How ever even if you do not want to display your email and phone on your ads the clients can contact you through our send email functionality. 
+              This settings are affecting you horse spot profile page and your advertisments. <br />
+              However, even if you do not want to display your email and phone number on your advertisments, the clients can contact you through our send email functionality. 
           </p>
 
           <div>
@@ -38,11 +39,11 @@
           </div>
 
           <div>
-            <input type="checkbox" name="display-email-ext" autocomplete="off" [(ngModel)]="userModel.DisplayEmail"> <span>I agree to display the email on my profile.</span>
+            <input type="checkbox" name="display-email-ext" autocomplete="off" [(ngModel)]="userModel.DisplayEmail"> <span>I agree to display my email on my horse spot profile and advertisments.</span>
           </div>
 
           <div *ngIf="userModel.PhoneNumber">
-            <input type="checkbox" name="display-phone-ext" autocomplete="off" [(ngModel)]="userModel.DisplayPhoneNumber"> <span>I agree to display the phone number on my profile.</span>
+            <input type="checkbox" name="display-phone-ext" autocomplete="off" [(ngModel)]="userModel.DisplayPhoneNumber"> <span>I agree to display my phone number on my horse spot profile and advertisments.</span>
           </div>
         </div>
 
@@ -129,6 +130,12 @@
 
         <div class="form">
           <section *ngIf="errorMessage" class="client-side-validation-error">{{errorMessage}}</section>
+
+          <p *ngIf="currentUserId == undefined">
+            Note: We will not store your email or use it for any purpose. <br />
+            Your email is requested as an information in order for seller to respond to your email.
+          </p>
+
           <form #sendEmailForm="ngForm">
             <!--Email input + client side validation-->
             <div *ngIf="email.errors && email.touched" class="client-side-validation-error">
