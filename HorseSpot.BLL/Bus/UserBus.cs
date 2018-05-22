@@ -260,6 +260,11 @@ namespace HorseSpot.BLL.Bus
                 throw new ValidationException(Resources.InvalidRegistrationRequest);
             }
 
+            if (user.PrivacyPolicyAccepted != true)
+            {
+                throw new ValidationException(Resources.InvalidRegistrationRequest);
+            }
+
             ValidationHelper.ValidateModelAttributes<UserViewModel>(user);
 
             Regex phoneNumberRegex = new Regex(@"^(?=.*[0-9])[- +()0-9].*[0-9]+$");
@@ -315,6 +320,12 @@ namespace HorseSpot.BLL.Bus
                 throw new ValidationException(Resources.InvalidExternalLoginRequest);
             }
 
+            if (editProfile.PrivacyPolicyAccepted != true)
+            {
+                throw new ValidationException(Resources.InvalidExternalLoginRequest);
+            }
+
+            user.PrivacyPolicyAccepted = editProfile.PrivacyPolicyAccepted;
             user.TermsAccepted = editProfile.TermsAccepted;
             user.PhoneNumber = editProfile.PhoneNumber;
             user.NewsletterSubscription = editProfile.NewsletterSubscription;

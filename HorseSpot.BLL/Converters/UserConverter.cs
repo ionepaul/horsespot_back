@@ -20,7 +20,8 @@ namespace HorseSpot.BLL.Converters
                 UserName = user.Email,
                 TermsAccepted = user.TermsAccepted,
                 DisplayEmail = user.DisplayEmail,
-                DisplayPhoneNumber = user.DisplayPhoneNumber
+                DisplayPhoneNumber = user.DisplayPhoneNumber,
+                PrivacyPolicyAccepted = user.PrivacyPolicyAccepted
             };
         }
 
@@ -42,7 +43,8 @@ namespace HorseSpot.BLL.Converters
                 ProfileImage = user.ImagePath,
                 TermsAccepted = user.TermsAccepted,
                 DisplayEmail = user.DisplayEmail,
-                DisplayPhoneNumber = user.DisplayPhoneNumber
+                DisplayPhoneNumber = user.DisplayPhoneNumber,
+                PrivacyPolicyAccepted = user.PrivacyPolicyAccepted
             };
 
             return userViewModel;

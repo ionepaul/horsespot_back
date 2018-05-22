@@ -106,6 +106,7 @@ export class ProfileComponent implements OnInit {
     this.editModel.PhoneNumber = this.userModel.PhoneNumber;
     this.editModel.Email = this.userModel.Email;
     this.editModel.TermsAccepted = true;
+    this.editModel.PrivacyPolicyAccepted = true;
     this.editModel.NewsletterSubscription = this.userModel.NewsletterSubscription;
     this.editModel.DisplayEmail = this.userModel.DisplayEmail;
     this.editModel.DisplayPhoneNumber = this.userModel.DisplayPhoneNumber;

@@ -11,6 +11,7 @@ namespace HorseSpot.DAL.Entities
         public Nullable<bool> NewsletterSubscription { get; set; }
         public string ImagePath { get; set; }
         public bool TermsAccepted { get; set; }
+        public bool PrivacyPolicyAccepted { get; set; }
         public bool DisplayEmail { get; set; }
         public bool DisplayPhoneNumber { get; set; }
 

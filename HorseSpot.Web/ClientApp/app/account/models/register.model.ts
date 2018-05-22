@@ -10,4 +10,5 @@ export interface RegisterModel {
         TermsAccepted: boolean;
         DisplayEmail: boolean;
         DisplayPhoneNumber: boolean;
+        PrivacyPolicyAccepted: boolean;
 }

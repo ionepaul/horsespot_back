@@ -9,4 +9,5 @@ export interface UserModel {
     TermsAccepted: boolean;
     DisplayEmail: boolean;
     DisplayPhoneNumber: boolean;
+    PrivacyPolicyAccepted: boolean;
 }

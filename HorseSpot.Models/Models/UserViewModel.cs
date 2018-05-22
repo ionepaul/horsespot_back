@@ -34,6 +34,8 @@ namespace HorseSpot.Models.Models
 
         public bool DisplayPhoneNumber { get; set; }
 
+        public bool PrivacyPolicyAccepted { get; set; }
+
         public string RoleName { get; set; }
     }
 }

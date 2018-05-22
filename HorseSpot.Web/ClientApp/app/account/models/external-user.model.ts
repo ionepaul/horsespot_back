@@ -4,4 +4,5 @@ export class ExternalUserModel {
   TermsAccepted: boolean;
   DisplayEmail: boolean;
   DisplayPhoneNumber: boolean;
+  PrivacyPolicyAccepted: boolean;
 }
