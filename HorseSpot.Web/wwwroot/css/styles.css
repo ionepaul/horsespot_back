@@ -1925,15 +1925,15 @@ modal.cancel-app textarea {
 
 
 /* LOGIN MODAL and Conditions Modal */
-#conditionsModal .modal {
+.terms-privacy-modal .modal {
   z-index: 99999999;
 }
 
-#conditionsModal .modal-content {
-  margin-left: -10px;
+.terms-privacy-modal .modal-content {
+  margin-left: 0px;
 }
 
-#conditionsModal .agreeTerms {
+.terms-privacy-modal .agreeTerms {
   display: block;
   width: 100%;
   text-align: center;
@@ -1944,8 +1944,8 @@ modal.cancel-app textarea {
   border-radius: 3px;
 }
 
-#conditionsModal article {
-  height: 350px;
+.terms-privacy-modal article {
+  height: 430px;
   overflow-y: scroll;
   margin-bottom: 30px;
 }
@@ -6688,7 +6688,7 @@ aside.col-sm-4 img {
     left: 25px;
   }
 
-  #conditionsModal .modal-content {
+  .terms-privacy-modal .modal-content {
     margin-left: 0;
   }
 

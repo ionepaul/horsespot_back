@@ -131,8 +131,8 @@
         <div class="form">
           <section *ngIf="errorMessage" class="client-side-validation-error">{{errorMessage}}</section>
 
-          <p *ngIf="currentUserId == undefined">
-            Note: We will not store your email or use it for any purpose. <br />
+          <p style="text-align: left; font-size: 14px;color: #767676;" *ngIf="currentUserId == undefined">
+            Note: We will not store your email or use it for any purpose.
             Your email is requested as an information in order for seller to respond to your email.
           </p>
 
@@ -242,8 +242,8 @@
           <p *ngIf="deleteUserErrorMessage" class="client-side-validation-error">{{deleteUserErrorMessage}}</p>
 
           <p>
-            Are you sure you want to delete your account? <br />
-            <small>Note: Hitting 'YES' will permanently delete your account and your advertisments from our database.</small>
+            Are you sure you want to delete your account? <br /> <br />
+            <span style="font-size: 14px;color: #767676;">Note: Hitting 'YES' will permanently delete your account and your advertisments from our database.</span>
           </p>
           <button class="save" (click)="deleteUser()">Yes</button>
           <button class="cancel" (click)="deleteAccountModal.hide()">Cancel</button>

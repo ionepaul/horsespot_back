@@ -112,19 +112,19 @@
             </div><!-- input-group -->
           </div><!-- form-group -->
 
-          <div *ngIf="email.errors && email.touched" class="client-side-validation-error">
-            <small [hidden]="!email.errors.required">
+          <div *ngIf="emailRegister.errors && emailRegister.touched" class="client-side-validation-error">
+            <small [hidden]="!emailRegister.errors.required">
               {{'REGISTER_PAGE.EMAIL_ERROR' | translate}}
             </small>
-            <small [hidden]="!email.errors.pattern">
+            <small [hidden]="!emailRegister.errors.pattern">
               {{'GENERAL.INVALID_EMAIL_FORMAT' | translate}}
             </small>
           </div><!-- email client-side-validation-error -->
 
           <div class="form-group">
             <div class="input-group">
-              <input autocomplete="off" name="email" type="text" class="form-control" id="email" placeholder="{{'REGISTER_PAGE.EMAIL' | translate}}"
-                     [(ngModel)]="registerInput.Email" required #email="ngModel" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$">
+              <input autocomplete="off" name="emailRegister" type="text" class="form-control" id="emailRegister" placeholder="{{'REGISTER_PAGE.EMAIL' | translate}}"
+                     [(ngModel)]="registerInput.Email" required #emailRegister="ngModel" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$">
             </div><!-- input-group -->
           </div><!-- form-group -->
 
@@ -163,7 +163,7 @@
           </div>
 
           <div class="modal-footer">
-            <input type="checkbox" name="privacy-policy" #privacyPolicyAccepted="ngModel" autocomplete="off" [(ngModel)]="registerInput.PrivacyPolicyAccepted" mustBeChecked> <span>I have read and I agree with the <a (click)="privacyPolicyModal.show()">Privacy Policy</a>.</span>
+            <input type="checkbox" name="privacy-policy" #privacyPolicyAccepted="ngModel" autocomplete="off" [(ngModel)]="registerInput.PrivacyPolicyAccepted" mustBeChecked> <span>I have read and I agree with the <a (click)="privacyPolicyModal.show()">privacy policy.</a></span>
           </div>
 
           <div class="modal-footer">
@@ -201,7 +201,7 @@
           <form #logInForm="ngForm" class="login-form">
             <div class="form-group">
               <div class="input-group">
-                <input name="email" type="text" class="form-control" [(ngModel)]="loginInput.Email" id="email" placeholder="{{ 'LOGIN_PAGE.EMAIL' | translate }}">
+                <input name="emailLogin" type="text" class="form-control" [(ngModel)]="loginInput.Email" id="emailLogin" placeholder="{{ 'LOGIN_PAGE.EMAIL' | translate }}">
               </div><!-- input-group -->
             </div><!-- form-group -->
 
@@ -234,7 +234,7 @@
 
             <div class="form-group">
               <div class="input-group forgot-password-input">
-                <input placeholder="{{ 'LOGIN_PAGE.EMAIL' | translate }}" name="email" type="text" class="form-control" id="email"
+                <input placeholder="{{ 'LOGIN_PAGE.EMAIL' | translate }}" name="forgotPassowrdEmail" type="text" class="form-control" id="forgotPassowrdEmail"
                        [(ngModel)]="forgotPasswordEmail" #forgotPassowrdEmail="ngModel" required pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$">
               </div><!-- input-group -->
             </div><!-- form-group -->
@@ -293,7 +293,7 @@
   </div>
 </div>
 
-<div id="conditionsModal" class="modal fade navbar-modals" [config]="{ ignoreBackdropClick: true, keyboard: false }" bsModal #conditionsModal="bs-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" (onHide)="onPhoneNumberModalClose()">
+<div id="conditionsModal" class="modal fade navbar-modals terms-privacy-modal" [config]="{ ignoreBackdropClick: true, keyboard: false }" bsModal #conditionsModal="bs-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" (onHide)="onPhoneNumberModalClose()">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
@@ -301,120 +301,54 @@
         <div class="horse-logo">
           <img src="../../../../wwwroot/assets/images/logo_2.png" alt="Horse Spot Logo">
         </div><!-- horse-logo -->
-        <article style="font-size:11px;">
-          <b style="font-weight:700">USER AGREEMENT</b>
-          <br />
-          <br />
-          This Agreement describes the terms and conditions applicable to your use of our services at www.horse-spot.com. If you do not agree with any part of this Agreement, you may not use or access our services. You must read and agree with all our terms and conditions as well as the Privacy Policy.
-          <br />
-          <br />
-          <b style="font-weight:700">ADVERT CONTENTS</b>
-          <br />
-          <br />
-          1. Advert contents on www.horse-spot.com are only for general information.<br /><br />
-          2. The Horse Spot web site is constantly updated by sellers with horses for sale and all the ads are validated by a Horse Spot administrator. However, we exclude any warranties as to the quality, accuracy, completeness, performance, fitness for a particular purpose of the site or any of its contents.<br /><br />
-          3. Horse Spot, its owners and its administrative department will not be liable for any damages without limitation, damages for any consequential loss or loss of business opportunities or loss of profits. However, arising from the use of or inability to use the Horse Spot web site, or any of its contents, or from any action or omission taken as a result of using the site or any of its contents.<br /><br />
-          4. We make no warranty that the contents of the web site are free from infection or viruses or anything else which has contaminating or destructive properties and shall have no liability in respect thereof.<br /><br />
-          5. All liability is excluded to the extent permitted by law including any implied terms.
-          <br />
-          <br />
-          <b style="font-weight:700">PHOTOGRAPHS</b>
-          <br /><br />
-          6. All photographs used on the web site must have the prior consent of the photographer. The seller is responsible for gaining any photographers approval prior to forwarding photographs to Horse Spot to use on the web site. Horse Spot cannot be held responsible for any issues arising due to copyright protection on photographs.
-          <br />
-          <br />
-          <b style="font-weight:700">LINKS</b>
-          <br /><br />
-          7. If linked in description, the web site address stated in the advert must be the web site address that the link points to, redirection of web site links to a different web site will not be accepted.
-          <br />
-          <br />
-          8. You should note that certain links on the web site lead to resources located on servers maintained by third parties over whom we have no control and accordingly we accept no responsibility or liability for any of the material contained on those servers.
-          <br />
-          <br />
-          <b style="font-weight:700">REFUSAL OF ADVERTS</b>
-          <br />
-          <br />
-          9. Horse Spot accepts adverts at its own discretion. Horse Spot has a right to reject any adverts if feels does not comply with the terms and conditions of advertising. Horse Spot does not have to justify its reasoning for the rejection of any adverts.
-          <br /><br />
-          11. If an advertiser does not comply with Horse Spot Terms and Conditions of Advertising, Horse Spot will withdraw any sellers advert from the web site without warning.
-          <br /><br />
-          <b style="font-weight:700">EMAILS SENT TO SELLERS</b>
-          <br />
-          <br />
-          12. Emails sent to sellers from any advert page are not filtered by Horse Spot and Horse Spot are not responsible for its contents.
-          <br />
-          <br />
-          <b style="font-weight:700">The Horse Spot Web Site</b>
-          <br />
-          <br />
-          Horse Spot represents an online market which allows users to sell and buy horses from different categories, at any time, from anywhere. However, we are not involved in transactions between buyers and sellers, thus, we cannot control the quality or the health of the horses advertised, the accuracy of the listings or the ability of sellers to sell or the ability of buyers to buy. Do not assume that the sale, purchase, export or import of any horse is legal simply because it is available on our website. Horse Spot is not responsible for ensuring that buyers and sellers complete a transaction. Horse Spot is not responsible for buyers purchasing horses that are unsuitable for the capability of the purchaser. Buyers buy at their own risk and must take the appropriate professional advice prior to purchasing.
-          <br /><br />
-          Horse Spot cannot and does not confirm the identity of users or the validity of the information which users submits to our website.
-          <br /><br />
-          In the case that you have any complaint any other user arising from that user's use of our website, you agree to pursue and resolve any of the issues independently of and without recourse to us, and you release Horse Spot from all issues, damages, costs and expenses, known and unknown that this may cause.
-          <br /><br />
-          The Information you provide to us from Horse Spot web site includes any information you fill in through our services, without limitation. You are the only responsible for the information you submitted, and we act as a passive conduit for your online distribution and publication of your information.
-          <br /><br />
-          Information and activity that you have on www.horse-spot.com must not:
-          <br />
-          <ul>
-            <li>- Be false, inaccurate or misleading;</li>
-            <li>- Be offensive, abusive, defamatory or in breach of copyright, privacy or any other rights;</li>
-            <li>- Be fraudulent or involve the sale of not owned horses;</li>
-            <li>- Link directly or indirectly any competitor of Horse Spot;</li>
-            <li>
-              - Contain any computer viruses, macro viruses, trojan horses, worms or anything else designed to interfere with, interrupt or disrupt the normal operating procedures of a computer or to surreptitiously intercept, access without authority or expropriate any system, data or personal information;
-            </li>
-            <li>
-              - Cause our website to be interrupted, damaged, rendered less efficient or such that the effectiveness or functionality of our website is in any way impaired.
-            </li>
-          </ul>
-          <br />
-          Horse Spot can at any time, to delete your account without notification and explanation, if any point of the Agreement is violated.
-          <br /><br />
-          Please note that the information you provide will be stored and processed on our cloud servers. Horse Spot will hold and transmit the information in a safe, confidential and secure environment. Horse Spot will never sell or rent your personal information to third parties or any other business or person.
-          <br /><br />
-          We do not guarantee continuous, uninterrupted or secure access to our services, and operation of our website may be interfered with by numerous factors outside of our control.
-          <br /><br />
-          <b style="font-weight:700">Privacy Policy</b>
-          <br />
-          <br />
-          We are doing our best to protect your personal privacy. By providing your personal details to us, you signify your acceptance of our Privacy Policy. If you do not agree to this statement, please do not provide your personal details to us.
-          <br /><br />
-          We gather the following information from visitors to our site:<br />
-          <ul>
-            <li>- the IP address from which you access the site</li>
-            <li>- the type of browser and operating system used to access the site</li>
-            <li>- the date and time of your access to the site</li>
-            <li>- the pages you visit</li>
-            <li>- the internet address of the website from which you accessed the site</li>
-          </ul>
-          <br />
-          We use this information only for tracking records and to learn how our visitors act, what technology they use and how we can improve our services.
-          <br /><br />
-          We may compile and report to third parties (such as advertisers) aggregate statistics about our users and visitors in terms of numbers, traffic patterns and related site information.
-          <br /><br />
-          We may disclose your personal information if permitted by law or required to do so by law or where we believe such action is necessary in order to protect or defend our interests or the interests of our customers or users of our site.
-          <br /><br />
-          Due to the open communication nature of the Internet, we cannot guarantee that communications between you and us, or information stored on our servers, will be free from unauthorized access by third parties.
-          <br /><br />
-          Horse Spot web site may contain links or references to other web sites outside of our control. Please be aware that we have no control over these sites and our privacy policy does not apply to these sites.
-          <br /><br />
-          You agree that we may use personally identifiable information about you to analyze site usage, to improve our marketing strategy and customize our site's design and services.
-          <br /><br />
-          Due to the nature of the internet, we cannot ensure that all of your private communications and other personally identifiable information will never be disclosed in ways not otherwise described in this Privacy Policy.
-          <br /><br />
-          Your name and email address are required in order to sign up with Horse Spot. Also, for a better communication with sellers or buyers we ask for your phone number, but it is not required to submit it. By submitting this information to us you agree to make them public on Horse Spot web site and to be available to any visitors of the web site. At any time you can update your information, excluding your email address, which is your Horse Spot account identification.
-          <br /><br />
-          At any time, you can submit a complete information removal from our database by email. However, such information may never be completely deleted from our system due to technical and legal constraints, including stored “back-up” systems.
-          <br /><br />
-          Horse Spot uses standard practices to safeguard the confidentiality of your personal identifiable information. However, "perfect security" does not exist on the Internet.
-          <br /><br />
-          By accepting this Privacy Policy and the User Agreement, you expressly consent to our use and disclosure of your personal information in the manner.
-          <br /><br />
+        <article style="font-size:16px;">
+          <b style="font-weight:700; font-size:18px">USER AGREEMENT</b>
+          <p>This Agreement describes the terms and conditions applicable to your use of our services at www.horse-spot.com. If you do not agree with any part of this Agreement, you may not use or access our services. You must read and agree with all our terms and conditions as well as the Privacy Policy.</p>
 
+          <b style="font-weight:700; font-size:18px">ADVERT CONTENTS</b>
+          <p>1. Advert contents on www.horse-spot.com are only for general information.</p>
+          <p>2. The Horse Spot web site is constantly updated by sellers with horses for sale and all the ads are validated by a Horse Spot administrator. However, we exclude any warranties as to the quality, accuracy, completeness, performance, fitness for a particular purpose of the site or any of its contents.</p>
+          <p>3. Horse Spot, its owners and its administrative department will not be liable for any damages without limitation, damages for any consequential loss or loss of business opportunities or loss of profits. However, arising from the use of or inability to use the Horse Spot web site, or any of its contents, or from any action or omission taken as a result of using the site or any of its contents.</p>
+          <p>4. We make no warranty that the contents of the web site are free from infection or viruses or anything else which has contaminating or destructive properties and shall have no liability in respect thereof.</p>
+          <p>5. All liability is excluded to the extent permitted by law including any implied terms.</p>
+
+          <b style="font-weight:700; font-size:18px">PHOTOGRAPHS</b>
+          <p>6. All photographs used on the web site must have the prior consent of the photographer. The seller is responsible for gaining any photographers approval prior to forwarding photographs to Horse Spot to use on the web site. Horse Spot cannot be held responsible for any issues arising due to copyright protection on photographs.</p>
+
+          <b style="font-weight:700; font-size:18px">LINKS</b>
+          <p>7. If linked in description, the web site address stated in the advert must be the web site address that the link points to, redirection of web site links to a different web site will not be accepted.</p>
+          <p>8. You should note that certain links on the web site lead to resources located on servers maintained by third parties over whom we have no control and accordingly we accept no responsibility or liability for any of the material contained on those servers.</p>
+
+          <b style="font-weight:700; font-size:18px">REFUSAL OF ADVERTS</b>
+          <p>9. Horse Spot accepts adverts at its own discretion. Horse Spot has a right to reject any adverts if feels does not comply with the terms and conditions of advertising. Horse Spot does not have to justify its reasoning for the rejection of any adverts.</p>
+          <p>11. If an advertiser does not comply with Horse Spot Terms and Conditions of Advertising, Horse Spot will withdraw any sellers advert from the web site without warning.</p>
+
+          <b style="font-weight:700; font-size:18px">EMAILS SENT TO SELLERS</b>
+          <p>12. Emails sent to sellers from any advert page are not filtered by Horse Spot and Horse Spot are not responsible for its contents.</p>
+
+          <br />
+          <b style="font-weight:700; font-size:18px; text-transform:uppercase">The Horse Spot Web Site</b>
+          <p> Horse Spot represents an online market which allows users to sell and buy horses from different categories, at any time, from anywhere. However, we are not involved in transactions between buyers and sellers, thus, we cannot control the quality or the health of the horses advertised, the accuracy of the listings or the ability of sellers to sell or the ability of buyers to buy. Do not assume that the sale, purchase, export or import of any horse is legal simply because it is available on our website. Horse Spot is not responsible for ensuring that buyers and sellers complete a transaction. Horse Spot is not responsible for buyers purchasing horses that are unsuitable for the capability of the purchaser. Buyers buy at their own risk and must take the appropriate professional advice prior to purchasing.</p>
+          <p>Horse Spot cannot and does not confirm the identity of users or the validity of the information which users submits to our website.</p>
+          <p>In the case that you have any complaint any other user arising from that user's use of our website, you agree to pursue and resolve any of the issues independently of and without recourse to us, and you release Horse Spot from all issues, damages, costs and expenses, known and unknown that this may cause.</p>
+          <p>The Information you provide to us from Horse Spot web site includes any information you fill in through our services, without limitation. You are the only responsible for the information you submitted, and we act as a passive conduit for your online distribution and publication of your information.</p>
+          <p>Information and activity that you have on www.horse-spot.com must not:</p>
+          <ul style="padding-left: 50px;">
+            <li>Be false, inaccurate or misleading;</li>
+            <li>Be offensive, abusive, defamatory or in breach of copyright, privacy or any other rights;</li>
+            <li>Be fraudulent or involve the sale of not owned horses;</li>
+            <li>Link directly or indirectly any competitor of Horse Spot;</li>
+            <li>Contain any computer viruses, macro viruses, trojan horses, worms or anything else designed to interfere with, interrupt or disrupt the normal operating procedures of a computer or to surreptitiously intercept, access without authority or expropriate any system, data or personal information;</li>
+            <li>Cause our website to be interrupted, damaged, rendered less efficient or such that the effectiveness or functionality of our website is in any way impaired;</li>
+          </ul>
+          <br />
+          <p>Horse Spot can at any time, to delete your account without notification and explanation, if any point of the Agreement is violated.</p>
+          <p>Please note that the information you provide will be stored and processed on our cloud servers. Horse Spot will hold and transmit the information in a safe, confidential and secure environment. Horse Spot will never sell or rent your personal information to third parties or any other business or person.</p>
+          <p>We do not guarantee continuous, uninterrupted or secure access to our services, and operation of our website may be interfered with by numerous factors outside of our control.</p>
 
           <b style="font-weight:700">© Horse Spot 2018</b>
+          <br />
+          <br />
         </article>
         <button class="agreeTerms" (click)="conditionsModal.hide()">{{ 'TERMS_AND_CONDITIONS.AGREE' | translate }}</button>
 
@@ -423,7 +357,7 @@
   </div>
 </div>
 
-<div id="privacyPolicyModal" class="modal fade navbar-modals" [config]="{ ignoreBackdropClick: true, keyboard: false }" bsModal #privacyPolicyModal="bs-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" (onHide)="onPhoneNumberModalClose()">
+<div id="privacyPolicyModal" class="modal fade navbar-modals terms-privacy-modal" [config]="{ ignoreBackdropClick: true, keyboard: false }" bsModal #privacyPolicyModal="bs-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" (onHide)="onPhoneNumberModalClose()">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
@@ -431,43 +365,54 @@
         <div class="horse-logo">
           <img src="../../../../wwwroot/assets/images/logo_2.png" alt="Horse Spot Logo">
         </div><!-- horse-logo -->
-        <article>
-          <h1>Privacy Policy</h1>
+        <article style="font-size: 16px;">
+          <b style="font-weight:700; font-size: 18px">PRIVACY POLICY</b>
 
-          <p>Effective date: May 22, 2018</p>
+          <p>Effective date: May 23, 2018</p>
 
-          <p>Horse Spot ("us", "we", or "our") operates the <a href="http://horse-spot.com">http://horse-spot.com</a> website (the "Service").</p>
+          <p>Horse Spot ("us", "we", or "our") operates the http://horse-spot.com website (the "Service").</p>
           <p>This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service and the choices you have associated with that data. This Privacy Policy  for Horse Spot is powered by <a href="https://termsfeed.com/">TermsFeed</a>.</p>
           <p>We use your data to provide and improve the Service. By using the Service, you agree to the collection and use of information in accordance with this policy. Unless otherwise defined in this Privacy Policy, terms used in this Privacy Policy have the same meanings as in our Terms and Conditions, accessible from http://horse-spot.com</p>
 
-          <h2>Information Collection And Use</h2>
+          <b style="font-weight:700; font-size: 18px; text-transform:uppercase;">Information Collection And Use</b>
           <p>We collect several different types of information for various purposes to provide and improve our Service to you.</p>
-          <h3>Types of Data Collected</h3>
-          <h4>Personal Data</h4>
+
+          <b style="font-weight:700; font-size: 18px; text-transform:uppercase;">Types of Data Collected</b>
+          <br />
+          <p style="text-transform: uppercase">Personal Data</p>
           <p>While using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you ("Personal Data"). Personally identifiable information may include, but is not limited to:</p>
-          <ul>
+          <ul style="padding-left: 50px;">
             <li>Email address</li>
             <li>First name and last name</li>
             <li>Phone number</li>
             <li>Address, State, Province, ZIP/Postal code, City</li>
             <li>Cookies and Usage Data</li>
           </ul>
-          <h4>Usage Data</h4>
+          <br />
+          <p style="text-transform:uppercase">Usage Data</p>
           <p>We may also collect information how the Service is accessed and used ("Usage Data"). This Usage Data may include information such as your computer's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that you visit, the time and date of your visit, the time spent on those pages, unique device identifiers and other diagnostic data.</p>
-          <h4>Tracking &amp; Cookies Data</h4>
+
+          <p style="text-transform: uppercase;">Tracking &amp; Cookies Data</p>
           <p>We use cookies and similar tracking technologies to track the activity on our Service and hold certain information.</p>
           <p>Cookies are files with small amount of data which may include an anonymous unique identifier. Cookies are sent to your browser from a website and stored on your device. Tracking technologies also used are beacons, tags, and scripts to collect and track information and to improve and analyze our Service.</p>
           <p>You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of our Service.</p>
+
           <p>Examples of Cookies we use:</p>
-          <ul>
-            <li><strong>Session Cookies.</strong> We use Session Cookies to operate our Service.</li>
-            <li><strong>Preference Cookies.</strong> We use Preference Cookies to remember your preferences and various settings.</li>
+          <ul style="padding-left: 50px;">
+            <li><strong>Session Cookies.</strong> We use Session Cookies to operate our Service and analyze traffic (used by third parties).</li>
             <li><strong>Security Cookies.</strong> We use Security Cookies for security purposes.</li>
           </ul>
-          <h2>Use of Data</h2>
+          <br />
+          <b style="font-weight:700; font-size: 18px; text-transform:uppercase;">Use of Data</b>
+          <br />
+          <p style="text-transform: uppercase;">How We Collect Data</p>
+          <p>
+            Your email address, first and last name and phone number (optional) is collected at registration step. The address, State, Province, ZIP/Postal code, City is collected when posting a new horse advertisment. Notice, this is the location of the horse, it shouldn't be your living location.
+            As far as, cookies and usage data, we do not directly collect this type of information, this are collected and shared with us by third parties like Google Analytics, helping us to analyze the traffic of our "Service".
+          </p>
 
-          <p>Horse Spot uses the collected data for various purposes:</p>
-          <ul>
+          <p style="text-transform: uppercase;">How We Use Data And Why We Collect It</p>
+          <ul style="padding-left: 50px;">
             <li>To provide and maintain the Service</li>
             <li>To notify you about changes to our Service</li>
             <li>To allow you to participate in interactive features of our Service when you choose to do so</li>
@@ -476,50 +421,67 @@
             <li>To monitor the usage of the Service</li>
             <li>To detect, prevent and address technical issues</li>
           </ul>
-          <h2>Transfer Of Data</h2>
+          <br />
+          <b style="font-weight:700; font-size: 18px; text-transform:uppercase;">Control your Data</b>
+          <p>
+            At any time you can choose and set which personal information you would like us to disclose in your profile and on your advertisemnts.
+            <br /> <span style="text-transform: uppercase;">(Log In > My account > Privacy Settings)</span>
+          </p>
+          <p>
+            At any time you can delete your account and we will erase all your data from our servers.
+            <br /> <span style="text-transform: uppercase;">(Log In > My account > Delete account)</span>
+          </p>
+          <p>
+            At any time you can choose if you want to receive emails from us or not.
+            <br /> <span style="text-transform: uppercase;">(Log In > My account > Privacy Settings)</span>
+          </p>
+
+          <b style="font-weight:700; font-size: 18px; text-transform:uppercase;">Transfer Of Data</b>
           <p>Your information, including Personal Data, may be transferred to — and maintained on — computers located outside of your state, province, country or other governmental jurisdiction where the data protection laws may differ than those from your jurisdiction.</p>
-          <p>If you are located outside Romania and choose to provide information to us, please note that we transfer the data, including Personal Data, to Romania and process it there.</p>
           <p>Your consent to this Privacy Policy followed by your submission of such information represents your agreement to that transfer.</p>
           <p>Horse Spot will take all steps reasonably necessary to ensure that your data is treated securely and in accordance with this Privacy Policy and no transfer of your Personal Data will take place to an organization or a country unless there are adequate controls in place including the security of your data and other personal information.</p>
-          <h2>Disclosure Of Data</h2>
-          <h3>Legal Requirements</h3>
+
+          <b style="font-weight:700; font-size: 18px; text-transform:uppercase;">Disclosure Of Data</b>
+          <br />
+          <p style="text-transform: uppercase;">Legal Requirements</p>
           <p>Horse Spot may disclose your Personal Data in the good faith belief that such action is necessary to:</p>
-          <ul>
+          <ul style="padding-left: 50px;">
             <li>To comply with a legal obligation</li>
             <li>To protect and defend the rights or property of Horse Spot</li>
             <li>To prevent or investigate possible wrongdoing in connection with the Service</li>
             <li>To protect the personal safety of users of the Service or the public</li>
             <li>To protect against legal liability</li>
           </ul>
-          <h2>Security Of Data</h2>
+          <br />
+          <b style="font-weight:700; font-size: 18px; text-transform:uppercase;">Security Of Data</b>
           <p>The security of your data is important to us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security.</p>
-          <h2>Service Providers</h2>
+
+          <b style="font-weight:700; font-size: 18px; text-transform:uppercase;">Service Providers</b>
           <p>We may employ third party companies and individuals to facilitate our Service ("Service Providers"), to provide the Service on our behalf, to perform Service-related services or to assist us in analyzing how our Service is used.</p>
           <p>These third parties have access to your Personal Data only to perform these tasks on our behalf and are obligated not to disclose or use it for any other purpose.</p>
 
-
-          <h2>Links To Other Sites</h2>
+          <b style="font-weight:700; font-size: 18px; text-transform:uppercase;">Links To Other Sites</b>
           <p>Our Service may contain links to other sites that are not operated by us. If you click on a third party link, you will be directed to that third party's site. We strongly advise you to review the Privacy Policy of every site you visit.</p>
           <p>We have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services.</p>
 
-          <h2>Children's Privacy</h2>
+          <b style="font-weight:700; font-size: 18px; text-transform:uppercase;">Children's Privacy</b>
           <p>Our Service does not address anyone under the age of 18 ("Children").</p>
           <p>We do not knowingly collect personally identifiable information from anyone under the age of 18. If you are a parent or guardian and you are aware that your Children has provided us with Personal Data, please contact us. If we become aware that we have collected Personal Data from children without verification of parental consent, we take steps to remove that information from our servers.</p>
 
-          <h2>Changes To This Privacy Policy</h2>
+          <b style="font-weight:700; font-size: 18px; text-transform:uppercase;">Changes To This Privacy Policy</b>
           <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
           <p>We will let you know via email and/or a prominent notice on our Service, prior to the change becoming effective and update the "effective date" at the top of this Privacy Policy.</p>
           <p>You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
 
-          <h2>Contact Us</h2>
+          <b style="font-weight:700; font-size: 18px; text-transform:uppercase;">Contact Us</b>
           <p>If you have any questions about this Privacy Policy, please contact us:</p>
-          <ul>
+          <ul style="padding-left: 50px;">
             <li>By email: contact@horse-spot.com</li>
-
           </ul>
-        </article>
+          <br />
+          <br />
+        </article>     
         <button class="agreeTerms" (click)="privacyPolicyModal.hide()">{{ 'TERMS_AND_CONDITIONS.AGREE' | translate }}</button>
-
       </div>
     </div>
   </div>
