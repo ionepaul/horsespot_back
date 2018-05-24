@@ -12,5 +12,6 @@ namespace HorseSpot.BLL.Interfaces
         IEnumerable<PriceRangeDTO> GetAllPriceRanges();
         IEnumerable<HorseAbilityDTO> GetAllAbilities();
         IEnumerable<string> GetAllCountries();
+        Task SendPrivacyPolicyEmail(string email, string fullName);
     }
 }

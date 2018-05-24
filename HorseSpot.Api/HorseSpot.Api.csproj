@@ -309,6 +309,7 @@
     <Content Include="Templates\ContactPageEmailTemplate.cshtml" />
     <Content Include="Templates\HorseAdDeleted.cshtml" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
+    <Content Include="Templates\PrivacyPolicyChanges.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

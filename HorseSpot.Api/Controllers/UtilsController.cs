@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using HorseSpot.BLL.Interfaces;
@@ -9,10 +11,12 @@ namespace HorseSpot.Api.Controllers
     public class UtilsController : ApiController
     {
         private readonly IUtilBus _iUtilBus;
+        private readonly IUserBus _iUserBus;
 
-        public UtilsController(IUtilBus iUtilBus)
+        public UtilsController(IUtilBus iUtilBus, IUserBus iUserBus)
         {
             _iUtilBus = iUtilBus;
+            _iUserBus = iUserBus;
         }
 
         #region HttpGet
@@ -54,6 +58,31 @@ namespace HorseSpot.Api.Controllers
         public async Task SendMail([FromBody] EmailModelDTO emailModelDTO)
         {
             await _iUtilBus.EmailSendingBetweenUsers(emailModelDTO);
+        }
+
+        [HttpPost]
+        [Route("api/sendemail/all")]
+        public async Task SendEmailToAllUsers()
+        {
+            var users = _iUserBus.GetAllUsers().Skip(49);
+
+            try
+            {
+                foreach (var user in users)
+                {
+                    var fullName = user.FirstName + " " + user.LastName;
+                    await _iUtilBus.SendPrivacyPolicyEmail(user.Email, fullName);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+
+            }
+
         }
 
         [HttpPost]

@@ -18,5 +18,6 @@
         public const string AppointmentDoneToOwnerTemplate = "C:\\HostingSpaces\\horsespotcom\\horse-spot.com\\horse_spot_services\\Templates\\AppointmentDoneToOwnerTemplate.cshtml";
         public const string AppointmentDoneToInitiatorTemplate = "C:\\HostingSpaces\\horsespotcom\\horse-spot.com\\horse_spot_services\\Templates\\AppointmentDoneToInitiatorTemplate.cshtml";
         public const string HorseAdDeleted = "~/Templates/HorseAdDeleted.cshtml";
+        public const string PrivacyPolicyChanges = "~/Templates/PrivacyPolicyChanges.cshtml";
     }
 }

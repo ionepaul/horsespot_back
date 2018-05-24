@@ -2,16 +2,16 @@ import { environment } from '../environments/environment';
 
 export let CONFIG = {
   baseUrls: {
-    apiUrl: 'http://localhost/api.horsespot/' + 'api/',
+    apiUrl: 'https://api.horse-spot.com/' + 'api/',
   },
 
-  imagesUrl: 'http://localhost/api.horsespot/',
+  imagesUrl: 'https://api.horse-spot.com/',
 
-  horseAdsImagesUrl: 'http://localhost/api.horsespot/' + 'Images/HorseAdsImg/',
+  horseAdsImagesUrl: 'https://api.horse-spot.com/' + 'Images/HorseAdsImg/',
 
-  profileImagesUrl: 'http://localhost/api.horsespot/' + 'Images/ProfilePhotos/',
+  profileImagesUrl: 'https://api.horse-spot.com/' + 'Images/ProfilePhotos/',
 
-  authUrl: 'http://localhost/api.horsespot/' + 'token',
+  authUrl: 'https://api.horse-spot.com/' + 'token',
 
   restCountriesUrl: 'https://restcountries.eu/rest/v2/name/',
 

@@ -91,7 +91,7 @@ namespace HorseSpot.DAL.Dao
 
         public IEnumerable<UserModel> GetAllUsers()
         {
-            return _userManager.Users.AsEnumerable();
+            return _ctx.Users.ToList();
         }
 
         public async Task DeleteUser(UserModel user)

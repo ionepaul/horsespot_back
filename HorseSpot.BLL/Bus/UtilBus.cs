@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -63,6 +64,21 @@ namespace HorseSpot.BLL.Bus
             ValidateEmailAndMessage(contactPageEmailModel.Sender, contactPageEmailModel.Message);
 
             EmailModel emailModel = UtilConverter.FromContactPageEmailModelTOEmailModel(contactPageEmailModel);
+
+            await _iMailerService.SendMail(emailModel);
+        }
+
+        public async Task SendPrivacyPolicyEmail(string email, string fullName)
+        {
+
+            EmailModel emailModel = new EmailModel
+            {
+                 EmailSubject = EmailSubjects.PrivacyPolicyChanges,
+                 Receiver = email,
+                 EmailTemplatePath = EmailTemplatesPath.PrivacyPolicyChanges,
+                 ReceiverFirstName = fullName,
+                 Sender = ConfigurationManager.AppSettings["AdminEmail"]
+            };
 
             await _iMailerService.SendMail(emailModel);
         }

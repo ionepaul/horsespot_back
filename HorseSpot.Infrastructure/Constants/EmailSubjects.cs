@@ -15,5 +15,6 @@
         public const string AppointmentComing = "Appointment coming";
         public const string HowWasTheAppointment = "Tell us how was your last appointment";
         public const string ContactPageEmailSubject = "New Horse Spot message!";
+        public const string PrivacyPolicyChanges = "Updates to our Terms and Conditions, Privacy Policy and Cookie Policy";
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.IO;
 using System.Net.Mail;
 using System.Threading.Tasks;
@@ -18,10 +19,10 @@ namespace HorseSpot.Infrastructure.MailService
             message.Subject = emailModel.EmailSubject;
 
             message.IsBodyHtml = true;
-            
+
             var template = File.ReadAllText(HttpContext.Current.Server.MapPath(emailModel.EmailTemplatePath));
             message.Body = Razor.Parse(template, emailModel);
-            
+
             message.To.Add(emailModel.Receiver);
             message.ReplyToList.Add(emailModel.Sender);
 
